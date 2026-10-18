@@ -212,6 +212,40 @@ export function Listen({ text, label }: { text: string; id?: string; label: stri
   );
 }
 
+/** Reads a whole page aloud, one fixed sentence after another. For people who prefer listening to reading. */
+export function ListenAll({ texts, label }: { texts: string[]; label: string }) {
+  const { lang } = useLang();
+  const [i, setI] = useState<number | null>(null);
+  const stop = useRef(false);
+  const cur = useRef<HTMLAudioElement | null>(null);
+  useEffect(() => () => { stop.current = true; cur.current?.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); }, []);
+  const sayOne = (text: string) => new Promise<void>(async done => {
+    const src = `audio/${audioKey(lang, text)}.mp3`;
+    try {
+      const head = await fetch(src, { method: 'HEAD' });
+      if (head.ok && (head.headers.get('content-type') ?? '').includes('audio')) {
+        const a = new Audio(src); cur.current = a; a.onended = () => done(); a.onerror = () => done();
+        await a.play(); return;
+      }
+    } catch { /* device voice below */ }
+    if (!('speechSynthesis' in window)) return done();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = lang === 'ar' ? 'ar-AE' : 'en-GB'; u.rate = 0.95; u.onend = () => done(); u.onerror = () => done();
+    speechSynthesis.speak(u);
+  });
+  const run = async () => {
+    if (i !== null) { stop.current = true; cur.current?.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); setI(null); return; }
+    stop.current = false;
+    for (let k = 0; k < texts.length && !stop.current; k++) { setI(k); await sayOne(texts[k]); }
+    setI(null);
+  };
+  return (
+    <button class="btn calm" onClick={run} aria-pressed={i !== null}>
+      {i !== null ? <IconPause size={18} /> : <IconPlay size={18} />} {label}{i !== null ? ` · ${i + 1}/${texts.length}` : ''}
+    </button>
+  );
+}
+
 export function useInterval(f: () => void, ms: number) {
   const saved = useRef(f);
   saved.current = f;

@@ -270,7 +270,7 @@ p { margin: 0; }
 .stage { display: grid; grid-template-columns: 430px 1fr; gap: 26px; padding: 18px 26px 26px; min-height: 100vh; align-items: start; }
 .device { width: 410px; height: 860px; border-radius: 54px; background: var(--goat); padding: 12px; box-shadow: 0 40px 80px -40px rgba(27, 31, 51, .6); }
 .device iframe { width: 100%; height: 100%; border: 0; border-radius: 44px; background: var(--ground); }
-.desk-frame { width: 100%; height: calc(100vh - 120px); min-height: 760px; border: 0; border-radius: 34px; background: var(--ground); box-shadow: 0 30px 70px -40px rgba(27, 31, 51, .5); }
+.desk-frame { width: 100%; height: calc(100vh - 190px); min-height: 700px; border: 0; border-radius: 34px; background: var(--ground); box-shadow: 0 30px 70px -40px rgba(27, 31, 51, .5); }
 
 @media (max-width: 900px) {
   .desk { grid-template-columns: 1fr; }
@@ -279,4 +279,40 @@ p { margin: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* story strip on the stage: knots on a thread */
+.story-strip { display: flex; align-items: center; gap: 0; position: relative; }
+.story-strip::before { content: ''; position: absolute; left: 10px; right: 10px; top: 50%; height: 2px; background: var(--indigo-tint); }
+.story-knot { position: relative; width: 30px; height: 30px; border: 0; background: none; cursor: pointer; margin: 0 4px; }
+.story-knot::before { content: ''; position: absolute; inset: 5px; transform: rotate(45deg); border-radius: 4px; background: var(--ground); border: 2px solid var(--outline); transition: all .3s var(--ease); }
+.story-knot span { position: relative; font: 600 11px var(--mono); color: var(--ink-2); }
+.story-knot.done::before { background: var(--saffron); border-color: var(--saffron-ink); }
+.story-knot.done span { color: #fff; }
+.story-knot.now::before { background: #fff; border-color: var(--indigo); box-shadow: 0 0 0 5px rgba(43,58,103,.14); }
+.story-knot.now span { color: var(--indigo); }
+.story-knot:focus-visible::before { outline: 3px solid var(--saffron); outline-offset: 3px; }
+
+/* focus that is always visible for keyboard users */
+:focus-visible { outline: 3px solid var(--saffron); outline-offset: 2px; border-radius: 8px; }
+button:focus:not(:focus-visible) { outline: none; }
+
+/* larger text, chosen by the person */
+.phone.big { font-size: 20px; }
+.phone.big h1 { font-size: 34px; }
+.phone.big h2 { font-size: 26px; }
+.phone.big .small { font-size: 17px; }
+.phone.big .tiny { font-size: 14.5px; }
+
+/* clinic in a narrower frame (the stage on a laptop): the menu becomes a thread of knots */
+@media (max-width: 1180px) and (min-width: 901px) {
+  .desk { grid-template-columns: 74px 1fr; }
+  .desk nav { padding: 22px 10px; }
+  .desk nav .wordmark, .desk nav > p { display: none; }
+  .desk nav .step { grid-template-columns: 34px 0; column-gap: 0; }
+  .desk nav .step .body { width: 0; overflow: hidden; padding-block: 14px; }
+  .desk nav .step .body h3 { white-space: nowrap; }
+  .desk nav .step button.body { width: 34px; margin-inline-start: -34px; height: 46px; opacity: 0; }
+  .desk main { padding: 22px 24px 50px; }
+  .split { grid-template-columns: minmax(260px, 1fr) minmax(300px, 1.1fr); gap: 22px; }
 }

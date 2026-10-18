@@ -11,6 +11,8 @@ export type MsgKind =
   | 'share.finding'            // person → partner: a finding the person chose to share
   | 'share.revoke'             // person → recipient
   | 'brief.packet'             // person → clinic: teach-back results and questions, with consent
+  | 'brief.revoke'             // person → clinic: delete the summary
+  | 'consent.withdraw'         // person → clinic: withdraw consent to the couple check
   | 'birthplan.notify'         // person → clinic (delivery hospital)
   | 'birthplan.revoke'
   | 'invite.request'           // person → clinic: blinded invitation requests

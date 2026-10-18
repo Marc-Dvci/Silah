@@ -1,20 +1,83 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { PERSONAS } from '../app/demo';
 import { dbClearAll } from '../app/db';
+import { loadClinic, sendOutreach, OUTREACH_REGISTER } from '../app/clinic';
+import { loadPerson, syncPerson, respondToInvitation, currentView, setBirthPlan, type PersonState } from '../app/person';
 import { ensureSeeded } from './hooks';
 import { LangCtx, Mark, go } from './kit';
 
 // The demonstration stage: one person's phone beside the health-system side, in one browser.
+// Each story step points both screens at the right place, and runs the system's part of the step.
 // On a phone, the same page becomes a simple chooser.
+
+interface StoryStep { who: string; page?: string; clinic: string; title: string; text: string; action?: () => Promise<void> }
+
+const withClinic = (f: (c: NonNullable<Awaited<ReturnType<typeof loadClinic>>>) => Promise<void>) => async () => {
+  const run = async () => { const c = await loadClinic(); if (c) await f(c); };
+  if ('locks' in navigator) await navigator.locks.request('silah-clinic', run); else await run();
+};
+
+/** Completes a person's step if the viewer skipped it, so later steps always have something to show. */
+const withPerson = (id: string, f: (st: PersonState) => Promise<void>) => async () => {
+  const run = async () => { const st = await loadPerson(id); await syncPerson(st); await f(st); };
+  if ('locks' in navigator) await navigator.locks.request(`silah-person-${id}`, run); else await run();
+};
+const consent = (id: string) => withPerson(id, async st => { if (st.invitation?.status === 'pending') await respondToInvitation(st, true); });
+const birthPlanOn = withPerson('noura', async st => {
+  const v = currentView(st);
+  if (!v || st.birthPlan?.active) return;
+  await setBirthPlan(st, true, v.birthPlanConditions.map(c => c.id), v.shared.filter(x => v.birthPlanConditions.includes(x.condition)).map(x => x.gene));
+});
+const settle = (ms: number) => new Promise(r => setTimeout(r, ms));
+
+const STORY: StoryStep[] = [
+  {
+    who: 'mariam', clinic: 'outreach', title: 'The health system invites',
+    text: 'Couples married before the mandate are ranked by declared signals only, never genetics. The top three are invited.',
+    action: withClinic(c => sendOutreach(c, OUTREACH_REGISTER.slice(0, 3).map(r => r.id))),
+  },
+  { who: 'mariam', clinic: 'outreach', title: 'Mariam agrees', text: 'She reads what will and will not happen, and agrees. Nothing is checked until Saeed agrees too.' },
+  { who: 'saeed', clinic: 'outreach', title: 'Saeed agrees', text: 'The check runs on genomes already held. Each phone receives a result signed by the lab.', action: consent('mariam') },
+  {
+    who: 'mariam', page: 'result', clinic: 'queue', title: 'Mariam reads her result',
+    text: 'Four children, counted; what does not change; what the test cannot see. The couple joins the counselling queue.',
+    action: async () => { await consent('mariam')(); await consent('saeed')(); await settle(1500); },
+  },
+  { who: 'mariam', page: 'check', clinic: 'queue', title: 'She checks her understanding', text: 'Four questions. She can share the answers so her counsellor starts where she is.' },
+  { who: 'saeed', page: 'result', clinic: 'queue', title: 'Saeed’s private finding', text: 'Saeed carries CYP21A2. Mariam never sees it unless he chooses to share it.' },
+  { who: 'mariam', page: 'family', clinic: 'invites', title: 'Invitations for the family', text: 'Blind-signed invitations: the clinic can verify each one but not who sent it.' },
+  { who: 'noura', page: 'birth', clinic: 'births', title: 'Noura’s birth plan', text: 'Noura, 31 weeks pregnant, tells the delivery hospital to test the baby for SMA in the first days.' },
+  { who: 'noura', page: 'birth', clinic: 'births', title: 'The baby is tested', text: 'On the hospital side, record the newborn result. The parents see it on Noura’s phone.', action: birthPlanOn },
+  { who: 'fatima', page: 'result', clinic: 'pathway', title: '“Compatible” is not zero', text: 'Fatima’s certificate says compatible. Silah shows 1 in 260 for her gene, because her fiancé is her cousin.' },
+];
 
 export function Stage() {
   const wide = useWide();
   const [who, setWho] = useState(() => sessionStorageGet('silah-who') ?? 'mariam');
+  const [step, setStep] = useState<number | null>(null);
   const [nonce, setNonce] = useState(0);
-  const pick = (id: string) => { setWho(id); try { sessionStorage.setItem('silah-who', id); } catch { /* private mode */ } };
+  const phone = useRef<HTMLIFrameElement>(null);
+  // The frame's src is set once; afterwards it is driven through its location so a page can be chosen.
+  const firstSrc = useRef(`#/p/${who}`);
+  const clinic = useRef<HTMLIFrameElement>(null);
+  const pick = (id: string, page?: string) => {
+    setWho(id);
+    try { sessionStorage.setItem('silah-who', id); } catch { /* private mode */ }
+    const w = phone.current?.contentWindow;
+    if (w) w.location.hash = `#/p/${id}${page ? `/${page}` : ''}`;
+  };
+  const play = async (i: number) => {
+    const s = STORY[i];
+    setStep(i);
+    if (s.action) await s.action();
+    pick(s.who, s.page);
+    const w = clinic.current?.contentWindow;
+    if (w) w.location.hash = `#/c/${s.clinic}`;
+  };
   const reset = async () => {
     await dbClearAll();
     await ensureSeeded();
+    setStep(null);
     setNonce(n => n + 1);
   };
   if (!wide) return <Chooser reset={reset} />;
@@ -31,36 +94,41 @@ export function Stage() {
         </header>
         <div class="stage">
           <div class="stack" style={{ '--gap': '10px' } as any}>
-            <div class="device"><iframe key={`${who}-${nonce}`} src={`#/p/${who}`} title="Person's phone" /></div>
+            <div class="device"><iframe ref={phone} key={`phone-${nonce}`} src={firstSrc.current} title="Person's phone" /></div>
             <p class="small muted" style={{ maxWidth: '410px' }}>{PERSONAS.find(p => p.id === who)?.blurb.en}</p>
-            <Story pick={pick} />
           </div>
-          <iframe key={`clinic-${nonce}`} class="desk-frame" src="#/c/queue" title="Health-system side" />
+          <div class="stack" style={{ '--gap': '14px' } as any}>
+            <Story step={step} play={play} />
+            <iframe ref={clinic} key={`clinic-${nonce}`} class="desk-frame" src="#/c/queue" title="Health-system side" />
+          </div>
         </div>
       </div>
     </LangCtx.Provider>
   );
 }
 
-const STORY: { who?: string; text: string }[] = [
-  { text: 'Clinic › Outreach › Send invitations. Couples married before the mandate are invited by non-genetic signals only.' },
-  { who: 'mariam', text: 'Mariam agrees to the couple check. Nothing happens until Saeed agrees too.' },
-  { who: 'saeed', text: 'Saeed agrees. The service checks genomes already held and signs a result for each phone.' },
-  { who: 'mariam', text: 'Mariam reads the result, checks her understanding, asks questions, shares a summary and books counselling.' },
-  { who: 'saeed', text: 'Saeed sees his own CYP21A2 finding, which Mariam never sees, and chooses whether to share it.' },
-  { who: 'noura', text: 'Noura, 31 weeks pregnant, turns on a birth plan for the delivery hospital.' },
-  { who: 'fatima', text: 'Fatima’s certificate says compatible. Silah shows what that does and does not mean.' },
-];
-
-function Story({ pick }: { pick: (id: string) => void }) {
+/** The story as a woven strip: one knot per step; the current step's text sits under it. */
+function Story({ step, play }: { step: number | null; play: (i: number) => void }) {
+  const cur = step ?? -1;
+  const s = step !== null ? STORY[step] : null;
   return (
-    <div class="stack" style={{ maxWidth: '410px', '--gap': '6px' } as any}>
-      <p class="eyebrow">The story, in order</p>
-      {STORY.map((s, i) => (
-        <button key={i} class="row small" style={{ all: 'unset', cursor: s.who ? 'pointer' : 'default', display: 'flex', gap: '10px', alignItems: 'flex-start' }} onClick={() => s.who && pick(s.who)}>
-          <span class="chip indigo num" style={{ padding: '2px 9px' }}>{i + 1}</span><span class="muted">{s.text}</span>
+    <div class="stack" style={{ '--gap': '8px' } as any}>
+      <div class="row" style={{ gap: '10px', flexWrap: 'wrap' }}>
+        <span class="eyebrow">The story</span>
+        <div class="story-strip">
+          {STORY.map((x, i) => (
+            <button key={i} class={`story-knot ${i < cur ? 'done' : i === cur ? 'now' : ''}`} onClick={() => play(i)} title={x.title} aria-label={`Step ${i + 1}: ${x.title}`}>
+              <span>{i + 1}</span>
+            </button>
+          ))}
+        </div>
+        <button class="btn primary" style={{ padding: '8px 18px', fontSize: '14px' }} onClick={() => play(Math.min(STORY.length - 1, cur + 1))}>
+          {cur < 0 ? 'Start the story' : cur >= STORY.length - 1 ? 'Last step' : 'Next step'}
         </button>
-      ))}
+      </div>
+      <p class="small" style={{ minHeight: '1.6em' }}>
+        {s ? <><b>{s.title}.</b> <span class="muted">{s.text}</span></> : <span class="muted">Ten steps. Each step moves both screens; act on the phone or the clinic yourself, or press Next and the story completes the step for you.</span>}
+      </p>
     </div>
   );
 }

@@ -54,7 +54,11 @@ export interface Case {
   createdAt: string;
 }
 
-export interface Birth { coupleId: string; personId: string; name: string; genes: string[]; conditionIds: string[]; due?: string; at: string; active: boolean }
+export interface Birth {
+  coupleId: string; personId: string; name: string; genes: string[]; conditionIds: string[]; due?: string; at: string; active: boolean;
+  /** The targeted newborn test. Only affected / not affected is reported; a child's carrier status is not. */
+  outcome?: { at: string; affected: boolean; note: string };
+}
 
 export interface ClinicState {
   lab: { sk: string; pk: string; keyId: string };
@@ -113,7 +117,7 @@ async function issueCouple(c: ClinicState, dc: DemoCouple, method: PersonResult[
   return kase;
 }
 
-function advance(k: Case, state: PathState, by = PATH_OWNER[state], note?: string, at = new Date().toISOString()) {
+export function advance(k: Case, state: PathState, by = PATH_OWNER[state], note?: string, at = new Date().toISOString()) {
   if (PATH.indexOf(state) <= PATH.indexOf(k.state) && state !== k.state) return;
   if (k.events.some(e => e.state === state)) return;
   k.state = state;
@@ -245,6 +249,17 @@ async function handle(c: ClinicState, m: Msg): Promise<void> {
       }
       break;
     }
+    case 'brief.revoke': {
+      const k = caseOf(c, b.coupleId);
+      if (k) k.briefs = k.briefs.filter(x => x.personId !== b.personId);
+      break;
+    }
+    case 'consent.withdraw': {
+      c.outreach.consents[b.coupleId] = (c.outreach.consents[b.coupleId] ?? []).filter(x => x !== b.personId);
+      const k = caseOf(c, b.coupleId);
+      if (k && !k.flags.includes('consent-withdrawn')) k.flags.push('consent-withdrawn');
+      break;
+    }
     case 'birthplan.revoke':
       c.births = c.births.map(x => (x.coupleId === b.coupleId && x.personId === b.personId ? { ...x, active: false } : x));
       break;
@@ -290,6 +305,26 @@ export async function counsellorAdvance(c: ClinicState, caseId: string, state: P
   if (extra.referral) k.referral = extra.referral;
   if (extra.closeReason) k.closeReason = extra.closeReason;
   for (const pid of k.personIds ?? []) await send('clinic', `p:${pid}`, 'pathway.update', { state, note: extra.note });
+  await saveClinic(c);
+}
+
+/** Maternity records the targeted newborn test; the pathway closes or moves to treatment, and the parents are told. */
+export async function recordNewborn(c: ClinicState, coupleId: string, affected: boolean): Promise<void> {
+  const b = c.births.find(x => x.coupleId === coupleId && x.active);
+  const k = caseOf(c, coupleId);
+  if (!b) return;
+  const genes = b.genes.join(', ');
+  const note = affected
+    ? `Newborn test on day 2 confirmed ${genes}. Referred the same week to the treating team, before any symptoms.`
+    : `Newborn test on day 2: not affected for ${genes}. Carrier status of the child is not tested or reported.`;
+  b.outcome = { at: new Date().toISOString(), affected, note };
+  if (k) {
+    if (affected) { k.events.push({ at: new Date().toISOString(), state: 'referred', by: 'Corniche Hospital maternity', note }); if (!k.flags.includes('newborn-treatment')) k.flags.push('newborn-treatment'); }
+    else { advance(k, 'closed', 'Corniche Hospital maternity', note); k.closeReason = 'Newborn not affected; pathway complete'; }
+  }
+  for (const pid of k?.personIds ?? [b.personId]) {
+    await send('clinic', `p:${pid}`, 'pathway.update', { state: affected ? 'referred' : 'closed', note, birth: { affected, genes: b.genes, note } });
+  }
   await saveClinic(c);
 }
 

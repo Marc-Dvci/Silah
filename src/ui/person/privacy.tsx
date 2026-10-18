@@ -1,6 +1,6 @@
 import { useMemo } from 'preact/hooks';
 import type { PersonState } from '../../app/person';
-import { revoke, setDigits, setLang, partnerOf } from '../../app/person';
+import { revoke, setDigits, setLang, setBig, partnerOf } from '../../app/person';
 import { activeGrants, verifyLedger } from '../../core/crypto/receipts';
 import { fromB64url } from '../../core/crypto/sign';
 import { PERSONAS, personaById } from '../../app/demo';
@@ -68,6 +68,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
         <section class="stack">
           <h2>{t({ en: 'Settings', ar: 'الإعدادات' })}</h2>
           <div class="row"><span class="grow">{t({ en: 'العربية', ar: 'العربية' })}</span><Toggle on={s.lang === 'ar'} label="Arabic" onChange={v => act(st => setLang(st, v ? 'ar' : 'en'))} /></div>
+          <div class="row"><span class="grow">{t({ en: 'Larger text', ar: 'نص أكبر' })}</span><Toggle on={!!s.big} label={t({ en: 'Larger text', ar: 'نص أكبر' })} onChange={v => act(st => setBig(st, v))} /></div>
           {s.lang === 'ar' && <div class="row"><span class="grow">{t({ en: 'Arabic-Indic digits', ar: 'الأرقام الهندية (١٢٣)' })}</span><Toggle on={s.digits === 'arab'} label="digits" onChange={v => act(st => setDigits(st, v ? 'arab' : 'latn'))} /></div>}
         </section>
 

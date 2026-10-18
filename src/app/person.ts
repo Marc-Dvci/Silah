@@ -30,6 +30,8 @@ export interface PersonState {
   received: Received[];
   invites: { tokens: string[]; pending?: { prepared: string; inv: string }[]; requested: number; shared: number };
   birthPlan?: { active: boolean; hospital: string; seq: number };
+  birthOutcome?: { at: string; affected: boolean; genes: string[]; note: string };
+  big?: boolean;
   booking?: { at: string; status: 'requested' | 'confirmed'; slot?: string };
   briefShared?: string;
   pathway: { state: PathState; at: string; note?: string }[];
@@ -144,6 +146,7 @@ async function apply(s: PersonState, m: Msg): Promise<void> {
       break;
     }
     case 'pathway.update':
+      if (body.birth) s.birthOutcome = { at: m.at, ...body.birth };
       push(s, body.state as PathState, body.note);
       if (body.state === 'counselling-booked' && body.slot) s.booking = { at: m.at, status: 'confirmed', slot: body.slot };
       break;
@@ -195,7 +198,14 @@ export async function revoke(s: PersonState, seq: number): Promise<void> {
     s.birthPlan = s.birthPlan ? { ...s.birthPlan, active: false } : undefined;
     await send(owner(s.id), 'clinic', 'birthplan.revoke', { coupleId: coupleOf(s.id)?.id, personId: s.id });
   }
-  if (r.subject.kind === 'brief') s.briefShared = undefined;
+  if (r.subject.kind === 'brief') {
+    s.briefShared = undefined;
+    await send(owner(s.id), 'clinic', 'brief.revoke', { coupleId: coupleOf(s.id)?.id, personId: s.id });
+  }
+  if (r.subject.kind === 'couple-check') {
+    if (s.invitation) s.invitation.status = 'declined';
+    await send(owner(s.id), 'clinic', 'consent.withdraw', { coupleId: coupleOf(s.id)?.id, personId: s.id });
+  }
   await savePerson(s);
 }
 
@@ -261,6 +271,11 @@ export async function recordQuestion(s: PersonState, q: Question): Promise<void>
 
 export async function setLang(s: PersonState, lang: Lang): Promise<void> {
   s.lang = lang;
+  await savePerson(s);
+}
+
+export async function setBig(s: PersonState, big: boolean): Promise<void> {
+  s.big = big;
   await savePerson(s);
 }
 

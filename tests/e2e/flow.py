@@ -115,11 +115,12 @@ with sync_playwright() as p:
     pg.get_by_role('button', name='استخدام هذه الدعوة').click(); pg.wait_for_timeout(3000)
     check(pg.get_by_text('قُبلت الدعوة').count() == 1, 'relative redeems the invitation')
     shot('relative_redeemed')
-    goto('#/p/mariam', 800)
-    pg.reload()
-    goto(href, 1500)
-    pg.get_by_role('button', name='استخدام هذه الدعوة').click(); pg.wait_for_timeout(3000)
-    check(pg.get_by_text('استُخدمت هذه الدعوة من قبل').count() == 1, 'second use is refused')
+    p2 = ctx.new_page()
+    p2.goto(BASE + href); p2.wait_for_timeout(2500)
+    p2.get_by_role('button', name='استخدام هذه الدعوة').click(); p2.wait_for_timeout(3000)
+    p2.screenshot(path=f'{OUT}/relative_second_use.png')
+    check(p2.get_by_text('استُخدمت هذه الدعوة من قبل').count() == 1, 'second use is refused')
+    p2.close()
 
     # Noura's birth plan
     goto('#/p/noura/birth', 2500)
@@ -143,6 +144,23 @@ with sync_playwright() as p:
     shot('clinic_invites')
     goto('#/c/pathway', 1500)
     shot('clinic_pathway')
+
+    # The baby is born: maternity records the targeted test; the parents see it.
+    goto('#/c/births', 1500)
+    pg.get_by_role('button', name='Affected · refer this week').click(); pg.wait_for_timeout(1500)
+    check(pg.get_by_text('Referred the same week to the treating team').count() == 1, 'maternity records the newborn result')
+    pg.set_viewport_size({'width': 412, 'height': 900})
+    goto('#/p/noura/birth', 3500)
+    check(pg.get_by_text('Your baby was referred this week to the treating team').count() == 1, 'parents see the newborn result on the phone')
+    shot('noura_newborn')
+
+    # Mariam withdraws the summary she shared; it disappears from the counsellor's brief.
+    goto('#/p/mariam/counsellor', 2500)
+    pg.get_by_role('button', name='إيقاف المشاركة').click(); pg.wait_for_timeout(2500)
+    pg.set_viewport_size({'width': 1440, 'height': 900})
+    goto('#/c/queue/C-2019-0412', 3000)
+    brief = pg.locator('.pool').filter(has_text='Pre-visit brief')
+    check('Shared by Mariam' not in brief.inner_text(), "withdrawing the summary removes it from the counsellor's brief")
     b.close()
 
 bad = [e for e in errors if 'favicon' not in e]

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'preact/hooks';
 import { useClinic } from '../hooks';
-import { PATH, PATH_OWNER, counsellorAdvance, referralKpi, sendOutreach, urgency, OUTREACH_REGISTER, type Case, type ClinicState, type Referral } from '../../app/clinic';
+import { PATH, PATH_OWNER, counsellorAdvance, recordNewborn, referralKpi, sendOutreach, urgency, OUTREACH_REGISTER, type Case, type ClinicState, type Referral } from '../../app/clinic';
 import type { PathState } from '../../app/person';
 import { conditionFor } from '../../core/conditions';
 import { linkable } from '../../core/crypto/invites';
@@ -37,7 +37,7 @@ export function ClinicApp({ page, sub }: { page?: string; sub?: string }) {
         <main>
           {!c ? <p class="muted">Loading…</p>
             : p === 'outreach' ? <Outreach c={c} act={act} />
-            : p === 'births' ? <Births c={c} />
+            : p === 'births' ? <Births c={c} act={act} />
             : p === 'invites' ? <Invites c={c} />
             : p === 'pathway' ? <Pathway c={c} />
             : <Queue c={c} act={act} sel={sub} />}
@@ -56,6 +56,7 @@ const STATE_LABEL: Record<PathState, string> = {
 const FLAG_LABEL: Record<string, string> = {
   'distress': 'Distress', 'asked-for-human': 'Asked for a call', 'pregnancy': 'Pregnant', 'planning': 'Planning a pregnancy',
   'wedding-date': 'Wedding date set', 'vus': 'Uncertain variant', 'birth-plan': 'Birth plan',
+  'newborn-treatment': 'Newborn in treatment', 'consent-withdrawn': 'Consent withdrawn',
 };
 const flagTone = (f: string) => f === 'distress' ? 'madder' : f === 'birth-plan' ? 'palm' : f === 'pregnancy' || f === 'asked-for-human' ? 'saffron' : 'indigo';
 const days = (iso: string) => Math.round((Date.now() - new Date(iso).getTime()) / 864e5);
@@ -233,7 +234,7 @@ function Outreach({ c, act }: { c: ClinicState; act: Act }) {
 }
 const score = (r: (typeof OUTREACH_REGISTER)[number]) => (r.declaredRelated ? 4 : 0) + (r.affectedRelative ? 3 : 0) + (r.planning ? 2 : 0);
 
-function Births({ c }: { c: ClinicState }) {
+function Births({ c, act }: { c: ClinicState; act: Act }) {
   const list = c.births.filter(b => b.active);
   return (
     <Enter k="births">
@@ -249,7 +250,16 @@ function Births({ c }: { c: ClinicState }) {
             <p>{b.genes.map(g => <span key={g} class="chip saffron num" style={{ marginInlineEnd: '6px' }}>{g}</span>)} {b.conditionIds.map(id => conditionFor(b.genes[0]).id === id ? conditionFor(b.genes[0]).name.en : id).join(', ')}</p>
             <p class="row small" style={{ alignItems: 'flex-start' }}><span class="dot" style={{ color: 'var(--saffron)', marginTop: '9px' }} />Day 1–3: targeted confirmatory test for {b.genes.join(', ')} (in addition to routine newborn screening).</p>
             <p class="row small" style={{ alignItems: 'flex-start' }}><span class="dot" style={{ color: 'var(--saffron)', marginTop: '9px' }} />If positive: same-week referral to the treating team, before symptoms.</p>
-            <p class="tiny muted">Shared {new Date(b.at).toLocaleDateString('en-GB')} · couple {b.coupleId}</p>
+            {b.outcome ? (
+              <p class={`chip ${b.outcome.affected ? 'indigo' : 'palm'}`} style={{ whiteSpace: 'normal' }}>{b.outcome.note}</p>
+            ) : (
+              <div class="row wrap">
+                <span class="small muted">Record the targeted newborn test:</span>
+                <button class="btn calm" style={{ padding: '8px 14px', fontSize: '14px' }} onClick={() => act(st => recordNewborn(st, b.coupleId, false))}>Not affected</button>
+                <button class="btn primary" style={{ padding: '8px 14px', fontSize: '14px' }} onClick={() => act(st => recordNewborn(st, b.coupleId, true))}>Affected · refer this week</button>
+              </div>
+            )}
+            <p class="tiny muted">Shared {new Date(b.at).toLocaleDateString('en-GB')} · couple {b.coupleId} · only affected or not affected is reported; a child’s carrier status is not tested.</p>
           </div>
         );
       })}

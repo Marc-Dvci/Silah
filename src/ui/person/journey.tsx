@@ -52,7 +52,17 @@ export function BirthPlan({ s, act, base }: { s: PersonState; act: Act; base: st
             <div class="row wrap"><Listen id={`birth:${c.id}`} text={`${t(c.birthPlan!.action)} ${t(c.birthPlan!.window)}`} label={t({ en: 'Listen', ar: 'استمع' })} /><SourceChips ids={c.birthPlan!.sources} /></div>
           </div>
         ))}
-        {due ? (
+        {s.birthOutcome && (
+          <div class={`pool ${s.birthOutcome.affected ? 'indigo' : 'palm'} stack`} style={{ '--gap': '8px' } as any}>
+            <p class="eyebrow">{t({ en: 'Your baby’s test', ar: 'فحص طفلكما' })} · {new Date(s.birthOutcome.at).toLocaleDateString(s.lang === 'ar' ? 'ar-AE-u-nu-latn' : 'en-GB', { day: 'numeric', month: 'long' })}</p>
+            {s.birthOutcome.affected ? (
+              <p>{t({ en: `The test in the first days confirmed ${s.birthOutcome.genes.join(', ')}. Your baby was referred this week to the treating team, before any signs.`, ar: `أكّد الفحص في الأيام الأولى الإصابة المرتبطة بالجين ${s.birthOutcome.genes.join('، ')}. وقد أُحيل طفلكما هذا الأسبوع إلى الفريق المعالج، قبل ظهور أي علامات.` })}</p>
+            ) : (
+              <p>{t({ en: `The test in the first days showed your baby is not affected (${s.birthOutcome.genes.join(', ')}). Children are not tested for carrier status; they can choose that for themselves when they are older.`, ar: `أظهر الفحص في الأيام الأولى أن طفلكما غير مصاب (${s.birthOutcome.genes.join('، ')}). لا يُفحص الأطفال لمعرفة إن كانوا حاملين للتغيّر، ويمكنهم أن يقرروا ذلك بأنفسهم عندما يكبرون.` })}</p>
+            )}
+          </div>
+        )}
+        {s.birthOutcome ? null : due ? (
           <div class="stack">
             <p class="row"><span class="chip indigo num">{t({ en: `Due ${new Date(due).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}`, ar: `الموعد المتوقع ${new Date(due).toLocaleDateString('ar-AE-u-nu-latn', { day: 'numeric', month: 'long' })}` })}</span>
               <span class="muted small">{t({ en: `about ${weeksLeft} weeks`, ar: `بعد نحو ${weeksLeft} أسبوعاً` })}</span></p>

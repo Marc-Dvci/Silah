@@ -12,7 +12,7 @@ export function PersonShell({ s, act, base, children, showAsk = true }: {
   const dir = s.lang === 'ar' ? 'rtl' : 'ltr';
   return (
     <LangCtx.Provider value={{ lang: s.lang, digits: s.digits, sex: personaById(s.id)?.sex }}>
-      <div dir={dir} lang={s.lang} class="phone">
+      <div dir={dir} lang={s.lang} class={`phone ${s.big ? 'big' : ''}`}>
         <Top s={s} act={act} base={base} onHide={() => setHidden(true)} />
         {children}
         {showAsk && <AskFab base={base} />}
@@ -34,7 +34,7 @@ function Top({ s, act, base, onHide }: { s: PersonState; act: any; base: string;
       <button class="chip palm" onClick={() => go(`${base}/privacy`)}>
         <IconLock size={15} /> {t({ en: 'Private', ar: 'خاص' })}
       </button>
-      <button class="chip" onClick={() => act((st: PersonState) => setLang(st, st.lang === 'ar' ? 'en' : 'ar'))} aria-label="Language">
+      <button class="chip" onClick={() => act((st: PersonState) => setLang(st, st.lang === 'ar' ? 'en' : 'ar'))} aria-label={s.lang === 'ar' ? 'EN · English' : 'ع · العربية'} lang={s.lang === 'ar' ? 'en' : 'ar'}>
         {s.lang === 'ar' ? 'EN' : 'ع'}
       </button>
       <button class="chip" onClick={onHide} aria-label={t({ en: 'Hide screen', ar: 'إخفاء الشاشة' })} title={t({ en: 'Hide screen', ar: 'إخفاء الشاشة' })}>

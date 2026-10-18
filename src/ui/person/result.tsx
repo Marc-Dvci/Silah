@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'preact/hooks';
 import type { PersonState } from '../../app/person';
-import { acknowledgeResult, bundleVerified, currentBundle, currentView, recordTeachback, shareFinding, revoke } from '../../app/person';
+import { acknowledgeResult, bundleVerified, currentBundle, currentView, recordTeachback, shareFinding, revoke, requestBooking } from '../../app/person';
 import { isCarrierFinding } from '../../core/kernel';
 import { Q } from '../../core/fraction';
 import type { FactCard } from '../../core/types';
 import { activeGrants } from '../../core/crypto/receipts';
-import { Enter, Kids, Field, KidFigure, Listen, Toggle, Receipt, IconSeal, go, useT, type Tx, type KidKind } from '../kit';
+import { Enter, Kids, Field, KidFigure, Listen, ListenAll, Toggle, Receipt, IconSeal, go, useT, type Tx, type KidKind } from '../kit';
 import { Back } from './shell';
 import { partnerName } from './home';
 import { SourceChips } from './sources';
@@ -33,6 +33,16 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
             ? t({ en: `Signed by ${bundle.payload.issuer}. Checked on this phone.`, ar: `موقّعة من ${issuerAr(bundle.payload.issuer)}، وتم التحقق منها على هذا الهاتف.` })
             : t({ en: 'This result could not be verified. Do not rely on it.', ar: 'تعذّر التحقق من هذه النتيجة، فلا تعتمدي عليها.', arM: 'تعذّر التحقق من هذه النتيجة، فلا تعتمد عليها.' })}
         </p>
+
+        <ListenAll label={t({ en: 'Listen to this page', ar: 'استمع إلى الصفحة كلها' })} texts={view.cards.filter(c => !c.id.startsWith('option:')).map(c => t(c.text))} />
+
+        {view.counsellorFirst && (
+          <div class="pool indigo stack" style={{ '--gap': '8px' } as any}>
+            <h3>{t({ en: 'Part of this result needs a specialist first', ar: 'جزء من هذه النتيجة يحتاج إلى مختص أولاً' })}</h3>
+            <p class="small">{t({ en: 'Some findings, like a change whose meaning is not yet known, are explained by a genetics professional before anything else. Nothing here is a diagnosis.', ar: 'بعض النتائج، مثل تغيّر لم يُعرف معناه بعد، يشرحها مختص في علم الوراثة قبل أي شيء آخر، ولا شيء هنا تشخيص.' })}</p>
+            {!s.booking && <button class="btn primary" onClick={() => act(st => requestBooking(st))}>{t({ en: 'Book a counselling appointment', ar: 'حجز موعد استشارة' })}</button>}
+          </div>
+        )}
 
         {atRisk ? view.shared.map(sh => {
           const c = card(`couple:${sh.gene}`)!;
@@ -79,7 +89,7 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
 
         <h2>{t({ en: 'What this test cannot see', ar: 'ما لا يستطيع هذا الفحص رؤيته' })}</h2>
         <section class="flow">
-          {[...byKind('residual-gene'), card('panel-residual'), card('not-assessed'), card('consanguinity'), card('background')]
+          {[...byKind('vus'), ...byKind('residual-gene'), card('panel-residual'), card('not-assessed'), card('consanguinity'), card('background')]
             .filter((c): c is FactCard => !!c)
             .map(c => <CardLine key={c.id} c={c} />)}
         </section>
@@ -214,7 +224,8 @@ export function Check({ s, act, base }: { s: PersonState; act: Act; base: string
         {q.kind === 'pick' ? (
           <div class="stack" style={{ '--gap': '10px' } as any}>
             {q.options!.map((row, k) => (
-              <button key={k} class={`choice ${answered ? (k === q.answer ? 'right' : picked[i] === k ? 'wrong' : '') : picked[i] === k ? 'picked' : ''}`} onClick={() => pick(k)}>
+              <button key={k} class={`choice ${answered ? (k === q.answer ? 'right' : picked[i] === k ? 'wrong' : '') : picked[i] === k ? 'picked' : ''}`} onClick={() => pick(k)}
+                aria-label={describeRow(row, t)}>
                 <div class="row" style={{ justifyContent: 'space-around' }}>{row.map((kind, j) => <KidFigure key={j} kind={kind} size={0.75} />)}</div>
               </button>
             ))}
@@ -244,3 +255,12 @@ export function Check({ s, act, base }: { s: PersonState; act: Act; base: string
 }
 
 export const oneInOf = (c: FactCard, key = 'affected') => Q.from(c.numbers[key]).oneIn();
+
+/** A spoken description of a row of counted children, for screen readers. */
+function describeRow(row: KidKind[], t: (x: Tx) => string): string {
+  const n = (k: KidKind) => row.filter(x => x === k).length;
+  return t({
+    en: `${n('aff')} of 4 may have the condition, ${n('car')} of 4 healthy carriers, ${n('non')} of 4 carry neither`,
+    ar: `${n('aff')} من 4 قد يُصاب بالحالة، و${n('car')} من 4 حاملون أصحّاء، و${n('non')} من 4 لا يحملون التغيّر`,
+  });
+}
