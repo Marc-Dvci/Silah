@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { verifyAnswer, extractNumbers, isDirective, parseModelAnswer } from '../src/core/verifier';
+import { verifyAnswer, extractNumbers, isDirective, parseModelAnswer, resolveIds, stripInlineIds } from '../src/core/verifier';
 import { route } from '../src/core/routes';
 import { coupleView, labCouple } from '../src/core/kernel';
 import type { PersonResult } from '../src/core/types';
@@ -47,12 +47,15 @@ describe('non-directive guard', () => {
     'يجب عليكما عدم الزواج.',
     'الأفضل أن تتجنبا الإنجاب.',
     'ننصح بأطفال الأنابيب.',
+    'I cannot tell you everything, but you should not get married.',
   ];
   const allowed = [
     'You can talk it through with a genetic counsellor before deciding anything about a pregnancy.',
     'Some couples choose IVF with PGT, others choose a natural pregnancy with a birth plan.',
     'يمكنكما مناقشة الأمر مع المستشار الوراثي قبل اتخاذ أي قرار بشأن الحمل.',
     'The chance is the same in every pregnancy.',
+    'I cannot tell you what you should do about having children, but your counsellor can help you think it through.',
+    'لا يمكنني إخبارك بما يجب أن تفعله بشأن الإنجاب، لكن مستشارك الوراثي يمكنه مساعدتك.',
   ];
   for (const s of blocked) it(`blocks: ${s}`, () => expect(isDirective(s)).toBe(true));
   for (const s of allowed) it(`allows: ${s}`, () => expect(isDirective(s)).toBe(false));
@@ -93,5 +96,15 @@ describe('hard routes', () => {
   it('lets ordinary questions through', () => {
     expect(route('What does carrier mean?').route).toBe('none');
     expect(route('ما معنى أنني حامل للجين؟').route).toBe('none');
+  });
+});
+
+describe('card id resolution', () => {
+  it('resolves a unique prefix and leaves an ambiguous one unknown', () => {
+    expect(resolveIds(['couple'], cards)).toEqual(['couple:SMN1']);
+    expect(resolveIds(['option'], cards)).toEqual(['option']);   // four option cards: ambiguous
+  });
+  it('strips ids repeated inside the text', () => {
+    expect(stripInlineIds('The chance is 1 in 4 [couple:SMN1].')).toBe('The chance is 1 in 4.');
   });
 });

@@ -78,8 +78,12 @@ const AR_REFERRAL = /(مستشار|الاستشاره|استشاره|الطبي�
 const EN_CERTAIN = /\b(your (baby|child|son|daughter) (will|is going to) (have|be born with|be affected|be sick|be ill)|will definitely|is certain to|100 ?%)\b/;
 const AR_CERTAIN = /(سيصاب|سيكون مصابا|سيولد مصابا|سيولد مريضا|مؤكد ان|بالتاكيد سي)/;
 
+// "I can't tell you what you should do" refuses to steer; remove that clause before looking for a steer.
+const EN_NEG_TELL = /\b(i )?(can'?not|can'?t|won'?t|will not|do not|don'?t|am not able to)( be able to)? (tell|say|decide)( (you|for you))?[^,.;]*/g;
+const AR_NEG_TELL = /(لا يمكنني|لا استطيع|لا يمكن لي|لن) (ان )?(اخبرك|اخبركما|اخبارك|اخباركما|اقول|القول|اقرر|احدد)[^،,.؛]*/g;
+
 export function isDirective(text: string): boolean {
-  const n = normalize(text);
+  const n = normalize(text).replace(EN_NEG_TELL, ' ').replace(AR_NEG_TELL, ' ');
   const decision = EN_DECISION.test(n) || AR_DECISION.test(n);
   const steer = EN_STEER.test(n) || AR_STEER.test(n);
   if (!decision || !steer) return false;
@@ -119,9 +123,22 @@ export function verifySentence(s: ModelSentence, cards: Map<string, FactCard>): 
 
 export interface VerifiedAnswer { shown: ModelSentence[]; blocked: Verdict[]; verdicts: Verdict[] }
 
+/**
+ * Models sometimes cite a card by its prefix ("residual" for "residual:CYP21A2"). The id is resolved
+ * only when exactly one card matches; anything ambiguous stays unknown and the sentence is blocked.
+ */
+export function resolveIds(ids: string[], cards: FactCard[]): string[] {
+  const known = new Set(cards.map(c => c.id));
+  return ids.map(id => {
+    if (known.has(id)) return id;
+    const hits = cards.filter(c => c.id.startsWith(`${id}:`) || c.id.toLowerCase() === id.toLowerCase());
+    return hits.length === 1 ? hits[0].id : id;
+  });
+}
+
 export function verifyAnswer(a: ModelAnswer, cards: FactCard[]): VerifiedAnswer {
   const byId = new Map(cards.map(c => [c.id, c]));
-  const verdicts = (a.sentences ?? []).slice(0, 8).map(s => verifySentence(s, byId));
+  const verdicts = (a.sentences ?? []).slice(0, 8).map(s => verifySentence({ ...s, cards: resolveIds(s.cards ?? [], cards) }, byId));
   return { shown: verdicts.filter(v => v.ok).map(v => v.sentence), blocked: verdicts.filter(v => !v.ok), verdicts };
 }
 
@@ -135,9 +152,14 @@ export function parseModelAnswer(raw: string): ModelAnswer | null {
     return {
       sentences: j.sentences
         .filter((s: unknown) => s && typeof (s as ModelSentence).text === 'string')
-        .map((s: ModelSentence) => ({ text: s.text, cards: Array.isArray(s.cards) ? s.cards.map(String) : [] })),
+        .map((s: ModelSentence) => ({ text: stripInlineIds(s.text), cards: Array.isArray(s.cards) ? s.cards.map(String) : [] })),
     };
   } catch {
     return null;
   }
+}
+
+/** Models sometimes repeat card ids inside the sentence, e.g. "... [couple:SMN1]". */
+export function stripInlineIds(text: string): string {
+  return text.replace(/\s*[\[(]\s*(?:[a-z]+:[A-Za-z0-9:-]+|counsellor|background|not-assessed|panel-residual|consanguinity)(?:\s*,\s*[a-zA-Z0-9:-]+)*\s*[\])]/g, '').trim();
 }

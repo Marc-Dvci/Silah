@@ -55,6 +55,8 @@ export function composeMessages(question: string, cards: FactCard[], lang: Lang)
     '6. Never say a particular child will or will not be affected. Speak about chances.',
     '7. At most 4 short sentences.',
     '8. If the cards do not answer the question, reply with one sentence based on the "counsellor" card.',
+    '9. If the question asks for a number that is on no card (for example the chance for two children, or a figure about other people), say that the genetic counsellor can work it out. Never answer with a different number instead.',
+    '10. Put card ids only in the "cards" field, never inside the text, and never mention "cards" or "fact cards" to the person.',
     '',
     'FACT CARDS:',
     list,
