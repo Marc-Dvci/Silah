@@ -40,6 +40,7 @@ function short(id: string): string {
   const src = sourceById(id);
   if (id.startsWith('doh-')) return `DoH ${src?.year ?? ''}`.trim();
   if (id.startsWith('fda-')) return `FDA ${src?.year ?? ''}`.trim();
-  const surname = src?.cite.split(/[ ,.]/)[0] ?? id;
+  // Surnames can have several words ("De Vivo DC"): take the capitalised words before the initials.
+  const surname = src?.cite.match(/^((?:[A-Z][a-z'’-]+\s?)+)/)?.[1].trim() ?? id;
   return `${surname} ${src?.year ?? ''}`.trim();
 }

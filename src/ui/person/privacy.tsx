@@ -39,7 +39,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
             return (
               <Receipt key={g.at}>
                 <b>{t(SUBJECT[g.subject.kind])}{g.subject.gene ? ` · ${g.subject.gene}` : ''}</b><br />
-                {recipientLabel(g.recipient, t)} · {g.scope}
+                {recipientLabel(g.recipient, t)} · {scopeLabel(g.scope, t)}
                 {g.expires && <> · {t({ en: 'ends', ar: 'ينتهي' })} {new Date(g.expires).toLocaleDateString('en-GB')}</>}
                 <br /><button class="link" onClick={() => seq !== undefined && act(st => revoke(st, seq))}>{g.action === 'consent' ? t({ en: 'Withdraw', ar: 'سحب الموافقة' }) : t({ en: 'Stop sharing', ar: 'إيقاف المشاركة' })}</button>
               </Receipt>
@@ -92,4 +92,19 @@ function recipientLabel(r: string, t: (x: any) => string): string {
     'Genetic counsellor': { en: 'Your genetic counsellor', ar: 'مستشارك الوراثي' },
   };
   return map[r] ? t(map[r]) : r;
+}
+
+/** Receipts store their scope in English; show it in the reader's language. */
+function scopeLabel(scope: string, t: (x: any) => string): string {
+  const fixed: Record<string, { en: string; ar: string }> = {
+    'carrier findings on the premarital panel, for this couple only': { en: 'carrier findings on the premarital panel, for this couple only', ar: 'نتائج الحمل للجينات في لوحة ما قبل الزواج، لهذين الزوجين فقط' },
+    'teach-back results and questions asked in Silah': { en: 'your check answers and the questions you asked in Silah', ar: 'إجابات التحقق والأسئلة التي طُرحت في صلة' },
+    'blinded requests only; the clinic cannot link invitations to you': { en: 'blinded requests only; the clinic cannot link invitations to you', ar: 'طلبات معمّاة فقط، ولا تستطيع العيادة ربط الدعوات بك' },
+  };
+  if (fixed[scope]) return t(fixed[scope]);
+  const gene = scope.match(/^([A-Z0-9, ]+?) carrier status only$/);
+  if (gene) return t({ en: `${gene[1]} carrier status only`, ar: `حالة الحمل للجين ${gene[1]} فقط` });
+  const plan = scope.match(/^([A-Z0-9, ]+?) only, this pregnancy$/);
+  if (plan) return t({ en: `${plan[1]} only, this pregnancy`, ar: `${plan[1]} فقط، لهذا الحمل` });
+  return scope;
 }
