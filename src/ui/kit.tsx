@@ -1,7 +1,8 @@
 import { createContext, type ComponentChildren } from 'preact';
 import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import type { L10n, Lang } from '../core/types';
-import { toArabicDigits } from '../core/text';
+import { toArabicDigits, toAsciiDigits } from '../core/text';
+import { sha256Hex } from '../core/crypto/sign';
 
 // ---------- language ----------
 
@@ -172,27 +173,28 @@ export function Receipt({ children }: { children: ComponentChildren }) {
   return <div class="receipt"><IconLock size={18} /><div>{children}</div></div>;
 }
 
-/** Reads text aloud. Pre-rendered audio is used when present; otherwise the device voice. */
-export function Listen({ text, id, label }: { text: string; id?: string; label: string }) {
+/** File name of the pre-rendered narration for a text: the same key the render script uses. */
+export const audioKey = (lang: string, text: string) => sha256Hex(`${lang}|${toAsciiDigits(text)}`).slice(0, 16);
+
+/** Reads text aloud. Pre-rendered narration is used when it exists; otherwise the device voice. */
+export function Listen({ text, label }: { text: string; id?: string; label: string }) {
   const { lang } = useLang();
   const [playing, setPlaying] = useState(false);
   const audio = useRef<HTMLAudioElement | null>(null);
-  useEffect(() => () => { audio.current?.pause(); speechSynthesis?.cancel(); }, []);
+  useEffect(() => () => { audio.current?.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); }, []);
   const play = async () => {
-    if (playing) { audio.current?.pause(); speechSynthesis?.cancel(); setPlaying(false); return; }
+    if (playing) { audio.current?.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel(); setPlaying(false); return; }
     setPlaying(true);
-    if (id) {
-      const src = `audio/${lang}/${id.replace(/[^a-z0-9-]/gi, '_')}.mp3`;
-      try {
-        const head = await fetch(src, { method: 'HEAD' });
-        if (head.ok && (head.headers.get('content-type') ?? '').includes('audio')) {
-          audio.current = new Audio(src);
-          audio.current.onended = () => setPlaying(false);
-          await audio.current.play();
-          return;
-        }
-      } catch { /* fall through to the device voice */ }
-    }
+    const src = `audio/${audioKey(lang, text)}.mp3`;
+    try {
+      const head = await fetch(src, { method: 'HEAD' });
+      if (head.ok && (head.headers.get('content-type') ?? '').includes('audio')) {
+        audio.current = new Audio(src);
+        audio.current.onended = () => setPlaying(false);
+        await audio.current.play();
+        return;
+      }
+    } catch { /* fall through to the device voice */ }
     if ('speechSynthesis' in window) {
       const u = new SpeechSynthesisUtterance(text);
       u.lang = lang === 'ar' ? 'ar-AE' : 'en-GB';
