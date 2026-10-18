@@ -93,13 +93,13 @@ export function Stage() {
   return (
     <LangCtx.Provider value={{ lang: 'en', digits: 'latn' }}>
       <div dir="ltr">
-        <header class="row" style={{ padding: '16px 28px 0', gap: '14px' }}>
+        <header class="row stage-head" style={{ padding: '16px 28px 0', gap: '14px' }}>
           <Mark size={32} /><span class="wordmark">صلة</span><b style={{ fontSize: '20px' }}>Silah</b>
-          <span class="muted small">Inherited-risk pathway · prototype with a fictional family</span>
+          <span class="muted small tagline">Inherited-risk pathway · prototype with a fictional family</span>
           <span class="grow" />
-          <span class="tiny muted">Phone:</span>
+          <span class="tiny muted" style={{ whiteSpace: 'nowrap' }}>Phone:</span>
           {PERSONAS.map(p => <button key={p.id} class={`chip ${p.id === who ? 'indigo' : ''}`} onClick={() => pick(p.id)}>{p.name.en}</button>)}
-          <span class="tiny muted" style={{ marginInlineStart: '8px' }}>Phones in:</span>
+          <span class="tiny muted" style={{ marginInlineStart: '8px', whiteSpace: 'nowrap' }}>Phones in:</span>
           <button class={`chip ${phoneLang === 'ar' ? 'indigo' : ''}`} lang="ar" onClick={() => switchLang('ar')}>العربية</button>
           <button class={`chip ${phoneLang === 'en' ? 'indigo' : ''}`} onClick={() => switchLang('en')}>English</button>
           <button class="chip saffron" onClick={reset}>Reset demo</button>
