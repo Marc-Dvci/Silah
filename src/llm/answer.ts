@@ -79,7 +79,7 @@ export async function askModel(backend: Backend, question: string, cards: FactCa
 /** An OpenAI-compatible server on this machine (llama.cpp's llama-server). */
 export function localServer(base = 'http://127.0.0.1:8080', model = 'local'): Backend {
   return {
-    name: `llama-server (${base})`,
+    name: `the model on this computer (llama.cpp, ${base})`,
     async generate(messages) {
       const r = await fetch(`${base}/v1/chat/completions`, {
         method: 'POST',
@@ -126,7 +126,7 @@ export async function webgpuBackend(onProgress?: (p: number) => void): Promise<B
     },
   });
   return {
-    name: `${WEB_MODEL} (WebGPU)`,
+    name: 'Gemma 4 E2B in this browser (WebGPU)',
     async generate(messages) {
       const out = await gen(messages, { max_new_tokens: 380, do_sample: false });
       const last = out?.[0]?.generated_text;
