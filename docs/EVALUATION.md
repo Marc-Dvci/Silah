@@ -22,7 +22,11 @@ The cousin case is the one a "compatible" certificate hides. A related partner m
 
 ## 2. Privacy, end to end
 
-`python tests/e2e/flow.py` drives the real interface headless through the whole demo story: 20 checks, all passing.
+`python tests/e2e/flow.py` drives the real interface headless through the whole demo story: 23 checks, all passing. It also covers the newborn result recorded by maternity reaching the parents' phone, and a withdrawn summary disappearing from the counsellor's brief.
+
+`python tests/e2e/stage.py` plays the ten-step guided story on the desktop stage by pressing Next only, and checks that every step lands on a screen with content, that the clinic follows the demo couple, and that the stage's language switch reaches the phone.
+
+`python tests/e2e/a11y.py` runs axe-core (WCAG 2.2 AA rules) on 18 screens in Arabic and English: 0 violations.
 
 The privacy checks inside it:
 
@@ -54,6 +58,8 @@ Each model answered 26 questions in English and Arabic (52 answers) with the app
 - **Gemma 4 E2B** was the most cautious. It often answered with the counsellor sentence alone, and is the only one of the three with a WebGPU build that runs inside a phone's browser.
 - **Omission.** Blocking a sentence can make an answer understate risk: in one Arabic answer, the sentence with "1 in 260" cited a wrong card and was removed. Two changes followed. Card ids that match exactly one card by prefix are now resolved. Common risk questions ("does compatible mean no risk?") are answered from the fact cards directly, so the model never sees them.
 - **Substitution.** Asked for a number that is on no card ("the chance two of our children are affected"), an early prompt let the model answer with a different number. A rule now tells it to say the counsellor can work it out; the transcripts show it does.
+
+**Inside the browser.** `python tests/e2e/webgpu.py` loads Gemma 4 E2B (ONNX, q4f16) through Transformers.js on WebGPU in Chromium, then asks three free questions on Noura's phone. On the RTX 4070 the cached model is ready in 10 s and answers in 1.6 to 8.3 s. Every sentence shown carries the id of the fact card it came from (`condition:sma`, `birth:sma`, `counsellor`); "Should we have another baby?" is answered with the four options at equal weight and no recommendation. Chromium's headless shell cannot create a WebGPU device with 16-bit shaders on Windows (it ships without `dxil.dll`), so the test uses the full Chromium build. If a phone's graphics cannot start the model, the app says so in plain words and common questions keep working.
 
 **Choice:** Gemma 4 E4B on a computer (counsellor workstation, or a family's laptop) and Gemma 4 E2B in the phone's browser. Both are Apache-2.0. Neither is fine-tuned: safety comes from the fact cards, the hard routes and the verifier, so a model can be swapped without retraining.
 

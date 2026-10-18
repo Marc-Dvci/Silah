@@ -24,7 +24,10 @@ npm run build        # static PWA in dist/, works offline after the first visit
 End-to-end checks drive the real UI headless (Python Playwright):
 
 ```bash
-python tests/e2e/flow.py      # the whole demo story, 20 assertions
+python tests/e2e/flow.py      # the whole demo story, 23 assertions
+python tests/e2e/stage.py     # the guided ten-step story on the desktop stage
+python tests/e2e/a11y.py      # axe-core WCAG 2.2 AA on 18 screens, both languages
+python tests/e2e/webgpu.py    # Gemma 4 E2B inside the browser (WebGPU, ~3 GB download once)
 python tests/e2e/offline.py   # the built app with the network off (needs `npx vite preview --port 4173`)
 ```
 

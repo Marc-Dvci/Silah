@@ -77,7 +77,10 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
   const useDevice = async () => {
     setLoading(0);
     try { sharedBackend = await webgpuBackend(p => setLoading(p)); setBackend(sharedBackend); }
-    catch (e) { alertLine(String(e)); }
+    catch (e) {
+      console.error('on-device model failed to start', e);
+      alertLine(t({ en: 'The model could not start on this device’s graphics. Common questions still work, and your counsellor can answer the rest.', ar: 'تعذّر تشغيل النموذج على معالج الرسوميات في هذا الجهاز. ما زالت الأسئلة الشائعة متاحة، ويستطيع المستشار الوراثي الإجابة عن غيرها.' }));
+    }
     setLoading(null);
   };
   const [note, setNote] = useState('');

@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'preact/hooks';
 import { PERSONAS } from '../app/demo';
 import { dbClearAll } from '../app/db';
 import { loadClinic, sendOutreach, OUTREACH_REGISTER } from '../app/clinic';
-import { loadPerson, syncPerson, respondToInvitation, currentView, setBirthPlan, type PersonState } from '../app/person';
+import { loadPerson, syncPerson, respondToInvitation, currentView, setBirthPlan, setLang, type PersonState } from '../app/person';
+import type { Lang } from '../core/types';
 import { ensureSeeded } from './hooks';
 import { LangCtx, Mark, go } from './kit';
 
@@ -39,12 +40,12 @@ const STORY: StoryStep[] = [
   { who: 'mariam', clinic: 'outreach', title: 'Mariam agrees', text: 'She reads what will and will not happen, and agrees. Nothing is checked until Saeed agrees too.' },
   { who: 'saeed', clinic: 'outreach', title: 'Saeed agrees', text: 'The check runs on genomes already held. Each phone receives a result signed by the lab.', action: consent('mariam') },
   {
-    who: 'mariam', page: 'result', clinic: 'queue', title: 'Mariam reads her result',
+    who: 'mariam', page: 'result', clinic: 'queue/C-2019-0412', title: 'Mariam reads her result',
     text: 'Four children, counted; what does not change; what the test cannot see. The couple joins the counselling queue.',
     action: async () => { await consent('mariam')(); await consent('saeed')(); await settle(1500); },
   },
-  { who: 'mariam', page: 'check', clinic: 'queue', title: 'She checks her understanding', text: 'Four questions. She can share the answers so her counsellor starts where she is.' },
-  { who: 'saeed', page: 'result', clinic: 'queue', title: 'Saeed’s private finding', text: 'Saeed carries CYP21A2. Mariam never sees it unless he chooses to share it.' },
+  { who: 'mariam', page: 'check', clinic: 'queue/C-2019-0412', title: 'She checks her understanding', text: 'Four questions. She can share the answers so her counsellor starts where she is.' },
+  { who: 'saeed', page: 'result', clinic: 'queue/C-2019-0412', title: 'Saeed’s private finding', text: 'Saeed carries CYP21A2. Mariam never sees it unless he chooses to share it.' },
   { who: 'mariam', page: 'family', clinic: 'invites', title: 'Invitations for the family', text: 'Blind-signed invitations: the clinic can verify each one but not who sent it.' },
   { who: 'noura', page: 'birth', clinic: 'births', title: 'Noura’s birth plan', text: 'Noura, 31 weeks pregnant, tells the delivery hospital to test the baby for SMA in the first days.' },
   { who: 'noura', page: 'birth', clinic: 'births', title: 'The baby is tested', text: 'On the hospital side, record the newborn result. The parents see it on Noura’s phone.', action: birthPlanOn },
@@ -74,10 +75,18 @@ export function Stage() {
     const w = clinic.current?.contentWindow;
     if (w) w.location.hash = `#/c/${s.clinic}`;
   };
+  // One switch for every phone, so a viewer who does not read Arabic can follow the story in English.
+  const [phoneLang, setPhoneLang] = useState<Lang | null>(null);
+  const switchLang = async (lang: Lang) => {
+    setPhoneLang(lang);
+    for (const p of PERSONAS) await withPerson(p.id, st => setLang(st, lang))();
+    phone.current?.contentWindow?.location.reload();
+  };
   const reset = async () => {
     await dbClearAll();
     await ensureSeeded();
     setStep(null);
+    setPhoneLang(null);
     setNonce(n => n + 1);
   };
   if (!wide) return <Chooser reset={reset} />;
@@ -90,6 +99,9 @@ export function Stage() {
           <span class="grow" />
           <span class="tiny muted">Phone:</span>
           {PERSONAS.map(p => <button key={p.id} class={`chip ${p.id === who ? 'indigo' : ''}`} onClick={() => pick(p.id)}>{p.name.en}</button>)}
+          <span class="tiny muted" style={{ marginInlineStart: '8px' }}>Phones in:</span>
+          <button class={`chip ${phoneLang === 'ar' ? 'indigo' : ''}`} lang="ar" onClick={() => switchLang('ar')}>العربية</button>
+          <button class={`chip ${phoneLang === 'en' ? 'indigo' : ''}`} onClick={() => switchLang('en')}>English</button>
           <button class="chip saffron" onClick={reset}>Reset demo</button>
         </header>
         <div class="stage">
