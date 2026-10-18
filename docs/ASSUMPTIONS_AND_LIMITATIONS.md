@@ -1,0 +1,33 @@
+# Assumptions, dependencies and limitations
+
+## Assumptions
+
+| Assumption | Value used | Why, and where it shows |
+|---|---|---|
+| Carrier frequency for panel genes without a published Emirati figure | 1 in 200 | Conservative default; labelled "assumed frequency" next to every number that uses it |
+| Share of a gene's pathogenic variants the panel detects | 90% | DoH does not publish per-gene detection rates; lower detection gives a higher, more cautious residual |
+| Detection of a known family variant tested directly | 99% | Targeted detection is near-certain; not 100% so the residual is never zero |
+| Chance that a relative carries the same variant | Coefficient of relationship (sibling 1/2, aunt or uncle 1/4, first cousin 1/8) | Standard genetics; relatives in consanguineous families can share more |
+| Added background chance for first cousins | 1.7 to 2.8 percentage points | Bennett et al. 2002 (NSGC). The figure is widely reported; the primary full text was not reachable for this project, so it is marked "not yet checked against the primary source" in the app |
+| Background chance of a birth defect | 1 in 33 | CDC |
+
+Published Emirati carrier frequencies used: CYP21A2 10.6%, HBB 9.6%, MEFV 5.9%, ABCA4 4.3%, HBA2 1.8% (Jain et al., Genet Med Open 2025); SMN1 19 in 1,502 newborns (Rabea et al., Commun Med 2024); CFTR from a reported allele frequency of 0.34%.
+
+## Dependencies
+
+- **DoH Premarital Screening Standard V3 (September 2024)**: the gene panel (Appendix 12, 563 genes after mapping to current HGNC symbols), the report wording, the counselling flow and the 90% referral KPI.
+- **A signed result format.** Silah proposes a lab-signed bundle delivered with the existing digital certificate. Integration with DoH, M42 and Malaffi systems is assumed, not built.
+- **The Emirati Genome Programme holding sequence data for couples married before the mandate.** More than 900,000 Emiratis have been sequenced (DoH, July 2026). Returning couple results from these genomes needs a DoH policy decision and fresh consent; Silah builds the consent flow, not the policy.
+- **Models:** Gemma 4 E4B and E2B (Apache-2.0) through llama.cpp or Transformers.js. No model is fine-tuned.
+- **Narration:** pre-rendered with Microsoft neural voices (ar-AE-FatimaNeural, en-GB-SoniaNeural). A deployment would license Azure AI Speech.
+
+## Limitations
+
+- **Fictional data.** The family, their genomes and every clinic record are invented. No real person's data was used.
+- **Simulated health system.** The lab, counselling clinic, hospital and invitation service run in the browser for the demonstration.
+- **Arabic has not been reviewed by a native speaker.** It is Modern Standard Arabic written for the prototype, using the DoH booklet's wording where possible. Gendered forms are handled for the reader.
+- **Birth-plan conditions.** The treatment windows come from published trials (NURTURE, SPR1NT, Escolar 2005, Fumagalli 2022, Kishnani 2007, Gaston 1986). Routine newborn screening in Abu Dhabi already covers CAH, sickle cell disease and thalassaemia (DOH/NBSC/SD/V4/2024); SMA, Pompe, MPS I, Krabbe and MLD are not on that standard list. A DoH genomic newborn programme announced in August 2025 names SMA; its coverage and turnaround were not found.
+- **Alpha-thalassaemia** (HBA1/HBA2) results always go to a counsellor first, because detection depends on the lab's method for deletions.
+- **No clinical validation.** Silah has not been tested with patients or counsellors. Comprehension is assessed by a content comparison; the protocol for a real study is in `docs/PILOT.md`.
+- **Companion evaluation is small** (52 answers per model) and its directive check is a word list. All transcripts are published in `eval/REPORT.md`.
+- **Legal texts.** The UAE health data law, the personal data law, the medically assisted reproduction law and Cabinet Resolution No. 44 of 2024 were read through secondary sources; the official gazette was not reachable.
