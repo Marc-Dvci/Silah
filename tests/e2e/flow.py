@@ -50,7 +50,7 @@ with sync_playwright() as p:
     shot('mariam_invitation')
     pg.get_by_role('button', name='أوافق على الفحص الثنائي').click()
     pg.wait_for_timeout(1200)
-    check(pg.get_by_text('فحصكما الثنائي في الطريق').count() == 1, 'Mariam waits for her partner')
+    check(pg.get_by_text('فحصكما الثنائي في طريقه إليكما').count() == 1, 'Mariam waits for her partner')
 
     # Saeed agrees
     goto('#/p/saeed', 2500)

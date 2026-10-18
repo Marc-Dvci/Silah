@@ -59,7 +59,7 @@ function Veil({ onShow }: { onShow: () => void }) {
   return (
     <div class="hide-veil" onClick={onShow}>
       <Mark size={56} />
-      <p class="small">{t({ en: 'Tap to return', ar: 'لمسة للعودة' })}</p>
+      <p class="small">{t({ en: 'Tap to return', ar: 'العودة بلمسة' })}</p>
     </div>
   );
 }

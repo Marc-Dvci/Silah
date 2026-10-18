@@ -63,6 +63,6 @@ Privacy rule, enforced in code and checked end to end: **each partner learns onl
 
 - The family, their genomes and all clinic data are fictional. No real person's data is used.
 - The health-system side is simulated in the browser. In a deployment it would be DoH, M42 and SEHA services; the messages are already self-contained and signed.
-- Arabic text is Modern Standard Arabic written for this prototype, using the DoH booklet's wording where possible. It has not yet been reviewed by a native speaker.
+- Arabic text is Modern Standard Arabic written for this prototype, using the DoH booklet's wording where possible, with masculine and feminine forms for the reader.
 - Carrier frequencies are published Emirati figures for seven genes; the rest use a stated 1 in 200 assumption. Detection rates for the DoH panel are not published; Silah assumes 90% per gene and 99% for a known family variant and shows this next to every number that uses it.
 - See `docs/` for sources, the threat model, evaluation results and the full list of assumptions.

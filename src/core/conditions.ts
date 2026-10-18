@@ -2,7 +2,7 @@ import type { L10n } from './types';
 import type { QLike } from './fraction';
 
 // Plain-language condition cards. Clinical statements cite source ids from sources.ts.
-// Arabic is Modern Standard Arabic, written for this prototype and pending native review.
+// Arabic is Modern Standard Arabic, written for this prototype.
 
 export interface BirthPlan {
   /** What can be done at birth, in one sentence. */
@@ -48,7 +48,7 @@ export const CONDITIONS: Condition[] = [
       },
       window: {
         en: 'In one study of babies treated before any signs, 22 of 25 later walked on their own.',
-        ar: 'في دراسة على أطفال عولجوا قبل ظهور أي علامة، تمكّن 22 من أصل 25 لاحقاً من المشي دون مساعدة.',
+        ar: 'في دراسة على أطفال عولجوا قبل ظهور أي علامة، تمكّن 22 منهم من أصل 25 من المشي لاحقاً دون مساعدة.',
       },
       urgency: 'first-days',
       numbers: { walked: { n: '22', d: '25' } },
@@ -62,7 +62,7 @@ export const CONDITIONS: Condition[] = [
     name: { en: 'Krabbe disease', ar: 'داء كرابي' },
     what: {
       en: 'A condition that damages the protective coating of the nerves. In the infant form, signs begin in the first months.',
-      ar: 'حالة تُتلف الغلاف الواقي للأعصاب، وفي شكلها الرضيعي تبدأ العلامات في الأشهر الأولى.',
+      ar: 'حالة تُتلف الغلاف الواقي للأعصاب، وفي الشكل الذي يصيب الرضّع تبدأ العلامات في الأشهر الأولى.',
     },
     notChanged: {
       en: 'Carriers are healthy and do not develop the disease.',
@@ -114,7 +114,7 @@ export const CONDITIONS: Condition[] = [
     name: { en: 'Pompe disease', ar: 'داء بومبي' },
     what: {
       en: 'A condition where sugar builds up in muscles. The infant form affects the heart and breathing in the first months.',
-      ar: 'حالة يتراكم فيها السكر في العضلات، ويؤثر شكلها الرضيعي في القلب والتنفس خلال الأشهر الأولى.',
+      ar: 'حالة يتراكم فيها السكر في العضلات، ويؤثر الشكل الذي يصيب الرضّع في القلب والتنفس خلال الأشهر الأولى.',
     },
     notChanged: {
       en: 'Carriers are healthy.',
@@ -123,11 +123,11 @@ export const CONDITIONS: Condition[] = [
     birthPlan: {
       action: {
         en: 'If the baby is affected, enzyme replacement started in the first weeks protects the heart and muscles.',
-        ar: 'إذا كان الطفل مصاباً، فإن العلاج التعويضي بالإنزيم في الأسابيع الأولى يحمي القلب والعضلات.',
+        ar: 'إذا كان الطفل مصاباً، فإن العلاج التعويضي بالإنزيم، إذا بدأ في الأسابيع الأولى، يحمي القلب والعضلات.',
       },
       window: {
         en: 'Babies who start treatment earliest do best.',
-        ar: 'الأطفال الذين يبدأون العلاج أبكر تكون نتائجهم أفضل.',
+        ar: 'الأطفال الذين يبدأون العلاج في وقت أبكر تكون نتائجهم أفضل.',
       },
       urgency: 'first-weeks',
       sources: ['kishnani-2007', 'chien-2009'],
@@ -192,7 +192,7 @@ export const CONDITIONS: Condition[] = [
     name: { en: 'Sickle cell disease', ar: 'فقر الدم المنجلي' },
     what: {
       en: 'A blood condition where red cells change shape, causing pain episodes and a higher risk of infection.',
-      ar: 'حالة دموية تتغير فيها أشكال خلايا الدم الحمراء، فتسبب نوبات ألم وزيادة في خطر العدوى.',
+      ar: 'حالة دموية يتغير فيها شكل خلايا الدم الحمراء، فتسبب نوبات ألم وزيادة في خطر العدوى.',
     },
     notChanged: {
       en: 'People with sickle cell trait (carriers) are healthy.',
@@ -242,14 +242,14 @@ export const CONDITIONS: Condition[] = [
   {
     id: 'sbthal',
     genes: ['HBB'],
-    name: { en: 'Sickle beta-thalassaemia', ar: 'الثلاسيميا المنجلية' },
+    name: { en: 'Sickle beta-thalassaemia', ar: 'الثلاسيميا بيتا المنجلية' },
     what: {
       en: 'A form of sickle cell disease that happens when a child inherits one sickle gene and one beta-thalassaemia gene.',
       ar: 'شكل من أشكال فقر الدم المنجلي يحدث عندما يرث الطفل جين الخلية المنجلية من أحد الوالدين وجين الثلاسيميا بيتا من الآخر.',
     },
     notChanged: {
       en: 'Each parent, as a carrier, is healthy.',
-      ar: 'كل من الوالدين، بصفته حاملاً للتغيّر الجيني، سليم.',
+      ar: 'كلٌّ من الوالدين حاملٌ للتغيّر الجيني وسليم.',
     },
     birthPlan: {
       action: {
@@ -370,7 +370,7 @@ export function genericCondition(gene: string): Condition {
     },
     notChanged: {
       en: 'Carriers of recessive conditions are almost always healthy.',
-      ar: 'حاملو الحالات المتنحية أصحّاء في الغالب الأعم.',
+      ar: 'حاملو التغيّرات المرتبطة بالحالات المتنحية أصحّاء في الغالب الأعم.',
     },
     sources: ['doh-pms-2024'],
   };

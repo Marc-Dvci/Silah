@@ -10,10 +10,10 @@ import { Back } from './shell';
 type Act = (f: (st: PersonState) => Promise<void>) => Promise<void>;
 
 const SUBJECT: Record<string, { en: string; ar: string }> = {
-  'couple-check': { en: 'Couple check on your existing genome', ar: 'فحص ثنائي على جينومك الموجود' },
-  'finding': { en: 'A carrier finding', ar: 'نتيجة تغيّر في جين' },
+  'couple-check': { en: 'Couple check on your existing genome', ar: 'فحص ثنائي على جينومك المحفوظ' },
+  'finding': { en: 'A carrier finding', ar: 'تغيّر في أحد جيناتك' },
   'birth-plan': { en: 'Birth plan', ar: 'خطة الولادة' },
-  'teachback': { en: 'Your check answers', ar: 'إجابات التحقق' },
+  'teachback': { en: 'Your check answers', ar: 'إجابات التحقق من الفهم' },
   'brief': { en: 'Your summary for the counsellor', ar: 'ملخصك للمستشار' },
   'invitation': { en: 'Anonymous invitations', ar: 'دعوات مجهولة المصدر' },
 };
@@ -33,7 +33,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
         <p class="muted">{t({ en: 'It is encrypted here, with a key this phone keeps. Below is everything you have agreed to share. Each line is a signed record you can withdraw.', ar: 'وهي مشفّرة هنا بمفتاح يحتفظ به هذا الهاتف. وفي ما يلي كل ما وافقتِ على مشاركته، وكل سطر منه سجلّ موقّع يمكنك سحبه.', arM: 'وهي مشفّرة هنا بمفتاح يحتفظ به هذا الهاتف. وفي ما يلي كل ما وافقت على مشاركته، وكل سطر منه سجلّ موقّع يمكنك سحبه.' })}</p>
 
         <section class="stack" style={{ '--gap': '4px' } as any}>
-          {active.length === 0 && <p class="muted">{t({ en: 'Nothing is shared.', ar: 'لا شيء مُشارَك.' })}</p>}
+          {active.length === 0 && <p class="muted">{t({ en: 'Nothing is shared.', ar: 'لم تتم مشاركة أي شيء.' })}</p>}
           {active.map(g => {
             const seq = seqOf(g.at, g.subject.kind);
             return (
@@ -52,8 +52,8 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
             <h2>{t({ en: 'Shared with you', ar: 'ما تمت مشاركته معك' })}</h2>
             {received.map(r => (
               <div key={r.seq} class="pool palm">
-                <p><b>{personaById(partner ?? '') ? t(personaById(partner!)!.name) : r.fromName}</b> {t({ en: `chose to share: carrier of ${r.gene}.`, ar: `اختار مشاركة: حامل لتغيّر في الجين ${r.gene}.`, arM: `اختارت مشاركة: حاملة لتغيّر في الجين ${r.gene}.` })}</p>
-                <p class="small muted">{t({ en: 'You tested negative for this gene. Your counsellor can explain what the small remaining chance means.', ar: 'جاءت نتيجتك سلبية لهذا الجين، ويمكن لمستشارك شرح ما يعنيه الاحتمال الصغير المتبقي.' })}</p>
+                <p><b>{personaById(partner ?? '') ? t(personaById(partner!)!.name) : r.fromName}</b> {t({ en: `chose to share: carrier of ${r.gene}.`, ar: `اختار أن يشاركك: يحمل تغيّراً في الجين ${r.gene}.`, arM: `اختارت أن تشاركك: تحمل تغيّراً في الجين ${r.gene}.` })}</p>
+                <p class="small muted">{t({ en: 'You tested negative for this gene. Your counsellor can explain what the small remaining chance means.', ar: 'جاءت نتيجة فحصك لهذا الجين سلبية، ويمكن لمستشارك شرح ما يعنيه الاحتمال الصغير المتبقي.' })}</p>
               </div>
             ))}
           </section>
@@ -61,8 +61,8 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
 
         <p class="row small" style={{ color: ok.ok ? 'var(--palm)' : 'var(--madder)', gap: '6px' }}>
           <IconSeal size={18} /> {ok.ok
-            ? t({ en: `${s.ledger.length} signed records, chain intact.`, ar: `${s.ledger.length} ${s.ledger.length === 1 ? 'سجل موقّع' : s.ledger.length === 2 ? 'سجلان موقّعان' : s.ledger.length <= 10 ? 'سجلات موقّعة' : 'سجلاً موقّعاً'}، والسلسلة سليمة.` })
-            : t({ en: `Record ${ok.brokenAt} does not match. Show this to your counsellor.`, ar: `السجل ${ok.brokenAt} لا يطابق. اعرضيه على مستشارك.`, arM: `السجل ${ok.brokenAt} لا يطابق. اعرضه على مستشارك.` })}
+            ? t({ en: `${s.ledger.length} signed records, chain intact.`, ar: `${s.ledger.length === 1 ? 'سجل موقّع واحد' : s.ledger.length === 2 ? 'سجلان موقّعان' : `${s.ledger.length} ${s.ledger.length <= 10 ? 'سجلات موقّعة' : 'سجلاً موقّعاً'}`}، والسلسلة سليمة.` })
+            : t({ en: `Record ${ok.brokenAt} does not match. Show this to your counsellor.`, ar: `السجل رقم ${ok.brokenAt} غير مطابق. اعرضيه على مستشارك.`, arM: `السجل رقم ${ok.brokenAt} غير مطابق. اعرضه على مستشارك.` })}
         </p>
 
         <section class="stack">
@@ -74,7 +74,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
 
         <section class="stack">
           <p class="eyebrow">{t({ en: 'Demonstration', ar: 'عرض توضيحي' })}</p>
-          <p class="small muted">{t({ en: 'Silah is a prototype with a fictional family. Switch to another person’s phone:', ar: 'صلة نموذج أولي مع عائلة خيالية. للتبديل إلى هاتف شخص آخر:' })}</p>
+          <p class="small muted">{t({ en: 'Silah is a prototype with a fictional family. Switch to another person’s phone:', ar: 'صلة نموذج أولي يستخدم عائلة خيالية. للانتقال إلى هاتف شخص آخر:' })}</p>
           <div class="row wrap">
             {PERSONAS.map(p => <button key={p.id} class={`chip ${p.id === s.id ? 'indigo' : ''}`} onClick={() => go(`p/${p.id}`)}>{t(p.name)}</button>)}
             <button class="chip" onClick={() => go('c/queue')}>{t({ en: 'Clinic (simulated)', ar: 'العيادة (محاكاة)' })}</button>
@@ -99,7 +99,7 @@ function recipientLabel(r: string, t: (x: any) => string): string {
 function scopeLabel(scope: string, t: (x: any) => string): string {
   const fixed: Record<string, { en: string; ar: string }> = {
     'carrier findings on the premarital panel, for this couple only': { en: 'carrier findings on the premarital panel, for this couple only', ar: 'نتائج التغيّرات الجينية في لوحة ما قبل الزواج، لهذين الزوجين فقط' },
-    'teach-back results and questions asked in Silah': { en: 'your check answers and the questions you asked in Silah', ar: 'إجابات التحقق والأسئلة التي طُرحت في صلة' },
+    'teach-back results and questions asked in Silah': { en: 'your check answers and the questions you asked in Silah', ar: 'إجابات التحقق من الفهم والأسئلة التي طُرحت في صلة' },
     'blinded requests only; the clinic cannot link invitations to you': { en: 'blinded requests only; the clinic cannot link invitations to you', ar: 'طلبات معمّاة فقط، ولا تستطيع العيادة ربط الدعوات بك' },
   };
   if (fixed[scope]) return t(fixed[scope]);

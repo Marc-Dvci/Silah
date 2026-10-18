@@ -142,7 +142,7 @@ export function coupleView(own: PersonResult, couple: CoupleSection): CoupleView
       numbers: { affected: affected.toJSON(), partnerResidual: residual.toJSON(), familialPrior: famPrior.toJSON(), carrierFreq: src.carrier.toJSON() },
       text: {
         en: `You carry a change in ${f.gene}; ${couple.partnerName} tested negative for it. A negative test lowers the chance a lot but not to zero: about ${fmt(affected)} per pregnancy for this gene.`,
-        ar: `لديك تغيّر في الجين ${f.gene}، وجاءت نتيجة شريكك سلبية له. النتيجة السلبية تخفض الاحتمال كثيراً لكن ليس إلى الصفر: نحو 1 من ${affected.oneIn().toLocaleString('en-US')} في كل حمل لهذا الجين.`,
+        ar: `لديك تغيّر في الجين ${f.gene}، وجاءت نتيجة فحص شريكك لهذا الجين سلبية. النتيجة السلبية تخفض الاحتمال كثيراً لكن ليس إلى الصفر: نحو 1 من ${affected.oneIn().toLocaleString('en-US')} في كل حمل لهذا الجين.`,
       },
       sources: [src.ref ?? 'assumption-carrier', 'assumption-detection', ...(famPrior.isZero() ? [] : ['bennett-2002'])],
       arithmetic: `Partner residual = (r(1−d_fam) + p(1−d)) / (1 − r·d_fam − p·d) with r=${famPrior}, p=${src.carrier}, d=${DETECTION_GENE}, d_fam=${DETECTION_FAMILIAL}; × 1 (you carry) × 1/4.`,
@@ -154,7 +154,7 @@ export function coupleView(own: PersonResult, couple: CoupleSection): CoupleView
       numbers: {},
       text: {
         en: `Carrying a change in ${f.gene} does not make you ill. It matters only if a child also receives a change in the same gene from the other parent.`,
-        ar: `وجود تغيّر في الجين ${f.gene} لديك لا يسبب المرض، ولا يهم ذلك إلا إذا ورث الطفل تغيّراً في الجين نفسه من الوالد الآخر أيضاً.`,
+        ar: `وجود تغيّر في الجين ${f.gene} لديك لا يسبب المرض، ولا تكون له أهمية إلا إذا ورث الطفل تغيّراً في الجين نفسه من الوالد الآخر أيضاً.`,
       },
       sources: ['medlineplus-ar'],
     });
@@ -287,7 +287,7 @@ export function consanguinityCard(rel: Relationship): FactCard | null {
     text: closer
       ? {
           en: 'Because you are double first cousins, the background chance is higher than for unrelated parents, and higher than for first cousins.',
-          ar: 'لأنكما ابنا عمومة أو خؤولة مزدوجان، فإن الاحتمال الأساسي أعلى منه لدى الوالدين غير الأقارب، وأعلى منه لدى أبناء العمومة من الدرجة الأولى.',
+          ar: 'لأنكما أبناء عمومة أو خؤولة من الجهتين، فإن الاحتمال الأساسي أعلى منه لدى الوالدين غير الأقارب، وأعلى منه لدى أبناء العمومة من الدرجة الأولى.',
         }
       : {
           en: 'Because you are related, the background chance is slightly higher than for unrelated parents. It is lower than for first cousins.',
@@ -335,7 +335,7 @@ export const OPTIONS: FactCard[] = [
     numbers: {},
     text: {
       en: 'Taking time. Nothing has to be decided today, and you can talk it through with a genetic counsellor first.',
-      ar: 'أخذ الوقت الكافي. لا شيء يجب تقريره اليوم، ويمكنكما مناقشة الأمر أولاً مع مستشار وراثي.',
+      ar: 'أخذ الوقت الكافي. لا يلزم اتخاذ أي قرار اليوم، ويمكنكما مناقشة الأمر أولاً مع مستشار وراثي.',
     },
     sources: [],
   },
@@ -351,8 +351,8 @@ export function relativeCard(rel: Relative, gene: string): FactCard {
     'half-sibling': { en: 'a half-brother or half-sister', ar: 'الأخ أو الأخت من أحد الوالدين فقط' },
     'aunt-uncle': { en: 'an aunt or uncle', ar: 'العم أو العمة أو الخال أو الخالة' },
     'niece-nephew': { en: 'a niece or nephew', ar: 'ابن أو ابنة الأخ أو الأخت' },
-    'first-cousin': { en: 'a first cousin', ar: 'ابن أو بنت العم أو الخال من الدرجة الأولى' },
-    'second-cousin': { en: 'a second cousin', ar: 'قريب من الدرجة الثانية' },
+    'first-cousin': { en: 'a first cousin', ar: 'أحد أبناء العمومة أو الخؤولة من الدرجة الأولى' },
+    'second-cousin': { en: 'a second cousin', ar: 'أحد أبناء العمومة أو الخؤولة من الدرجة الثانية' },
   };
   return {
     id: `relative:${rel}`,
@@ -361,7 +361,7 @@ export function relativeCard(rel: Relative, gene: string): FactCard {
     numbers: { prior: p.toJSON() },
     text: {
       en: `For ${names[rel].en}, the chance of carrying the same change is about 1 in ${p.oneIn()}.`,
-      ar: `بالنسبة إلى ${names[rel].ar}، فإن احتمال أن يحمل التغيّر نفسه نحو 1 من ${p.oneIn()}.`,
+      ar: `بالنسبة إلى ${names[rel].ar}، فإن احتمال أن يحمل التغيّر نفسه يبلغ نحو 1 من ${p.oneIn()}.`,
     },
     sources: ['bennett-2002'],
     arithmetic: 'Coefficient of relationship to a known carrier.',

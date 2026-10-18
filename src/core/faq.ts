@@ -30,7 +30,7 @@ export const INTENTS: Intent[] = [
     answer: ['panel-residual', 'kind:residual-gene', 'not-assessed', 'background', 'consanguinity'],
     lead: {
       en: '“Compatible” means the panel found no gene where you both carry a change. It does not mean zero chance.',
-      ar: '«متوافق» يعني أن اللوحة لم تجد جيناً يحمل كلاكما تغيّراً فيه، ولا يعني أن الاحتمال صفر.',
+      ar: '«متوافق» يعني أن لوحة الفحص لم تجد جيناً يحمل كلاكما تغيّراً فيه، ولا يعني أن الاحتمال صفر.',
     },
   },
   {
@@ -85,7 +85,7 @@ export const INTENTS: Intent[] = [
   },
   {
     id: 'every-pregnancy',
-    label: { en: 'If our first child is healthy, is the next one safe?', ar: 'إذا كان طفلنا الأول سليماً، هل يكون الثاني بأمان؟' },
+    label: { en: 'If our first child is healthy, is the next one safe?', ar: 'إذا كان طفلنا الأول سليماً، فهل يكون الثاني سليماً أيضاً؟' },
     en: /\b(next (child|baby|pregnancy)|second (child|baby)|first child|already have|each pregnancy|every pregnancy)\b/,
     ar: /(الطفل الثاني|الحمل القادم|الحمل الثاني|طفلنا الاول|كل حمل)/,
     answer: ['kind:couple-gene'],

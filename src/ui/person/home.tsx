@@ -20,7 +20,7 @@ export function Home({ s, act, base }: { s: PersonState; act: Act; base: string 
         <Enter k="empty">
           <p class="eyebrow">{t({ en: `Hello ${me?.name.en ?? ''}`, ar: `مرحباً ${me?.name.ar ?? ''}` })}</p>
           <h1>{s.invitation?.status === 'consented'
-            ? t({ en: 'Your couple check is on its way.', ar: 'فحصكما الثنائي في الطريق.' })
+            ? t({ en: 'Your couple check is on its way.', ar: 'فحصكما الثنائي في طريقه إليكما.' })
             : t({ en: 'Nothing to read yet.', ar: 'لا يوجد ما تقرئينه بعد.', arM: 'لا يوجد ما تقرؤه بعد.' })}</h1>
           <p class="muted">{s.invitation?.status === 'consented'
             ? t({ en: 'It starts once both of you have agreed. The result arrives here, signed by the lab, and stays on this phone.', ar: 'يبدأ الفحص بعد موافقتكما كليكما. تصل النتيجة إلى هنا موقّعة من المختبر، وتبقى على هذا الهاتف.' })
@@ -123,7 +123,7 @@ function Invitation({ s, act }: { s: PersonState; act: Act }) {
         <h1>{t({ en: `A couple check for you and ${partner}, before your next pregnancy.`, ar: `فحص ثنائي لكِ ول${partner} قبل حملكما القادم.`, arM: `فحص ثنائي لك ول${partner} قبل حملكما القادم.` })}</h1>
         <p class="muted">{t({
           en: 'You married before genetic testing became part of premarital screening. Your genomes were already read by the Emirati Genome Programme, so there is no new blood test: only a check of the genes that matter for children.',
-          ar: 'تزوجتما قبل أن يصبح الفحص الجيني جزءاً من فحص ما قبل الزواج. وقد سبق أن قرأ البرنامج الإماراتي للجينوم جينوميكما، فلا حاجة إلى فحص دم جديد، بل مجرد فحص للجينات المهمة للأطفال.',
+          ar: 'تزوجتما قبل أن يصبح الفحص الجيني جزءاً من فحص ما قبل الزواج. وقد سبق أن قرأ برنامج الجينوم الإماراتي جينومَيكما، فلا حاجة إلى فحص دم جديد، بل يقتصر الأمر على فحص الجينات المهمة لصحة الأطفال.',
         })}</p>
         <div class="pool stack">
           <h3>{t({ en: 'What happens if you agree', ar: 'ماذا يحدث إذا وافقتِ', arM: 'ماذا يحدث إذا وافقت' })}</h3>
@@ -146,7 +146,7 @@ function Invitation({ s, act }: { s: PersonState; act: Act }) {
         <Receipt>
           {t({ en: 'Agreeing creates a signed consent on this phone. You can withdraw it from “What you shared”.', ar: 'الموافقة تُنشئ إقراراً موقّعاً على هذا الهاتف، ويمكنك سحبه من صفحة «ما شاركتِه».', arM: 'الموافقة تُنشئ إقراراً موقّعاً على هذا الهاتف، ويمكنك سحبه من صفحة «ما شاركته».' })}
         </Receipt>
-        <p class="tiny muted">{t({ en: `Invitation received ${new Date(inv.at).toLocaleDateString('en-GB')}. Invited because you told us you are related and planning a pregnancy; no genetic data was used to choose you.`, ar: `استُلمت الدعوة في ${new Date(inv.at).toLocaleDateString('en-GB')}. وُجّهت إليكما لأنكما ذكرتما أنكما قريبان وتخططان لحمل، ولم تُستخدم أي بيانات جينية في اختياركما.` })}</p>
+        <p class="tiny muted">{t({ en: `Invitation received ${new Date(inv.at).toLocaleDateString('en-GB')}. Invited because you told us you are related and planning a pregnancy; no genetic data was used to choose you.`, ar: `استُلمت الدعوة في ${new Date(inv.at).toLocaleDateString('en-GB')}. وُجّهت إليكما لأنكما ذكرتما أنكما قريبان وتخططان للإنجاب، ولم تُستخدم أي بيانات جينية في اختياركما.` })}</p>
       </Enter>
     </main>
   );

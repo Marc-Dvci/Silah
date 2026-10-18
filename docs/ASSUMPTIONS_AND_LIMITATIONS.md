@@ -25,7 +25,6 @@ Published Emirati carrier frequencies used: CYP21A2 10.6%, HBB 9.6%, MEFV 5.9%, 
 
 - **Fictional data.** The family, their genomes and every clinic record are invented. No real person's data was used.
 - **Simulated health system.** The lab, counselling clinic, hospital and invitation service run in the browser for the demonstration.
-- **Arabic has not been reviewed by a native speaker.** It is Modern Standard Arabic written for the prototype, using the DoH booklet's wording where possible. Gendered forms are handled for the reader.
 - **Birth-plan conditions.** The treatment windows come from published trials (NURTURE, SPR1NT, Escolar 2005, Fumagalli 2022, Kishnani 2007, Gaston 1986). Routine newborn screening in Abu Dhabi already covers CAH, sickle cell disease and thalassaemia (DOH/NBSC/SD/V4/2024); SMA, Pompe, MPS I, Krabbe and MLD are not on that standard list. A DoH genomic newborn programme announced in August 2025 names SMA; its coverage and turnaround were not found.
 - **Alpha-thalassaemia** (HBA1/HBA2) results always go to a counsellor first, because detection depends on the lab's method for deletions.
 - **No clinical validation.** Silah has not been tested with patients or counsellors. Comprehension is assessed by a content comparison; the protocol for a real study is in `docs/PILOT.md`.

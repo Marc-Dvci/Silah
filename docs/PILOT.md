@@ -30,7 +30,7 @@ Pre-registration: the protocol above is fixed before any data is collected; devi
 
 ## What must happen before a pilot
 
-1. A native Arabic review of every fixed text, and recording the narration with a licensed voice.
+1. Recording the narration with a licensed voice.
 2. DoH approval of the signed result format and of the couple re-check consent wording.
 3. Hosting of the clinic services inside the UAE (Federal Law No. 2 of 2019).
 4. A clinical safety review of the birth-plan statements by a paediatric geneticist.

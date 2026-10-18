@@ -115,8 +115,8 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
               {x.sentences?.map((sn, j) => (
                 <p key={j}>{sn.text}{sn.cards.map(id => <span class="cite" key={id}>{byId.get(id) ? id : 'counsellor'}</span>)}</p>
               ))}
-              {x.none && <p>{t({ en: 'Silah does not have a checked answer to that. It has been added to the questions for your counsellor, who can answer it.', ar: 'لا يملك تطبيق صلة إجابة موثّقة عن ذلك، وقد أُضيف السؤال إلى أسئلتك للمستشار الوراثي الذي يستطيع الإجابة عنه.' })}</p>}
-              {x.via === 'model' && <p class="tiny muted"><IconSpark size={12} /> {t({ en: `Worded by the on-device model from your cards${x.blocked ? `; ${x.blocked} sentence(s) held back by the safety check` : ''}.`, ar: `صاغها النموذج على الجهاز من بطاقاتك${x.blocked ? `، وحُجبت ${x.blocked} ${x.blocked === 1 ? 'جملة' : x.blocked === 2 ? 'جملتان' : x.blocked <= 10 ? 'جمل' : 'جملة'} بفحص السلامة` : ''}.` })}</p>}
+              {x.none && <p>{t({ en: 'Silah does not have a checked answer to that. It has been added to the questions for your counsellor, who can answer it.', ar: 'لا يملك تطبيق صلة إجابة موثّقة عن ذلك، وقد أُضيف السؤال إلى قائمة أسئلتك للمستشار الوراثي الذي يستطيع الإجابة عنه.' })}</p>}
+              {x.via === 'model' && <p class="tiny muted"><IconSpark size={12} /> {t({ en: `Worded by the on-device model from your cards${x.blocked ? `; ${x.blocked} sentence(s) held back by the safety check` : ''}.`, ar: `صاغها النموذج على الجهاز من بطاقاتك${x.blocked ? `، وحُجبت ${x.blocked === 1 ? 'جملة واحدة' : x.blocked === 2 ? 'جملتان' : `${x.blocked} ${x.blocked <= 10 ? 'جمل' : 'جملة'}`} بفحص السلامة` : ''}.` })}</p>}
               {(x.cards?.length || x.sentences?.length) ? <div><Listen text={[x.lead ? t(x.lead) : '', ...(x.cards?.map(c => t(c.text)) ?? []), ...(x.sentences?.map(z => z.text) ?? [])].join(' ')} label={t({ en: 'Listen', ar: 'استماع' })} /></div> : null}
             </div>
           </div>

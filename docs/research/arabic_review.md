@@ -87,3 +87,17 @@ The Arabic is generally clear, grammatical modern standard Arabic, and it alread
 - result.tsx, journey.tsx, privacy.tsx and shell.tsx have uncommitted edits in the working tree (another session is changing them). The line numbers in the JSON match the working tree as of this review; re-run the check before applying.
 - Not reviewed (outside the list): src/ui/kit.tsx (modified, has new strings), src/app/person.ts (HOSPITAL object: 'مستشفى الكورنيش، قسم الولادة' reads correctly in the birth-plan sentence), src/core/verifier.ts.
 - No source file was edited. Only `docs/research/arabic_review.json` and this file were written.
+
+## Second pass (18 Oct 2026)
+
+Every bilingual text (364, listed by `node scripts/extract-arabic.mjs`) was read again in context, on the rendered screens as well as in the source. 70 corrections, applied by `scripts/arabic_fixes_2026-10-18.py` and four small edits:
+
+- **Kinship terms.** "Second cousin" was rendered قريب من الدرجة الثانية, which in Arabic names a second-degree relative (a sibling or grandparent). Now أحد أبناء العمومة أو الخؤولة من الدرجة الثانية; first cousins and double first cousins follow the same pattern.
+- **Meaning.** The teach-back button read تحقّقي من فهمي ("check my understanding" addressed to the user); now التحقق من فهمي. A partner's shared finding now reads اختار أن يشاركك: يحمل تغيّراً في الجين … instead of a noun phrase.
+- **Medical terms.** شكلها الرضيعي becomes الشكل الذي يصيب الرضّع; sickle beta-thalassaemia is الثلاسيميا بيتا المنجلية; the programme is برنامج الجينوم الإماراتي, its official name.
+- **Counts.** A number before a dual noun ("2 جملتان", "2 سجلان") is replaced by the dual alone; one item reads جملة واحدة / سجل موقّع واحد.
+- **Calques and register.** في الطريق, مقابل المصدر, قد يهم الأطفال, لا شيء مُشارَك, a passive with من (تُوقَّع … من العيادة), and similar phrases are rewritten as natural Modern Standard Arabic.
+- **Mixed script.** Two source chips ("assumed frequency", "assumed detection") and the panel name were shown in English on Arabic screens; they now have Arabic labels. Author–year citations stay in Latin script, as in Arabic academic writing.
+
+The official compatible-couple wording quoted on the result screen was checked against the Arabic text of the DoH standard (Appendix 7, ثالثاً): «لا توجد خطورة على الطرف الآخر والأطفال».
+

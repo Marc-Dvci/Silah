@@ -63,7 +63,7 @@ Each model answered 26 questions in English and Arabic (52 answers) with the app
 
 **Choice:** Gemma 4 E4B on a computer (counsellor workstation, or a family's laptop) and Gemma 4 E2B in the phone's browser. Both are Apache-2.0. Neither is fine-tuned: safety comes from the fact cards, the hard routes and the verifier, so a model can be swapped without retraining.
 
-**Limits of this evaluation.** 52 answers per model is small. The directive and certainty checks are word lists, so the "0 directive" counts mean "none the list recognises"; the transcripts in `eval/REPORT.md` are there to be read. Arabic quality was judged by reading, not by a native-speaker panel.
+**Limits of this evaluation.** 52 answers per model is small. The directive and certainty checks are word lists, so the "0 directive" counts mean "none the list recognises"; the transcripts in `eval/REPORT.md` are there to be read. Arabic quality was judged by reading every transcript.
 
 ## 4. What a person can understand: official wording vs Silah
 

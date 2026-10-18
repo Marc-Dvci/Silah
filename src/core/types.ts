@@ -1,7 +1,7 @@
 import type { QLike } from './fraction';
 
 export type Lang = 'ar' | 'en';
-/** A string in both languages. Arabic is Modern Standard Arabic, pending native review.
+/** A string in both languages. Arabic is Modern Standard Arabic.
  *  `ar` addresses a woman or the couple; `arM`, when present, is the masculine form shown to a man. */
 export type L10n = { ar: string; en: string; arM?: string };
 

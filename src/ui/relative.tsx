@@ -41,8 +41,8 @@ function Body({ token, gene }: { token: string; gene: string | null }) {
       <Enter k={state}>
         <p class="eyebrow">{t({ en: 'An invitation from your family', ar: 'دعوة من عائلتك' })}</p>
         <h1>{t({ en: 'Someone who cares about you thought you should know.', ar: 'شخص يهتم بك رأى أن من حقك المعرفة.' })}</h1>
-        <p>{t({ en: 'A relative of yours has learned they carry a gene change that can matter for children. Relatives often carry the same change without knowing, and carriers are healthy.', ar: 'علم أحد أقاربك أنه يحمل تغيّراً جينياً قد يهم الأطفال. وكثيراً ما يحمل الأقارب التغيّر نفسه دون أن يعلموا، والحاملون أصحّاء.' })}</p>
-        {gene && <p class="row"><span class="chip saffron num">{gene}</span><span class="small muted">{t({ en: 'The gene they chose to mention', ar: 'الجين الذي اختار ذكره' })}</span></p>}
+        <p>{t({ en: 'A relative of yours has learned they carry a gene change that can matter for children. Relatives often carry the same change without knowing, and carriers are healthy.', ar: 'علم أحد أقاربك أنه يحمل تغيّراً جينياً قد يؤثر في صحة الأطفال. وكثيراً ما يحمل الأقارب التغيّر نفسه دون أن يعلموا، والحاملون أصحّاء.' })}</p>
+        {gene && <p class="row"><span class="chip saffron num">{gene}</span><span class="small muted">{t({ en: 'The gene they chose to mention', ar: 'الجين الذي اختير ذكره' })}</span></p>}
         <div class="pool palm stack" style={{ '--gap': '8px' } as any}>
           <p><b>{t({ en: 'This invitation does not say who sent it.', ar: 'لا تذكر هذه الدعوة من أرسلها.' })}</b></p>
           <p class="small">{t({ en: 'The clinic can check that it is genuine. It cannot tell which relative sent it.', ar: 'تستطيع العيادة التأكد من أنها أصلية، لكنها لا تستطيع معرفة القريب الذي أرسلها.' })}</p>
@@ -57,7 +57,7 @@ function Body({ token, gene }: { token: string; gene: string | null }) {
         )}
         {state === 'spent' && <p class="chip saffron">{t({ en: 'This invitation has already been used.', ar: 'استُخدمت هذه الدعوة من قبل.' })}</p>}
         {state === 'invalid' && <p class="chip madder">{t({ en: 'This invitation could not be verified.', ar: 'تعذّر التحقق من هذه الدعوة.' })}</p>}
-        <p class="tiny muted">{t({ en: 'Silah prototype. Fictional demonstration.', ar: 'نموذج أولي لتطبيق صلة، عرض خيالي.' })}</p>
+        <p class="tiny muted">{t({ en: 'Silah prototype. Fictional demonstration.', ar: 'نموذج أولي لتطبيق صلة، وعرض ببيانات خيالية.' })}</p>
       </Enter>
     </main>
   );

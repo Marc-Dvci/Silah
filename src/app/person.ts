@@ -209,7 +209,7 @@ export async function revoke(s: PersonState, seq: number): Promise<void> {
   await savePerson(s);
 }
 
-export const HOSPITAL = { en: 'Corniche Hospital, maternity', ar: 'مستشفى الكورنيش، قسم الولادة' };
+export const HOSPITAL = { en: 'Corniche Hospital, maternity', ar: 'قسم الولادة في مستشفى الكورنيش' };
 
 export async function setBirthPlan(s: PersonState, on: boolean, conditionIds: string[], genes: string[]): Promise<void> {
   if (on && !s.birthPlan?.active) {

@@ -5,6 +5,7 @@ import { isCarrierFinding } from '../../core/kernel';
 import { Q } from '../../core/fraction';
 import type { FactCard } from '../../core/types';
 import { activeGrants } from '../../core/crypto/receipts';
+import { PANEL_VERSION } from '../../core/data/panel';
 import { Enter, Kids, Field, KidFigure, Listen, ListenAll, Toggle, Receipt, IconSeal, go, useT, type Tx, type KidKind } from '../kit';
 import { Back } from './shell';
 import { partnerName } from './home';
@@ -39,7 +40,7 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
         {view.counsellorFirst && (
           <div class="pool indigo stack" style={{ '--gap': '8px' } as any}>
             <h3>{t({ en: 'Part of this result needs a specialist first', ar: 'جزء من هذه النتيجة يحتاج إلى مختص أولاً' })}</h3>
-            <p class="small">{t({ en: 'Some findings, like a change whose meaning is not yet known, are explained by a genetics professional before anything else. Nothing here is a diagnosis.', ar: 'بعض النتائج، مثل تغيّر لم يُعرف معناه بعد، يشرحها مختص في علم الوراثة قبل أي شيء آخر، وليس هنا ما يُعد تشخيصاً.' })}</p>
+            <p class="small">{t({ en: 'Some findings, like a change whose meaning is not yet known, are explained by a genetics professional before anything else. Nothing here is a diagnosis.', ar: 'بعض النتائج، مثل تغيّر لم يُعرف معناه بعد، يشرحها مختص في علم الوراثة قبل أي شيء آخر، ولا شيء هنا يُعد تشخيصاً.' })}</p>
             {!s.booking && <button class="btn primary" onClick={() => act(st => requestBooking(st))}>{t({ en: 'Book a counselling appointment', ar: 'حجز موعد استشارة' })}</button>}
           </div>
         )}
@@ -73,10 +74,10 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
           );
         }) : (
           <section class="stack">
-            <h1>{t({ en: 'The panel found no gene where you both carry a change.', ar: 'لم تجد اللوحة جيناً يحمل فيه كلاكما تغيّراً.' })}</h1>
-            <p class="muted">{t({ en: '“Compatible” is good news. It does not mean zero chance, and the numbers below show how small the remaining chance is.', ar: '«متوافق» خبر طيب، لكنه لا يعني أن الاحتمال صفر، والأرقام أدناه تبيّن مدى صغر الاحتمال المتبقي.' })}</p>
+            <h1>{t({ en: 'The panel found no gene where you both carry a change.', ar: 'لم تجد لوحة الفحص جيناً يحمل فيه كلاكما تغيّراً.' })}</h1>
+            <p class="muted">{t({ en: '“Compatible” is good news. It does not mean zero chance, and the numbers below show how small the remaining chance is.', ar: 'نتيجة «متوافق» خبر سار، لكنها لا تعني أن الاحتمال صفر، والأرقام أدناه تبيّن مدى صغر الاحتمال المتبقي.' })}</p>
             <div class="pool">
-              <p class="eyebrow">{t({ en: 'Conditions on the panel, per pregnancy', ar: 'حالات اللوحة، في كل حمل' })}</p>
+              <p class="eyebrow">{t({ en: 'Conditions on the panel, per pregnancy', ar: 'الحالات التي تفحصها اللوحة، في كل حمل' })}</p>
               <div style={{ margin: '14px 0' }}><Field n={view.panelRisk.oneIn()} /></div>
               <p><b class="num">{t({ en: `1 in ${view.panelRisk.oneIn().toLocaleString('en-US')}`, ar: `1 من ${view.panelRisk.oneIn().toLocaleString('en-US')}` })}</b> {t({ en: 'per pregnancy: about one dot in this whole field.', ar: 'في كل حمل: نحو نقطة واحدة في هذا الحقل كله.' })}</p>
               <p class="muted small" style={{ marginTop: '8px' }}>{t({ en: 'The official certificate wording for a compatible couple reads “No risk for either the other partner or children to be carrier or diseased”. The same standard also says the test does not cover all genetic disorders. Silah shows both halves.', ar: 'تنص صيغة الشهادة الرسمية للزوجين المتوافقين على «لا توجد خطورة على الطرف الآخر والأطفال»، بينما يذكر المعيار نفسه أن الفحص لا يغطي جميع الاضطرابات الوراثية. يعرض تطبيق صلة الأمرين معاً.' })}</p>
@@ -95,8 +96,8 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
         </section>
 
         <div class="stack" style={{ '--gap': '10px' } as any}>
-          <button class="btn primary full" onClick={() => go(`${base}/check`)}>{t({ en: 'Check I have understood', ar: 'تحقّقي من فهمي', arM: 'تحقّق من فهمي' })}</button>
-          <p class="tiny muted" style={{ textAlign: 'center' }}>{t({ en: `Panel: ${bundle.payload.person.panelVersion}`, ar: `اللوحة: ${bundle.payload.person.panelVersion}` })}</p>
+          <button class="btn primary full" onClick={() => go(`${base}/check`)}>{t({ en: 'Check I have understood', ar: 'التحقق من فهمي' })}</button>
+          <p class="tiny muted" style={{ textAlign: 'center' }}>{t({ en: `Panel: ${bundle.payload.person.panelVersion}`, ar: `اللوحة: ${bundle.payload.person.panelVersion === PANEL_VERSION ? 'معيار فحص ما قبل الزواج لدائرة الصحة، الإصدار 3 (سبتمبر 2024)، الملحق 12' : bundle.payload.person.panelVersion}` })}</p>
         </div>
       </Enter>
     </main>
@@ -164,12 +165,12 @@ function questions(atRisk: boolean): TQ[] {
       explain: { en: 'In each pregnancy: 1 in 4 may have the condition, 2 in 4 are healthy carriers, 1 in 4 carries neither change.', ar: 'في كل حمل: 1 من 4 قد يُصاب بالحالة، و2 من 4 حاملون أصحّاء، و1 من 4 لا يحمل أي تغيّر.' },
     },
     { id: 'next', kind: 'tf', answer: false, ask: { en: '“If our first child is healthy, the next one will be too.”', ar: '«إذا كان طفلنا الأول سليماً فسيكون الثاني سليماً أيضاً.»' }, explain: { en: 'The chance is the same in every pregnancy. A healthy child does not change it.', ar: 'الاحتمال نفسه في كل حمل، وسلامة طفل لا تغيّره.' } },
-    { id: 'ill', kind: 'tf', answer: false, ask: { en: '“Being a carrier means I am ill.”', ar: '«أن يحمل الشخص تغيّراً في الجين يعني أنه مريض.»' }, explain: { en: 'Carriers are healthy. It matters only when both parents carry a change in the same gene.', ar: 'الحاملون أصحّاء، ولا يهم الأمر إلا إذا حمل الوالدان كلاهما تغيّراً في الجين نفسه.' } },
-    { id: 'ours', kind: 'tf', answer: true, ask: { en: '“The decision about what to do next is ours.”', ar: '«القرار في ما نفعله بعد ذلك قرارنا.»' }, explain: { en: 'Yes. Silah and the counsellor explain; the decision belongs to you.', ar: 'نعم. يشرح تطبيق صلة والمستشار، والقرار لكما.' } },
+    { id: 'ill', kind: 'tf', answer: false, ask: { en: '“Being a carrier means I am ill.”', ar: '«أن يحمل الشخص تغيّراً في الجين يعني أنه مريض.»' }, explain: { en: 'Carriers are healthy. It matters only when both parents carry a change in the same gene.', ar: 'الحاملون أصحّاء، ولا تكون لذلك أهمية إلا إذا حمل الوالدان كلاهما تغيّراً في الجين نفسه.' } },
+    { id: 'ours', kind: 'tf', answer: true, ask: { en: '“The decision about what to do next is ours.”', ar: '«القرار بشأن ما سنفعله بعد ذلك يعود إلينا.»' }, explain: { en: 'Yes. Silah and the counsellor explain; the decision belongs to you.', ar: 'نعم. تطبيق صلة والمستشار يشرحان، والقرار لكما وحدكما.' } },
   ];
   return [
     { id: 'zero', kind: 'tf', answer: false, ask: { en: '“Compatible means there is no chance at all.”', ar: '«متوافق يعني أنه لا يوجد أي احتمال على الإطلاق.»' }, explain: { en: 'Compatible lowers the chance a lot, but not to zero.', ar: '«متوافق» يخفض الاحتمال كثيراً، لكن ليس إلى الصفر.' } },
-    { id: 'all', kind: 'tf', answer: false, ask: { en: '“The test checks every genetic condition.”', ar: '«الفحص يكشف كل الحالات الوراثية.»' }, explain: { en: 'It checks recessive conditions on the panel only, not all of them.', ar: 'يفحص الحالات المتنحية في اللوحة فقط، وليس جميعها.' } },
+    { id: 'all', kind: 'tf', answer: false, ask: { en: '“The test checks every genetic condition.”', ar: '«الفحص يكشف كل الحالات الوراثية.»' }, explain: { en: 'It checks recessive conditions on the panel only, not all of them.', ar: 'يفحص الحالات المتنحية المدرجة في اللوحة فقط، لا كل الحالات الوراثية.' } },
     { id: 'ill', kind: 'tf', answer: false, ask: { en: '“Being a carrier means I am ill.”', ar: '«أن يحمل الشخص تغيّراً في الجين يعني أنه مريض.»' }, explain: { en: 'Carriers are healthy.', ar: 'الحاملون أصحّاء.' } },
     { id: 'cousins', kind: 'tf', answer: true, ask: { en: '“Because we are cousins, our background chance is a little higher than for unrelated parents.”', ar: '«لأننا أقارب، فإن احتمالنا الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب.»' }, explain: { en: 'Yes, mostly from recessive conditions the panel does not test.', ar: 'نعم، ومعظم ذلك من حالات متنحية لا تفحصها اللوحة.' } },
   ];
@@ -261,6 +262,6 @@ function describeRow(row: KidKind[], t: (x: Tx) => string): string {
   const n = (k: KidKind) => row.filter(x => x === k).length;
   return t({
     en: `${n('aff')} of 4 may have the condition, ${n('car')} of 4 healthy carriers, ${n('non')} of 4 carry neither`,
-    ar: `${n('aff')} من 4 قد يُصاب بالحالة، و${n('car')} من 4 حاملون أصحّاء، و${n('non')} من 4 لا يحملون التغيّر`,
+    ar: `${n('aff')} من 4 قد يُصاب بالحالة، و${n('car')} من 4 حاملون أصحّاء، و${n('non')} من 4 لا يحمل أي تغيّر`,
   });
 }

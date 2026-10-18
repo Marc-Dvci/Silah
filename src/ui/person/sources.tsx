@@ -1,10 +1,11 @@
-import { useState } from 'preact/hooks';
+import { useContext, useState } from 'preact/hooks';
 import { sourceById } from '../../core/data/sources';
-import { Sheet, useT } from '../kit';
+import { LangCtx, Sheet, useT } from '../kit';
 
 /** Small citation chips. Tapping one shows the full reference and whether it was checked. */
 export function SourceChips({ ids }: { ids: string[] }) {
   const t = useT();
+  const ar = useContext(LangCtx).lang === 'ar';
   const [open, setOpen] = useState<string | null>(null);
   const uniq = [...new Set(ids)].filter(id => sourceById(id)).filter((id, i, a) => a.findIndex(x => short(x) === short(id)) === i);
   if (!uniq.length) return null;
@@ -12,7 +13,7 @@ export function SourceChips({ ids }: { ids: string[] }) {
   return (
     <>
       {uniq.map(id => (
-        <button key={id} class="cite" style={{ border: 0, cursor: 'pointer' }} onClick={() => setOpen(id)}>{short(id)}</button>
+        <button key={id} class="cite" style={{ border: 0, cursor: 'pointer' }} onClick={() => setOpen(id)}>{short(id, ar)}</button>
       ))}
       <Sheet open={!!src} onClose={() => setOpen(null)}>
         {src && (
@@ -21,7 +22,7 @@ export function SourceChips({ ids }: { ids: string[] }) {
             <p>{src.cite}</p>
             {src.url && <p class="small"><a href={src.url} target="_blank" rel="noopener">{src.url}</a></p>}
             <p class={`chip ${src.verified ? 'palm' : 'saffron'}`}>
-              {src.verified ? t({ en: 'Checked against the source for this project', ar: 'تم التحقق منه مقابل المصدر لهذا المشروع' }) : t({ en: 'Not yet checked against the primary source', ar: 'لم يُتحقق منه بعد مقابل المصدر الأصلي' })}
+              {src.verified ? t({ en: 'Checked against the source for this project', ar: 'رُوجع مع المصدر لهذا المشروع' }) : t({ en: 'Not yet checked against the primary source', ar: 'لم يُراجَع بعد مع المصدر الأصلي' })}
             </p>
             {src.note && <p class="small muted">{src.note}</p>}
           </div>
@@ -31,9 +32,10 @@ export function SourceChips({ ids }: { ids: string[] }) {
   );
 }
 
-function short(id: string): string {
+function short(id: string, ar = false): string {
   const fixed: Record<string, string> = {
-    'assumption-carrier': 'assumed frequency', 'assumption-detection': 'assumed detection',
+    'assumption-carrier': ar ? 'نسبة حاملين مفترضة' : 'assumed frequency',
+    'assumption-detection': ar ? 'نسبة كشف مفترضة' : 'assumed detection',
     'medlineplus-ar': 'MedlinePlus', 'cdc-birth-defects-1-in-33': 'CDC',
   };
   if (fixed[id]) return fixed[id];

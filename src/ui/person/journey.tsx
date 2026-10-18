@@ -56,24 +56,24 @@ export function BirthPlan({ s, act, base }: { s: PersonState; act: Act; base: st
           <div class={`pool ${s.birthOutcome.affected ? 'indigo' : 'palm'} stack`} style={{ '--gap': '8px' } as any}>
             <p class="eyebrow">{t({ en: 'Your baby’s test', ar: 'فحص طفلكما' })} · {new Date(s.birthOutcome.at).toLocaleDateString(s.lang === 'ar' ? 'ar-AE-u-nu-latn' : 'en-GB', { day: 'numeric', month: 'long' })}</p>
             {s.birthOutcome.affected ? (
-              <p>{t({ en: `The test in the first days confirmed ${s.birthOutcome.genes.join(', ')}. Your baby was referred this week to the treating team, before any signs.`, ar: `أكّد الفحص في الأيام الأولى الإصابة المرتبطة بالجين: ${s.birthOutcome.genes.join('، ')}. وقد أُحيل طفلكما هذا الأسبوع إلى الفريق المعالج، قبل ظهور أي علامات.` })}</p>
+              <p>{t({ en: `The test in the first days confirmed ${s.birthOutcome.genes.join(', ')}. Your baby was referred this week to the treating team, before any signs.`, ar: `أكّد فحص الأيام الأولى إصابة طفلكما بالحالة المرتبطة بالجين ${s.birthOutcome.genes.join('، ')}، وقد أُحيل هذا الأسبوع إلى الفريق المعالج قبل ظهور أي علامات.` })}</p>
             ) : (
-              <p>{t({ en: `The test in the first days showed your baby is not affected (${s.birthOutcome.genes.join(', ')}). Children are not tested for carrier status; they can choose that for themselves when they are older.`, ar: `أظهر الفحص في الأيام الأولى أن طفلكما غير مصاب (${s.birthOutcome.genes.join('، ')}). لا يُفحص الأطفال لمعرفة إن كانوا حاملين للتغيّر، ويمكنهم أن يقرروا ذلك بأنفسهم عندما يكبرون.` })}</p>
+              <p>{t({ en: `The test in the first days showed your baby is not affected (${s.birthOutcome.genes.join(', ')}). Children are not tested for carrier status; they can choose that for themselves when they are older.`, ar: `أظهر فحص الأيام الأولى أن طفلكما غير مصاب (${s.birthOutcome.genes.join('، ')}). لا يُفحص الأطفال لمعرفة إن كانوا حاملين للتغيّر، ويمكنهم أن يقرروا ذلك بأنفسهم عندما يكبرون.` })}</p>
             )}
           </div>
         )}
         {s.birthOutcome ? null : due ? (
           <div class="stack">
-            <p class="row"><span class="chip indigo num">{t({ en: `Due ${new Date(due).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}`, ar: `الموعد المتوقع ${new Date(due).toLocaleDateString('ar-AE-u-nu-latn', { day: 'numeric', month: 'long' })}` })}</span>
+            <p class="row"><span class="chip indigo num">{t({ en: `Due ${new Date(due).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}`, ar: `موعد الولادة المتوقع ${new Date(due).toLocaleDateString('ar-AE-u-nu-latn', { day: 'numeric', month: 'long' })}` })}</span>
               <span class="muted small">{t({ en: `in about ${(weeksLeft ?? 0)} weeks`, ar: `${(weeksLeft ?? 0) === 1 ? 'بعد نحو أسبوع' : (weeksLeft ?? 0) === 2 ? 'بعد نحو أسبوعين' : 'بعد نحو ' + (weeksLeft ?? 0) + ' ' + ((weeksLeft ?? 0) <= 10 ? 'أسابيع' : 'أسبوعاً')}` })}</span></p>
             <div class="row" style={{ alignItems: 'flex-start' }}>
               <div class="grow">
                 <h3>{t({ en: 'Tell the delivery hospital', ar: 'إبلاغ مستشفى الولادة' })}</h3>
-                <p class="muted small">{t({ en: `${t(HOSPITAL)} will know to test the baby for ${genes.join(', ')} in the first days. Nothing else is shared.`, ar: `سيعرف ${HOSPITAL.ar} أن يُفحص الطفل بحثاً عن ${genes.join('، ')} في الأيام الأولى، ولا يُشارَك أي شيء آخر.` })}</p>
+                <p class="muted small">{t({ en: `${t(HOSPITAL)} will know to test the baby for ${genes.join(', ')} in the first days. Nothing else is shared.`, ar: `سيعلم ${HOSPITAL.ar} بضرورة فحص الطفل بحثاً عن ${genes.join('، ')} في الأيام الأولى، ولن يُشارَك أي شيء آخر.` })}</p>
               </div>
               <Toggle on={on} label={t({ en: 'Tell the delivery hospital', ar: 'إبلاغ مستشفى الولادة' })} onChange={v => act(st => setBirthPlan(st, v, conds.map(c => c.id), genes))} />
             </div>
-            {on && <Receipt><b>{t({ en: 'Shared', ar: 'تمت المشاركة' })}</b> · {t(HOSPITAL)} · {t({ en: `${genes.join(', ')} only, this pregnancy, until six weeks after birth`, ar: `${genes.join('، ')} فقط، لهذا الحمل، حتى ستة أسابيع بعد الولادة` })} · {t({ en: 'turn off to withdraw', ar: 'أوقفيه للسحب', arM: 'أوقفه للسحب' })}</Receipt>}
+            {on && <Receipt><b>{t({ en: 'Shared', ar: 'تمت المشاركة' })}</b> · {t(HOSPITAL)} · {t({ en: `${genes.join(', ')} only, this pregnancy, until six weeks after birth`, ar: `${genes.join('، ')} فقط، لهذا الحمل، حتى ستة أسابيع بعد الولادة` })} · {t({ en: 'turn off to withdraw', ar: 'أوقفيه لسحب الموافقة', arM: 'أوقفه لسحب الموافقة' })}</Receipt>}
           </div>
         ) : (
           <p class="muted">{t({ en: 'When you are expecting, you can turn this on here, and the delivery hospital will be ready.', ar: 'عندما يحدث حمل، يمكنكما تفعيل هذا من هنا، وسيكون مستشفى الولادة مستعداً.' })}</p>
@@ -98,7 +98,7 @@ export function Family({ s, act, base }: { s: PersonState; act: Act; base: strin
   const link = (tok: string) => `${location.origin}${location.pathname}#/r/${tok}${withGene ? `?g=${gene}` : ''}`;
   const message = (tok: string) => t({
     en: `Someone in your family has learned they carry a gene change that can matter for children. Testing is available to you. This invitation does not say who sent it.${withGene ? ` The gene is ${gene}.` : ''} ${link(tok)}`,
-    ar: `علم أحد أفراد عائلتك أنه يحمل تغيّراً جينياً قد يهم الأطفال، والفحص متاح لك. لا تذكر هذه الدعوة من أرسلها.${withGene ? ` الجين هو ${gene}.` : ''} ${link(tok)}`,
+    ar: `علم أحد أفراد عائلتك أنه يحمل تغيّراً جينياً قد يؤثر في صحة الأطفال، والفحص متاح لك. لا تذكر هذه الدعوة من أرسلها.${withGene ? ` الجين هو ${gene}.` : ''} ${link(tok)}`,
   });
   const shareIt = async (tok: string, k: number) => {
     const text = message(tok);
@@ -131,7 +131,7 @@ export function Family({ s, act, base }: { s: PersonState; act: Act; base: strin
         <h2>{t({ en: 'Invite them without saying it was you', ar: 'ادعيهم دون أن تذكري أنكِ المرسِلة', arM: 'ادعُهم دون أن تذكر أنك المرسِل' })}</h2>
         <div class="pool palm stack" style={{ '--gap': '8px' } as any}>
           <p class="small"><b>{t({ en: 'How this stays anonymous', ar: 'كيف تبقى الدعوة مجهولة المصدر' })}</b></p>
-          <p class="small">{t({ en: 'Each invitation is signed by the clinic with a blind signature: the clinic signs it without seeing it. When a relative uses it, the clinic can tell it is genuine and unused, but not who it came from.', ar: 'تُوقَّع كل دعوة من العيادة بتوقيع أعمى، أي أن العيادة توقّعها دون أن تراها. وعندما يستخدمها القريب، تستطيع العيادة التأكد من أنها أصلية وغير مستخدمة، لكنها لا تعرف من أرسلها.' })}</p>
+          <p class="small">{t({ en: 'Each invitation is signed by the clinic with a blind signature: the clinic signs it without seeing it. When a relative uses it, the clinic can tell it is genuine and unused, but not who it came from.', ar: 'توقّع العيادة كل دعوة توقيعاً أعمى، أي أنها توقّعها دون أن ترى محتواها. وعندما يستخدمها القريب، تستطيع العيادة التأكد من أنها أصلية وغير مستخدمة، لكنها لا تعرف من أرسلها.' })}</p>
         </div>
         {tokens.length === 0 ? (
           <button class="btn primary full" disabled={!!s.invites.pending} onClick={() => act(st => askForInvites(st, 3))}>
@@ -147,7 +147,7 @@ export function Family({ s, act, base }: { s: PersonState; act: Act; base: strin
               <div key={tok} class="row">
                 <span class="chip indigo num">{n(k + 1)}</span>
                 <span class="grow tiny muted num" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>…{tok.slice(-18)}</span>
-                <button class="chip" onClick={() => shareIt(tok, k)}>{copied === k ? <IconCheck size={15} /> : <IconShare size={15} />} {copied === k ? t({ en: 'Copied', ar: 'نُسخت' }) : t({ en: 'Send', ar: 'إرسال' })}</button>
+                <button class="chip" onClick={() => shareIt(tok, k)}>{copied === k ? <IconCheck size={15} /> : <IconShare size={15} />} {copied === k ? t({ en: 'Copied', ar: 'تم النسخ' }) : t({ en: 'Send', ar: 'إرسال' })}</button>
               </div>
             ))}
             <p class="tiny muted">{t({ en: 'Open a link on another device to see what your relative sees.', ar: 'يمكن فتح الرابط على جهاز آخر لمعاينة ما يراه القريب.' })} <a href={`#/r/${tokens[0]}`} target="_blank">{t({ en: 'Preview', ar: 'معاينة' })}</a></p>
@@ -185,9 +185,9 @@ export function Counsellor({ s, act, base }: { s: PersonState; act: Act; base: s
       <Enter k="counsellor">
         <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'Your counsellor', ar: 'مستشارك الوراثي' })}</span></div>
         <h1>{s.booking?.slot
-          ? t({ en: `You are booked for ${fmtSlot(s.booking.slot, 'en')}.`, ar: `موعدك ${fmtSlot(s.booking.slot, 'ar')}.` })
+          ? t({ en: `You are booked for ${fmtSlot(s.booking.slot, 'en')}.`, ar: `حُجز موعدك في ${fmtSlot(s.booking.slot, 'ar')}.` })
           : t({ en: 'A genetic counsellor who already knows your result.', ar: 'مستشار وراثي يعرف نتيجتك مسبقاً.' })}</h1>
-        <p class="muted">{t({ en: 'Genetic Counselling Clinic, Corniche Hospital. The counsellor explains, answers, and supports whatever you decide.', ar: 'عيادة الاستشارة الوراثية، مستشفى الكورنيش. يشرح المستشار ويجيب ويدعم أي قرار تتخذانه.' })}</p>
+        <p class="muted">{t({ en: 'Genetic Counselling Clinic, Corniche Hospital. The counsellor explains, answers, and supports whatever you decide.', ar: 'عيادة الاستشارة الوراثية، مستشفى الكورنيش. يشرح المستشار ويجيب عن أسئلتكما ويدعم أي قرار تتخذانه.' })}</p>
         {!s.booking && (
           <button class="btn primary full" onClick={() => act(st => requestBooking(st))}>{t({ en: 'Book a counselling appointment', ar: 'حجز موعد استشارة' })}</button>
         )}
@@ -203,7 +203,7 @@ export function Counsellor({ s, act, base }: { s: PersonState; act: Act; base: s
         <h2>{t({ en: 'Let the counsellor start where you are', ar: 'دعي المستشار يبدأ من حيث وصلتِ', arM: 'دع المستشار يبدأ من حيث وصلت' })}</h2>
         <div class="pool stack" style={{ '--gap': '8px' } as any}>
           <p class="small muted">{t({ en: 'If you share, the counsellor sees exactly this and nothing else:', ar: 'إذا شاركتِ، يرى المستشار هذا فقط ولا شيء غيره:', arM: 'إذا شاركت، يرى المستشار هذا فقط ولا شيء غيره:' })}</p>
-          <p class="small">• {s.teachback ? t({ en: `Your check: ${s.teachback.correct} of ${s.teachback.total} points explained back`, ar: `تحقّقك: ${s.teachback.correct} من ${s.teachback.total} نقاط` }) : t({ en: 'Your check: not done yet', ar: 'التحقق: لم يُنجز بعد' })}</p>
+          <p class="small">• {s.teachback ? t({ en: `Your check: ${s.teachback.correct} of ${s.teachback.total} points explained back`, ar: `التحقق من الفهم: ${s.teachback.correct} من ${s.teachback.total} نقاط` }) : t({ en: 'Your check: not done yet', ar: 'التحقق من الفهم: لم يُنجز بعد' })}</p>
           <p class="small">• {t({ en: `Questions you asked in Silah: ${s.questions.length}`, ar: `الأسئلة التي طرحتِها في صلة: ${s.questions.length}`, arM: `الأسئلة التي طرحتها في صلة: ${s.questions.length}` })}</p>
           <p class="small">• {t({ en: 'What you chose to share, with whom', ar: 'ما اخترتِ مشاركته ومع من', arM: 'ما اخترت مشاركته ومع من' })}</p>
           {briefGrant ? (

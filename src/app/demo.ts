@@ -16,7 +16,7 @@ export interface Persona {
 export const PERSONAS: Persona[] = [
   {
     id: 'mariam', name: { en: 'Mariam', ar: 'مريم' }, sex: 'F', lang: 'ar', age: 31,
-    blurb: { en: 'Married to her cousin Saeed since 2019. One daughter. Hoping for a second child.', ar: 'متزوجة من ابن عمها سعيد منذ 2019، ولديهما ابنة، ويأملان في طفل ثانٍ.' },
+    blurb: { en: 'Married to her cousin Saeed since 2019. One daughter. Hoping for a second child.', ar: 'متزوجة من ابن عمها سعيد منذ 2019، ولديهما ابنة، ويأملان أن يُرزقا بطفل ثانٍ.' },
     genome: [
       { gene: 'SMN1', variant: 'SMN1 exon 7 deletion (1 copy)', classification: 'P' },
       { gene: 'MEFV', variant: 'c.2080A>G (p.Met694Val)', classification: 'P' },
@@ -45,7 +45,7 @@ export const PERSONAS: Persona[] = [
   },
   {
     id: 'fatima', name: { en: 'Fatima', ar: 'فاطمة' }, sex: 'F', lang: 'ar', age: 24,
-    blurb: { en: 'Engaged to her cousin Ahmed. Their 2026 premarital result says “compatible”.', ar: 'مخطوبة لابن عمها أحمد. نتيجة فحصهما قبل الزواج في 2026 «متوافق».' },
+    blurb: { en: 'Engaged to her cousin Ahmed. Their 2026 premarital result says “compatible”.', ar: 'مخطوبة لابن عمها أحمد، وجاءت نتيجة فحصهما قبل الزواج في 2026 «متوافق».' },
     genome: [{ gene: 'CYP21A2', variant: 'c.293-13C>G', classification: 'P' }],
   },
   {
