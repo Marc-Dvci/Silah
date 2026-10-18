@@ -40,7 +40,7 @@ function Body({ token, gene }: { token: string; gene: string | null }) {
     <main class="page">
       <Enter k={state}>
         <p class="eyebrow">{t({ en: 'An invitation from your family', ar: 'دعوة من عائلتك' })}</p>
-        <h1>{t({ en: 'Someone who cares about you thought you should know.', ar: 'شخص يهتم بك رأى أن من حقك أن تعرف.' })}</h1>
+        <h1>{t({ en: 'Someone who cares about you thought you should know.', ar: 'شخص يهتم بك رأى أن من حقك المعرفة.' })}</h1>
         <p>{t({ en: 'A relative of yours has learned they carry a gene change that can matter for children. Relatives often carry the same change without knowing, and carriers are healthy.', ar: 'علم أحد أقاربك أنه يحمل تغيّراً جينياً قد يهم الأطفال. وكثيراً ما يحمل الأقارب التغيّر نفسه دون أن يعلموا، والحاملون أصحّاء.' })}</p>
         {gene && <p class="row"><span class="chip saffron num">{gene}</span><span class="small muted">{t({ en: 'The gene they chose to mention', ar: 'الجين الذي اختار ذكره' })}</span></p>}
         <div class="pool palm stack" style={{ '--gap': '8px' } as any}>
@@ -52,7 +52,7 @@ function Body({ token, gene }: { token: string; gene: string | null }) {
         {state === 'ok' && (
           <div class="stack">
             <p class="chip palm"><IconCheck size={15} /> {t({ en: 'Invitation accepted', ar: 'قُبلت الدعوة' })}</p>
-            <p>{t({ en: 'You can now book a carrier test at any premarital screening centre or with your family doctor. Bring this phone; the invitation is on it.', ar: 'يمكنك الآن حجز فحص الحمل الجيني في أي مركز لفحص ما قبل الزواج أو لدى طبيب الأسرة. أحضر هذا الهاتف، فالدعوة محفوظة عليه.' })}</p>
+            <p>{t({ en: 'You can now book a carrier test at any premarital screening centre or with your family doctor. Bring this phone; the invitation is on it.', ar: 'يمكنك الآن حجز فحص للتغيّر الجيني في أي مركز لفحص ما قبل الزواج أو لدى طبيب الأسرة، ويُستحسن إحضار هذا الهاتف، فالدعوة محفوظة عليه.' })}</p>
           </div>
         )}
         {state === 'spent' && <p class="chip saffron">{t({ en: 'This invitation has already been used.', ar: 'استُخدمت هذه الدعوة من قبل.' })}</p>}

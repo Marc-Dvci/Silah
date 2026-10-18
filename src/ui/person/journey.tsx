@@ -49,14 +49,14 @@ export function BirthPlan({ s, act, base }: { s: PersonState; act: Act; base: st
             <div class="row"><KidFigure kind="car" size={0.7} /><h3>{t(c.name)}</h3></div>
             <p>{t(c.birthPlan!.action)}</p>
             <p class="muted">{t(c.birthPlan!.window)}</p>
-            <div class="row wrap"><Listen id={`birth:${c.id}`} text={`${t(c.birthPlan!.action)} ${t(c.birthPlan!.window)}`} label={t({ en: 'Listen', ar: 'استمع' })} /><SourceChips ids={c.birthPlan!.sources} /></div>
+            <div class="row wrap"><Listen id={`birth:${c.id}`} text={`${t(c.birthPlan!.action)} ${t(c.birthPlan!.window)}`} label={t({ en: 'Listen', ar: 'استماع' })} /><SourceChips ids={c.birthPlan!.sources} /></div>
           </div>
         ))}
         {s.birthOutcome && (
           <div class={`pool ${s.birthOutcome.affected ? 'indigo' : 'palm'} stack`} style={{ '--gap': '8px' } as any}>
             <p class="eyebrow">{t({ en: 'Your baby’s test', ar: 'فحص طفلكما' })} · {new Date(s.birthOutcome.at).toLocaleDateString(s.lang === 'ar' ? 'ar-AE-u-nu-latn' : 'en-GB', { day: 'numeric', month: 'long' })}</p>
             {s.birthOutcome.affected ? (
-              <p>{t({ en: `The test in the first days confirmed ${s.birthOutcome.genes.join(', ')}. Your baby was referred this week to the treating team, before any signs.`, ar: `أكّد الفحص في الأيام الأولى الإصابة المرتبطة بالجين ${s.birthOutcome.genes.join('، ')}. وقد أُحيل طفلكما هذا الأسبوع إلى الفريق المعالج، قبل ظهور أي علامات.` })}</p>
+              <p>{t({ en: `The test in the first days confirmed ${s.birthOutcome.genes.join(', ')}. Your baby was referred this week to the treating team, before any signs.`, ar: `أكّد الفحص في الأيام الأولى الإصابة المرتبطة بالجين: ${s.birthOutcome.genes.join('، ')}. وقد أُحيل طفلكما هذا الأسبوع إلى الفريق المعالج، قبل ظهور أي علامات.` })}</p>
             ) : (
               <p>{t({ en: `The test in the first days showed your baby is not affected (${s.birthOutcome.genes.join(', ')}). Children are not tested for carrier status; they can choose that for themselves when they are older.`, ar: `أظهر الفحص في الأيام الأولى أن طفلكما غير مصاب (${s.birthOutcome.genes.join('، ')}). لا يُفحص الأطفال لمعرفة إن كانوا حاملين للتغيّر، ويمكنهم أن يقرروا ذلك بأنفسهم عندما يكبرون.` })}</p>
             )}
@@ -65,11 +65,11 @@ export function BirthPlan({ s, act, base }: { s: PersonState; act: Act; base: st
         {s.birthOutcome ? null : due ? (
           <div class="stack">
             <p class="row"><span class="chip indigo num">{t({ en: `Due ${new Date(due).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}`, ar: `الموعد المتوقع ${new Date(due).toLocaleDateString('ar-AE-u-nu-latn', { day: 'numeric', month: 'long' })}` })}</span>
-              <span class="muted small">{t({ en: `about ${weeksLeft} weeks`, ar: `بعد نحو ${weeksLeft} أسبوعاً` })}</span></p>
+              <span class="muted small">{t({ en: `about ${(weeksLeft ?? 0)} weeks`, ar: `${(weeksLeft ?? 0) === 1 ? 'بعد نحو أسبوع' : (weeksLeft ?? 0) === 2 ? 'بعد نحو أسبوعين' : 'بعد نحو ' + (weeksLeft ?? 0) + ' ' + ((weeksLeft ?? 0) <= 10 ? 'أسابيع' : 'أسبوعاً')}` })}</span></p>
             <div class="row" style={{ alignItems: 'flex-start' }}>
               <div class="grow">
                 <h3>{t({ en: 'Tell the delivery hospital', ar: 'إبلاغ مستشفى الولادة' })}</h3>
-                <p class="muted small">{t({ en: `${t(HOSPITAL)} will know to test the baby for ${genes.join(', ')} in the first days. Nothing else is shared.`, ar: `سيعرف ${HOSPITAL.ar} أن يفحص الطفل لـ${genes.join('، ')} في الأيام الأولى، ولا يُشارَك أي شيء آخر.` })}</p>
+                <p class="muted small">{t({ en: `${t(HOSPITAL)} will know to test the baby for ${genes.join(', ')} in the first days. Nothing else is shared.`, ar: `سيعرف ${HOSPITAL.ar} أن يُفحص الطفل بحثاً عن ${genes.join('، ')} في الأيام الأولى، ولا يُشارَك أي شيء آخر.` })}</p>
               </div>
               <Toggle on={on} label={t({ en: 'Tell the delivery hospital', ar: 'إبلاغ مستشفى الولادة' })} onChange={v => act(st => setBirthPlan(st, v, conds.map(c => c.id), genes))} />
             </div>
@@ -110,8 +110,8 @@ export function Family({ s, act, base }: { s: PersonState; act: Act; base: strin
     <main class="page">
       <Enter k="family">
         <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'Your family', ar: 'عائلتك' })}</span></div>
-        <h1>{t({ en: 'The same change often runs in a family.', ar: 'كثيراً ما يسري التغيّر نفسه في العائلة.' })}</h1>
-        <p class="muted">{t({ en: 'Relatives who marry within the family are the people most likely to share it. Knowing early gives them the same choices you have.', ar: 'الأقارب الذين يتزوجون داخل العائلة هم الأكثر احتمالاً لمشاركته، والمعرفة المبكرة تمنحهم الخيارات نفسها المتاحة لك.' })}</p>
+        <h1>{t({ en: 'The same change often runs in a family.', ar: 'كثيراً ما يتوارث أفراد العائلة التغيّر نفسه.' })}</h1>
+        <p class="muted">{t({ en: 'Relatives who marry within the family are the people most likely to share it. Knowing early gives them the same choices you have.', ar: 'الأقارب الذين يتزوجون داخل العائلة هم الأكثر احتمالاً لأن يحملوا التغيّر نفسه، والمعرفة المبكرة تمنحهم الخيارات نفسها المتاحة لك.' })}</p>
         <div class="pool stack" style={{ '--gap': '10px' } as any}>
           {RELS.map(r => {
             const c = relativeCard(r, gene);
@@ -128,7 +128,7 @@ export function Family({ s, act, base }: { s: PersonState; act: Act; base: strin
           <SourceChips ids={['bennett-2002']} />
         </div>
 
-        <h2>{t({ en: 'Invite them without saying it was you', ar: 'ادعيهم دون أن يعرفوا أنكِ المرسِلة', arM: 'ادعُهم دون أن يعرفوا أنك المرسِل' })}</h2>
+        <h2>{t({ en: 'Invite them without saying it was you', ar: 'ادعيهم دون أن تذكري أنكِ المرسِلة', arM: 'ادعُهم دون أن تذكر أنك المرسِل' })}</h2>
         <div class="pool palm stack" style={{ '--gap': '8px' } as any}>
           <p class="small"><b>{t({ en: 'How this stays anonymous', ar: 'كيف تبقى الدعوة مجهولة المصدر' })}</b></p>
           <p class="small">{t({ en: 'Each invitation is signed by the clinic with a blind signature: the clinic signs it without seeing it. When a relative uses it, the clinic can tell it is genuine and unused, but not who it came from.', ar: 'تُوقَّع كل دعوة من العيادة بتوقيع أعمى، أي أن العيادة توقّعها دون أن تراها. وعندما يستخدمها القريب، تستطيع العيادة التأكد من أنها أصلية وغير مستخدمة، لكنها لا تعرف من أرسلها.' })}</p>
@@ -150,7 +150,7 @@ export function Family({ s, act, base }: { s: PersonState; act: Act; base: strin
                 <button class="chip" onClick={() => shareIt(tok, k)}>{copied === k ? <IconCheck size={15} /> : <IconShare size={15} />} {copied === k ? t({ en: 'Copied', ar: 'نُسخت' }) : t({ en: 'Send', ar: 'إرسال' })}</button>
               </div>
             ))}
-            <p class="tiny muted">{t({ en: 'Open a link on another device to see what your relative sees.', ar: 'افتح الرابط على جهاز آخر لترى ما يراه قريبك.' })} <a href={`#/r/${tokens[0]}`} target="_blank">{t({ en: 'Preview', ar: 'معاينة' })}</a></p>
+            <p class="tiny muted">{t({ en: 'Open a link on another device to see what your relative sees.', ar: 'يمكن فتح الرابط على جهاز آخر لمعاينة ما يراه القريب.' })} <a href={`#/r/${tokens[0]}`} target="_blank">{t({ en: 'Preview', ar: 'معاينة' })}</a></p>
           </div>
         )}
       </Enter>
@@ -216,7 +216,7 @@ export function Counsellor({ s, act, base }: { s: PersonState; act: Act; base: s
 
         <div class="pool soft stack" style={{ '--gap': '8px' } as any}>
           <h3>{t({ en: 'Need someone now?', ar: 'تحتاجين إلى أحد الآن؟', arM: 'تحتاج إلى أحد الآن؟' })}</h3>
-          <p class="small muted">{t({ en: 'The counsellor will call you back today. In an emergency, call 999 or 998.', ar: 'سيتصل بك المستشار اليوم. وفي حالة الطوارئ اتصل بالرقم 999 أو 998.' })}</p>
+          <p class="small muted">{t({ en: 'The counsellor will call you back today. In an emergency, call 999 or 998.', ar: 'سيتصل بك المستشار اليوم. وفي حالة الطوارئ يُرجى الاتصال بالرقم 999 أو 998.' })}</p>
           {called
             ? <p class="chip palm"><IconCheck size={15} /> {t({ en: 'Your counsellor has been asked to call you today.', ar: 'طُلب من مستشارك الاتصال بك اليوم.' })}</p>
             : <button class="btn calm" onClick={() => act(st => escalate(st, 'none')).then(() => setCalled(true))}>{t({ en: 'Ask for a call back', ar: 'طلب معاودة الاتصال' })}</button>}

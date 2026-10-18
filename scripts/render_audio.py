@@ -18,6 +18,10 @@ async def main():
             continue
         await edge_tts.Communicate(it['text'], VOICE[it['lang']], rate='-6%').save(path)
         done += 1
-    print(f'{len(items)} sentences, {done} rendered now')
+    keep = {f"{it['key']}.mp3" for it in items}
+    stale = [f for f in os.listdir(OUT) if f.endswith('.mp3') and f not in keep]
+    for f in stale:
+        os.remove(f'{OUT}/{f}')
+    print(f'{len(items)} sentences, {done} rendered now, {len(stale)} stale files removed')
 
 asyncio.run(main())

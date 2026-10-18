@@ -81,11 +81,11 @@ with sync_playwright() as p:
     # Ask: a FAQ answer and a hard route
     goto('#/p/mariam/ask', 1200)
     pg.get_by_role('textbox').fill('إذا كان طفلنا الأول سليماً، هل يكون الثاني بأمان؟')
-    pg.get_by_role('button', name='اسأل').click(); pg.wait_for_timeout(1200)
+    pg.get_by_role('button', name='إرسال').click(); pg.wait_for_timeout(1200)
     check(pg.get_by_text('الاحتمال نفسه في كل حمل').count() >= 1, 'FAQ answered from cards')
     pg.get_by_role('textbox').fill('هل يجوز فحص الأجنة؟')
-    pg.get_by_role('button', name='اسأل').click(); pg.wait_for_timeout(1200)
-    check(pg.get_by_text('عالم دين تثق به').count() == 1, 'religious question routed to a scholar')
+    pg.get_by_role('button', name='إرسال').click(); pg.wait_for_timeout(1200)
+    check(pg.get_by_text('عالم دين تثقين به').count() == 1, 'religious question routed to a scholar (feminine form for Mariam)')
     shot('mariam_ask')
 
     # Counsellor: share brief, book

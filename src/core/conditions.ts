@@ -39,7 +39,7 @@ export const CONDITIONS: Condition[] = [
     },
     notChanged: {
       en: 'Carriers of SMA are healthy. Being a carrier does not affect your own muscles.',
-      ar: 'حاملو ضمور العضلات الشوكي أصحّاء، وكونك حاملاً لا يؤثر في عضلاتك أنت.',
+      ar: 'حاملو التغيّر المرتبط بضمور العضلات الشوكي أصحّاء، ووجود هذا التغيّر لديك لا يؤثر في عضلاتك.',
     },
     birthPlan: {
       action: {
@@ -48,7 +48,7 @@ export const CONDITIONS: Condition[] = [
       },
       window: {
         en: 'In one study of babies treated before any signs, 22 of 25 later walked on their own.',
-        ar: 'في دراسة على أطفال عولجوا قبل ظهور أي علامة، تمكّن 22 من أصل 25 منهم لاحقاً من المشي دون مساعدة.',
+        ar: 'في دراسة على أطفال عولجوا قبل ظهور أي علامة، تمكّن 22 من أصل 25 لاحقاً من المشي دون مساعدة.',
       },
       urgency: 'first-days',
       numbers: { walked: { n: '22', d: '25' } },
@@ -123,7 +123,7 @@ export const CONDITIONS: Condition[] = [
     birthPlan: {
       action: {
         en: 'If the baby is affected, enzyme replacement started in the first weeks protects the heart and muscles.',
-        ar: 'إذا كان الطفل مصاباً، فإن العلاج بتعويض الإنزيم في الأسابيع الأولى يحمي القلب والعضلات.',
+        ar: 'إذا كان الطفل مصاباً، فإن العلاج التعويضي بالإنزيم في الأسابيع الأولى يحمي القلب والعضلات.',
       },
       window: {
         en: 'Babies who start treatment earliest do best.',
@@ -137,7 +137,7 @@ export const CONDITIONS: Condition[] = [
   {
     id: 'mps1',
     genes: ['IDUA'],
-    name: { en: 'Mucopolysaccharidosis type I (MPS I)', ar: 'داء عديد السكاريد المخاطي من النوع الأول' },
+    name: { en: 'Mucopolysaccharidosis type I (MPS I)', ar: 'داء عديدات السكاريد المخاطية من النوع الأول' },
     what: {
       en: 'A condition where the body cannot break down certain sugars, which slowly affects growth, joints, heart and learning.',
       ar: 'حالة لا يستطيع فيها الجسم تفكيك سكريات معيّنة، فتؤثر تدريجياً في النمو والمفاصل والقلب والتعلّم.',
@@ -175,11 +175,11 @@ export const CONDITIONS: Condition[] = [
     birthPlan: {
       action: {
         en: 'Routine newborn screening in Abu Dhabi already includes CAH. Telling the delivery team in advance means they watch for it from the first day and can start medicine early.',
-        ar: 'يشمل فحص حديثي الولادة الروتيني في أبوظبي هذه الحالة أصلاً، وإبلاغ فريق الولادة مسبقاً يعني أنه يراقبها منذ اليوم الأول ويمكنه بدء الدواء مبكراً.',
+        ar: 'يشمل فحص حديثي الولادة الروتيني في أبوظبي هذه الحالة أصلاً. وإبلاغ فريق الولادة مسبقاً يعني أنه يراقبها منذ اليوم الأول، ويمكنه بدء الدواء مبكراً.',
       },
       window: {
         en: 'In the severe form, a crisis can happen in infancy if the condition is not known.',
-        ar: 'في الشكل الشديد قد تحدث الأزمة في سن الرضاعة إذا لم تكن الحالة معروفة.',
+        ar: 'في الشكل الشديد قد تحدث أزمة في سن الرضاعة إذا لم تكن الحالة معروفة.',
       },
       urgency: 'first-days',
       sources: ['speiser-2018', 'doh-newborn-standard-2025'],
@@ -201,11 +201,11 @@ export const CONDITIONS: Condition[] = [
     birthPlan: {
       action: {
         en: 'Routine newborn screening already looks for sickle cell. Knowing in advance means care, including daily penicillin by four months of age, is planned before birth. In the trial that established penicillin, serious pneumococcal infections fell by 84%.',
-        ar: 'يبحث فحص حديثي الولادة الروتيني عن فقر الدم المنجلي أصلاً، والمعرفة المسبقة تعني التخطيط للرعاية قبل الولادة، ومنها البنسلين اليومي قبل بلوغ أربعة أشهر من العمر. وفي التجربة التي أثبتت فائدة البنسلين انخفضت العدوى الرئوية الخطيرة بنسبة 84%.',
+        ar: 'يبحث فحص حديثي الولادة الروتيني عن فقر الدم المنجلي أصلاً. والمعرفة المسبقة تعني التخطيط للرعاية قبل الولادة، ومنها البنسلين اليومي بحلول سن أربعة أشهر. وفي التجربة التي أثبتت فائدة البنسلين، انخفضت العدوى الخطيرة بالمكوّرات الرئوية بنسبة 84%.',
       },
       window: {
         en: 'The risk of serious infection is highest in early childhood.',
-        ar: 'يكون خطر العدوى الخطيرة في أعلاه خلال الطفولة المبكرة.',
+        ar: 'يبلغ خطر العدوى الخطيرة ذروته خلال الطفولة المبكرة.',
       },
       urgency: 'first-months',
       numbers: { months: { n: '4', d: '1' }, reduction: { n: '84', d: '100' } },
@@ -249,7 +249,7 @@ export const CONDITIONS: Condition[] = [
     },
     notChanged: {
       en: 'Each parent, as a carrier, is healthy.',
-      ar: 'كل من الوالدين، بصفته حاملاً، سليم.',
+      ar: 'كل من الوالدين، بصفته حاملاً للتغيّر الجيني، سليم.',
     },
     birthPlan: {
       action: {
@@ -258,7 +258,7 @@ export const CONDITIONS: Condition[] = [
       },
       window: {
         en: 'The risk of serious infection is highest in early childhood.',
-        ar: 'يكون خطر العدوى الخطيرة في أعلاه خلال الطفولة المبكرة.',
+        ar: 'يبلغ خطر العدوى الخطيرة ذروته خلال الطفولة المبكرة.',
       },
       urgency: 'first-months',
       sources: ['gaston-1986'],
@@ -311,7 +311,7 @@ export const CONDITIONS: Condition[] = [
   {
     id: 'pcd',
     genes: ['DNAH5', 'DNAI1', 'DNAI2', 'DNAH11', 'CCDC39', 'CCDC40', 'CCDC103', 'CCDC65', 'DNAAF1', 'DNAAF2', 'DNAAF3', 'DNAAF4', 'DNAAF5', 'DNAAF11', 'DNAL1', 'HYDIN', 'CCNO', 'DRC1', 'GAS8'],
-    name: { en: 'Primary ciliary dyskinesia (PCD)', ar: 'خلل الحركة الهدبية الأولي' },
+    name: { en: 'Primary ciliary dyskinesia (PCD)', ar: 'خلل الحركة الهدبية الأوّلية' },
     what: {
       en: 'A condition where the tiny hairs that clear the airways do not move properly, leading to repeated chest and ear infections.',
       ar: 'حالة لا تتحرك فيها الشعيرات الدقيقة التي تنظف المجاري التنفسية كما ينبغي، مما يؤدي إلى التهابات متكررة في الصدر والأذن.',
@@ -325,7 +325,7 @@ export const CONDITIONS: Condition[] = [
   {
     id: 'fmf',
     genes: ['MEFV'],
-    name: { en: 'Familial Mediterranean fever', ar: 'حمى البحر المتوسط العائلية' },
+    name: { en: 'Familial Mediterranean fever', ar: 'حمى البحر الأبيض المتوسط العائلية' },
     what: {
       en: 'A condition that causes repeated episodes of fever and pain. It is usually controlled with daily medicine.',
       ar: 'حالة تسبب نوبات متكررة من الحمى والألم، وعادة ما يُسيطَر عليها بدواء يومي.',
@@ -366,7 +366,7 @@ export function genericCondition(gene: string): Condition {
     name: { en: `A recessive condition linked to ${gene}`, ar: `حالة متنحية مرتبطة بالجين ${gene}` },
     what: {
       en: `Your counsellor will explain what changes in ${gene} mean for a child, and how serious the condition is.`,
-      ar: `سيشرح لكم المستشار الوراثي ما تعنيه التغيرات في الجين ${gene} بالنسبة للطفل، ومدى شدة الحالة.`,
+      ar: `سيشرح لكما المستشار الوراثي ما تعنيه التغيرات في الجين ${gene} بالنسبة للطفل، ومدى شدة الحالة.`,
     },
     notChanged: {
       en: 'Carriers of recessive conditions are almost always healthy.',

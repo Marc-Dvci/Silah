@@ -69,7 +69,7 @@ export function Home({ s, act, base }: { s: PersonState; act: Act; base: string 
     {
       key: 'family', done: s.invites.tokens.length > 0,
       title: t({ en: 'Your family', ar: 'عائلتك' }),
-      sub: t({ en: 'Invite relatives to test, without saying it came from you.', ar: 'ادعي أقاربك للفحص دون أن يعرفوا أن الدعوة منك.', arM: 'ادعُ أقاربك للفحص دون أن يعرفوا أن الدعوة منك.' }),
+      sub: t({ en: 'Invite relatives to test, without saying it came from you.', ar: 'ادعي أقاربك للفحص دون أن تذكري أن الدعوة منك.', arM: 'ادعُ أقاربك للفحص دون أن تذكر أن الدعوة منك.' }),
       to: 'family',
     },
     {
@@ -120,7 +120,7 @@ function Invitation({ s, act }: { s: PersonState; act: Act }) {
     <main class="page">
       <Enter k="invite">
         <p class="eyebrow">{t({ en: 'An invitation from the Department of Health', ar: 'دعوة من دائرة الصحة' })}</p>
-        <h1>{t({ en: `A couple check for you and ${partner}, before your next pregnancy.`, ar: `فحص ثنائي لكِ ولـ${partner} قبل حملكما القادم.`, arM: `فحص ثنائي لك ولـ${partner} قبل حملكما القادم.` })}</h1>
+        <h1>{t({ en: `A couple check for you and ${partner}, before your next pregnancy.`, ar: `فحص ثنائي لكِ ول${partner} قبل حملكما القادم.`, arM: `فحص ثنائي لك ول${partner} قبل حملكما القادم.` })}</h1>
         <p class="muted">{t({
           en: 'You married before genetic testing became part of premarital screening. Your genomes were already read by the Emirati Genome Programme, so there is no new blood test: only a check of the genes that matter for children.',
           ar: 'تزوجتما قبل أن يصبح الفحص الجيني جزءاً من فحص ما قبل الزواج. وقد سبق أن قرأ البرنامج الإماراتي للجينوم جينوميكما، فلا حاجة إلى فحص دم جديد، بل مجرد فحص للجينات المهمة للأطفال.',

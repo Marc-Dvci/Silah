@@ -1,8 +1,9 @@
 import type { QLike } from './fraction';
 
 export type Lang = 'ar' | 'en';
-/** A string in both languages. Arabic is Modern Standard Arabic, pending native review. */
-export type L10n = { ar: string; en: string };
+/** A string in both languages. Arabic is Modern Standard Arabic, pending native review.
+ *  `ar` addresses a woman or the couple; `arM`, when present, is the masculine form shown to a man. */
+export type L10n = { ar: string; en: string; arM?: string };
 
 /** ACMG classes the panel reports. Only P and LP count as carrier findings. */
 export type Classification = 'P' | 'LP' | 'VUS';

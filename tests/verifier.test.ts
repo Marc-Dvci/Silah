@@ -108,3 +108,11 @@ describe('card id resolution', () => {
     expect(stripInlineIds('The chance is 1 in 4 [couple:SMN1].')).toBe('The chance is 1 in 4.');
   });
 });
+
+describe('faq matching', () => {
+  it('does not read كم inside كلاكما as "how many"', async () => {
+    const { matchIntent } = await import('../src/core/faq');
+    expect(matchIntent('هل يمكن لكلاكما أن تختارا بحرية؟')?.id).not.toBe('chance');
+    expect(matchIntent('كم احتمال الإصابة؟')?.id).toBe('chance');
+  });
+});

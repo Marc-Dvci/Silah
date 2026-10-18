@@ -34,12 +34,12 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
             : t({ en: 'This result could not be verified. Do not rely on it.', ar: 'تعذّر التحقق من هذه النتيجة، فلا تعتمدي عليها.', arM: 'تعذّر التحقق من هذه النتيجة، فلا تعتمد عليها.' })}
         </p>
 
-        <ListenAll label={t({ en: 'Listen to this page', ar: 'استمع إلى الصفحة كلها' })} texts={view.cards.filter(c => !c.id.startsWith('option:')).map(c => t(c.text))} />
+        <ListenAll label={t({ en: 'Listen to this page', ar: 'الاستماع إلى الصفحة كلها' })} texts={view.cards.filter(c => !c.id.startsWith('option:')).map(c => t(c.text))} />
 
         {view.counsellorFirst && (
           <div class="pool indigo stack" style={{ '--gap': '8px' } as any}>
             <h3>{t({ en: 'Part of this result needs a specialist first', ar: 'جزء من هذه النتيجة يحتاج إلى مختص أولاً' })}</h3>
-            <p class="small">{t({ en: 'Some findings, like a change whose meaning is not yet known, are explained by a genetics professional before anything else. Nothing here is a diagnosis.', ar: 'بعض النتائج، مثل تغيّر لم يُعرف معناه بعد، يشرحها مختص في علم الوراثة قبل أي شيء آخر، ولا شيء هنا تشخيص.' })}</p>
+            <p class="small">{t({ en: 'Some findings, like a change whose meaning is not yet known, are explained by a genetics professional before anything else. Nothing here is a diagnosis.', ar: 'بعض النتائج، مثل تغيّر لم يُعرف معناه بعد، يشرحها مختص في علم الوراثة قبل أي شيء آخر، وليس هنا ما يُعد تشخيصاً.' })}</p>
             {!s.booking && <button class="btn primary" onClick={() => act(st => requestBooking(st))}>{t({ en: 'Book a counselling appointment', ar: 'حجز موعد استشارة' })}</button>}
           </div>
         )}
@@ -55,12 +55,12 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
                 <p class="eyebrow">{t({ en: 'In each pregnancy', ar: 'في كل حمل' })}</p>
                 <Kids labels={{
                   aff: t({ en: 'May have the condition', ar: 'قد يُصاب بالحالة' }),
-                  car: t({ en: 'Healthy carrier', ar: 'حامل سليم' }),
+                  car: t({ en: 'Healthy carrier', ar: 'حامل للتغيّر وسليم' }),
                   non: t({ en: 'Carries neither', ar: 'لا يحمل التغيّر' }),
                 }} />
                 <p style={{ marginTop: '6px' }}>{t(c.text)}</p>
                 <div class="row wrap" style={{ marginTop: '12px' }}>
-                  <Listen id={c.id} text={t(c.text)} label={t({ en: 'Listen', ar: 'استمع' })} />
+                  <Listen id={c.id} text={t(c.text)} label={t({ en: 'Listen', ar: 'استماع' })} />
                   <SourceChips ids={c.sources} />
                 </div>
               </div>
@@ -73,7 +73,7 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
           );
         }) : (
           <section class="stack">
-            <h1>{t({ en: 'The panel found no gene where you both carry a change.', ar: 'لم تجد اللوحة جيناً تحملان كلاكما تغيّراً فيه.' })}</h1>
+            <h1>{t({ en: 'The panel found no gene where you both carry a change.', ar: 'لم تجد اللوحة جيناً يحمل فيه كلاكما تغيّراً.' })}</h1>
             <p class="muted">{t({ en: '“Compatible” is good news. It does not mean zero chance, and the numbers below show how small the remaining chance is.', ar: '«متوافق» خبر طيب، لكنه لا يعني أن الاحتمال صفر، والأرقام أدناه تبيّن مدى صغر الاحتمال المتبقي.' })}</p>
             <div class="pool">
               <p class="eyebrow">{t({ en: 'Conditions on the panel, per pregnancy', ar: 'حالات اللوحة، في كل حمل' })}</p>
@@ -111,7 +111,7 @@ export function CardLine({ c }: { c: FactCard }) {
     <div>
       <p>{t(c.text)}</p>
       <div class="row wrap" style={{ marginTop: '10px' }}>
-        <Listen id={c.id} text={t(c.text)} label={t({ en: 'Listen', ar: 'استمع' })} />
+        <Listen id={c.id} text={t(c.text)} label={t({ en: 'Listen', ar: 'استماع' })} />
         <SourceChips ids={c.sources} />
       </div>
     </div>
@@ -143,7 +143,7 @@ function OwnFindings({ s, act }: { s: PersonState; act: Act }) {
               <Toggle on={!!g} label={t({ en: `Share ${f.gene} with ${partner}`, ar: `مشاركة ${f.gene} مع ${partner}` })}
                 onChange={on => act(st => on ? shareFinding(st, f.gene) : seq !== undefined ? revoke(st, seq) : Promise.resolve())} />
             </div>
-            {g && <Receipt><b>{t({ en: 'Shared', ar: 'تمت المشاركة' })}</b> · {partner} · {t({ en: `${f.gene} carrier status only`, ar: `حالة الحمل للجين ${f.gene} فقط` })} · {t({ en: 'you can stop sharing at any time', ar: 'يمكنك إيقاف المشاركة في أي وقت' })}</Receipt>}
+            {g && <Receipt><b>{t({ en: 'Shared', ar: 'تمت المشاركة' })}</b> · {partner} · {t({ en: `${f.gene} carrier status only`, ar: `حالة التغيّر في الجين ${f.gene} فقط` })} · {t({ en: 'you can stop sharing at any time', ar: 'يمكنك إيقاف المشاركة في أي وقت' })}</Receipt>}
           </div>
         );
       })}
@@ -164,13 +164,13 @@ function questions(atRisk: boolean): TQ[] {
       explain: { en: 'In each pregnancy: 1 in 4 may have the condition, 2 in 4 are healthy carriers, 1 in 4 carries neither change.', ar: 'في كل حمل: 1 من 4 قد يُصاب بالحالة، و2 من 4 حاملون أصحّاء، و1 من 4 لا يحمل أي تغيّر.' },
     },
     { id: 'next', kind: 'tf', answer: false, ask: { en: '“If our first child is healthy, the next one will be too.”', ar: '«إذا كان طفلنا الأول سليماً فسيكون الثاني سليماً أيضاً.»' }, explain: { en: 'The chance is the same in every pregnancy. A healthy child does not change it.', ar: 'الاحتمال نفسه في كل حمل، وسلامة طفل لا تغيّره.' } },
-    { id: 'ill', kind: 'tf', answer: false, ask: { en: '“Being a carrier means I am ill.”', ar: '«حمل التغيّر يعني أن الشخص مريض.»' }, explain: { en: 'Carriers are healthy. It matters only when both parents carry a change in the same gene.', ar: 'الحاملون أصحّاء، ولا يهم الأمر إلا إذا حمل الوالدان كلاهما تغيّراً في الجين نفسه.' } },
+    { id: 'ill', kind: 'tf', answer: false, ask: { en: '“Being a carrier means I am ill.”', ar: '«أن يحمل الشخص تغيّراً في الجين يعني أنه مريض.»' }, explain: { en: 'Carriers are healthy. It matters only when both parents carry a change in the same gene.', ar: 'الحاملون أصحّاء، ولا يهم الأمر إلا إذا حمل الوالدان كلاهما تغيّراً في الجين نفسه.' } },
     { id: 'ours', kind: 'tf', answer: true, ask: { en: '“The decision about what to do next is ours.”', ar: '«القرار في ما نفعله بعد ذلك قرارنا.»' }, explain: { en: 'Yes. Silah and the counsellor explain; the decision belongs to you.', ar: 'نعم. يشرح تطبيق صلة والمستشار، والقرار لكما.' } },
   ];
   return [
     { id: 'zero', kind: 'tf', answer: false, ask: { en: '“Compatible means there is no chance at all.”', ar: '«متوافق يعني أنه لا يوجد أي احتمال على الإطلاق.»' }, explain: { en: 'Compatible lowers the chance a lot, but not to zero.', ar: '«متوافق» يخفض الاحتمال كثيراً، لكن ليس إلى الصفر.' } },
     { id: 'all', kind: 'tf', answer: false, ask: { en: '“The test checks every genetic condition.”', ar: '«الفحص يكشف كل الحالات الوراثية.»' }, explain: { en: 'It checks recessive conditions on the panel only, not all of them.', ar: 'يفحص الحالات المتنحية في اللوحة فقط، وليس جميعها.' } },
-    { id: 'ill', kind: 'tf', answer: false, ask: { en: '“Being a carrier means I am ill.”', ar: '«حمل التغيّر يعني أن الشخص مريض.»' }, explain: { en: 'Carriers are healthy.', ar: 'الحاملون أصحّاء.' } },
+    { id: 'ill', kind: 'tf', answer: false, ask: { en: '“Being a carrier means I am ill.”', ar: '«أن يحمل الشخص تغيّراً في الجين يعني أنه مريض.»' }, explain: { en: 'Carriers are healthy.', ar: 'الحاملون أصحّاء.' } },
     { id: 'cousins', kind: 'tf', answer: true, ask: { en: '“Because we are cousins, our background chance is a little higher than for unrelated parents.”', ar: '«لأننا أقارب، فإن احتمالنا الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب.»' }, explain: { en: 'Yes, mostly from recessive conditions the panel does not test.', ar: 'نعم، ومعظم ذلك من حالات متنحية لا تفحصها اللوحة.' } },
   ];
 }
@@ -206,7 +206,7 @@ export function Check({ s, act, base }: { s: PersonState; act: Act; base: string
             ? t({ en: 'You have it, clearly.', ar: 'الصورة واضحة لديك تماماً.' })
             : t({ en: `${correct} of ${qs.length} — here is the rest, once more.`, ar: `${correct} من ${qs.length}، وإليك الباقي مرة أخرى.` })}</h1>
           {qs.map((x, k) => !right(k) && <div key={x.id} class="pool saffron"><p>{t(x.explain)}</p></div>)}
-          <p class="muted">{t({ en: 'Your counsellor can see these answers only if you choose to share them, so your appointment can start where you are.', ar: 'لا يرى مستشارك هذه الإجابات إلا إذا اخترت مشاركتها، ليبدأ موعدك من حيث وصلت.' })}</p>
+          <p class="muted">{t({ en: 'Your counsellor can see these answers only if you choose to share them, so your appointment can start where you are.', ar: 'لا يرى مستشاركِ هذه الإجابات إلا إذا اخترتِ مشاركتها، ليبدأ موعدكِ من حيث وصلتِ.', arM: 'لا يرى مستشارك هذه الإجابات إلا إذا اخترت مشاركتها، ليبدأ موعدك من حيث وصلت.' })}</p>
           <div class="stack" style={{ '--gap': '10px' } as any}>
             <button class="btn primary full" onClick={() => go(`${base}/counsellor`)}>{t({ en: 'Go to my counsellor', ar: 'الانتقال إلى مستشاري' })}</button>
             <button class="btn calm full" onClick={() => { setPicked(qs.map(() => null)); setI(0); }}>{t({ en: 'Try again', ar: 'المحاولة مرة أخرى' })}</button>

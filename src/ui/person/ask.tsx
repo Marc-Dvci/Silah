@@ -87,8 +87,8 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
   return (
     <main class="page" style={{ paddingBottom: '150px' }}>
       <Enter k="ask">
-        <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'Ask a question', ar: 'اطرح سؤالاً' })}</span></div>
-        <p class="muted">{t({ en: 'Answers come only from your own result and checked sources. Silah never tells you what to decide.', ar: 'تأتي الإجابات من نتيجتك ومن مصادر موثّقة فقط، ولا يخبرك تطبيق صلة بما تقرره.' })}</p>
+        <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'Ask a question', ar: 'طرح سؤال' })}</span></div>
+        <p class="muted">{t({ en: 'Answers come only from your own result and checked sources. Silah never tells you what to decide.', ar: 'تأتي الإجابات من نتيجتك ومن مصادر موثّقة فقط، ولا يخبركِ تطبيق صلة بما تقررينه.', arM: 'تأتي الإجابات من نتيجتك ومن مصادر موثّقة فقط، ولا يخبرك تطبيق صلة بما تقرره.' })}</p>
         {turns.length === 0 && (
           <div class="row wrap">
             {INTENTS.filter(i => view?.status === 'at-risk' || i.id !== 'options').slice(0, 7).map(i => (
@@ -113,8 +113,8 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
                 <p key={j}>{sn.text}{sn.cards.map(id => <span class="cite" key={id}>{byId.get(id) ? id : 'counsellor'}</span>)}</p>
               ))}
               {x.none && <p>{t({ en: 'Silah does not have a checked answer to that. It has been added to the questions for your counsellor, who can answer it.', ar: 'لا يملك تطبيق صلة إجابة موثّقة عن ذلك، وقد أُضيف السؤال إلى أسئلتك للمستشار الوراثي الذي يستطيع الإجابة عنه.' })}</p>}
-              {x.via === 'model' && <p class="tiny muted"><IconSpark size={12} /> {t({ en: `Worded by the on-device model from your cards${x.blocked ? `; ${x.blocked} sentence(s) held back by the safety check` : ''}.`, ar: `صاغها النموذج على الجهاز من بطاقاتك${x.blocked ? `، وحُجبت ${x.blocked} جملة بفحص السلامة` : ''}.` })}</p>}
-              {(x.cards?.length || x.sentences?.length) ? <div><Listen text={[x.lead ? t(x.lead) : '', ...(x.cards?.map(c => t(c.text)) ?? []), ...(x.sentences?.map(z => z.text) ?? [])].join(' ')} label={t({ en: 'Listen', ar: 'استمع' })} /></div> : null}
+              {x.via === 'model' && <p class="tiny muted"><IconSpark size={12} /> {t({ en: `Worded by the on-device model from your cards${x.blocked ? `; ${x.blocked} sentence(s) held back by the safety check` : ''}.`, ar: `صاغها النموذج على الجهاز من بطاقاتك${x.blocked ? `، وحُجبت ${x.blocked} ${x.blocked === 1 ? 'جملة' : x.blocked === 2 ? 'جملتان' : x.blocked <= 10 ? 'جمل' : 'جملة'} بفحص السلامة` : ''}.` })}</p>}
+              {(x.cards?.length || x.sentences?.length) ? <div><Listen text={[x.lead ? t(x.lead) : '', ...(x.cards?.map(c => t(c.text)) ?? []), ...(x.sentences?.map(z => z.text) ?? [])].join(' ')} label={t({ en: 'Listen', ar: 'استماع' })} /></div> : null}
             </div>
           </div>
         ))}
@@ -123,7 +123,7 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
         <div class="pool soft stack" style={{ '--gap': '8px' } as any}>
           <p class="small"><b>{t({ en: 'Other questions', ar: 'أسئلة أخرى' })}</b></p>
           {backend ? (
-            <p class="small muted">{t({ en: `Free questions are answered by ${backend.name}, on this machine, then checked.`, ar: `يجيب عن الأسئلة الحرة ${backend.name} على هذا الجهاز، ثم تُفحص الإجابة.` })}</p>
+            <p class="small muted">{t({ en: `Free questions are answered by ${backend.name}, on this machine, then checked.`, ar: `يجيب عن الأسئلة المفتوحة ${backend.name} على هذا الجهاز، ثم تُفحص الإجابة.` })}</p>
           ) : (
             <>
               <p class="small muted">{t({ en: 'Common questions are answered from your cards. For other questions, Silah can use a language model that runs on this device. Nothing leaves it.', ar: 'تُجاب الأسئلة الشائعة من بطاقاتك. وللأسئلة الأخرى يمكن لتطبيق صلة استخدام نموذج لغوي يعمل على هذا الجهاز، ولا يغادره شيء.' })}</p>
@@ -140,8 +140,8 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
       </Enter>
       <form class="ask-bar" onSubmit={e => { e.preventDefault(); submit(q); }}>
         <div class="ask-input">
-          <input value={q} onInput={e => setQ((e.target as HTMLInputElement).value)} placeholder={t({ en: 'Type your question…', ar: 'اكتب سؤالك…' })} aria-label={t({ en: 'Your question', ar: 'سؤالك' })} />
-          <button class="btn primary" style={{ padding: '10px 18px' }} type="submit" disabled={busy}>{t({ en: 'Ask', ar: 'اسأل' })}</button>
+          <input value={q} onInput={e => setQ((e.target as HTMLInputElement).value)} placeholder={t({ en: 'Type your question…', ar: 'سؤالك هنا…' })} aria-label={t({ en: 'Your question', ar: 'سؤالك' })} />
+          <button class="btn primary" style={{ padding: '10px 18px' }} type="submit" disabled={busy}>{t({ en: 'Ask', ar: 'إرسال' })}</button>
         </div>
       </form>
     </main>

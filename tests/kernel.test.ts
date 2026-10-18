@@ -141,3 +141,12 @@ describe('relatives', () => {
     expect(relativeCard('first-cousin', 'SMN1').text.en).toContain('1 in 8');
   });
 });
+
+describe('consanguinity card', () => {
+  it('double first cousins are higher than first cousins, second cousins lower', async () => {
+    const { consanguinityCard } = await import('../src/core/kernel');
+    expect(consanguinityCard('double-first-cousins')!.text.en).toContain('higher than for first cousins');
+    expect(consanguinityCard('second-cousins')!.text.en).toContain('lower than for first cousins');
+    expect(consanguinityCard('unrelated')).toBeNull();
+  });
+});

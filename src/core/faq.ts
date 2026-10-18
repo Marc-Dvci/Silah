@@ -19,7 +19,7 @@ export const INTENTS: Intent[] = [
     id: 'chance',
     label: { en: 'What is the chance for our children?', ar: 'ما احتمال إصابة أطفالنا؟' },
     en: /\b(chance|risk|odds|likely|probabilit|percent|how many)\b/,
-    ar: /(احتمال|نسبه|خطر|خطوره|فرصه|كم)/,
+    ar: /(احتمال|نسبه|خطر|خطوره|فرصه|(^|\s)كم(\s|$))/,
     answer: ['kind:couple-gene', 'kind:residual-gene', 'panel-residual'],
   },
   {
@@ -35,13 +35,13 @@ export const INTENTS: Intent[] = [
   },
   {
     id: 'carrier',
-    label: { en: 'What does being a carrier mean?', ar: 'ماذا يعني أنني حامل للجين؟' },
+    label: { en: 'What does being a carrier mean?', ar: 'ماذا يعني أنني أحمل تغيّراً في الجين؟' },
     en: /\b(carrier|carry|carries|am i (sick|ill)|affect me)\b/,
     ar: /(حامل للجين|حامله للجين|حامل للتغير|حامله للتغير|احمل|معني حامل|هل انا مريض|هل انا مريضه|يوثر علي)/,
     answer: ['kind:carrier', 'kind:condition'],
     lead: {
       en: 'A carrier has one changed copy of a gene and one working copy. Carriers are healthy.',
-      ar: 'الحامل لديه نسخة متغيرة من الجين ونسخة سليمة، والحاملون أصحّاء.',
+      ar: 'من يحمل تغيّراً في الجين لديه نسخة متغيرة منه ونسخة سليمة، والحاملون أصحّاء.',
     },
   },
   {
@@ -57,7 +57,7 @@ export const INTENTS: Intent[] = [
   },
   {
     id: 'pgt',
-    label: { en: 'What is IVF with embryo testing?', ar: 'ما هو أطفال الأنابيب مع فحص الأجنة؟' },
+    label: { en: 'What is IVF with embryo testing?', ar: 'ما المقصود بأطفال الأنابيب مع فحص الأجنة؟' },
     en: /\b(ivf|pgt|embryo|test tube)\b/,
     ar: /(اطفال الانابيب|الاجنه|اجنه|فحص الاجنه|التلقيح الصناعي)/,
     answer: ['option:pgt'],

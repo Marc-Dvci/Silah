@@ -11,7 +11,7 @@ type Act = (f: (st: PersonState) => Promise<void>) => Promise<void>;
 
 const SUBJECT: Record<string, { en: string; ar: string }> = {
   'couple-check': { en: 'Couple check on your existing genome', ar: 'فحص ثنائي على جينومك الموجود' },
-  'finding': { en: 'A carrier finding', ar: 'نتيجة حمل لجين' },
+  'finding': { en: 'A carrier finding', ar: 'نتيجة تغيّر في جين' },
   'birth-plan': { en: 'Birth plan', ar: 'خطة الولادة' },
   'teachback': { en: 'Your check answers', ar: 'إجابات التحقق' },
   'brief': { en: 'Your summary for the counsellor', ar: 'ملخصك للمستشار' },
@@ -30,7 +30,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
       <Enter k="privacy">
         <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'What you shared', ar: 'ما شاركتِه', arM: 'ما شاركته' })}</span></div>
         <h1>{t({ en: 'Your genetic information stays on this phone.', ar: 'تبقى معلوماتك الجينية على هذا الهاتف.' })}</h1>
-        <p class="muted">{t({ en: 'It is encrypted here, with a key this phone keeps. Below is everything you have agreed to share. Each line is a signed record you can withdraw.', ar: 'وهي مشفّرة هنا بمفتاح يحتفظ به هذا الهاتف. وفي ما يلي كل ما وافقتِ على مشاركته، وكل سطر سجلّ موقّع يمكنك سحبه.', arM: 'وهي مشفّرة هنا بمفتاح يحتفظ به هذا الهاتف. وفي ما يلي كل ما وافقت على مشاركته، وكل سطر سجلّ موقّع يمكنك سحبه.' })}</p>
+        <p class="muted">{t({ en: 'It is encrypted here, with a key this phone keeps. Below is everything you have agreed to share. Each line is a signed record you can withdraw.', ar: 'وهي مشفّرة هنا بمفتاح يحتفظ به هذا الهاتف. وفي ما يلي كل ما وافقتِ على مشاركته، وكل سطر منه سجلّ موقّع يمكنك سحبه.', arM: 'وهي مشفّرة هنا بمفتاح يحتفظ به هذا الهاتف. وفي ما يلي كل ما وافقت على مشاركته، وكل سطر منه سجلّ موقّع يمكنك سحبه.' })}</p>
 
         <section class="stack" style={{ '--gap': '4px' } as any}>
           {active.length === 0 && <p class="muted">{t({ en: 'Nothing is shared.', ar: 'لا شيء مُشارَك.' })}</p>}
@@ -49,7 +49,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
 
         {received.length > 0 && (
           <section class="stack">
-            <h2>{t({ en: 'Shared with you', ar: 'شوركت معك' })}</h2>
+            <h2>{t({ en: 'Shared with you', ar: 'ما تمت مشاركته معك' })}</h2>
             {received.map(r => (
               <div key={r.seq} class="pool palm">
                 <p><b>{personaById(partner ?? '') ? t(personaById(partner!)!.name) : r.fromName}</b> {t({ en: `chose to share: carrier of ${r.gene}.`, ar: `اختار مشاركة: حامل لتغيّر في الجين ${r.gene}.`, arM: `اختارت مشاركة: حاملة لتغيّر في الجين ${r.gene}.` })}</p>
@@ -61,7 +61,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
 
         <p class="row small" style={{ color: ok.ok ? 'var(--palm)' : 'var(--madder)', gap: '6px' }}>
           <IconSeal size={18} /> {ok.ok
-            ? t({ en: `${s.ledger.length} signed records, chain intact.`, ar: `${s.ledger.length} سجلات موقّعة، والسلسلة سليمة.` })
+            ? t({ en: `${s.ledger.length} signed records, chain intact.`, ar: `${s.ledger.length} ${s.ledger.length === 1 ? 'سجل موقّع' : s.ledger.length === 2 ? 'سجلان موقّعان' : s.ledger.length <= 10 ? 'سجلات موقّعة' : 'سجلاً موقّعاً'}، والسلسلة سليمة.` })
             : t({ en: `Record ${ok.brokenAt} does not match. Show this to your counsellor.`, ar: `السجل ${ok.brokenAt} لا يطابق. اعرضيه على مستشارك.`, arM: `السجل ${ok.brokenAt} لا يطابق. اعرضه على مستشارك.` })}
         </p>
 
@@ -74,7 +74,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
 
         <section class="stack">
           <p class="eyebrow">{t({ en: 'Demonstration', ar: 'عرض توضيحي' })}</p>
-          <p class="small muted">{t({ en: 'Silah is a prototype with a fictional family. Switch to another person’s phone:', ar: 'صلة نموذج أولي مع عائلة خيالية. انتقل إلى هاتف شخص آخر:' })}</p>
+          <p class="small muted">{t({ en: 'Silah is a prototype with a fictional family. Switch to another person’s phone:', ar: 'صلة نموذج أولي مع عائلة خيالية. للتبديل إلى هاتف شخص آخر:' })}</p>
           <div class="row wrap">
             {PERSONAS.map(p => <button key={p.id} class={`chip ${p.id === s.id ? 'indigo' : ''}`} onClick={() => go(`p/${p.id}`)}>{t(p.name)}</button>)}
             <button class="chip" onClick={() => go('c/queue')}>{t({ en: 'Clinic (simulated)', ar: 'العيادة (محاكاة)' })}</button>
@@ -98,13 +98,13 @@ function recipientLabel(r: string, t: (x: any) => string): string {
 /** Receipts store their scope in English; show it in the reader's language. */
 function scopeLabel(scope: string, t: (x: any) => string): string {
   const fixed: Record<string, { en: string; ar: string }> = {
-    'carrier findings on the premarital panel, for this couple only': { en: 'carrier findings on the premarital panel, for this couple only', ar: 'نتائج الحمل للجينات في لوحة ما قبل الزواج، لهذين الزوجين فقط' },
+    'carrier findings on the premarital panel, for this couple only': { en: 'carrier findings on the premarital panel, for this couple only', ar: 'نتائج التغيّرات الجينية في لوحة ما قبل الزواج، لهذين الزوجين فقط' },
     'teach-back results and questions asked in Silah': { en: 'your check answers and the questions you asked in Silah', ar: 'إجابات التحقق والأسئلة التي طُرحت في صلة' },
     'blinded requests only; the clinic cannot link invitations to you': { en: 'blinded requests only; the clinic cannot link invitations to you', ar: 'طلبات معمّاة فقط، ولا تستطيع العيادة ربط الدعوات بك' },
   };
   if (fixed[scope]) return t(fixed[scope]);
   const gene = scope.match(/^([A-Z0-9, ]+?) carrier status only$/);
-  if (gene) return t({ en: `${gene[1]} carrier status only`, ar: `حالة الحمل للجين ${gene[1]} فقط` });
+  if (gene) return t({ en: `${gene[1]} carrier status only`, ar: `حالة التغيّر في الجين ${gene[1]} فقط` });
   const plan = scope.match(/^([A-Z0-9, ]+?) only, this pregnancy$/);
   if (plan) return t({ en: `${plan[1]} only, this pregnancy`, ar: `${plan[1]} فقط، لهذا الحمل` });
   return scope;

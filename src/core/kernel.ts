@@ -118,7 +118,7 @@ export function coupleView(own: PersonResult, couple: CoupleSection): CoupleView
       },
       text: {
         en: `You both carry a change in ${s.gene}. In each pregnancy there is a 1 in 4 chance the child has ${cond.name.en}, a 2 in 4 chance the child is a healthy carrier, and a 1 in 4 chance the child carries neither change.`,
-        ar: `كلاكما يحمل تغيّراً في الجين ${s.gene}. في كل حمل، هناك احتمال 1 من 4 أن يكون الطفل مصاباً بـ${cond.name.ar}، واحتمال 2 من 4 أن يكون حاملاً سليماً، واحتمال 1 من 4 ألا يحمل أي تغيّر.`,
+        ar: `أنتما تحملان تغيّراً في الجين ${s.gene}. في كل حمل، هناك احتمال 1 من 4 أن يكون الطفل مصاباً ب${cond.name.ar}، واحتمال 2 من 4 أن يكون حاملاً للتغيّر الجيني وسليماً، واحتمال 1 من 4 ألا يحمل أي تغيّر.`,
       },
       sources: ['doh-pms-2024', 'medlineplus-ar'],
       arithmetic: 'Each parent passes one of two copies at random: 1/2 × 1/2 = 1/4 affected; 2 × 1/2 × 1/2 = 1/2 carrier.',
@@ -154,7 +154,7 @@ export function coupleView(own: PersonResult, couple: CoupleSection): CoupleView
       numbers: {},
       text: {
         en: `Carrying a change in ${f.gene} does not make you ill. It matters only if a child also receives a change in the same gene from the other parent.`,
-        ar: `حملك لتغيّر في الجين ${f.gene} لا يجعلك مريضاً، وهو لا يهم إلا إذا ورث الطفل تغيّراً في الجين نفسه من الوالد الآخر أيضاً.`,
+        ar: `وجود تغيّر في الجين ${f.gene} لديك لا يسبب المرض، ولا يهم ذلك إلا إذا ورث الطفل تغيّراً في الجين نفسه من الوالد الآخر أيضاً.`,
       },
       sources: ['medlineplus-ar'],
     });
@@ -193,7 +193,7 @@ export function coupleView(own: PersonResult, couple: CoupleSection): CoupleView
       numbers: {},
       text: {
         en: `A change in ${g} was found whose meaning is not yet known. It is not counted as a risk, and a genetics professional will review it with you.`,
-        ar: `وُجد تغيّر في الجين ${g} لم يُعرف معناه بعد. لا يُحتسب خطراً، وسيراجعه معكم مختص في علم الوراثة.`,
+        ar: `وُجد تغيّر في الجين ${g} لم يُعرف معناه بعد. لا يُحتسب خطراً، وسيراجعه معكما مختص في علم الوراثة.`,
       },
       sources: ['doh-pms-2024'],
     });
@@ -242,7 +242,7 @@ export function notAssessedCard(): FactCard {
     numbers: {},
     text: {
       en: 'The premarital panel looks only at recessive conditions, and not all of them. It does not look at conditions passed through the X chromosome, dominant conditions, chromosome differences, new changes that arise in the child, or causes that are not genetic.',
-      ar: 'تفحص لوحة ما قبل الزواج الحالات المتنحية فقط، وليس جميعها. ولا تفحص الحالات المنقولة عبر الكروموسوم X، ولا الحالات السائدة، ولا الاختلافات الكروموسومية، ولا التغيرات الجديدة التي تنشأ لدى الطفل، ولا الأسباب غير الوراثية.',
+      ar: 'تفحص لوحة ما قبل الزواج الحالات المتنحية فقط، وليس جميعها. ولا تفحص الحالات المرتبطة بالصبغي X، ولا الحالات السائدة، ولا الاختلالات الصبغية، ولا التغيرات الجديدة التي تنشأ لدى الطفل، ولا الأسباب غير الوراثية.',
     },
     sources: ['doh-pms-2024'],
   };
@@ -279,20 +279,25 @@ export function consanguinityCard(rel: Relationship): FactCard | null {
       arithmetic: `Inbreeding coefficient F = ${F}.`,
     };
   }
+  const closer = rel === 'double-first-cousins';
   return {
     id: 'consanguinity',
     kind: 'consanguinity',
     numbers: { inbreeding: F.toJSON() },
-    text: {
-      en: 'Because you are related, the background chance is slightly higher than for unrelated parents. It is lower than for first cousins.',
-      ar: 'لأنكما قريبان، فإن الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب، لكنه أقل منه لدى أبناء العمومة من الدرجة الأولى.',
-    },
+    text: closer
+      ? {
+          en: 'Because you are double first cousins, the background chance is higher than for unrelated parents, and higher than for first cousins.',
+          ar: 'لأنكما ابنا عمومة أو خؤولة مزدوجان، فإن الاحتمال الأساسي أعلى منه لدى الوالدين غير الأقارب، وأعلى منه لدى أبناء العمومة من الدرجة الأولى.',
+        }
+      : {
+          en: 'Because you are related, the background chance is slightly higher than for unrelated parents. It is lower than for first cousins.',
+          ar: 'لأنكما قريبان، فإن الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب، لكنه أقل منه لدى أبناء العمومة من الدرجة الأولى.',
+        },
     sources: ['bennett-2002'],
     arithmetic: `Inbreeding coefficient F = ${F}.`,
   };
 }
 
-/** Options offered to at-risk couples, written to carry equal weight. The order never changes. */
 export const OPTIONS: FactCard[] = [
   {
     id: 'option:pgt',
@@ -343,10 +348,10 @@ export function relativeCard(rel: Relative, gene: string): FactCard {
     'parent': { en: 'each parent', ar: 'كل من الوالدين' },
     'sibling': { en: 'a brother or sister', ar: 'الأخ أو الأخت' },
     'child': { en: 'a child', ar: 'الابن أو الابنة' },
-    'half-sibling': { en: 'a half-brother or half-sister', ar: 'الأخ أو الأخت غير الشقيقين' },
+    'half-sibling': { en: 'a half-brother or half-sister', ar: 'الأخ أو الأخت من أحد الوالدين فقط' },
     'aunt-uncle': { en: 'an aunt or uncle', ar: 'العم أو العمة أو الخال أو الخالة' },
-    'niece-nephew': { en: 'a niece or nephew', ar: 'ابن الأخ أو الأخت أو ابنتهما' },
-    'first-cousin': { en: 'a first cousin', ar: 'ابن العم أو الخال من الدرجة الأولى' },
+    'niece-nephew': { en: 'a niece or nephew', ar: 'ابن أو ابنة الأخ أو الأخت' },
+    'first-cousin': { en: 'a first cousin', ar: 'ابن أو بنت العم أو الخال من الدرجة الأولى' },
     'second-cousin': { en: 'a second cousin', ar: 'قريب من الدرجة الثانية' },
   };
   return {
@@ -356,7 +361,7 @@ export function relativeCard(rel: Relative, gene: string): FactCard {
     numbers: { prior: p.toJSON() },
     text: {
       en: `For ${names[rel].en}, the chance of carrying the same change is about 1 in ${p.oneIn()}.`,
-      ar: `بالنسبة إلى ${names[rel].ar}، فإن احتمال حمل التغيّر نفسه نحو 1 من ${p.oneIn()}.`,
+      ar: `بالنسبة إلى ${names[rel].ar}، فإن احتمال أن يحمل التغيّر نفسه نحو 1 من ${p.oneIn()}.`,
     },
     sources: ['bennett-2002'],
     arithmetic: 'Coefficient of relationship to a known carrier.',

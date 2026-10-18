@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://silah.example/schema/result-bundle.schema.json",
+  "title": "Silah signed result bundle",
+  "description": "What a genomics lab issues to ONE person after a premarital test or a couple re-check. The partner's findings never appear, except the genes both partners carry.",
+  "type": "object",
+  "required": ["payload", "keyId", "sig"],
+  "additionalProperties": false,
+  "properties": {
+    "keyId": { "type": "string", "pattern": "^[0-9a-f]{16}$", "description": "First 16 hex characters of SHA-256 of the lab's Ed25519 public key." },
+    "sig": { "type": "string", "pattern": "^[A-Za-z0-9_-]{86}$", "description": "Ed25519 signature (RFC 8032), base64url without padding, over the UTF-8 bytes of the canonical JSON of payload (keys sorted, no whitespace)." },
+    "payload": {
+      "type": "object",
+      "required": ["v", "kind", "person", "issuer", "issuedAt"],
+      "additionalProperties": false,
+      "properties": {
+        "v": { "const": 1 },
+        "kind": { "const": "silah.result" },
+        "issuer": { "type": "string", "minLength": 1 },
+        "issuedAt": { "type": "string", "format": "date-time" },
+        "validUntil": { "type": "string" },
+        "person": {
+          "type": "object",
+          "required": ["personId", "displayName", "sex", "findings", "panelVersion", "testedAt", "method"],
+          "additionalProperties": false,
+          "properties": {
+            "personId": { "type": "string", "minLength": 1 },
+            "displayName": { "type": "string" },
+            "sex": { "enum": ["F", "M"] },
+            "panelVersion": { "type": "string" },
+            "testedAt": { "type": "string" },
+            "method": { "enum": ["premarital", "egp-recheck"] },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["gene", "variant", "classification"],
+                "additionalProperties": false,
+                "properties": {
+                  "gene": { "type": "string", "pattern": "^[A-Z0-9-]+$", "description": "Current HGNC symbol on the DoH panel." },
+                  "variant": { "type": "string", "description": "HGVS c. notation or a copy-number description." },
+                  "classification": { "enum": ["P", "LP", "VUS"] },
+                  "tag": { "type": "string", "description": "Gene-specific allele class, e.g. HBB: HbS | HbC | b0 | b+." }
+                }
+              }
+            }
+          }
+        },
+        "couple": {
+          "type": "object",
+          "required": ["coupleId", "partnerName", "relationship", "status", "shared", "partnerNegativeFor", "vusGenes"],
+          "additionalProperties": false,
+          "properties": {
+            "coupleId": { "type": "string" },
+            "partnerName": { "type": "string" },
+            "relationship": { "enum": ["unrelated", "second-cousins", "first-cousins-once-removed", "first-cousins", "double-first-cousins"] },
+            "status": { "enum": ["at-risk", "compatible"] },
+            "shared": {
+              "type": "array",
+              "description": "Genes in which BOTH partners carry a pathogenic or likely pathogenic variant.",
+              "items": {
+                "type": "object",
+                "required": ["gene"],
+                "additionalProperties": false,
+                "properties": { "gene": { "type": "string" }, "ownTag": { "type": "string" }, "partnerTag": { "type": "string" } }
+              }
+            },
+            "partnerNegativeFor": { "type": "array", "items": { "type": "string" }, "description": "This person's own carrier genes for which the partner tested negative. Nothing else about the partner." },
+            "vusGenes": { "type": "array", "items": { "type": "string" }, "description": "Genes where a variant of uncertain significance matters for the couple; routed to a counsellor first." }
+          }
+        }
+      }
+    }
+  }
+}

@@ -48,7 +48,7 @@ function AskFab({ base }: { base: string }) {
   const t = useT();
   return (
     <button class="fab" onClick={() => go(`${base}/ask`)}>
-      <IconChat size={20} /> {t({ en: 'Ask a question', ar: 'اطرح سؤالاً' })}
+      <IconChat size={20} /> {t({ en: 'Ask a question', ar: 'طرح سؤال' })}
     </button>
   );
 }
@@ -59,7 +59,7 @@ function Veil({ onShow }: { onShow: () => void }) {
   return (
     <div class="hide-veil" onClick={onShow}>
       <Mark size={56} />
-      <p class="small">{t({ en: 'Tap to return', ar: 'المس للعودة' })}</p>
+      <p class="small">{t({ en: 'Tap to return', ar: 'لمسة للعودة' })}</p>
     </div>
   );
 }
