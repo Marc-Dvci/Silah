@@ -1,0 +1,513 @@
+[
+  {
+    "id": "bennett-2002",
+    "cite": "Bennett RL, Motulsky AG, Bittles A, Hudgins L, Uhrich S, Doyle DL, Silvey K, Scott CR, Cheng E, McGillivray B, Steiner RD, Olson D. Genetic counseling and screening of consanguineous couples and their offspring: recommendations of the National Society of Genetic Counselors. J Genet Couns. 2002;11(2):97-119.",
+    "url": "https://doi.org/10.1023/A:1014593404915",
+    "doi": "10.1023/A:1014593404915",
+    "pmid": "26141656",
+    "year": 2002,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "The recommendations cover consanguineous couples, defined as related as second cousins or closer.",
+        "quote": "The objective of this document is to provide recommendations for genetic counseling and screening for consanguineous couples (related as second cousins or closer) and their offspring",
+        "where": "abstract"
+      },
+      {
+        "claim": "Beyond a thorough family history, no additional preconception screening is recommended; couples are offered the same ethnicity-based screening as any couple of their group.",
+        "quote": "beyond a thorough medical family history with follow-up of significant findings, no additional preconception screening is recommended for consanguineous couples. Consanguineous couples should be offered similar genetic screening as suggested for any couple of their ethnic group.",
+        "where": "abstract"
+      }
+    ],
+    "note": "NOT VERIFIED for the risk figures. The abstract contains no risk figures. The 1.7-2.8% excess risk and the 2-3% general-population baseline are attributed to this paper only by a secondary 2017 slide deck (Hamamy), and a fact sheet gives a different number (4.4%) for the same paper. The primary text (Springer, DOI above) was not accessible. Do not state these figures until the full text is read. PMID 26141656 is taken from the Europe PMC record; the PubMed page was not fetchable. Verified related fact (abstract of Bennett et al., Genet Med 1999;1(6):286-292, PMID 11258630): quoted risk figures for first-cousin unions ranged from 0.25% to 20%. Focused revision: Bennett RL et al., J Genet Couns 2021;30(5):1354-1357 (PMID 34309119, DOI 10.1002/jgc4.1477)."
+  },
+  {
+    "id": "cdc-birth-defects-1-in-33",
+    "cite": "Centers for Disease Control and Prevention. Birth Defects Resources. Atlanta, GA: CDC. Official page; the page date line shown when fetched is December 26, 2024.",
+    "url": "https://www.cdc.gov/birth-defects/resources/index.html",
+    "doi": null,
+    "pmid": null,
+    "year": 2024,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "The CDC states that about 1 in 33 babies is born with a birth defect.",
+        "quote": "About 1 in 33 babies is born with a birth defect.",
+        "where": "official page"
+      }
+    ],
+    "note": "The page gives no year or period for the figure. The quote was extracted by the fetch tool from the live page; re-check the wording in a browser before submission. An archived 2004 CDC page (webharvest.gov) used the same 1-in-33 rate with about 150,000 affected births a year; do not use that archive as a current source."
+  },
+  {
+    "id": "strauss-2022-2copy",
+    "cite": "Strauss KA, Farrar MA, Muntoni F, Saito K, Mendell JR, Servais L, McMillan HJ, Finkel RS, Swoboda KJ, Kwon JM, Zaidman CM, Chiriboga CA, Iannaccone ST, Krueger JM, Parsons JA, Shieh PB, Kavanagh S, Tauscher-Wisniewski S, McGill BE, Macek TA. Onasemnogene abeparvovec for presymptomatic infants with two copies of SMN2 at risk for spinal muscular atrophy type 1: the Phase III SPR1NT trial. Nat Med. 2022;28(7):1381-1389.",
+    "url": "https://doi.org/10.1038/s41591-022-01866-4",
+    "doi": "10.1038/s41591-022-01866-4",
+    "pmid": "35715566",
+    "year": 2022,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Presymptomatic children with two SMN2 copies, treated at 6 weeks of age or younger; 14 children reported.",
+        "quote": "treated at ≤6 weeks of life. Here, we report final results for 14 children with two copies of SMN2",
+        "where": "abstract"
+      },
+      {
+        "claim": "All 14 sat independently for at least 30 seconds by 18 months; 11 of them within the normal developmental window.",
+        "quote": "All 14 enrolled infants sat independently for ≥30 seconds at any visit ≤18 months (Bayley-III item #26; P < 0.001; 11 within the normal developmental window).",
+        "where": "abstract"
+      },
+      {
+        "claim": "All survived without permanent ventilation at 14 months; 13 kept weight at or above the 3rd WHO percentile through 18 months; no child needed nutritional or respiratory support.",
+        "quote": "All survived without permanent ventilation at 14 months as per protocol; 13 maintained body weight (≥3rd WHO percentile) through 18 months. No child used nutritional or respiratory support.",
+        "where": "abstract"
+      },
+      {
+        "claim": "Median age at first sitting was 265 days (range 172-354); 11 of 14 (79%) were within the WHO window of 279 days or less.",
+        "quote": "Children in the two-copy cohort first sat independently at a median age of 265 days (range, 172–354 days), and 11 of 14 (79%) achieved this motor milestone within the World Health Organization (WHO) normal developmental time window of ≤279 days of age.",
+        "where": "full text"
+      },
+      {
+        "claim": "Efficacy was compared with a matched natural-history cohort of 23 children.",
+        "quote": "Efficacy was compared with a matched Pediatric Neuromuscular Clinical Research natural-history cohort (n = 23).",
+        "where": "abstract"
+      }
+    ],
+    "note": "Verified. For the two-copy cohort the abstract reports sitting, not walking; walking figures in this request belong to the three-copy paper (strauss-2022-3copy). Full-text quote from PMC9205281. Efficacy endpoint was independent sitting for at least 30 seconds (Bayley-III item 26)."
+  },
+  {
+    "id": "devivo-2019-nurture",
+    "cite": "De Vivo DC, Bertini E, Swoboda KJ, Hwu WL, Crawford TO, Finkel RS, Kirschner J, Kuntz NL, Parsons JA, Ryan MM, Butterfield RJ, Topaloglu H, Ben-Omran T, Sansone VA, Jong YJ, Shu F, Staropoli JF, Kerr D, Sandrock AW, Stebbins C, Petrillo M, Braley G, Johnson K, Foster R, Gheuens S, Bhan I, Reyna SP, Fradette S, Farwell W; NURTURE Study Group. Nusinersen initiated in infants during the presymptomatic stage of spinal muscular atrophy: interim efficacy and safety results from the Phase 2 NURTURE study. Neuromuscular Disorders. 2019;29(11):842-856.",
+    "url": "https://doi.org/10.1016/j.nmd.2019.09.007",
+    "doi": "10.1016/j.nmd.2019.09.007",
+    "pmid": "31704158",
+    "year": 2019,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "25 children first treated with nusinersen in infancy while presymptomatic; 15 had two SMN2 copies and 10 had three.",
+        "quote": "We report interim efficacy and safety outcomes as of March 29, 2019 in 25 children with genetically diagnosed SMA who first received nusinersen in infancy while presymptomatic ... Fifteen children have two SMN2 copies and 10 have three SMN2 copies.",
+        "where": "abstract"
+      },
+      {
+        "claim": "Infants were 6 weeks old or younger at first dose; median age at first dose was 22.0 days (range 3-42).",
+        "quote": "were ≤6 weeks old at first dose ... The median (range) age at first dose of nusinersen among enrolled infants was 22.0 (3–42) days.",
+        "where": "full text"
+      },
+      {
+        "claim": "All 25 sat without support; 23 of 25 (92%) walked with assistance; 22 of 25 (88%) walked independently.",
+        "quote": "All 25 participants achieved the ability to sit without support, 23/25 (92%) achieved walking with assistance, and 22/25 (88%) achieved walking independently.",
+        "where": "abstract"
+      },
+      {
+        "claim": "At last visit (median age 34.8 months) all children were alive; none needed tracheostomy or permanent ventilation.",
+        "quote": "At last visit, children were median (range) 34.8 [25.7-45.4] months of age and past the expected age of symptom onset for SMA Types I or II; all were alive and none required tracheostomy or permanent ventilation.",
+        "where": "abstract"
+      }
+    ],
+    "note": "Verified. Single-arm, open-label trial with no concurrent control, so comparisons with natural history are not controlled. Eight infants had adverse events considered possibly related to nusinersen. Later update: Crawford TO et al., Muscle Nerve 2023;68(2):157-170 (PMID 37409780, DOI 10.1002/mus.27853)."
+  },
+  {
+    "id": "strauss-2022-3copy",
+    "cite": "Strauss KA, Farrar MA, Muntoni F, Saito K, Mendell JR, Servais L, McMillan HJ, Finkel RS, Swoboda KJ, Kwon JM, Zaidman CM, Chiriboga CA, Iannaccone ST, Krueger JM, Parsons JA, Shieh PB, Kavanagh S, Wigderson M, Tauscher-Wisniewski S, McGill BE, Macek TA. Onasemnogene abeparvovec for presymptomatic infants with three copies of SMN2 at risk for spinal muscular atrophy: the Phase III SPR1NT trial. Nat Med. 2022;28(7):1390-1397.",
+    "url": "https://doi.org/10.1038/s41591-022-01867-3",
+    "doi": "10.1038/s41591-022-01867-3",
+    "pmid": "35715567",
+    "year": 2022,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Of 15 children with three SMN2 copies treated before symptom onset, all stood independently before 24 months, and 14 walked independently.",
+        "quote": "Of 15 children with three SMN2 copies treated before symptom onset, all stood independently before 24 months (P < 0.0001; 14 within normal developmental window), and 14 walked independently (P < 0.0001; 11 within normal developmental window).",
+        "where": "abstract"
+      },
+      {
+        "claim": "All survived without permanent ventilation at 14 months; ten (67%) kept weight at or above the 3rd WHO percentile without feeding support through 24 months.",
+        "quote": "All survived without permanent ventilation at 14 months; ten (67%) maintained body weight (≥3rd WHO percentile) without feeding support through 24 months",
+        "where": "abstract"
+      }
+    ],
+    "note": "Verified from the abstract. Treated within six postnatal weeks. This is the three-copy cohort, not the two-copy cohort named in the request. PMCID PMC9205287."
+  },
+  {
+    "id": "escolar-2005",
+    "cite": "Escolar ML, Poe MD, Provenzale JM, Richards KC, Allison J, Wood S, Wenger DA, Pietryga D, Wall D, Champagne M, Morse R, Krivit W, Kurtzberg J. Transplantation of umbilical-cord blood in babies with infantile Krabbe's disease. N Engl J Med. 2005;352(20):2069-2081.",
+    "url": "https://doi.org/10.1056/NEJMoa042604",
+    "doi": "10.1056/NEJMoa042604",
+    "pmid": "15901860",
+    "year": 2005,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Eleven asymptomatic newborns were transplanted at 12 to 44 days of age; 14 symptomatic infants at 142 to 352 days of age.",
+        "quote": "Eleven asymptomatic newborns (age range, 12 to 44 days) and 14 symptomatic infants (age range, 142 to 352 days) with infantile Krabbe's disease underwent transplantation of umbilical-cord blood from unrelated donors after myeloablative chemotherapy.",
+        "where": "abstract"
+      },
+      {
+        "claim": "Survival was 100% in asymptomatic newborns and 43% in symptomatic infants; donor-cell engraftment was 100% in both groups.",
+        "quote": "The rates of donor-cell engraftment and survival were 100 percent and 100 percent, respectively, among the asymptomatic newborns (median follow-up, 3.0 years) and 100 percent and 43 percent, respectively, among the symptomatic infants (median follow-up, 3.4 years).",
+        "where": "abstract"
+      },
+      {
+        "claim": "Presymptomatically transplanted infants showed progressive myelination and mostly age-appropriate cognition, but some had language and motor delays.",
+        "quote": "Infants who underwent transplantation before the development of symptoms showed progressive central myelination and continued gains in developmental skills, and most had age-appropriate cognitive function and receptive language skills, but a few had mild-to-moderate delays in expressive language and mild-to-severe delays in gross motor function.",
+        "where": "abstract"
+      },
+      {
+        "claim": "Children transplanted after symptom onset had minimal neurologic improvement.",
+        "quote": "Children who underwent transplantation after the onset of symptoms had minimal neurologic improvement.",
+        "where": "abstract"
+      }
+    ],
+    "note": "Verified. Follow-up ran from four months to six years; the cohorts were 11 and 14 infants, so the survival difference rests on small numbers. Abstract taken from the Europe PMC record, which matches PubMed; the PubMed page itself was not fetchable."
+  },
+  {
+    "id": "fumagalli-2022",
+    "cite": "Fumagalli F, Calbi V, Natali Sora MG, et al. Lentiviral haematopoietic stem-cell gene therapy for early-onset metachromatic leukodystrophy: long-term results from a non-randomised, open-label, phase 1/2 trial and expanded access. Lancet. 2022;399(10322):372-383.",
+    "url": "https://doi.org/10.1016/S0140-6736(21)02017-1",
+    "doi": "10.1016/S0140-6736(21)02017-1",
+    "pmid": "35065785",
+    "year": 2022,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "29 treated children with pre-symptomatic or early-symptomatic early-onset MLD were compared with 31 untreated natural-history patients matched by age and subtype.",
+        "quote": "29 paediatric patients with pre-symptomatic or early-symptomatic early-onset MLD with biochemical and molecular confirmation of diagnosis were treated with arsa-cel ... and compared with an untreated natural history (NHx) cohort of 31 patients with early-onset MLD, matched by age and disease subtype.",
+        "where": "abstract"
+      },
+      {
+        "claim": "At 2 years, gross motor function was more than 10% better than matched untreated controls: 66% (95% CI 48.9-82.3) in late-infantile and 42% (95% CI 12.3-71.8) in early-juvenile MLD.",
+        "quote": "Mean differences in total scores for gross motor function measure between treated patients and age-matched and disease subtype-matched NHx patients 2 years after treatment were significant for both patients with late-infantile MLD (66% [95% CI 48.9–82.3]) and early-juvenile MLD (42% [12.3–71.8]).",
+        "where": "full text"
+      },
+      {
+        "claim": "Benefit was seen in pre-symptomatic late-infantile patients and in pre-symptomatic and early-symptomatic early-juvenile patients treated before rapid progression.",
+        "quote": "HSPC-GT provided benefit in pre-symptomatic late-infantile and pre-symptomatic and early-symptomatic early-juvenile patients treated before entering the rapid phase of disease progression, preserving cognitive function, delaying time to severe motor disability, and slowing down brain demyelination and atrophy.",
+        "where": "full text"
+      },
+      {
+        "claim": "Treatment gave sustained, clinically relevant benefits in children with early-onset MLD, preserving cognitive function and motor development in most patients and slowing demyelination and brain atrophy.",
+        "quote": "Treatment with arsa-cel resulted in sustained, clinically relevant benefits in children with early-onset MLD by preserving cognitive function and motor development in most patients, and slowing demyelination and brain atrophy.",
+        "where": "abstract"
+      },
+      {
+        "claim": "26 treated patients were alive at analysis, with median follow-up 3.16 years (range 0.64-7.51).",
+        "quote": "At the time of analyses, 26 patients treated with arsa-cel were alive with median follow-up of 3·16 years (range 0·64–7·51).",
+        "where": "abstract"
+      }
+    ],
+    "note": "Verified, with one correction. The abstract says pre-symptomatic or early-symptomatic early-onset MLD; the words late-infantile come from the full text. The 66% GMFM figure is for all 16 late-infantile patients (15 of 16 were pre-symptomatic at treatment, per the full-text table), not for the pre-symptomatic subset alone. Late-infantile was defined as predicted symptom onset at or before 30 months. Decimal points normalised from the source's middle dots. Trial NCT01560182. The FDA indication for Lenmeldy is in fda-lenmeldy-2024."
+  },
+  {
+    "id": "fda-lenmeldy-2024",
+    "cite": "U.S. Food and Drug Administration. FDA approves first gene therapy for children with metachromatic leukodystrophy (press announcement), March 18, 2024. Product: Lenmeldy (atidarsagene autotemcel).",
+    "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-first-gene-therapy-children-metachromatic-leukodystrophy",
+    "doi": null,
+    "pmid": null,
+    "year": 2024,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Indicated for children with pre-symptomatic late infantile, pre-symptomatic early juvenile, or early symptomatic early juvenile MLD.",
+        "quote": "the first FDA-approved gene therapy indicated for the treatment of children with pre-symptomatic late infantile, [...] pre-symptomatic early juvenile or early symptomatic early juvenile metachromatic leukodystrophy (MLD)",
+        "where": "official page"
+      },
+      {
+        "claim": "Approval announced March 18, 2024.",
+        "quote": "March 18, 2024",
+        "where": "official page"
+      },
+      {
+        "claim": "Evidence base: data from 37 children in two single-arm, open-label trials and an expanded access program, compared with untreated children (natural history).",
+        "quote": "data from 37 children who received Lenmeldy in two single-arm, open-label clinical trials and in an expanded access program.",
+        "where": "official page"
+      }
+    ],
+    "note": "Verified from the FDA press release as fetched. Quotes were extracted by the fetch tool, so re-check wording in a browser before submission. Some outlets dated the approval March 19; the FDA release is dated March 18."
+  },
+  {
+    "id": "kishnani-2007",
+    "cite": "Kishnani PS, Corzo D, Nicolino M, et al. Recombinant human acid [alpha]-glucosidase: major clinical benefits in infantile-onset Pompe disease. Neurology. 2007;68(2):99-109.",
+    "url": "https://doi.org/10.1212/01.wnl.0000251268.41188.04",
+    "doi": "10.1212/01.wnl.0000251268.41188.04",
+    "pmid": "17151339",
+    "year": 2007,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "18 patients with rapidly progressing infantile-onset Pompe disease, diagnosed at 6 months of age or younger.",
+        "quote": "Patients were diagnosed at 6 months of age and younger and exhibited severe GAA deficiency and cardiomyopathy.",
+        "where": "abstract"
+      },
+      {
+        "claim": "All 18 patients survived to 18 months of age.",
+        "quote": "All patients (100%) survived to 18 months of age.",
+        "where": "abstract"
+      },
+      {
+        "claim": "Compared with an untreated historical control group, treatment reduced the risk of death by 99%, of death or invasive ventilation by 92%, and of death or any ventilation by 88%.",
+        "quote": "treatment reduced the risk of death by 99%, reduced the risk of death or invasive ventilation by 92%, and reduced the risk of death or any type of ventilation by 88%, as compared to an untreated historical control group.",
+        "where": "abstract"
+      },
+      {
+        "claim": "The authors suggest the young age at which therapy started may have contributed to the improved response.",
+        "quote": "The young age at which these patients initiated therapy may have contributed to their improved response compared to previous trials with recombinant human acid alpha-glucosidase in which patients were older.",
+        "where": "abstract"
+      }
+    ],
+    "note": "Verified. The abstract gives age at diagnosis (6 months or younger), not an exact age at first infusion. 'Ventilator-free survival' is not a reported endpoint; the ventilation outcomes are composites that include death. Dose arms were 20 mg/kg (n=9) and 40 mg/kg (n=9), every other week. The control group was historical and not randomised."
+  },
+  {
+    "id": "chien-2009",
+    "cite": "Chien YH, Lee NC, Thurberg BL, Chiang SC, Zhang XK, Keutzer J, Huang AC, Wu MH, Huang PH, Tsai FJ, Chen YT, Hwu WL. Pompe disease in infants: improving the prognosis by newborn screening and early treatment. Pediatrics. 2009;124(6):e1116-e1125.",
+    "url": "https://doi.org/10.1542/peds.2008-3667",
+    "doi": "10.1542/peds.2008-3667",
+    "pmid": "19948615",
+    "year": 2009,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "In the Taiwan newborn-screening pilot, 6 of 206088 newborns screened positive and were treated.",
+        "quote": "Six of 206088 newborns screened tested positive and were treated for Pompe disease.",
+        "where": "abstract"
+      },
+      {
+        "claim": "Five had the rapidly progressive form and were treated soon after diagnosis; the sixth started treatment at 14 months of age.",
+        "quote": "Five had the rapidly progressive form of Pompe disease, characterized by cardiac and motor involvement, and were treated soon after diagnosis. The sixth patient was started on treatment at 14 months of age because of progressive muscle weakness.",
+        "where": "abstract"
+      },
+      {
+        "claim": "Survival in newborn-screened patients was significantly better than in an untreated reference cohort.",
+        "quote": "Survival in patients who had newborn screening was significantly improved compared with those in the untreated reference cohort (P = .001).",
+        "where": "abstract"
+      }
+    ],
+    "note": "PARTLY VERIFIED. Ventilator-free survival is NOT in the abstract. The full text (publications.aap.org) returned HTTP 403, so ventilator-free survival is unverified and must not be stated. Age at treatment start for the five screened infants is given only as soon after diagnosis. Patients had been treated for 14 to 32 months at the time of reporting. Pages e1116-25 per the Europe PMC record."
+  },
+  {
+    "id": "aldenhoven-2015",
+    "cite": "Aldenhoven M, Wynn RF, Orchard PJ, O'Meara A, Veys P, Fischer A, Valayannopoulos V, Neven B, Rovelli A, Prasad VK, Tolar J, Allewelt H, Jones SA, Parini R, Renard M, Bordon V, Wulffraat NM, de Koning TJ, Shapiro EG, Kurtzberg J, Boelens JJ. Long-term outcome of Hurler syndrome patients after hematopoietic cell transplantation: an international multicenter study. Blood. 2015;125(13):2164-2172.",
+    "url": "https://doi.org/10.1182/blood-2014-11-608075",
+    "doi": "10.1182/blood-2014-11-608075",
+    "pmid": "25624320",
+    "year": 2015,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "217 patients with MPS-IH were successfully engrafted after transplantation, with median follow-up age 9.2 years.",
+        "quote": "Two hundred seventeen patients with MPS-IH successfully engrafted with a median follow-up age of 9.2 years were included in this retrospective analysis.",
+        "where": "abstract"
+      },
+      {
+        "claim": "A younger age at transplantation was a major predictor of superior cognitive development after transplant.",
+        "quote": "Preservation of cognitive function at HCT and a younger age at transplantation were major predictors for superior cognitive development posttransplant.",
+        "where": "abstract"
+      },
+      {
+        "claim": "Long-term prognosis can be improved by reducing the age at transplant through earlier diagnosis.",
+        "quote": "The long-term prognosis of patients with MPS-IH receiving HCT can be improved by reducing the age at HCT through earlier diagnosis",
+        "where": "abstract"
+      }
+    ],
+    "note": "Citation and direction of effect verified. NO numeric age threshold is in the abstract, and the full text (ASH Publications) returned HTTP 403. Do not state a threshold such as 2 years until the full text is read."
+  },
+  {
+    "id": "speiser-2018",
+    "cite": "Speiser PW, Arlt W, Auchus RJ, Baskin LS, Conway GS, Merke DP, Meyer-Bahlburg HFL, Miller WL, Murad MH, Oberfield SE, White PC. Congenital adrenal hyperplasia due to steroid 21-hydroxylase deficiency: an Endocrine Society clinical practice guideline. J Clin Endocrinol Metab. 2018;103(11):4043-4088.",
+    "url": "https://doi.org/10.1210/jc.2018-01865",
+    "doi": "10.1210/jc.2018-01865",
+    "pmid": "30272171",
+    "year": 2018,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "In 75% of cases with severe enzyme deficiency, inadequate aldosterone causes salt wasting, failure to thrive, and potentially fatal hypovolemia and shock.",
+        "quote": "In 75% of cases with severe enzyme deficiency, inadequate aldosterone production causes salt wasting, failure to thrive, and potentially fatal hypovolemia and shock.",
+        "where": "full text"
+      },
+      {
+        "claim": "Missed diagnosis of salt-losing CAH is associated with increased risk of early neonatal morbidity and mortality.",
+        "quote": "Missed diagnosis of salt-losing CAH is associated with increased risk for early neonatal morbidity and mortality.",
+        "where": "full text"
+      },
+      {
+        "claim": "Newborn screening, now universal in the United States and in many other developed countries, can mitigate these complications.",
+        "quote": "Newborn screening, now universal in the United States and in many other developed countries, can mitigate these complications.",
+        "where": "full text"
+      },
+      {
+        "claim": "Recommendation 1.1: all newborn screening programs should incorporate screening for CAH due to 21-hydroxylase deficiency.",
+        "quote": "We recommend that all newborn screening programs incorporate screening for congenital adrenal hyperplasia due to 21-hydroxylase deficiency (21OHD).",
+        "where": "full text"
+      },
+      {
+        "claim": "Death rate of infants with salt-wasting CAH without screening: about 10% in some reports; 0% to 4% in recent estimates from advanced economies.",
+        "quote": "Some researchers have reported a death rate of ∼10% among infants with salt-wasting CAH in the absence of screening, but recent estimates from advanced economies are lower, at 0% to 4%.",
+        "where": "full text"
+      }
+    ],
+    "note": "Citation verified. NOT VERIFIED: the statement that salt-wasting crisis typically occurs in the first weeks of life was not found in the full text (PMC6456929 HTML; the Europe PMC XML endpoint returned HTTP 500). Do not state it. The 2018 guideline says newborn screening can mitigate these complications, not that it prevents them. The phrase universal newborn screening comes from the 2010 guideline abstract (Speiser PW et al., JCEM 2010;95(9):4133-4160, PMID 20823466), not the 2018 abstract. Full-text quotes have reference numbers removed."
+  },
+  {
+    "id": "gaston-1986",
+    "cite": "Gaston MH, Verter JI, Woods G, Pegelow C, Kelleher J, Presbury G, Zarkowsky H, Vichinsky E, Iyer R, Lobel JS. Prophylaxis with oral penicillin in children with sickle cell anemia. A randomized trial. N Engl J Med. 1986;314(25):1593-1599.",
+    "url": "https://doi.org/10.1056/NEJM198606193142501",
+    "doi": "10.1056/NEJM198606193142501",
+    "pmid": "3086721",
+    "year": 1986,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Penicillin reduced the incidence of infection by 84% compared with placebo (13 of 110 placebo vs 2 of 105 penicillin; P = 0.0025).",
+        "quote": "an 84 percent reduction in the incidence of infection was observed in the group treated with penicillin, as compared with the group given placebo (13 of 110 patients vs. 2 of 105; P = 0.0025)",
+        "where": "abstract"
+      },
+      {
+        "claim": "Children under 3 years of age at entry were randomised to penicillin V potassium 125 mg twice daily or placebo.",
+        "quote": "who were under the age of three years at the time of entry. The children were randomly assigned to receive either 125 mg of penicillin V potassium (105 children) or placebo (110 children) twice daily.",
+        "where": "abstract"
+      },
+      {
+        "claim": "Children with sickle cell anemia should receive oral penicillin prophylaxis by four months of age.",
+        "quote": "those with sickle cell anemia should receive prophylactic therapy with oral penicillin by four months of age to decrease the morbidity and mortality associated with pneumococcal septicemia.",
+        "where": "abstract"
+      }
+    ],
+    "note": "Verified with two corrections to the request. (1) The paper says by four months of age, not 2-4 months. (2) The 84% is a reduction in the incidence of infection; the trial endpoint was documented pneumococcal (S. pneumoniae) septicemia. Do not describe it as a reduction in all pneumococcal infections. The trial was stopped 8 months early after about 15 months of follow-up; there were no pneumococcal septicemia deaths on penicillin and three on placebo."
+  },
+  {
+    "id": "russell-2017",
+    "cite": "Russell S, Bennett J, Wellman JA, et al. Efficacy and safety of voretigene neparvovec (AAV2-hRPE65v2) in patients with RPE65-mediated inherited retinal dystrophy: a randomised, controlled, open-label, phase 3 trial. Lancet. 2017;390(10097):849-860.",
+    "url": "https://doi.org/10.1016/S0140-6736(17)31868-8",
+    "doi": "10.1016/S0140-6736(17)31868-8",
+    "pmid": "28712537",
+    "year": 2017,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Eligible participants were aged 3 years or older with biallelic RPE65 mutations and sufficient viable retina.",
+        "quote": "individuals aged 3 years or older with ... confirmed genetic diagnosis of biallelic RPE65 mutations, sufficient viable retina",
+        "where": "abstract"
+      },
+      {
+        "claim": "The primary endpoint was 1-year change in multi-luminance mobility test (MLMT) performance, measuring functional vision at specified light levels.",
+        "quote": "The primary efficacy endpoint was 1-year change in MLMT performance, measuring functional vision at specified light levels.",
+        "where": "abstract"
+      },
+      {
+        "claim": "At 1 year, mean MLMT change was 1.8 light levels (SD 1.1) with treatment vs 0.2 (SD 1.0) in controls; difference 1.6 (95% CI 0.72-2.41; p=0.0013).",
+        "quote": "At 1 year, mean bilateral MLMT change score was 1·8 (SD 1·1) light levels in the intervention group versus 0·2 (1·0) in the control group (difference of 1·6, 95% CI 0·72-2·41, p=0·0013).",
+        "where": "abstract"
+      },
+      {
+        "claim": "13 of 20 treated participants (65%), and no control participants, passed MLMT at the lowest luminance tested (1 lux).",
+        "quote": "13 (65%) of 20 intervention participants, but no control participants, passed MLMT at the lowest luminance level tested (1 lux)",
+        "where": "abstract"
+      },
+      {
+        "claim": "Gene replacement improved functional vision in RPE65-mediated inherited retinal dystrophy previously medically untreatable.",
+        "quote": "Voretigene neparvovec gene replacement improved functional vision in RPE65-mediated inherited retinal dystrophy previously medically untreatable.",
+        "where": "abstract"
+      }
+    ],
+    "note": "Verified. Phase 3, two US sites; 31 enrolled (21 treated, 10 control); modified ITT 20 vs 9. The 'what it improves' answer is functional vision as measured by mobility testing at different light levels; the primary endpoint was MLMT, not visual acuity. Decimals normalised from the source's middle dots. FDA approval year: see fda-luxturna-2017."
+  },
+  {
+    "id": "fda-luxturna-2017",
+    "cite": "U.S. Food and Drug Administration. FDA approves novel gene therapy to treat patients with a rare form of inherited vision loss (news release), Luxturna (voretigene neparvovec-rzyl), December 2017. Related FDA Summary Basis for Regulatory Action, LUXTURNA, dated December 18, 2017.",
+    "url": "https://www.fda.gov/newsevents/newsroom/pressannouncements/ucm589467.htm",
+    "doi": null,
+    "pmid": null,
+    "year": 2017,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "FDA approved Luxturna for patients with biallelic RPE65 mutation-associated retinal dystrophy that leads to vision loss.",
+        "quote": "Luxturna is approved for the treatment of patients with confirmed biallelic RPE65 mutation-associated retinal dystrophy that leads to vision loss and may cause complete blindness in certain patients.",
+        "where": "official page"
+      }
+    ],
+    "note": "Year 2017 verified from FDA-hosted text: the search excerpt of the FDA news release and the FDA Summary Basis PDF dated December 18, 2017. The news-release URL returned HTTP 404 on direct fetch, so re-check the link and the wording in a browser. The exact approval day is not confirmed on an official page; a search summary of the FDA orphan database gave 12/19/2017, not checked directly."
+  },
+  {
+    "id": "tif-2021",
+    "cite": "Farmakis D, Porter J, Taher A, Cappellini MD, Angastiniotis M, Eleftheriou A. 2021 Thalassaemia International Federation Guidelines for the Management of Transfusion-dependent Thalassemia. HemaSphere. 2022;6(8):e732. (Summary of the 4th edition, 2021.)",
+    "url": "https://doi.org/10.1097/HS9.0000000000000732",
+    "doi": "10.1097/HS9.0000000000000732",
+    "pmid": "35928543",
+    "year": 2022,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "The fourth edition of the TIF guidelines for transfusion-dependent thalassaemia was published in 2021.",
+        "quote": "In 2021, the fourth edition of TIF's guidelines for the management of TDT was published.",
+        "where": "abstract"
+      }
+    ],
+    "note": "Citation verified (PMC9345633). NOT VERIFIED: the claim that transfusion dependence typically starts in the first 2 years of life is not in this summary's full text; searches for age, infancy, presentation and transfusion-onset wording found nothing relevant. The 5th edition summary (Musallam KM, Cappellini MD, Porter JB, Farmakis D, Eleftheriou A, Angastiniotis M, Taher AT. HemaSphere 2025;9(3):e70095; PMID 40045934; DOI 10.1002/hem3.70095; PMC11880825) also had no onset statement. The full guideline on the TIF site was not fetched. The author list in the request (Taher AT, Musallam KM, Cappellini MD, Weatherall DJ) does not match the 4th-edition summary; use the authors above."
+  },
+  {
+    "id": "kaphingst-2024-bridge",
+    "cite": "Kaphingst KA, Kohlmann WK, Lorenz Chambers R, Bather JR, Goodman MS, Bradshaw RL, Chavez-Yenter D, Colonna SV, Espinel WF, Everett JN, Flynn M, Gammon A, Harris A, Hess R, Kaiser-Jackson L, Lee S, Monahan R, Schiffman JD, Volkmar M, Wetter DW, Zhong L, Mann DM, Ginsburg O, Sigireddi M, Kawamoto K, Del Fiol G, Buys SS. Uptake of cancer genetic services for chatbot vs standard-of-care delivery models: the BRIDGE randomized clinical trial. JAMA Netw Open. 2024;7(9):e2432143.",
+    "url": "https://doi.org/10.1001/jamanetworkopen.2024.32143",
+    "doi": "10.1001/jamanetworkopen.2024.32143",
+    "pmid": "39250153",
+    "year": 2024,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "3073 patients were randomised: 1554 to the chatbot and 1519 to the enhanced standard-of-care arm (pretest appointment with a certified genetic counselor).",
+        "quote": "This study included 3073 patients (1554 in the chatbot group and 1519 in the enhanced SOC control group).",
+        "where": "abstract"
+      },
+      {
+        "claim": "Equivalence trial of chatbot vs standard of care on completion of pretest cancer genetic services and genetic testing.",
+        "quote": "This equivalence trial (Broadening the Reach, Impact, and Delivery of Genetic Services [BRIDGE] randomized clinical trial)",
+        "where": "abstract"
+      },
+      {
+        "claim": "Difference in completion of pretest cancer genetic services was 2.0 percentage points (95% CI -1.1 to 5.0); difference in genetic testing was -1.3 points (95% CI -3.7 to 1.1).",
+        "quote": "The estimated percentage point difference for completion of pretest cancer genetic services between groups was 2.0 (95% CI, -1.1 to 5.0). The estimated percentage point difference for completion of genetic testing was -1.3 (95% CI, -3.7 to 1.1).",
+        "where": "abstract"
+      },
+      {
+        "claim": "Analyses suggested equivalence in the primary outcomes.",
+        "quote": "Analyses suggested equivalence in the primary outcomes.",
+        "where": "abstract"
+      }
+    ],
+    "note": "Verified with corrections. (1) It is an equivalence trial, not a non-inferiority trial. (2) The population is people eligible for cancer genetic evaluation (aged 25 to 60, with a primary care visit in the past 3 years), not pretest genetic services in general. (3) The control is a pretest appointment with a certified genetic counselor. The abstract gives no equivalence margin; check the full text before stating one. Conducted 15 Aug 2020 to 31 Aug 2023 at University of Utah Health and NYU Langone Health; ClinicalTrials.gov NCT03985852. The abstract's women denominator (2233 of 3063) does not match the total of 3073; do not quote that line. PMCID PMC11385050."
+  },
+  {
+    "id": "ahmed-2002",
+    "cite": "Ahmed S, Saleem M, Modell B, Petrou M. Screening extended families for genetic hemoglobin disorders in Pakistan. N Engl J Med. 2002;347(15):1162-1168.",
+    "url": "https://doi.org/10.1056/NEJMsa013234",
+    "doi": "10.1056/NEJMsa013234",
+    "pmid": "12374877",
+    "year": 2002,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "In the 10 families with an index case, 183 of 591 persons tested (31%) were carriers.",
+        "quote": "In the 10 families with an index case, 183 of 591 persons tested (31 percent) were carriers",
+        "where": "abstract"
+      },
+      {
+        "claim": "In the 5 control families, no carrier was found among 397 members tested.",
+        "quote": "In the control families, no carrier was found among 397 members tested.",
+        "where": "abstract"
+      },
+      {
+        "claim": "17 of 214 married couples (8%) consisted of two carriers.",
+        "quote": "17 of 214 married couples (8 percent) consisted of two carriers",
+        "where": "abstract"
+      },
+      {
+        "claim": "No couple at risk was identified among 350 randomly selected pregnant women and their partners.",
+        "quote": "No couple at risk was identified among 350 randomly selected pregnant women and their partners.",
+        "where": "abstract"
+      }
+    ],
+    "note": "Verified with a correction. The 17 of 214 figure concerns married couples in the screened extended families (both partners carriers). It is not a comparison with controls. The control comparison is 0 carriers among 397 members of control families, and a separate group of 350 pregnant women with no at-risk couple. The study screened for beta-thalassemia and abnormal hemoglobins. Note the paper's own phrase 'marriage at risk'."
+  }
+]

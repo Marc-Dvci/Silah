@@ -1,0 +1,667 @@
+[
+  {
+    "id": "jain-2025-gimo",
+    "cite": "Jain R, Bizzari S, Ramaswamy S, Hasham KF, Sinha S, Chekroun I, Rabea F, Abuijlan E, El Naofal M, Sheikh Hassani M, Shenbagam S, Taylor A, Uddin M, Almarri M, Alkhnbashi O, Khansaheb H, Al Suwaidi H, Du Plessis SS, El-Hayek S, Alsheikh-Ali A, Abou Tayoun A. Pathogenic variation underlying rare diseases in an Arab population: Implications for screening programs. Genet Med Open. 2025;3:103446. doi:10.1016/j.gimo.2025.103446. PMID 40893834; PMC12397869.",
+    "url": "https://doi.org/10.1016/j.gimo.2025.103446",
+    "year": 2025,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "Curated P/LP variants from 1,333 Emirati families (346 internal, 987 from literature) and analysed P/LP variants in 1,194 Emirati exomes; the first author is Jain R, and Chekroun I is the fifth-listed author (not first).",
+        "value": "1,333 families; 1,194 exomes",
+        "quote": "analyzed P/LP variants in 1,194 Emirati exomes, and estimated carrier rates (condensed abstract summary; exact sentence not retrieved)"
+      },
+      {
+        "claim": "Share of variants absent from gnomAD and ClinVar.",
+        "value": "52% absent from gnomAD; 30% absent from ClinVar",
+        "quote": "52% and 30% being absent from the gnomAD and ClinVar databases, respectively (preprint wording, same study)"
+      },
+      {
+        "claim": "Variant count. The full-text summary says 854 unique variants; the preprint excerpt says 855. Unresolved.",
+        "value": "701 P/LP of 854 (full text) or 855 (preprint excerpt)",
+        "quote": "analysis of 854 unique genetic variants identified in this cohort (fetch summary of PMC page)"
+      },
+      {
+        "claim": "Carrier rates per gene (reported in text).",
+        "value": "CYP21A2 10.6%; HBB 9.6%; MEFV 5.9%; ABCA4 4.3%; HBA2 1.8%",
+        "quote": "CYP21A2 showed the highest carrier rate (10.6%), followed by HBB (9.6%), MEFV (5.9%) and ABCA4 (4.3%)"
+      },
+      {
+        "claim": "Cumulative gene allele frequency in the exome cohort (not carrier rate).",
+        "value": "CYP21A2 5.6%; HBB 5.0%; MEFV 3.0%; ABCA4 2.2%; CFTR 0.34%",
+        "quote": "gene frequencies are cumulative allele frequencies per gene (table read from fetch summary; per-gene values sit in figures and supplements)"
+      },
+      {
+        "claim": "Estimated at-risk couple rate using a provisional screening gene list.",
+        "value": "4% to 21%",
+        "quote": "we estimate the rate of at-risk couples (4-21%) which varies across different screening gene lists"
+      },
+      {
+        "claim": "Carrier rates for SMN1, GALC, ARSA, GAA, IDUA, RPE65, HBA1, GJB2, ACADM, BTD, PAH, MMUT were not found in the text. SMN1 carrier rate is said to come from the separate 1,502-newborn cohort (see rabea-2024-sma-uae).",
+        "value": "not reported",
+        "quote": ""
+      }
+    ],
+    "note": "The user's label 'Chekroun I et al. 2024' is wrong. This is the peer-reviewed version (2025) of a Research Square preprint from 12 Nov 2024 (DOI 10.21203/rs.3.rs-5377628/v1), with Jain R as first author. Numbers were read from a condensed fetch summary of the PMC page (PMC12397869), not from a direct read of the full text or figures. Per-gene carrier tables are in figures or supplements that were not read. Check these before citing. Not verified: per-gene values beyond CYP21A2, HBB, MEFV and ABCA4, and the 854 vs 855 count."
+  },
+  {
+    "id": "jain-2024-preprint",
+    "cite": "Jain R, et al. Pathogenic variation underlying rare diseases in an Arab population: implications for screening programs. Research Square preprint. 2024. doi:10.21203/rs.3.rs-5377628/v1. Europe PMC preprint ID PPR939041.",
+    "url": "https://doi.org/10.21203/rs.3.rs-5377628/v1",
+    "year": 2024,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "First publication date of the preprint.",
+        "value": "2024-11-12",
+        "quote": ""
+      },
+      {
+        "claim": "The preprint version is listed as the preprint of jain-2025-gimo.",
+        "value": "PPR939041 linked to Genet Med Open 2025",
+        "quote": ""
+      }
+    ],
+    "note": "Metadata came from a Europe PMC search result via the fetch tool. The preprint text was not read. Use the GIMO 2025 record for citation."
+  },
+  {
+    "id": "dubai-nmed-2026",
+    "cite": "Alblooshi K, Sharaf R, Shenbagam S, Sinha S, Jain R, Yaslam S, Alfalasi R, Abdulbaki A, Alyassi A, Alyafei H, Ramaswamy S, Jaber I, Sato M, Chekroun I, Rabea F, Khadija S, El Naofal M, Sheikh Hassani M, Taylor A, Farag M, Jamalalail B, Sarhan A, AlHajjaj S, Almadhoun F, Elsawy D, Alkhnbashi OS, Khansaheb H, Al Suwaidi H, Aldafrawy O, Albasti A, AlAwadhi M, Alsheikh-Ali A, Abou Tayoun A. Citywide premarital genomic screening in a Middle Eastern population. Nat Med. 2026;32(4):1511-1518. doi:10.1038/s41591-026-04251-7. PMID 42014881; PMCID PMC13099644.",
+    "url": "https://doi.org/10.1038/s41591-026-04251-7",
+    "year": 2026,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "First published online date.",
+        "value": "21 April 2026 (issue April 2026, vol 32 no 4, pp 1511-1518)",
+        "quote": ""
+      },
+      {
+        "claim": "Gene panel, centres and feasibility aim.",
+        "value": "782 genes; 18 primary healthcare centres",
+        "quote": "Here we describe the feasibility and first implementation of a mandatory, citywide premarital genomic screening program comprising the sequencing of 782 genes"
+      },
+      {
+        "claim": "Couples tested and at-risk proportion.",
+        "value": "1,000 couples tested; 79 at risk (8%, 95% CI 6.4-9.7)",
+        "quote": "79 (8%, 95% confidence interval: 6.4-9.7)"
+      },
+      {
+        "claim": "Comparison with Australian Mackenzie's Mission study.",
+        "value": "3.9%; P < 0.0001",
+        "quote": "significantly higher than that reported in the Australian Mackenzie's Mission study (3.9%; P < 0.0001)"
+      },
+      {
+        "claim": "Carriers and homozygous findings.",
+        "value": "158 carriers; 4 (2.5%, 95% CI 1.0-6.3) incidentally homozygous for a pathogenic variant",
+        "quote": "Of the 158 carriers, four (2.5%, 95% confidence interval: 1.0-6.3)"
+      },
+      {
+        "claim": "Most common concern and secondary genes.",
+        "value": "Hemoglobinopathies most common; 59% of at-risk couples carried variants in 33 other genes",
+        "quote": "Although risk for hemoglobinopathies was most common, 59% of at-risk couples carried variants in 33 other genes."
+      },
+      {
+        "claim": "Proceeded with marriage.",
+        "value": "63 of 79 (80%) proceeded; 16 (20%) did not",
+        "quote": "Of the 79 at-risk couples, 63 (80%) elected to proceed with marriage"
+      }
+    ],
+    "note": "Verified metadata by reading the Crossref record for the DOI and the Europe PMC record (PMID 42014881, PMCID PMC13099644). The numbers came from the Europe PMC abstract as returned by the fetch tool. nature.com was redirected to a login page and the full text was not read. The 'most common genes' answer is hemoglobinopathies. Trade press gives 21 alpha-thalassaemia and 11 beta-thalassaemia or SCD couples (genomeweb-dubai-2026, unverified). The Illumina page gives 570 genes, which conflicts with the 782 in the paper."
+  },
+  {
+    "id": "chekroun-2025-nmed-arab",
+    "cite": "Chekroun I, Rabea F, Jain R, Alsheikh-Ali A, Abou Tayoun A. Premarital genomic screening in Arab populations of the Middle East. Nat Med. 2025;31(2). doi:10.1038/s41591-024-03442-4. Published 9 Jan 2025.",
+    "url": "https://doi.org/10.1038/s41591-024-03442-4",
+    "year": 2025,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Authors, journal, volume and online date of the Nature Medicine paper. This is a separate paper from dubai-nmed-2026.",
+        "value": "Chekroun I, Rabea F, Jain R, Alsheikh-Ali A, Abou Tayoun A; Nat Med 31(2); 9 Jan 2025",
+        "quote": ""
+      }
+    ],
+    "note": "Metadata verified from the Crossref record. No abstract was retrieved, so the article type (review, perspective or other) is not confirmed. The MBRU repository summary says this paper argues for premarital genomic screening. The 'Chekroun 2024' label in the brief may refer to this or to the Genet Med Open paper. Check which one the brief means."
+  },
+  {
+    "id": "doh-premarital-2022",
+    "cite": "Department of Health Abu Dhabi. DoH to expand pre marital screening for 570 genetic medical conditions. Press release, 25 November 2022.",
+    "url": "https://www.doh.gov.ae/en/news/doh-to-expand-pre-marital-screening-for-570-genetic-medical-conditions",
+    "year": 2022,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Gene count and condition count in the launch announcement. A Media Office copy says '570 medical conditions' instead.",
+        "value": "570 genes for more than 800 medical conditions",
+        "quote": "The test will cover 570 genes for more than 800 medical conditions"
+      },
+      {
+        "claim": "Premarital test uses genetic data from the Emirati Genome Programme.",
+        "value": "Genetic data provided through the Emirati Genome Programme",
+        "quote": "encourage the translation of advanced genetic data provided through the Emirati Genome Programme into clinical practice"
+      },
+      {
+        "claim": "Pilot sites.",
+        "value": "Two Ambulatory Healthcare Services centres: Oud Al Touba Health Centre and Al Maqta Health Centre",
+        "quote": "two Ambulatory Healthcare Services (AHS) centres including Oud Al Touba Health Centre and Al Maqta Health Centre"
+      },
+      {
+        "claim": "Funding of IVF or PGT.",
+        "value": "Not stated in the announcement; it refers only to reproductive medicine options",
+        "quote": ""
+      }
+    ],
+    "note": "Read from the fetch tool, which returned a summary and some short quotes. The date 25 Nov 2022 is from the same fetch. The 'optional' wording is from the 2022 release (per search summary, unverified)."
+  },
+  {
+    "id": "gulfnews-565-2026",
+    "cite": "Rasheed A (Gulf News). Abu Dhabi genetic screening flags 565 incompatible cases among couples. Gulf News, Abu Dhabi. Page shows 'Last updated: October 03, 2026 | 18:28'.",
+    "url": "https://gulfnews.com/uae/health/abu-dhabi-genetic-screening-flags-565-incompatible-cases-among-couples-1.500697261",
+    "year": 2026,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Couples tested since launch.",
+        "value": "11,748 couples, from launch through July (2026 by implication)",
+        "quote": "11,748 couples underwent genetic testing from the launch of the programme"
+      },
+      {
+        "claim": "Incompatible cases.",
+        "value": "565 cases (about 5 per cent of those tested)",
+        "quote": "565 cases of genetic incompatibility were identified, representing around 5 per cent of those tested."
+      },
+      {
+        "claim": "Genes and disorders analysed.",
+        "value": "570 genes; more than 840 autosomal recessive genetic disorders",
+        "quote": "analysed 570 genes associated with more than 840 autosomal recessive genetic disorders"
+      },
+      {
+        "claim": "Most common conditions among incompatible couples.",
+        "value": "Congenital adrenal hyperplasia, inherited retinal disorders, primary ciliary dyskinesia, thalassaemia, sickle cell disease, glaucoma (no counts given)",
+        "quote": ""
+      },
+      {
+        "claim": "Funding of IVF and PGT.",
+        "value": "Not stated in the article. Counselling is said to cover options such as genetic testing of embryos and assisted reproduction for eligible cases.",
+        "quote": "genetic testing of embryos and assisted reproductive technologies for eligible cases"
+      }
+    ],
+    "note": "The article date is not shown. Only 'Last updated: October 03, 2026' is visible. The funding statement the brief asks to confirm is not in the article. The article's Abu Dhabi programme does not mention funded IVF or PGT. Trade press claims a funded Abu Dhabi programme, but it is undated and unverified (see genomeweb-dubai-2026)."
+  },
+  {
+    "id": "m42-doh-premarital-poster",
+    "cite": "Kandavel P, Al Awadhi A, El-Khani A, et al. Premarital screening and genetic counseling in the UAE enabled by the Emirati Genome Program. Poster. M42, Abu Dhabi, and Department of Health, Abu Dhabi. Undated.",
+    "url": "https://m42.ae/media/irlib1qa/premarital-screening-enabled-by-the-emirati-genome-program.pdf",
+    "year": null,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Couples screened and positive rate.",
+        "value": "More than 1,000 couples screened; about 11% reported positive (11.8% reviewed; 11% positive)",
+        "quote": "We found ~11% of couples carrying pathogenic variants and reported as positive."
+      },
+      {
+        "claim": "Direct negative reports.",
+        "value": "88.2% reported directly negative (chart: 89% negative)",
+        "quote": ">88% of couples were reported directly as negative (i.e. no risk)"
+      },
+      {
+        "claim": "Random-mating positive-rate estimate.",
+        "value": "8.5%",
+        "quote": "We estimated the positive rate under random mating to be 8.5% from simulations based on 1,000 permutations of sex-matched random pairings."
+      },
+      {
+        "claim": "Gene panel and disorder scope.",
+        "value": "570 genes; over 840 genetic disorders",
+        "quote": "in 570 genes linked to autosomal recessive disorders"
+      },
+      {
+        "claim": "Most prevalent diseases among positive couples (percent of positive cases, read from chart).",
+        "value": "Adrenal hyperplasia 15%; Familial Mediterranean fever 13%; Usher syndrome type 2A 12%; early-onset severe retinal dystrophy 10%; cystic fibrosis 6%; anterior segment dysgenesis 5%; retinitis pigmentosa 25 5%",
+        "quote": ""
+      },
+      {
+        "claim": "Most prevalent genes among positive couples (percent of positive cases, read from chart).",
+        "value": "CYP21A2 14%; MEFV 12%; USH2A 11%; further bars (9%, 5%, 4%, 4%) with labels not legible in the render",
+        "quote": ""
+      },
+      {
+        "claim": "Abu Dhabi marriages per year (poster claim).",
+        "value": "Approximately 10,000 marriages per year in Abu Dhabi",
+        "quote": "in total, there are approximately 10,000 marriages per year in Abu Dhabi"
+      }
+    ],
+    "note": "The poster has no date. Chart values were read from a rendered image of the PDF. The percentages are shares of positive couples, not population carrier frequencies. The poster's roughly 11% positive rate differs from the 565 of 11,748 (about 4.8%) in gulfnews-565-2026. The poster's pilot sample is about 1,000 couples, so the two may come from different periods or definitions. Not verified: the 10,000 marriages figure."
+  },
+  {
+    "id": "rabea-2024-sma-uae",
+    "cite": "Rabea F, El Naofal M, Chekroun I, Khalaf M, Al Zaabi N, AlZaabi K, ElHalik M, Dash S, El Saba Y, Ali A, Abraham S, Fathi K, Shekhy J, Aswad SG, Elbashir H, Alkuraya F, Loney T, Alsheikh-Ali A, Al Khayat A, Abou Tayoun A. Spinal muscular atrophy genetic epidemiology and the case for premarital genomic screening in Arab populations. Commun Med. 2024;4:119. doi:10.1038/s43856-024-00548-1.",
+    "url": "https://doi.org/10.1038/s43856-024-00548-1",
+    "year": 2024,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "UAE SMA carrier frequency from newborn screening of 1,502 Emirati newborns.",
+        "value": "1.3% (1 in 79); 19 carriers",
+        "quote": "we estimate SMA carrier frequency (1.3%) and incidence of the disease (1 in 7122 live births)"
+      },
+      {
+        "claim": "Carrier count and sample size.",
+        "value": "19 carriers among 1,502 newborns",
+        "quote": "we genetically screened a total of 1502 newborns"
+      },
+      {
+        "claim": "UAE SMA incidence (inbreeding-adjusted estimate; authors say likely an underestimate).",
+        "value": "1 in 7,122 live births",
+        "quote": "resulting in an incidence of 1 in 7122 individuals"
+      },
+      {
+        "claim": "Random-mating (Hardy-Weinberg) incidence estimate, which the authors consider less appropriate.",
+        "value": "1 in 25,000",
+        "quote": "can be calculated as 1 in 25,000 individuals"
+      },
+      {
+        "claim": "Clinical referral cohort (171 patients; 82% Arab; diagnostic yield).",
+        "value": "171 patients; 82% Arab from 18 countries; diagnostic yield 33.9%",
+        "quote": "The overall diagnostic yield is 33.9%"
+      }
+    ],
+    "note": "Online 15 June 2024; accepted 7 June 2024. Metadata and abstract from Europe PMC full-text XML, read by the fetch tool. The Springer page redirected to a login. The test detects deletions in about 92% of cases and cannot detect silent carriers, per the authors. The 2021 news item on a planned 6,500-newborn SMA study has no reported results."
+  },
+  {
+    "id": "ibrahim-2023-qatar-sma",
+    "cite": "Ibrahim F, Velayutham D, Alsharshani M, AlAlami U, AlDewik M, Abuarja T, Al Rifai H, Al-Dewik NI. Studying carrier frequency of spinal muscular atrophy in the State of Qatar and comparison to other ethnic groups: pilot study. Mol Genet Genomic Med. 2023;11(12):e2184. doi:10.1002/mgg3.2184. Published 15 Nov 2023.",
+    "url": "https://doi.org/10.1002/mgg3.2184",
+    "year": 2023,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "SMA carrier frequency in Qatar.",
+        "value": "2.8% (about 1 in 36)",
+        "quote": "The SMA carrier frequency was found to be (2.8%)"
+      },
+      {
+        "claim": "Sample.",
+        "value": "13,426 samples from Qatar Biobank",
+        "quote": "in 13,426 samples from Qatar biobank (QBB)"
+      }
+    ],
+    "note": "Verified from the Europe PMC full-text record via the fetch tool. 1 in 36 is my arithmetic from 2.8%, not a figure from the paper."
+  },
+  {
+    "id": "saudi-sma-2022",
+    "cite": "Molecular Genetics & Genomic Medicine, November 2022. Saudi Arabia SMA carrier study in 4,198 healthy volunteers aged 18-25 (full citation not retrieved).",
+    "url": "https://doaj.org/article/afe1b094615e4a0285f57209de51b750",
+    "year": 2022,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "SMA carrier rate in Saudi healthy volunteers.",
+        "value": "2.6% (about 1 in 38); 4,198 volunteers aged 18-25",
+        "quote": ""
+      }
+    ],
+    "note": "NOT VERIFIED. The DOAJ page returned HTTP 403. The figure comes from a search summary only. Get the full citation before use."
+  },
+  {
+    "id": "doh-newborn-genomic-2025",
+    "cite": "Department of Health Abu Dhabi. DoH launches newborn genetic screening programmes. Press release, 18 August 2025 (page shows Last updated 16 Oct 2026).",
+    "url": "https://www.doh.gov.ae/en/news/doh-launches-newborn-genetic-screening-programmes",
+    "year": 2025,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Scope of the genomic newborn programme.",
+        "value": "Whole genome sequencing for over 815 treatable childhood genetic conditions",
+        "quote": "offers whole genome sequencing to screen over 815 treatable childhood genetic conditions"
+      },
+      {
+        "claim": "Named categories, and SMA as the only named condition.",
+        "value": "Metabolic disorders, immunodeficiencies, haematologic conditions, and rare diseases such as Spinal Muscular Atrophy",
+        "quote": "include metabolic disorders, immunodeficiencies, hematologic conditions, and rare diseases such as Spinal Muscular Atrophy"
+      },
+      {
+        "claim": "Turnaround.",
+        "value": "Results within 21 days",
+        "quote": "Results are reported within 21 days."
+      },
+      {
+        "claim": "Phase one sites and expansion.",
+        "value": "Kanad Hospital and Danat Al Emarat Hospital, with M42; expansion to all maternity hospitals planned, no date",
+        "quote": "The initiative is planned to be expanded across all maternity hospitals"
+      },
+      {
+        "claim": "Pompe, CAH, MPS I, Krabbe, MLD, sickle cell and thalassaemia are not named in this release.",
+        "value": "Not named",
+        "quote": ""
+      }
+    ],
+    "note": "The Media Office copy of the same release says phase one is a 'voluntary option'. The DoH copy does not use the word 'voluntary' (per fetch). Enrolment and results counts were not found."
+  },
+  {
+    "id": "doh-newborn-standard-2025",
+    "cite": "Department of Health Abu Dhabi. Standard for Newborn Screening Requirements, Document Ref DOH/NBSC/SD/V4/2024, Version 4 (revised). Publication date January 2025; effective date field blank; revision date January 2028.",
+    "url": "https://www.doh.gov.ae/-/media/5CF37EB2567A4964843F5BC9D83DD156.ashx",
+    "year": 2025,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Publication date.",
+        "value": "January 2025 (effective date field left blank)",
+        "quote": "Publication Date: January 2025"
+      },
+      {
+        "claim": "Routine disorders in the blood-spot panel include CH, CAH, sickle cell disease, thalassaemia major and G6PD deficiency.",
+        "value": "Appendix (7) and Appendix (8): 40 numbered disorders",
+        "quote": "Appendix (8): Critical and non-critical disorders"
+      },
+      {
+        "claim": "Cystic fibrosis is in the panel (Appendix 7 'Respiratory').",
+        "value": "Cystic Fibrosis (CF)",
+        "quote": "Cystic Fibrosis (CF)"
+      },
+      {
+        "claim": "SMA, Pompe, MPS I, Krabbe and MLD do not appear in the standard text (negative finding from a full-text search).",
+        "value": "Not listed",
+        "quote": ""
+      }
+    ],
+    "note": "Read from the PDF text (pdftotext) saved by the fetch tool. The routine standard is separate from the 815-condition genomic programme (doh-newborn-genomic-2025). Zavis reports MOHAP national guidelines (29 July 2024) covering 40 genetic diseases. That is not verified."
+  },
+  {
+    "id": "genomeweb-dubai-2026",
+    "cite": "GenomeWeb / 360dx. Mandatory premarital genetic carrier screening program in Dubai IDs risk in couples. Trade press on the Dubai Nature Medicine study. 2026. Date not confirmed.",
+    "url": "https://www.genomeweb.com/molecular-diagnostics/mandatory-premarital-genetic-carrier-screening-program-dubai-ids-risk-couples",
+    "year": 2026,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "Share of at-risk couples who proceeded with marriage.",
+        "value": "About 80% proceeded; about 20% did not",
+        "quote": "80 percent of at-risk couples chose to proceed with their marriage"
+      },
+      {
+        "claim": "Funding for at-risk couples through the Al Amal Initiative.",
+        "value": "Up to three IVF rounds per year and PGT",
+        "quote": "which pays for up to three rounds of in vitro fertilization per year and preimplantation genetic testing"
+      },
+      {
+        "claim": "Abu Dhabi separate programme (reported, undated).",
+        "value": "Fully funded IVF and PGT for high-risk couples in Abu Dhabi",
+        "quote": "Couples identified as high-risk are offered fully-funded IVF and preimplantation genetic testing (PGT)"
+      },
+      {
+        "claim": "Hemoglobinopathy split in the 79 at-risk couples.",
+        "value": "32 couples: 21 alpha-thalassaemia, 11 beta-thalassaemia or sickle cell",
+        "quote": "Of these, 32 carried variants implicated in hemoglobinopathies, including 21 for alpha thalassemia and 11 for beta thalassemia or sickle cell disease."
+      }
+    ],
+    "note": "Trade press via search summaries. The GenomeWeb and 360dx pages redirected and were not read in full. Treat the funding statements as secondary until the Nature Medicine full text or an official source is read."
+  },
+  {
+    "id": "egp-900k-aletihad-2026",
+    "cite": "Aletihad. How 900,000+ genomes can help UAE healthcare turn proactive, precise, personalised. Feature with Dr Mohamed AlAmeri, Director, Genome and Biobank Division, DoH Abu Dhabi. 29 July 2026.",
+    "url": "https://en.aletihad.ae/news/business/4682076/javasxript:",
+    "year": 2026,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Emirati genomes or genetic data sequenced to date (latest found).",
+        "value": "More than 900,000 Emiratis",
+        "quote": "With genetic data from more than 900,000 Emiratis, covering the majority of the national citizen population."
+      },
+      {
+        "claim": "Earlier figure (ASHG 2024 material, DoH/M42/Khalifa University).",
+        "value": "More than 600,000 genomes; 100,000 long-read (snippet only, not verified)",
+        "quote": ""
+      }
+    ],
+    "note": "This is an interview feature, not an official DoH release. The article does not say whether the 900,000 excludes non-citizen residents. The 'more than 600,000' figure was not read from its primary source. Individual result return to participants was not found in any source."
+  },
+  {
+    "id": "ehs-premarital-2025",
+    "cite": "Gulf News. EHS conducts 3,699 genetic tests in 2025 to enhance family health in UAE. 2026. Search summary only.",
+    "url": "https://gulfnews.com/uae/health/ehs-conducts-3699-genetic-tests-in-2025-to-enhance-family-health-in-uae-1.500387144",
+    "year": 2026,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "Emirates Health Services premarital genetic tests, January-December 2025.",
+        "value": "3,699 tests; 130 cases of genetic incompatibility",
+        "quote": ""
+      }
+    ],
+    "note": "NOT VERIFIED. Read from a search summary. This covers EHS (northern emirates), not Abu Dhabi DoH."
+  },
+  {
+    "id": "latham-2019-health-data-law",
+    "cite": "Latham & Watkins. New UAE Law Regulates Healthcare Data. Client Alert No. 2514, 19 June 2019. Discusses Federal Law No. 2 of 2019 on the use of ICT in health fields.",
+    "url": "https://lw.com/thoughtLeadership/lw-new-uae-law-regulates-healthcare-data",
+    "year": 2019,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "Article 13 data localisation rule for health data related to services provided in the UAE.",
+        "value": "Health data may not be stored, processed, generated or transferred outside the UAE unless approved by a decision of the health authority or the Minister",
+        "quote": "Article 13 of the Law states that health data related to health services provided in the UAE may not be stored, processed, generated, or transferred outside of the UAE, unless such activity has been approved by a decision of the health authority or the Minister."
+      },
+      {
+        "claim": "Fine for violating Article 13.",
+        "value": "AED 500,000 to AED 700,000 (Latham cites Articles 23-24)",
+        "quote": "Violation of the data localisation obligation in Article 13 of the Law (with a fine between AED 500,000 and AED 700,000"
+      },
+      {
+        "claim": "Retention period.",
+        "value": "At least 25 years from the last health procedure (Article 20)",
+        "quote": "health data must be kept for a minimum of 25 years from the date on which the last health procedure was performed on the patient"
+      },
+      {
+        "claim": "Implementing resolution for transfers abroad (secondary, search summary).",
+        "value": "MOHAP Resolution No. 51/2021, effective 16 May 2021",
+        "quote": ""
+      }
+    ],
+    "note": "Read from a saved PDF copy of the client alert. The official text of Federal Law No. 2 of 2019 was not retrieved. elaws.moj.gov.ae refused the connection and ehs.gov.ae and mohap.gov.ae returned errors. Tamimi describes the approver as a health authority decision in coordination with MOHAP, which differs from Latham. The exact approver wording needs the official text."
+  },
+  {
+    "id": "pdpl-2021-art2",
+    "cite": "Federal Decree-Law No. 45 of 2021 on the Protection of Personal Data (UAE PDPL), Article 2(2). Effective 2 January 2022.",
+    "url": "https://uaelegislation.gov.ae/en/legislations/1972",
+    "year": 2021,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "Health personal data is excluded where its own legislation governs protection and processing.",
+        "value": "Excluded: personal health data that has legislation regulating its protection and processing",
+        "quote": "personal health data that has legislation regulating its protection and processing;"
+      },
+      {
+        "claim": "Seven exclusions listed in Article 2(2).",
+        "value": "Seven categories (government data, government entities, security and judicial authorities, personal-purpose processing, health data, banking and credit data, free-zone companies)",
+        "quote": ""
+      }
+    ],
+    "note": "The quote comes from the Modulos English-translation page (docs.modulos.ai). The official uaelegislation.gov.ae page returned HTTP 403. Pinsent Masons paraphrases the same carve-out and cites the health ICT law (which it calls Federal Decree-Law No. 2/2019, but the law is Federal Law No. 2 of 2019). The Pinsent summary is not an exact quote. Inference: the health ICT law is the likely regime that excludes health data from the PDPL. Check the Arabic or English official text before relying on it."
+  },
+  {
+    "id": "law-7-2019-mar",
+    "cite": "Federal Law No. 7 of 2019 Concerning Medically Assisted Reproduction, as amended by Federal Decree-Law No. 17 of 2023. Official English text at MOHAP and uaelegislation.gov.ae (link id 1438).",
+    "url": "https://mohap.gov.ae/app_content/legislations/php-law-en-96/files/basic-html/index.html",
+    "year": 2019,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "Preimplantation genetic diagnosis is permitted with written spousal consent to identify hereditary diseases (Article 15, per a practitioner-guide summary).",
+        "value": "Permitted for hereditary disease with written consent of the spouses (Article 15 per secondary source)",
+        "quote": ""
+      },
+      {
+        "claim": "Article 9 lists prohibited practices, including mixing gametes between non-spouses.",
+        "value": "Prohibited practices (Article 9; genetic-trait selection also reported as prohibited, sex selection not confirmed)",
+        "quote": ""
+      },
+      {
+        "claim": "Federal Decree-Law 17 of 2023 lets each emirate legislate locally on medically assisted reproduction and extended the law to free zones.",
+        "value": "Amendment in force from 16 September 2023 (secondary)",
+        "quote": ""
+      }
+    ],
+    "note": "NOT VERIFIED. The official text was not reachable. MOHAP pages returned connection resets or HTTP 404, and uaelegislation.gov.ae returned 403. The PGT permission rests on a secondary summary citing Article 15. Cabinet Resolution No. 64 of 2020 (executive regulation) may also cover genetic testing (secondary). Read the official text before quoting."
+  },
+  {
+    "id": "cabinet-res-44-2024",
+    "cite": "Cabinet Resolution No. 44 of 2024 Concerning the Permitted Abortion Cases. In effect 21 June 2024. Prior ground: Article 16 of Federal Decree-Law No. 4 of 2016 (Medical Liability Law).",
+    "url": "https://gulfnews.com/living-in-uae/ask-us/uae-introduces-new-abortion-resolution-heres-what-you-need-to-know-1.1719324525339",
+    "year": 2024,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "Effective date and title.",
+        "value": "In effect 21 June 2024",
+        "quote": "Cabinet Resolution No. 44 of 2024, Concerning the Permitted Abortion Cases"
+      },
+      {
+        "claim": "Gestational limit.",
+        "value": "120 days (stated by a law firm; the Gulf News source quotes a lawyer)",
+        "quote": "The abortion must be performed within 120 days of pregnancy."
+      },
+      {
+        "claim": "Prior fetal-anomaly ground (Medical Liability Law) and its limit.",
+        "value": "Severe fetal abnormalities confirmed by medical reports; pregnancy not exceeding 120 days",
+        "quote": "If severe fetal abnormalities were confirmed by medical reports and the pregnancy had not exceeded 120 days."
+      },
+      {
+        "claim": "New grounds. Sources disagree.",
+        "value": "Gulf News: non-consensual pregnancy; perpetrator a relative or unlawful-to-marry person; request of both spouses with committee approval (Article 4, other cases). LYLaw: rape, incest, spousal request. Mondaq: severe fetal abnormality listed as a new ground.",
+        "quote": "Based on the request of the spouses, after the approval of the Committee."
+      },
+      {
+        "claim": "Committee composition. Sources disagree.",
+        "value": "LYLaw: three doctors including an obstetrician-gynaecologist. Gulf News: obstetrics and gynaecology, a psychiatry specialist, and a public prosecution representative.",
+        "quote": "This committee will comprise of three medical professionals"
+      }
+    ],
+    "note": "NOT VERIFIED against the official resolution text, which was not found. Sources conflict on the new grounds, the committee composition, and whether fetal anomaly remains a ground. The 120-day limit is stated by law-firm and press sources only. Do not cite the fetal-anomaly position without the official text."
+  },
+  {
+    "id": "gulftoday-births-2024",
+    "cite": "Gulf Today. Abu Dhabi recorded 15,628 Emirati births in 2024. Report dated about 4 August 2025, attributing figures to DoH and the Statistics Centre Abu Dhabi. Read via Magzter.",
+    "url": "https://www.magzter.com/de/stories/newspaper/Gulf-Today/ABU-DHABI-RECORDED-15628-EMIRATI-BIRTHS-IN-2024",
+    "year": 2025,
+    "verified": false,
+    "facts": [
+      {
+        "claim": "Emirati live births in Abu Dhabi emirate, 2024.",
+        "value": "15,628 (8,298 male; 7,330 female)",
+        "quote": "ABU DHABI RECORDED 15628 EMIRATI BIRTHS IN 2024"
+      },
+      {
+        "claim": "Emirati births in Abu Dhabi city, 2024 (same report).",
+        "value": "9,676",
+        "quote": ""
+      },
+      {
+        "claim": "Emirati births in Abu Dhabi, 2022 (Gulf Migration table, MOHAP records; search summary).",
+        "value": "16,303",
+        "quote": ""
+      }
+    ],
+    "note": "NOT VERIFIED against SCAD. The Magzter page returned HTTP 403, so the figures come from a search summary. The report's total births (39,333) and non-Emirati births (23,492) do not reconcile with the Emirati total. The 2022 and 2024 figures differ and are unexplained."
+  },
+  {
+    "id": "scad-population-2024",
+    "cite": "Statistics Centre Abu Dhabi. Abu Dhabi population in 2024 grows 7.5% to reach 4.14m. Release dated 30 June 2025.",
+    "url": "https://scad.gov.ae/w/abu-dhabi-population-in-2024-grows-7-5-to-reach-4-14m",
+    "year": 2025,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "The SCAD 2024 population release contains no births, Emirati-birth or marriage figures.",
+        "value": "No births or marriages figures (negative finding)",
+        "quote": ""
+      },
+      {
+        "claim": "Where to find detailed indicators.",
+        "value": "Abu Dhabi Census website and the Bayaan platform",
+        "quote": ""
+      }
+    ],
+    "note": "Read via the fetch tool. The SCAD Bayaan platform was not searched directly, so the 2024 Emirati birth count is still unconfirmed at source."
+  },
+  {
+    "id": "gazali-1997-consanguinity",
+    "cite": "Al Gazali LI, Bener A, Abdulrazzaq YM, Micallef R, Al-Khayat AI, Gaber T. Consanguineous marriages in the United Arab Emirates. J Biosoc Sci. 1997;29(4):491-497.",
+    "url": "https://research.uaeu.ac.ae/en/publications/consanguineous-marriages-in-the-united-arab-emirates/",
+    "year": 1997,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Consanguinity rate, present generation.",
+        "value": "50.5%; inbreeding coefficient 0.0222",
+        "quote": "The rate of consanguinity in the present generation was high (50.5%) with a coefficient of inbreeding of 0.0222."
+      },
+      {
+        "claim": "Most common consanguineous type.",
+        "value": "First-cousin marriage 26.2% (denominator not clear in the sentence)",
+        "quote": "The commonest type of consanguineous marriage was between first cousins (26.2%)."
+      },
+      {
+        "claim": "Sample and setting.",
+        "value": "2,033 married Emirati women aged 15 and over; Al Ain and Dubai; October 1994 to March 1995",
+        "quote": "A sample of 2033 married UAE females aged 15 years and over participated."
+      }
+    ],
+    "note": "Verified from the UAEU research record abstract. Not nationally representative (two cities, married women only). The 1997 data are old."
+  },
+  {
+    "id": "khan-2023-consanguinity",
+    "cite": "Khan GA, Al Hammadi G, Ziyada A, Al Waeel K, Ayman L, Elgailani ES. Prevalence of consanguineous marriages in UAE nationals and the risk of genetic diseases. J Med (Journal of Medicine). 2023;24(2):82-88. Published 2 July 2023.",
+    "url": "https://banglajol.info/index.php/JOM/article/view/67269",
+    "year": 2023,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Consanguinity prevalence in a convenience sample of UAE nationals.",
+        "value": "About 65%",
+        "quote": "the incidence of consanguinity is relatively high with a rate of about 65% approximately"
+      },
+      {
+        "claim": "Share of consanguineous marriages that are first cousin or closer.",
+        "value": "33%",
+        "quote": "33% of all these consanguineous marriages are of the first cousin and closer marriage type."
+      },
+      {
+        "claim": "Sampling.",
+        "value": "Convenience sample from urban regions; survey by students in 2018",
+        "quote": "selected by using convenience sampling method from urban regions"
+      }
+    ],
+    "note": "Verified from the abstract page. The sample size is not given in the abstract. This is a small convenience sample, not a national estimate. The Sharjah study (23.4% consanguineous; 14.2% first cousin; 457 adults) is from a search summary only, with no citation or year, and is not verified."
+  },
+  {
+    "id": "doh-ai-policy-2018",
+    "cite": "Department of Health Abu Dhabi. Policy on Use of Artificial Intelligence (AI) in the Healthcare Sector of the Emirate of Abu Dhabi. Ref Policy/AI/0.9, Version 0.9, publication date 30 April 2018.",
+    "url": "https://www.doh.gov.ae/-/media/E9C1470A575146B18015DEBE57E47F8D.ashx",
+    "year": 2018,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Exact title of the DoH AI policy.",
+        "value": "Policy on Use of Artificial Intelligence (AI) in the Healthcare Sector of the Emirate of Abu Dhabi",
+        "quote": "Policy on Use of Artificial Intelligence (AI) in the Healthcare Sector of the Emirate of Abu Dhabi"
+      },
+      {
+        "claim": "Publication date and version.",
+        "value": "30 April 2018; version 0.9 (Policy/AI/0.9); effective on publication",
+        "quote": "Publication Date: 30 April 2018"
+      },
+      {
+        "claim": "Applies to licensed providers, UAE pharmaceutical makers, insurers, licensed researchers, and outside end-users of Abu Dhabi patient data for AI.",
+        "value": "Scope as stated on the cover page",
+        "quote": ""
+      }
+    ],
+    "note": "Read from the PDF text saved by the fetch tool. Press-release date 28 May 2018 is from a search summary. The 2025 Responsible AI Standard is mentioned in search results but not read."
+  }
+]
