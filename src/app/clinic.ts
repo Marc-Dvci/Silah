@@ -57,7 +57,7 @@ export interface Case {
 export interface Birth {
   coupleId: string; personId: string; name: string; genes: string[]; conditionIds: string[]; due?: string; at: string; active: boolean;
   /** The targeted newborn test. Only affected / not affected is reported; a child's carrier status is not. */
-  outcome?: { at: string; affected: boolean; note: string };
+  outcome?: { at: string; born?: string; affected: boolean; note: string };
 }
 
 export interface ClinicState {
@@ -317,13 +317,16 @@ export async function recordNewborn(c: ClinicState, coupleId: string, affected: 
   const note = affected
     ? `Newborn test on day 2 confirmed ${genes}. Referred the same week to the treating team, before any symptoms.`
     : `Newborn test on day 2: not affected for ${genes}. Carrier status of the child is not tested or reported.`;
-  b.outcome = { at: new Date().toISOString(), affected, note };
+  // The demo moves the clock to the birth: a pregnancy still due is born on its due date, tested on day 2.
+  const born = b.due && new Date(b.due).getTime() > Date.now() ? new Date(b.due) : new Date();
+  const at = new Date(born.getTime() + 864e5).toISOString();
+  b.outcome = { at, born: born.toISOString(), affected, note };
   if (k) {
-    if (affected) { k.events.push({ at: new Date().toISOString(), state: 'referred', by: 'Corniche Hospital maternity', note }); if (!k.flags.includes('newborn-treatment')) k.flags.push('newborn-treatment'); }
-    else { advance(k, 'closed', 'Corniche Hospital maternity', note); k.closeReason = 'Newborn not affected; pathway complete'; }
+    if (affected) { k.events.push({ at, state: 'referred', by: 'Corniche Hospital maternity', note }); if (!k.flags.includes('newborn-treatment')) k.flags.push('newborn-treatment'); }
+    else { advance(k, 'closed', 'Corniche Hospital maternity', note, at); k.closeReason = 'Newborn not affected; pathway complete'; }
   }
   for (const pid of k?.personIds ?? [b.personId]) {
-    await send('clinic', `p:${pid}`, 'pathway.update', { state: affected ? 'referred' : 'closed', note, birth: { affected, genes: b.genes, note } });
+    await send('clinic', `p:${pid}`, 'pathway.update', { state: affected ? 'referred' : 'closed', note, birth: { at, affected, genes: b.genes, note } });
   }
   await saveClinic(c);
 }

@@ -126,7 +126,8 @@ function Brief({ k, c, act }: { k: Case; c: ClinicState; act: Act }) {
   const agenda: string[] = [];
   if (k.flags.includes('distress')) agenda.push('Call today: distress language was detected in Silah. Start with how they are, not with the result.');
   if (k.flags.includes('asked-for-human')) agenda.push('The couple asked for a call back.');
-  if (weeks !== null) agenda.push(`Pregnancy due in about ${weeks} weeks${birth ? '; the birth plan is shared with the maternity team' : '; offer a birth plan'}.`);
+  if (birth?.outcome) agenda.push(birth.outcome.affected ? 'Baby born and confirmed affected; referred to the treating team. Offer the family support and invitations for relatives.' : 'Baby born and not affected; pathway complete.');
+  else if (weeks !== null) agenda.push(`Pregnancy due in about ${weeks} weeks${birth ? '; the birth plan is shared with the maternity team' : '; offer a birth plan'}.`);
   for (const b of k.briefs) {
     const who = personaById(b.personId)?.name.en ?? b.personId;
     for (const m of b.teachback?.missed ?? []) agenda.push(`Revisit with ${who}: ${MISSED[m] ?? m}.`);
@@ -246,7 +247,9 @@ function Births({ c, act }: { c: ClinicState; act: Act }) {
         const weeks = b.due ? Math.round((new Date(b.due).getTime() - Date.now()) / (7 * 864e5)) : null;
         return (
           <div key={b.coupleId + b.personId} class="pool stack" style={{ maxWidth: '760px', '--gap': '8px' } as any}>
-            <div class="row"><h2 class="grow">{b.name}</h2>{weeks !== null && <span class="chip indigo num">due in {weeks} weeks</span>}</div>
+            <div class="row"><h2 class="grow">{b.name}</h2>{b.outcome?.born
+              ? <span class="chip palm num">born {new Date(b.outcome.born).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })} · simulated</span>
+              : weeks !== null && <span class="chip indigo num">due in {weeks} weeks</span>}</div>
             <p>{b.genes.map(g => <span key={g} class="chip saffron num" style={{ marginInlineEnd: '6px' }}>{g}</span>)} {b.conditionIds.map(id => conditionFor(b.genes[0]).id === id ? conditionFor(b.genes[0]).name.en : id).join(', ')}</p>
             <p class="row small" style={{ alignItems: 'flex-start' }}><span class="dot" style={{ color: 'var(--saffron)', marginTop: '9px' }} />Day 1–3: targeted confirmatory test for {b.genes.join(', ')} (in addition to routine newborn screening).</p>
             <p class="row small" style={{ alignItems: 'flex-start' }}><span class="dot" style={{ color: 'var(--saffron)', marginTop: '9px' }} />If positive: same-week referral to the treating team, before symptoms.</p>

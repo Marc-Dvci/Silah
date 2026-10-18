@@ -65,7 +65,7 @@ export function BirthPlan({ s, act, base }: { s: PersonState; act: Act; base: st
         {s.birthOutcome ? null : due ? (
           <div class="stack">
             <p class="row"><span class="chip indigo num">{t({ en: `Due ${new Date(due).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}`, ar: `الموعد المتوقع ${new Date(due).toLocaleDateString('ar-AE-u-nu-latn', { day: 'numeric', month: 'long' })}` })}</span>
-              <span class="muted small">{t({ en: `about ${(weeksLeft ?? 0)} weeks`, ar: `${(weeksLeft ?? 0) === 1 ? 'بعد نحو أسبوع' : (weeksLeft ?? 0) === 2 ? 'بعد نحو أسبوعين' : 'بعد نحو ' + (weeksLeft ?? 0) + ' ' + ((weeksLeft ?? 0) <= 10 ? 'أسابيع' : 'أسبوعاً')}` })}</span></p>
+              <span class="muted small">{t({ en: `in about ${(weeksLeft ?? 0)} weeks`, ar: `${(weeksLeft ?? 0) === 1 ? 'بعد نحو أسبوع' : (weeksLeft ?? 0) === 2 ? 'بعد نحو أسبوعين' : 'بعد نحو ' + (weeksLeft ?? 0) + ' ' + ((weeksLeft ?? 0) <= 10 ? 'أسابيع' : 'أسبوعاً')}` })}</span></p>
             <div class="row" style={{ alignItems: 'flex-start' }}>
               <div class="grow">
                 <h3>{t({ en: 'Tell the delivery hospital', ar: 'إبلاغ مستشفى الولادة' })}</h3>
