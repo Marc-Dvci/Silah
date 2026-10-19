@@ -21,7 +21,8 @@ def check(cond, msg):
 
 with sync_playwright() as p:
     b = p.chromium.launch()
-    ctx = b.new_context(viewport={'width': 412, 'height': 900}, device_scale_factor=2)
+    # An Arabic browser: phones opened on their own start in the browser's language, so the family reads Arabic.
+    ctx = b.new_context(viewport={'width': 412, 'height': 900}, device_scale_factor=2, locale='ar-AE')
     pg = ctx.new_page()
     pg.on('pageerror', lambda e: errors.append(str(e)))
     pg.on('console', lambda m: errors.append(m.text) if m.type == 'error' else None)
@@ -122,8 +123,9 @@ with sync_playwright() as p:
     check(p2.get_by_text('استُخدمت هذه الدعوة من قبل').count() == 1, 'second use is refused')
     p2.close()
 
-    # Noura's birth plan
+    # Noura's birth plan. Noura reads English: one tap on her phone's language switch.
     goto('#/p/noura/birth', 2500)
+    pg.locator('header.top button.chip', has_text='EN').click(); pg.wait_for_timeout(1500)
     pg.get_by_role('switch').click(); pg.wait_for_timeout(2500)
     check(pg.get_by_text('Corniche Hospital, maternity').count() >= 1, 'birth plan receipt shown')
     shot('noura_birth')

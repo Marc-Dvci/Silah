@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import { PERSONAS } from '../app/demo';
 import { dbClearAll } from '../app/db';
-import { loadClinic, sendOutreach, OUTREACH_REGISTER } from '../app/clinic';
-import { loadPerson, syncPerson, respondToInvitation, currentView, setBirthPlan, setLang, type PersonState } from '../app/person';
+import { send } from '../app/net';
+import { loadClinic, recordNewborn, sendOutreach, OUTREACH_REGISTER } from '../app/clinic';
+import { loadPerson, syncPerson, respondToInvitation, currentView, setBirthPlan, setLang, recordTeachback, shareBrief, requestBooking, askForInvites, type PersonState } from '../app/person';
 import type { Lang } from '../core/types';
-import { ensureSeeded } from './hooks';
+import { ensureSeeded, pumpClinic } from './hooks';
 import { LangCtx, Mark, go } from './kit';
 
 // The demonstration stage: one person's phone beside the health-system side, in one browser.
@@ -23,32 +24,83 @@ const withPerson = (id: string, f: (st: PersonState) => Promise<void>) => async 
   const run = async () => { const st = await loadPerson(id); await syncPerson(st); await f(st); };
   if ('locks' in navigator) await navigator.locks.request(`silah-person-${id}`, run); else await run();
 };
+const settle = (ms: number) => new Promise(r => setTimeout(r, ms));
+const holds = (id: string, f: (st: PersonState) => boolean) => async () => { let ok = false; await withPerson(id, async st => { ok = f(st); })(); return ok; };
+/** Lets the simulated services answer, then waits (briefly) until the phone shows the effect. */
+const until = async (ok: () => Promise<boolean>) => { for (let i = 0; i < 24 && !(await ok()); i++) { await pumpClinic(); await settle(250); } };
+
+// Every action is idempotent: playing a step replays the actions of all steps up to it, so a jump to any knot
+// shows the same world as pressing Next all the way there.
+const invite = withClinic(c => sendOutreach(c, OUTREACH_REGISTER.slice(0, 3).map(r => r.id)));
 const consent = (id: string) => withPerson(id, async st => { if (st.invitation?.status === 'pending') await respondToInvitation(st, true); });
+const results = async () => {
+  await consent('mariam')(); await consent('saeed')();
+  await until(holds('mariam', st => !!currentView(st)));
+};
+const mariamShares = async () => {
+  await withPerson('mariam', async st => {
+    if (!currentView(st)) return;
+    if (!st.teachback) await recordTeachback(st, { at: new Date().toISOString(), correct: 4, total: 4, missed: [] });
+    if (!st.briefShared) await shareBrief(st);
+    if (!st.booking) await requestBooking(st);
+  })();
+  await pumpClinic();
+};
+const familyInvites = async () => {
+  await withPerson('mariam', async st => { if (currentView(st) && !st.invites.tokens.length && !st.invites.pending) await askForInvites(st, 3); })();
+  await until(holds('mariam', st => st.invites.tokens.length > 0));
+  // A cousin uses one invitation, so the clinic has a redemption to set beside the issuance it signed.
+  let token: string | undefined;
+  await withPerson('mariam', async st => { token = st.invites.tokens[0]; })();
+  if (token && !(await loadClinic())?.redeemLog.length) {
+    await send(`r:${crypto.randomUUID()}`, 'clinic', 'invite.redeem', { token });
+    await pumpClinic();
+  }
+};
 const birthPlanOn = withPerson('noura', async st => {
   const v = currentView(st);
-  if (!v || st.birthPlan?.active) return;
+  if (!v || st.birthPlan?.active || st.birthOutcome) return;
   await setBirthPlan(st, true, v.birthPlanConditions.map(c => c.id), v.shared.filter(x => v.birthPlanConditions.includes(x.condition)).map(x => x.gene));
 });
-const settle = (ms: number) => new Promise(r => setTimeout(r, ms));
+const newborn = async () => {
+  await birthPlanOn();
+  await pumpClinic();
+  await withClinic(async c => {
+    const b = c.births.find(x => x.personId === 'noura' && x.active);
+    if (b && !b.outcome) await recordNewborn(c, b.coupleId, true);
+  })();
+};
 
 const STORY: StoryStep[] = [
   {
     who: 'mariam', clinic: 'outreach', title: 'The health system invites',
     text: 'Couples married before the mandate are ranked by declared signals only, never genetics. The top three are invited.',
-    action: withClinic(c => sendOutreach(c, OUTREACH_REGISTER.slice(0, 3).map(r => r.id))),
+    action: invite,
   },
   { who: 'mariam', clinic: 'outreach', title: 'Mariam agrees', text: 'She reads what will and will not happen, and agrees. Nothing is checked until Saeed agrees too.' },
   { who: 'saeed', clinic: 'outreach', title: 'Saeed agrees', text: 'The check runs on genomes already held. Each phone receives a result signed by the lab.', action: consent('mariam') },
   {
     who: 'mariam', page: 'result', clinic: 'queue/C-2019-0412', title: 'Mariam reads her result',
     text: 'Four children, counted; what does not change; what the test cannot see. The couple joins the counselling queue.',
-    action: async () => { await consent('mariam')(); await consent('saeed')(); await settle(1500); },
+    action: results,
   },
-  { who: 'mariam', page: 'check', clinic: 'queue/C-2019-0412', title: 'She checks her understanding', text: 'Four questions. She can share the answers so her counsellor starts where she is.' },
-  { who: 'saeed', page: 'result', clinic: 'queue/C-2019-0412', title: 'Saeed’s private finding', text: 'Saeed carries CYP21A2. Mariam never sees it unless he chooses to share it.' },
-  { who: 'mariam', page: 'family', clinic: 'invites', title: 'Invitations for the family', text: 'Blind-signed invitations: the clinic can verify each one but not who sent it.' },
+  { who: 'mariam', page: 'check', clinic: 'queue/C-2019-0412', title: 'She checks her understanding', text: 'Four questions. Then she shares her answers and books a visit, so her counsellor starts where she is.' },
+  {
+    who: 'saeed', page: 'result/own', clinic: 'queue/C-2019-0412', title: 'Saeed’s private finding',
+    text: 'Saeed carries CYP21A2; Mariam never sees it unless he shares it. In the clinic, Mariam’s 4 of 4 answers are in the brief, the visit is booked and the referral KPI rises.',
+    action: mariamShares,
+  },
+  {
+    who: 'mariam', page: 'family/invite', clinic: 'invites', title: 'Invitations for the family',
+    text: 'Mariam prepares three blind-signed invitations and a cousin uses one. The clinic sees that it is genuine, but cannot match it to the request it signed.',
+    action: familyInvites,
+  },
   { who: 'noura', page: 'birth', clinic: 'births', title: 'Noura’s birth plan', text: 'Noura, 31 weeks pregnant, tells the delivery hospital to test the baby for SMA in the first days.' },
-  { who: 'noura', page: 'birth', clinic: 'births', title: 'The baby is tested', text: 'On the hospital side, record the newborn result. The parents see it on Noura’s phone.', action: birthPlanOn },
+  {
+    who: 'noura', page: 'birth/outcome', clinic: 'births', title: 'The baby is tested',
+    text: 'The demo moves to the due date. Maternity tests the baby on day 2, confirms SMA and refers that week, before any signs; Noura sees it on her phone.',
+    action: newborn,
+  },
   { who: 'fatima', page: 'result', clinic: 'pathway', title: '“Compatible” is not zero', text: 'Fatima’s certificate says compatible. Silah shows 1 in 260 for her gene, because her fiancé is her cousin.' },
 ];
 
@@ -70,13 +122,13 @@ export function Stage() {
   const play = async (i: number) => {
     const s = STORY[i];
     setStep(i);
-    if (s.action) await s.action();
+    for (const x of STORY.slice(0, i + 1)) if (x.action) await x.action();
     pick(s.who, s.page);
     const w = clinic.current?.contentWindow;
     if (w) w.location.hash = `#/c/${s.clinic}`;
   };
   // One switch for every phone. The stage starts in English so a viewer who does not read Arabic can
-  // follow the story; Arabic is one tap away. Phones opened on their own keep each person's language.
+  // follow the story; Arabic is one tap away. Phones opened on their own start in the browser's language.
   const [phoneLang, setPhoneLang] = useState<Lang>(() => sessionStorageGet('silah-phone-lang') === 'ar' ? 'ar' : 'en');
   const [ready, setReady] = useState(false);
   const applyLang = async (lang: Lang) => {
@@ -159,9 +211,10 @@ function Chooser({ reset }: { reset: () => void }) {
         <div class="row"><Mark size={40} /><span class="wordmark" style={{ fontSize: '34px' }}>صلة</span></div>
         <h1>Silah</h1>
         <p class="muted">A private companion for inherited disease risk in Abu Dhabi: from the couple check to counselling, birth and family. This prototype runs entirely in your browser with a fictional family.</p>
+        <p class="small">Start with Mariam: the Department of Health’s invitation is waiting on her phone. Each phone has an <span lang="ar">ع</span> / EN switch at the top.</p>
         <p class="eyebrow">Open a phone</p>
         {PERSONAS.map(p => (
-          <button key={p.id} class="choice" onClick={() => go(`p/${p.id}`)}>
+          <button key={p.id} class="choice" onClick={async () => { if (p.id === 'mariam' || p.id === 'saeed') await invite(); go(`p/${p.id}`); }}>
             <b>{p.name.en}</b> <span class="muted">· {p.name.ar}</span>
             <div class="small muted">{p.blurb.en}</div>
           </button>

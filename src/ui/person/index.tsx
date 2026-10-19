@@ -10,9 +10,15 @@ import { Privacy } from './privacy';
 import { Ask } from './ask';
 import { Mark } from '../kit';
 
-export function PersonApp({ id, page }: { id: string; page?: string }) {
+/** `focus` names a section to scroll to once the page has drawn (the demo stage uses it to point at one part). */
+export function PersonApp({ id, page, focus }: { id: string; page?: string; focus?: string }) {
   const { s, act } = usePerson(id);
-  useEffect(() => { scrollTo({ top: 0 }); }, [id, page]);
+  const loaded = !!s;
+  useEffect(() => {
+    if (!focus || !loaded) { scrollTo({ top: 0 }); return; }
+    const t = setTimeout(() => document.getElementById(`focus-${focus}`)?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 450);
+    return () => clearTimeout(t);
+  }, [id, page, focus, loaded]);
   if (!personaById(id)) return <p style={{ padding: '24px' }}>Unknown person.</p>;
   if (!s) return <div class="phone" style={{ alignItems: 'center', justifyContent: 'center' }}><Mark size={64} /></div>;
   const base = `p/${id}`;

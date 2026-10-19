@@ -130,7 +130,7 @@ function OwnFindings({ s, act }: { s: PersonState; act: Act }) {
   const grants = activeGrants(s.ledger, new Date());
   const partner = partnerName(s, s.lang);
   return (
-    <section class="stack">
+    <section class="stack" id="focus-own" style={{ scrollMarginTop: '72px' }}>
       <h2>{t({ en: 'Your own findings', ar: 'نتائجك الخاصة' })}</h2>
       <p class="muted">{t({ en: `These are yours. ${partner} does not see them unless you share them.`, ar: `هذه نتائجك أنتِ، ولا يراها ${partner} إلا إذا شاركتِها.`, arM: `هذه نتائجك أنت، ولا تراها ${partner} إلا إذا شاركتها.` })}</p>
       {own.map(f => {

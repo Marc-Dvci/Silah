@@ -18,8 +18,8 @@ export const INTENTS: Intent[] = [
   {
     id: 'chance',
     label: { en: 'What is the chance for our children?', ar: 'ما احتمال إصابة أطفالنا؟' },
-    en: /\b(chance|risk|odds|likely|probabilit|percent|how many)\b/,
-    ar: /(احتمال|نسبه|خطر|خطوره|فرصه|(^|\s)كم(\s|$))/,
+    en: /\b(chance|risk|odds|likely|probabilit|percent|how many|inherit\w*|pass(ed)? (it|this) on)\b|\bwill (my|our|the) (baby|babies|child|children|kids?|son|daughter)\b|\b(baby|babies|child|children|kids?) (will|going to) (have|get|be)\b|\b(healthy|sick|ill|affected) (baby|babies|child|children|kids?)\b/,
+    ar: /(احتمال|نسبه|خطر|خطوره|فرصه|(^|\s)كم(\s|$)|سيصاب|هل يصاب|طفل سليم|طفلا سليما|اطفال اصحاء|يرث|سيرث)/,
     answer: ['kind:couple-gene', 'kind:residual-gene', 'panel-residual'],
   },
   {
@@ -98,8 +98,16 @@ export const INTENTS: Intent[] = [
 
 export interface FaqAnswer { intent: Intent; cards: FactCard[] }
 
+/** "Should we…?" asks for a decision. It always gets every option at equal weight and the reminder that the choice is
+ * theirs, even when it names one option, so the answer never reads as a recommendation. */
+const DECIDE = {
+  en: /\b(should (we|i)|do you recommend|would you recommend|what would you do|is it better|which is better|best (option|choice|thing))\b/,
+  ar: /(هل يجب|هل ينبغي|هل علينا|هل نختار|تنصح|تنصحين|تنصحون|الافضل لنا|ما الافضل|ايهما افضل)/,
+};
+
 export function matchIntent(question: string): Intent | undefined {
   const n = normalize(question);
+  if (DECIDE.en.test(n) || DECIDE.ar.test(n)) return INTENTS.find(i => i.id === 'options');
   // Specific intents before general ones: check in a fixed priority order.
   const order = ['every-pregnancy', 'compatible', 'pgt', 'birth', 'cousins', 'carrier', 'options', 'chance', 'what-is'];
   for (const id of order) {

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'preact/hooks';
 import { useClinic } from '../hooks';
-import { PATH, PATH_OWNER, counsellorAdvance, recordNewborn, referralKpi, sendOutreach, urgency, OUTREACH_REGISTER, type Case, type ClinicState, type Referral } from '../../app/clinic';
+import { PATH, pathOwner, counsellorAdvance, recordNewborn, referralKpi, sendOutreach, urgency, OUTREACH_REGISTER, type Case, type ClinicState, type Referral } from '../../app/clinic';
 import type { PathState } from '../../app/person';
 import { conditionFor } from '../../core/conditions';
 import { linkable } from '../../core/crypto/invites';
@@ -103,7 +103,7 @@ function Timeline({ k }: { k: Case }) {
           <>{i > 0 && <span class={`tl ${i <= idx ? 'done' : ''}`} />}<span class={`tk ${i < idx ? 'done' : i === idx ? 'now' : ''}`} title={STATE_LABEL[s]} /></>
         ))}
       </div>
-      <div class="row tiny muted" style={{ justifyContent: 'space-between' }}><span>Result issued</span><span>{STATE_LABEL[k.state]} · {PATH_OWNER[k.state]}</span><span>Closed</span></div>
+      <div class="row tiny muted" style={{ justifyContent: 'space-between' }}><span>Result issued</span><span>{STATE_LABEL[k.state]} · {pathOwner(k, k.state)}</span><span>Closed</span></div>
     </div>
   );
 }
@@ -270,6 +270,8 @@ function Births({ c, act }: { c: ClinicState; act: Act }) {
   );
 }
 
+const REDEEMED: Record<string, string> = { ok: 'Genuine and unused: accepted', spent: 'Already used: refused', invalid: 'Not genuine: refused' };
+
 function Invites({ c }: { c: ClinicState }) {
   const link = linkable(c.issuerLog, c.redeemLog);
   return (
@@ -293,7 +295,7 @@ function Invites({ c }: { c: ClinicState }) {
           {c.redeemLog.length === 0 && <p class="muted small">Nothing redeemed yet.</p>}
           {c.redeemLog.map((e, i) => (
             <div key={i} class="pool soft">
-              <p class="small"><b>{e.outcome}</b> · {new Date(e.at).toLocaleTimeString('en-GB')}</p>
+              <p class="small"><b>{REDEEMED[e.outcome] ?? e.outcome}</b> · {new Date(e.at).toLocaleTimeString('en-GB')}</p>
               <p class="mono-log">{e.tokenHash}</p>
             </div>
           ))}

@@ -60,7 +60,7 @@ Everything runs on one machine at no cost: no server, no cloud, no API key. The 
 | Part | Where | What it guarantees |
 |---|---|---|
 | Risk kernel | `src/core/kernel.ts`, `fraction.ts` | Every number is an exact fraction with its arithmetic and sources; tested against a hand-calculated grid |
-| Gene panel | `src/core/data/panel.ts` | The 563 genes of the DoH premarital panel (Standard V3, Appendix 12), mapped to current HGNC symbols |
+| Gene panel | `src/core/data/panel.ts` | The 563 genes of the DoH premarital panel (Standard V3, Appendix 12: 570 printed names, 5 repeated and 2 older names of listed genes), mapped to current HGNC symbols |
 | Verifier | `src/core/verifier.ts` | A model sentence is shown only if it cites a fact card, uses only that card's numbers, does not steer a marriage or pregnancy decision, and states no certainty about a child |
 | Hard routes | `src/core/routes.ts` | Distress, termination, religious rulings, other people's results and blame go to a person, before any model |
 | Receipts | `src/core/crypto/receipts.ts` | Every consent and share is signed on the device, hash-chained, and revocable |

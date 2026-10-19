@@ -59,7 +59,7 @@ export function BirthPlan({ s, act, base }: { s: PersonState; act: Act; base: st
           </div>
         )}
         {s.birthOutcome && (
-          <div class={`pool ${s.birthOutcome.affected ? 'indigo' : 'palm'} stack`} style={{ '--gap': '8px' } as any}>
+          <div id="focus-outcome" class={`pool ${s.birthOutcome.affected ? 'indigo' : 'palm'} stack`} style={{ '--gap': '8px', scrollMarginTop: '72px' } as any}>
             <p class="eyebrow">{t({ en: 'Your baby’s test', ar: 'فحص طفلكما' })} · {new Date(s.birthOutcome.at).toLocaleDateString(s.lang === 'ar' ? 'ar-AE-u-nu-latn' : 'en-GB', { day: 'numeric', month: 'long' })}</p>
             {s.birthOutcome.affected ? (
               <p>{t({ en: `The test in the first days confirmed ${s.birthOutcome.genes.join(', ')}. Your baby was referred this week to the treating team, before any signs.`, ar: `أكّد فحص الأيام الأولى إصابة طفلكما بالحالة المرتبطة بالجين ${s.birthOutcome.genes.join('، ')}، وقد أُحيل هذا الأسبوع إلى الفريق المعالج قبل ظهور أي علامات.` })}</p>
@@ -134,7 +134,7 @@ export function Family({ s, act, base }: { s: PersonState; act: Act; base: strin
           <SourceChips ids={['hamamy-2012']} />
         </div>
 
-        <h2>{t({ en: 'Invite them without saying it was you', ar: 'ادعيهم دون أن تذكري أنكِ المرسِلة', arM: 'ادعُهم دون أن تذكر أنك المرسِل' })}</h2>
+        <h2 id="focus-invite" style={{ scrollMarginTop: '72px' }}>{t({ en: 'Invite them without saying it was you', ar: 'ادعيهم دون أن تذكري أنكِ المرسِلة', arM: 'ادعُهم دون أن تذكر أنك المرسِل' })}</h2>
         <div class="pool palm stack" style={{ '--gap': '8px' } as any}>
           <p class="small"><b>{t({ en: 'How this stays anonymous', ar: 'كيف تبقى الدعوة مجهولة المصدر' })}</b></p>
           <p class="small">{t({ en: 'Each invitation is signed by the clinic with a blind signature: the clinic signs it without seeing it. When a relative uses it, the clinic can tell it is genuine and unused, but not who it came from.', ar: 'توقّع العيادة كل دعوة توقيعاً أعمى، أي أنها توقّعها دون أن ترى محتواها. وعندما يستخدمها القريب، تستطيع العيادة التأكد من أنها أصلية وغير مستخدمة، لكنها لا تعرف من أرسلها.' })}</p>

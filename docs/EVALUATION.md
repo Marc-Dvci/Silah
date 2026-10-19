@@ -24,7 +24,7 @@ The cousin case is the one a "compatible" certificate hides. A related partner m
 
 `python tests/e2e/flow.py` drives the real interface headless through the whole demo story: 23 checks, all passing. It also covers the newborn result recorded by maternity reaching the parents' phone, and a withdrawn summary disappearing from the counsellor's brief.
 
-`python tests/e2e/stage.py` plays the ten-step guided story on the desktop stage by pressing Next only, and checks that every step lands on a screen with content, that the clinic follows the demo couple, and that the stage's language switch reaches the phone.
+`python tests/e2e/stage.py` plays the ten-step guided story on the desktop stage by pressing Next only, and checks that every step lands on a screen with content, that Next finishes each step (Mariam's shared teach-back reaches the counsellor's brief and the referral KPI rises; three invitations are issued and one is redeemed, unlinkably; the newborn result reaches maternity and Noura's phone), that the clinic follows the demo couple, and that the stage's language switch reaches the phone.
 
 `python tests/e2e/a11y.py` runs axe-core (WCAG 2.2 AA rules) on 18 screens in Arabic and English: 0 violations.
 
@@ -40,6 +40,8 @@ The privacy checks inside it:
 `python tests/e2e/offline.py`: the built app opens a result with the network off. The same check passed on an Android 13 emulator (Pixel 7 image) in airplane mode; screenshot in `docs/evidence/`.
 
 ## 3. Companion: three on-device models, one verifier
+
+**Before any model.** Typed questions go first to the hard routes, then to fact-card intents (`src/core/faq.ts`). `tests/faq.test.ts` checks questions in people's own words, in English and Arabic ("Will my baby have SMA?", "Can we still have a healthy child?"), and that every question asking for a decision ("Should we do IVF?", "What would you do?") gets all the options at equal weight with "The decision is yours", even when it names one option.
 
 `node eval/run.mjs <model>` · `node eval/report.mjs` · full table and every trap transcript in `eval/REPORT.md`
 
@@ -103,5 +105,7 @@ A synthetic population of 2,500 founder families over four generations, with 35%
 | Cascade from families with an affected child | 5.8 [4.0–7.0] | 5.3 [3.0–7.0] | 5.4 [3.2–6.6] |
 | Declared related first | 3.0 [2.0–4.0] | 3.0 [1.5–5.0] | 2.8 [1.8–4.2] |
 | Random | 1.2 [1.0–2.0] | 1.3 [0.5–2.0] | 1.5 [1.4–1.6] |
+
+The outreach panel in the app runs the same five seeds and shows the 200-test column.
 
 The simulated at-risk rate is 4.2% of couples (8.7% of related, 2.5% of unrelated couples). Abu Dhabi's programme reported 565 incompatible of 11,748 couples tested (about 4.8%). The ranking, cascade first, is the result that matters; the absolute numbers depend on assumed frequencies.

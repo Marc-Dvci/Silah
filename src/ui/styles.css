@@ -271,11 +271,12 @@ p { margin: 0; }
 
 /* ---------- stage (desktop demo) ---------- */
 .stage { display: grid; grid-template-columns: 430px 1fr; gap: 26px; padding: 18px 26px 26px; min-height: 100vh; align-items: start; }
-.device { width: 410px; height: 860px; border-radius: 54px; background: var(--deep); padding: 12px; box-shadow: 0 40px 80px -40px rgba(27, 31, 51, .6); }
+/* The stage fits a laptop screen: the phone and the clinic shrink with the window height instead of running below it. */
+.device { width: 410px; height: min(860px, max(560px, calc(100vh - 110px))); border-radius: 54px; background: var(--deep); padding: 12px; box-shadow: 0 40px 80px -40px rgba(27, 31, 51, .6); }
 .device iframe { width: 100%; height: 100%; border: 0; border-radius: 44px; background: var(--ground); }
-.desk-frame { width: 100%; height: calc(100vh - 190px); min-height: 700px; border: 0; border-radius: 34px; background: var(--ground); box-shadow: 0 30px 70px -40px rgba(27, 31, 51, .5); }
+.desk-frame { width: 100%; height: max(460px, calc(100vh - 215px)); border: 0; border-radius: 34px; background: var(--ground); box-shadow: 0 30px 70px -40px rgba(27, 31, 51, .5); }
 
-@media (max-width: 900px) {
+@media (max-width: 780px) {
   .split { grid-template-columns: 1fr; }
 }
 @media (max-width: 639px) {
@@ -320,7 +321,7 @@ button:focus:not(:focus-visible) { outline: none; }
   .desk nav .step button.body { width: 34px; margin-inline-start: -34px; height: 46px; opacity: 0; }
   .desk main { padding: 22px 24px 50px; }
 }
-@media (max-width: 1180px) and (min-width: 901px) {
+@media (max-width: 1180px) and (min-width: 781px) {
   .split { grid-template-columns: minmax(260px, 1fr) minmax(300px, 1.1fr); gap: 22px; }
 }
 /* stage header on a laptop: drop the tagline, keep every chip on one line */

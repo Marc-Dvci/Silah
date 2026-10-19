@@ -30,8 +30,8 @@ function App() {
     return () => { off(); clearInterval(t); };
   }, []);
   if (!ready) return null;
-  const [a, b, c] = r;
-  if (a === 'p' && b) return <PersonApp id={b} page={c} />;
+  const [a, b, c, d] = r;
+  if (a === 'p' && b) return <PersonApp id={b} page={c} focus={d} />;
   if (a === 'c') return <ClinicApp page={b} sub={c} />;
   if (a === 'r' && b) return <RelativePage token={b} />;
   return <Stage />;

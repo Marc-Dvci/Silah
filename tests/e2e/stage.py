@@ -1,4 +1,5 @@
 """Plays the whole story on the desktop stage by pressing Next only, and checks each screen has content,
+that Next finishes each step (shared teach-back in the brief, invitations issued and redeemed, the newborn result),
 that the clinic follows the demo couple, that phones start in English with the English switch lit, and that the
 switch reaches the phone in both directions."""
 import sys
@@ -25,6 +26,13 @@ with sync_playwright() as p:
         check(len(txt) > 40, f'step {i}: phone shows content ({txt[:50].strip()!r})'.replace('\n', ' '))
         if i in (4, 5, 6):
             check('Mariam & Saeed' in clinic.locator('.queue-row.sel').inner_text(), f'step {i}: clinic brief shows Mariam & Saeed')
+        desk = clinic.locator('main').first.inner_text()
+        if i == 6:
+            check('Teach-back: 4/4' in desk and '75%' in desk, 'step 6: Mariam’s shared answers are in the brief and the referral KPI rose')
+        if i == 7:
+            check('3 invitations' in desk and 'Genuine and unused' in desk and 'No redemption can be linked' in desk, 'step 7: invitations issued, one redeemed, unlinkable')
+        if i == 9:
+            check('your baby’s test' in txt.lower() and 'confirmed SMN1' in desk, 'step 9: the newborn result is in maternity and on Noura’s phone')
         pg.screenshot(path=f'D:/tmp/silah_shots/stage_{i:02d}.png')
     pg.get_by_role('button', name='العربية').click(); pg.wait_for_timeout(3000)
     check(phone.locator('[dir="rtl"]').count() > 0, 'language switch: phone in Arabic')

@@ -24,6 +24,10 @@ export const PATH_OWNER: Record<PathState, string> = {
   'closed': 'Genetic counsellor',
 };
 
+/** Who holds the case at a step. An EGP re-check result reaches a married couple through Silah, not a premarital centre. */
+export const pathOwner = (k: Pick<Case, 'source'>, s: PathState): string =>
+  s === 'notified' && k.source === 'egp-recheck' ? 'DoH genomics service, via Silah' : PATH_OWNER[s];
+
 export type Referral = 'pgt' | 'prenatal' | 'birth-plan' | 'committee' | 'no-action-chosen';
 
 export interface BriefPacket {

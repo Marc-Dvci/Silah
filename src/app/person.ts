@@ -41,6 +41,11 @@ export interface PersonState {
 const owner = (id: string) => `p:${id}`;
 export const address = owner;
 
+/** A phone opened on its own starts in the browser's language: Arabic for an Arabic browser, English otherwise.
+ * The ع / EN switch on every phone changes it, and the demo stage sets all phones at once. */
+const browserLang = (): Lang =>
+  typeof navigator !== 'undefined' && (navigator.languages ?? [navigator.language]).some(l => l?.toLowerCase().startsWith('ar')) ? 'ar' : 'en';
+
 const kpOf = (s: PersonState): KeyPair => ({ secretKey: fromB64url(s.kp.sk), publicKey: fromB64url(s.kp.pk), keyId: s.kp.keyId });
 
 export async function loadPerson(id: string): Promise<PersonState> {
@@ -49,7 +54,7 @@ export async function loadPerson(id: string): Promise<PersonState> {
   const kp = generateKeyPair();
   const fresh: PersonState = {
     id,
-    lang: personaById(id)?.lang ?? 'ar',
+    lang: browserLang(),
     digits: 'latn',
     kp: { sk: b64url(kp.secretKey), pk: b64url(kp.publicKey), keyId: kp.keyId },
     bundles: [],
