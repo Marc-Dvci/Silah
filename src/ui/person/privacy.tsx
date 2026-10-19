@@ -10,7 +10,7 @@ import { Back } from './shell';
 type Act = (f: (st: PersonState) => Promise<void>) => Promise<void>;
 
 const SUBJECT: Record<string, { en: string; ar: string }> = {
-  'couple-check': { en: 'Couple check on your existing genome', ar: 'فحص ثنائي على جينومك المحفوظ' },
+  'couple-check': { en: 'Couple check on your existing genome', ar: 'فحص ثنائي باستخدام جينومك المحفوظ' },
   'finding': { en: 'A carrier finding', ar: 'تغيّر في أحد جيناتك' },
   'birth-plan': { en: 'Birth plan', ar: 'خطة الولادة' },
   'teachback': { en: 'Your check answers', ar: 'إجابات التحقق من الفهم' },
@@ -30,7 +30,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
       <Enter k="privacy">
         <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'What you shared', ar: 'ما شاركتِه', arM: 'ما شاركته' })}</span></div>
         <h1>{t({ en: 'Your genetic information stays on this phone.', ar: 'تبقى معلوماتك الجينية على هذا الهاتف.' })}</h1>
-        <p class="muted">{t({ en: 'It is encrypted here, with a key this phone keeps. Below is everything you have agreed to share. Each line is a signed record you can withdraw.', ar: 'وهي مشفّرة هنا بمفتاح يحتفظ به هذا الهاتف. وفي ما يلي كل ما وافقتِ على مشاركته، وكل سطر منه سجلّ موقّع يمكنك سحبه.', arM: 'وهي مشفّرة هنا بمفتاح يحتفظ به هذا الهاتف. وفي ما يلي كل ما وافقت على مشاركته، وكل سطر منه سجلّ موقّع يمكنك سحبه.' })}</p>
+        <p class="muted">{t({ en: 'It is encrypted here, with a key this phone keeps. Below is everything you have agreed to share. Each line is a signed record you can withdraw.', ar: 'وهي مشفّرة هنا بمفتاح يحتفظ به هذا الهاتف. وفيما يلي كل ما وافقتِ على مشاركته، وكل سطر منه سجلّ موقّع يمكنك سحبه.', arM: 'وهي مشفّرة هنا بمفتاح يحتفظ به هذا الهاتف. وفيما يلي كل ما وافقت على مشاركته، وكل سطر منه سجلّ موقّع يمكنك سحبه.' })}</p>
 
         <section class="stack" style={{ '--gap': '4px' } as any}>
           {active.length === 0 && <p class="muted">{t({ en: 'Nothing is shared.', ar: 'لم تتم مشاركة أي شيء.' })}</p>}
@@ -52,7 +52,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
             <h2>{t({ en: 'Shared with you', ar: 'ما تمت مشاركته معك' })}</h2>
             {received.map(r => (
               <div key={r.seq} class="pool palm">
-                <p><b>{personaById(partner ?? '') ? t(personaById(partner!)!.name) : r.fromName}</b> {t({ en: `chose to share: carrier of ${r.gene}.`, ar: `اختار أن يشاركك: يحمل تغيّراً في الجين ${r.gene}.`, arM: `اختارت أن تشاركك: تحمل تغيّراً في الجين ${r.gene}.` })}</p>
+                <p><b>{personaById(partner ?? '') ? t(personaById(partner!)!.name) : r.fromName}</b> {t({ en: `chose to share: carrier of ${r.gene}.`, ar: `اختار مشاركة نتيجته معك: يحمل تغيّراً في الجين ${r.gene}.`, arM: `اختارت مشاركة نتيجتها معك: تحمل تغيّراً في الجين ${r.gene}.` })}</p>
                 <p class="small muted">{t({ en: 'You tested negative for this gene. Your counsellor can explain what the small remaining chance means.', ar: 'جاءت نتيجة فحصك لهذا الجين سلبية، ويمكن لمستشارك شرح ما يعنيه الاحتمال الصغير المتبقي.' })}</p>
               </div>
             ))}

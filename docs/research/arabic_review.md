@@ -101,3 +101,23 @@ Every bilingual text (364, listed by `node scripts/extract-arabic.mjs`) was read
 
 The official compatible-couple wording quoted on the result screen was checked against the Arabic text of the DoH standard (Appendix 7, ثالثاً): «لا توجد خطورة على الطرف الآخر والأطفال».
 
+
+## Third pass (19 Oct 2026): every string read in context
+
+All 365 bilingual texts were read against their English, then 52 Arabic screens (six personas, eight pages each, after the guided story) were captured at phone width and read in place. Changes (`scripts/arabic_fixes_2026-10-19.py`, plus two layout fixes):
+
+| Where | Before | After | Why |
+|---|---|---|---|
+| Ask page | ولا يخبركِ تطبيق صلة بما تقررينه | ولا يملي عليكِ تطبيق صلة أي قرار | The old text meant "does not tell you what you are deciding" |
+| Partner-negative card | فحص شريكك (all readers) | شريكك for a woman, شريكتك for a man | A man's partner is female |
+| CAH card | حياة كاملة | حياة طبيعية | Calque of "full lives" |
+| Family page | الأكثر احتمالاً لأن يحملوا | الأرجح أن يحملوا | Calque of "most likely to" |
+| Callback | تحتاجين إلى أحد الآن؟ | هل تحتاجين إلى التحدث مع أحد الآن؟ | Bare أحد read as incomplete |
+| Privacy scope | فحص ثنائي على جينومك | فحص ثنائي باستخدام جينومك | "على" is a calque of "on" |
+| Shared with you | اختار أن يشاركك | اختار مشاركة نتيجته معك | يشاركك reads as "partakes with you" |
+| Dot field | في هذا الحقل كله | بين كل هذه النقاط | "حقل" is a calque of "field" |
+| Source sheet | رُوجع مع المصدر | تمت مطابقته مع المصدر | Natural wording for "checked against" |
+| Spelling | وفي ما يلي · يبدأون · حسب | وفيما يلي · يبدؤون · بحسب | Standard spelling |
+| Due-date chip, source chips | Arabic set in the monospace font | Plex Sans Arabic in right-to-left pages | Words looked small and spaced |
+
+Checked and kept: the official certificate quote matches the genetic-test section of the DoH standard («لا توجد خطورة على الطرف الآخر والأطفال»); كلاكما with a singular verb is correct; numerals, RTL order of the four children and gene names inside sentences render correctly. Narration re-rendered for the changed sentences (66 now: the partner card has two forms).

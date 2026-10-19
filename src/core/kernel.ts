@@ -142,7 +142,7 @@ export function coupleView(own: PersonResult, couple: CoupleSection): CoupleView
       numbers: { affected: affected.toJSON(), partnerResidual: residual.toJSON(), familialPrior: famPrior.toJSON(), carrierFreq: src.carrier.toJSON() },
       text: {
         en: `You carry a change in ${f.gene}; ${couple.partnerName} tested negative for it. A negative test lowers the chance a lot but not to zero: about ${fmt(affected)} per pregnancy for this gene.`,
-        ar: `لديك تغيّر في الجين ${f.gene}، وجاءت نتيجة فحص شريكك لهذا الجين سلبية. النتيجة السلبية تخفض الاحتمال كثيراً لكن ليس إلى الصفر: نحو 1 من ${affected.oneIn().toLocaleString('en-US')} في كل حمل لهذا الجين.`,
+        ar: `لديك تغيّر في الجين ${f.gene}، وجاءت نتيجة فحص ${own.sex === 'M' ? 'شريكتك' : 'شريكك'} لهذا الجين سلبية. النتيجة السلبية تخفض الاحتمال كثيراً لكن ليس إلى الصفر: نحو 1 من ${affected.oneIn().toLocaleString('en-US')} في كل حمل لهذا الجين.`,
       },
       sources: [src.ref ?? 'assumption-carrier', 'assumption-detection', ...(famPrior.isZero() ? [] : ['bennett-2002'])],
       arithmetic: `Partner residual = (r(1−d_fam) + p(1−d)) / (1 − r·d_fam − p·d) with r=${famPrior}, p=${src.carrier}, d=${DETECTION_GENE}, d_fam=${DETECTION_FAMILIAL}; × 1 (you carry) × 1/4.`,

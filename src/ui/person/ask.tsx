@@ -91,7 +91,7 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
     <main class="page" style={{ paddingBottom: '150px' }}>
       <Enter k="ask">
         <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'Ask a question', ar: 'طرح سؤال' })}</span></div>
-        <p class="muted">{t({ en: 'Answers come only from your own result and checked sources. Silah never tells you what to decide.', ar: 'تأتي الإجابات من نتيجتك ومن مصادر موثّقة فقط، ولا يخبركِ تطبيق صلة بما تقررينه.', arM: 'تأتي الإجابات من نتيجتك ومن مصادر موثّقة فقط، ولا يخبرك تطبيق صلة بما تقرره.' })}</p>
+        <p class="muted">{t({ en: 'Answers come only from your own result and checked sources. Silah never tells you what to decide.', ar: 'تأتي الإجابات من نتيجتك ومن مصادر موثّقة فقط، ولا يملي عليكِ تطبيق صلة أي قرار.', arM: 'تأتي الإجابات من نتيجتك ومن مصادر موثّقة فقط، ولا يملي عليك تطبيق صلة أي قرار.' })}</p>
         {turns.length === 0 && (
           <div class="row wrap">
             {INTENTS.filter(i => view?.status === 'at-risk' || i.id !== 'options').slice(0, 7).map(i => (

@@ -70,7 +70,7 @@ export function BirthPlan({ s, act, base }: { s: PersonState; act: Act; base: st
         )}
         {s.birthOutcome ? null : due ? (
           <div class="stack">
-            <p class="row"><span class="chip indigo num">{t({ en: `Due ${new Date(due).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}`, ar: `موعد الولادة المتوقع ${new Date(due).toLocaleDateString('ar-AE-u-nu-latn', { day: 'numeric', month: 'long' })}` })}</span>
+            <p class="row"><span class={`chip indigo num${s.lang === 'ar' ? ' arab' : ''}`}>{t({ en: `Due ${new Date(due).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}`, ar: `موعد الولادة المتوقع ${new Date(due).toLocaleDateString('ar-AE-u-nu-latn', { day: 'numeric', month: 'long' })}` })}</span>
               <span class="muted small">{t({ en: `in about ${(weeksLeft ?? 0)} weeks`, ar: `${(weeksLeft ?? 0) === 1 ? 'بعد نحو أسبوع' : (weeksLeft ?? 0) === 2 ? 'بعد نحو أسبوعين' : 'بعد نحو ' + (weeksLeft ?? 0) + ' ' + ((weeksLeft ?? 0) <= 10 ? 'أسابيع' : 'أسبوعاً')}` })}</span></p>
             <div class="row" style={{ alignItems: 'flex-start' }}>
               <div class="grow">
@@ -117,7 +117,7 @@ export function Family({ s, act, base }: { s: PersonState; act: Act; base: strin
       <Enter k="family">
         <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'Your family', ar: 'عائلتك' })}</span></div>
         <h1>{t({ en: 'The same change often runs in a family.', ar: 'كثيراً ما يتوارث أفراد العائلة التغيّر نفسه.' })}</h1>
-        <p class="muted">{t({ en: 'Relatives who marry within the family are the people most likely to share it. Knowing early gives them the same choices you have.', ar: 'الأقارب الذين يتزوجون داخل العائلة هم الأكثر احتمالاً لأن يحملوا التغيّر نفسه، والمعرفة المبكرة تمنحهم الخيارات نفسها المتاحة لك.' })}</p>
+        <p class="muted">{t({ en: 'Relatives who marry within the family are the people most likely to share it. Knowing early gives them the same choices you have.', ar: 'الأقارب الذين يتزوجون داخل العائلة هم الأرجح أن يحملوا التغيّر نفسه، والمعرفة المبكرة تمنحهم الخيارات نفسها المتاحة لك.' })}</p>
         <div class="pool stack" style={{ '--gap': '10px' } as any}>
           {RELS.map(r => {
             const c = relativeCard(r, gene);
@@ -221,7 +221,7 @@ export function Counsellor({ s, act, base }: { s: PersonState; act: Act; base: s
         </div>
 
         <div class="pool soft stack" style={{ '--gap': '8px' } as any}>
-          <h3>{t({ en: 'Need someone now?', ar: 'تحتاجين إلى أحد الآن؟', arM: 'تحتاج إلى أحد الآن؟' })}</h3>
+          <h3>{t({ en: 'Need someone now?', ar: 'هل تحتاجين إلى التحدث مع أحد الآن؟', arM: 'هل تحتاج إلى التحدث مع أحد الآن؟' })}</h3>
           <p class="small muted">{t({ en: 'The counsellor will call you back today. In an emergency, call 999 or 998.', ar: 'سيتصل بك المستشار اليوم. وفي حالة الطوارئ يُرجى الاتصال بالرقم 999 أو 998.' })}</p>
           {called
             ? <p class="chip palm"><IconCheck size={15} /> {t({ en: 'Your counsellor has been asked to call you today.', ar: 'طُلب من مستشارك الاتصال بك اليوم.' })}</p>

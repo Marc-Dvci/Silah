@@ -22,7 +22,7 @@ export function SourceChips({ ids }: { ids: string[] }) {
             <p>{src.cite}</p>
             {src.url && <p class="small"><a href={src.url} target="_blank" rel="noopener">{src.url}</a></p>}
             <p class={`chip ${src.verified ? 'palm' : 'saffron'}`}>
-              {src.verified ? t({ en: 'Checked against the source for this project', ar: 'رُوجع مع المصدر لهذا المشروع' }) : t({ en: 'Not yet checked against the primary source', ar: 'لم يُراجَع بعد مع المصدر الأصلي' })}
+              {src.verified ? t({ en: 'Checked against the source for this project', ar: 'تمت مطابقته مع المصدر في هذا المشروع' }) : t({ en: 'Not yet checked against the primary source', ar: 'لم تتم مطابقته بعد مع المصدر الأصلي' })}
             </p>
             {src.note && <p class="small muted">{src.note}</p>}
           </div>

@@ -127,7 +127,7 @@ export const CONDITIONS: Condition[] = [
       },
       window: {
         en: 'Babies who start treatment earliest do best.',
-        ar: 'الأطفال الذين يبدأون العلاج في وقت أبكر تكون نتائجهم أفضل.',
+        ar: 'الأطفال الذين يبدؤون العلاج في وقت أبكر تكون نتائجهم أفضل.',
       },
       urgency: 'first-weeks',
       sources: ['kishnani-2007', 'chien-2009'],
@@ -170,7 +170,7 @@ export const CONDITIONS: Condition[] = [
     },
     notChanged: {
       en: 'Carriers are healthy. Many people with CAH live full lives with treatment.',
-      ar: 'الحاملون أصحّاء، وكثير من المصابين يعيشون حياة كاملة مع العلاج.',
+      ar: 'الحاملون أصحّاء، وكثير من المصابين يعيشون حياة طبيعية مع العلاج.',
     },
     birthPlan: {
       action: {
@@ -271,7 +271,7 @@ export const CONDITIONS: Condition[] = [
     name: { en: 'Alpha-thalassaemia', ar: 'الثلاسيميا ألفا' },
     what: {
       en: 'A blood condition with several forms, from mild to severe, depending on how many alpha-globin genes are missing.',
-      ar: 'حالة دموية لها عدة أشكال، من الخفيف إلى الشديد، حسب عدد جينات ألفا غلوبين المفقودة.',
+      ar: 'حالة دموية لها عدة أشكال، من الخفيف إلى الشديد، بحسب عدد جينات ألفا غلوبين المفقودة.',
     },
     notChanged: {
       en: 'Most carriers are healthy.',
