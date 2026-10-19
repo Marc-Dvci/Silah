@@ -41,4 +41,22 @@ Pre-registration: the protocol above is fixed before any data is collected; devi
 - **No new sequencing for the couple re-check:** the genomes already exist; the marginal cost is analysis, a notification and counselling time.
 - **The phone does the explaining**, so counselling time goes to decisions, not biology lessons, for a workforce of about nine genetic counsellors nationally (PMC12619030).
 - **The same core serves other programmes:** Dubai's premarital programme (1,000 couples, 8% at risk, 80% proceeding with marriage, Nature Medicine 2026), other emirates, and preconception screening for residents outside the mandatory test.
-- **Commercial model:** a licence per screened couple or per screening centre, paid by the programme owner; the person never pays and never sees advertising.
+
+## What it costs and who pays
+
+Each figure is marked as measured (published), assumed (my input, to be replaced by DoH data) or priced (arithmetic on the two).
+
+| | Figure | Type |
+|---|---|---|
+| Genetics workforce | 9 practising genetic counsellors and 8 clinical geneticists for nearly 11 million people in the UAE (J Genet Couns 2025, PMC12619030) | Measured |
+| Today's at-risk flow in Abu Dhabi | 565 non-compatible couples of 11,748 tested, 2022 to July 2026: about 4.8%, about 125 couples a year | Measured |
+| Re-check volume | DoH invites 20,000 couples married before the mandate each year | Assumed |
+| At-risk couples found by the re-check | 20,000 × 4.8% ≈ 960 a year, about 8 times today's flow | Priced |
+| Licence | AED 100 per couple served, all moments included | Assumed |
+| Annual cost at that volume | (20,000 re-check + 3,500 premarital couples) × AED 100 ≈ AED 2.35 million | Priced |
+| Running cost per question | None on the server: the model runs on the phone or the counsellor's computer | Design |
+
+**Why the programme owner would pay.** The re-check would multiply the number of at-risk couples needing counselling by about eight, against a national genetics workforce of 17. Silah takes the explaining, the understanding check and the triage off that workforce: every counselling visit starts from a brief that shows what the couple already understood, and urgent cases (a pregnancy, distress) come first. The genomes, the panel and the referral KPI already exist; Silah is the delivery layer that lets them reach married couples.
+
+**Who pays.** The programme owner (DoH, or M42 as the operator of the couple check). Families never pay and never see advertising. Pilot pricing is to be agreed with DoH.
+

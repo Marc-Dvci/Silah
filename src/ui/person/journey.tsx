@@ -52,6 +52,12 @@ export function BirthPlan({ s, act, base }: { s: PersonState; act: Act; base: st
             <div class="row wrap"><Listen id={`birth:${c.id}`} text={`${t(c.birthPlan!.action)} ${t(c.birthPlan!.window)}`} label={t({ en: 'Listen', ar: 'استماع' })} /><SourceChips ids={c.birthPlan!.sources} /></div>
           </div>
         ))}
+        {conds.length > 0 && (
+          <div class="row wrap" style={{ alignItems: 'flex-start' }}>
+            <p class="muted small grow">{t({ en: 'Abu Dhabi’s newborn genome screening reports within 21 days in the hospitals that offer it. Because you already know which change to look for, a targeted test can answer in the first days, in any delivery hospital.', ar: 'يصدر فحص الجينوم لحديثي الولادة في أبوظبي نتائجه خلال 21 يوماً في المستشفيات التي تقدّمه. ولأنكما تعرفان مسبقاً التغيّر الذي يجب البحث عنه، يمكن لفحص موجّه أن يعطي النتيجة في الأيام الأولى، في أي مستشفى ولادة.' })}</p>
+            <SourceChips ids={['doh-newborn-genomic-2025']} />
+          </div>
+        )}
         {s.birthOutcome && (
           <div class={`pool ${s.birthOutcome.affected ? 'indigo' : 'palm'} stack`} style={{ '--gap': '8px' } as any}>
             <p class="eyebrow">{t({ en: 'Your baby’s test', ar: 'فحص طفلكما' })} · {new Date(s.birthOutcome.at).toLocaleDateString(s.lang === 'ar' ? 'ar-AE-u-nu-latn' : 'en-GB', { day: 'numeric', month: 'long' })}</p>

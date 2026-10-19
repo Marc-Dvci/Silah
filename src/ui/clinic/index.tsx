@@ -251,7 +251,7 @@ function Births({ c, act }: { c: ClinicState; act: Act }) {
               ? <span class="chip palm num">born {new Date(b.outcome.born).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })} · simulated</span>
               : weeks !== null && <span class="chip indigo num">due in {weeks} weeks</span>}</div>
             <p>{b.genes.map(g => <span key={g} class="chip saffron num" style={{ marginInlineEnd: '6px' }}>{g}</span>)} {b.conditionIds.map(id => conditionFor(b.genes[0]).id === id ? conditionFor(b.genes[0]).name.en : id).join(', ')}</p>
-            <p class="row small" style={{ alignItems: 'flex-start' }}><span class="dot" style={{ color: 'var(--saffron)', marginTop: '9px' }} />Day 1–3: targeted confirmatory test for {b.genes.join(', ')} (in addition to routine newborn screening).</p>
+            <p class="row small" style={{ alignItems: 'flex-start' }}><span class="dot" style={{ color: 'var(--saffron)', marginTop: '9px' }} />Day 1–3: targeted confirmatory test for {b.genes.join(', ')} (in addition to routine and genome newborn screening).</p>
             <p class="row small" style={{ alignItems: 'flex-start' }}><span class="dot" style={{ color: 'var(--saffron)', marginTop: '9px' }} />If positive: same-week referral to the treating team, before symptoms.</p>
             {b.outcome ? (
               <p class={`chip ${b.outcome.affected ? 'indigo' : 'palm'}`} style={{ whiteSpace: 'normal' }}>{b.outcome.note}</p>

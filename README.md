@@ -7,7 +7,7 @@ Future Health Digital Innovation Challenge · Fertility · Challenge 03, *Unders
 Silah serves three moments where knowing a genetic risk can still change an outcome:
 
 1. **Before the next pregnancy.** Couples who married before genetic testing joined premarital screening are invited, by non-genetic signals only, to a couple check run on genomes the Emirati Genome Programme already holds. Both partners must consent.
-2. **At birth.** For conditions where days matter (SMA, Krabbe, MLD, Pompe, MPS I), an at-risk couple can choose a birth plan: the delivery hospital tests the baby in the first days. This works whatever the couple decided before, so it serves the couples who marry and conceive naturally.
+2. **At birth.** For conditions where days matter (SMA, Krabbe, MLD, Pompe, MPS I), an at-risk couple can choose a birth plan: the delivery hospital tests the baby in the first days. This works whatever the couple decided before, so it serves the couples who marry and conceive naturally. It complements DoH's newborn genome screening, which reports within 21 days where it is offered: when the parents' shared change is already known, a targeted test of that one change can answer in the first days, at any delivery hospital.
 3. **In the family.** A carrier can invite relatives to test with blind-signed invitations. The clinic can verify each invitation but cannot tell who sent it.
 
 Between those moments, Silah explains the result in Arabic or English, checks understanding, answers questions only from checked facts, never steers a decision, and hands the couple to a genetic counsellor who already has a brief.
