@@ -1,4 +1,4 @@
-# Builds the static PWA and publishes it to GitHub Pages on every push to main.
+# Builds the static PWA and the product page and publishes both to GitHub Pages on every push to main.
 name: pages
 on:
   push:
@@ -23,9 +23,11 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      # the product page at the root, the app under /demo/
+      - run: mkdir -p _site && cp -r site/index.html site/ar.html site/assets _site/ && cp -r dist _site/demo
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: _site
   deploy:
     needs: build
     runs-on: ubuntu-latest

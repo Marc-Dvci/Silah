@@ -29,9 +29,14 @@ python tests/e2e/stage.py     # the guided ten-step story on the desktop stage
 python tests/e2e/a11y.py      # axe-core WCAG 2.2 AA on 18 screens, both languages
 python tests/e2e/webgpu.py    # Gemma 4 E2B inside the browser (WebGPU, ~3 GB download once)
 python tests/e2e/offline.py   # the built app with the network off (needs `npx vite preview --port 4173`)
+python tests/e2e/site.py      # the product page in both languages, as GitHub Pages serves it (after `npm run build`)
 ```
 
 Everything runs on one machine at no cost: no server, no cloud, no API key. The optional language model runs either on the same computer (llama.cpp) or inside the browser (WebGPU).
+
+## Product page
+
+`site/` holds the bilingual product page (`index.html`, `ar.html`) published at https://marc-dvci.github.io/silah/, with the app under `/demo/`. `python site/build/build_assets.py` rebuilds its fonts, screenshots, film and QR codes; `python site/build/capture_ar.py` recaptures the Arabic phone screens from the running app.
 
 ## How it is built
 
