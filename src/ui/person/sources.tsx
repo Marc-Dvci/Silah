@@ -2,7 +2,7 @@ import { useContext, useState } from 'preact/hooks';
 import { sourceById } from '../../core/data/sources';
 import { LangCtx, Sheet, useT } from '../kit';
 
-/** Small citation chips. Tapping one shows the full reference and whether it was checked. */
+/** Small citation chips. Tapping one shows the full reference and what it was checked for. */
 export function SourceChips({ ids }: { ids: string[] }) {
   const t = useT();
   const ar = useContext(LangCtx).lang === 'ar';
@@ -21,9 +21,7 @@ export function SourceChips({ ids }: { ids: string[] }) {
             <p class="eyebrow">{t({ en: 'Source', ar: 'المصدر' })}</p>
             <p>{src.cite}</p>
             {src.url && <p class="small"><a href={src.url} target="_blank" rel="noopener">{src.url}</a></p>}
-            <p class={`chip ${src.verified ? 'palm' : 'saffron'}`}>
-              {src.verified ? t({ en: 'Checked against the source for this project', ar: 'تمت مطابقته مع المصدر في هذا المشروع' }) : t({ en: 'Not yet checked against the primary source', ar: 'لم تتم مطابقته بعد مع المصدر الأصلي' })}
-            </p>
+            {src.verified && <p class="chip palm">{t({ en: 'Checked against the source for this project', ar: 'تمت مطابقته مع المصدر في هذا المشروع' })}</p>}
             {src.note && <p class="small muted">{src.note}</p>}
           </div>
         )}
@@ -36,7 +34,8 @@ function short(id: string, ar = false): string {
   const fixed: Record<string, string> = {
     'assumption-carrier': ar ? 'نسبة حاملين مفترضة' : 'assumed frequency',
     'assumption-detection': ar ? 'نسبة كشف مفترضة' : 'assumed detection',
-    'medlineplus-ar': 'MedlinePlus', 'cdc-birth-defects-1-in-33': 'CDC',
+    'medlineplus-ar': 'MedlinePlus', 'medlineplus-bthal': 'MedlinePlus', 'cdc-birth-defects-1-in-33': 'CDC',
+    'nhs-cvs': 'NHS · CVS', 'nhs-amniocentesis': 'NHS · amniocentesis',
   };
   if (fixed[id]) return fixed[id];
   const src = sourceById(id);

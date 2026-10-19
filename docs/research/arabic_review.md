@@ -90,7 +90,7 @@ The Arabic is generally clear, grammatical modern standard Arabic, and it alread
 
 ## Second pass (18 Oct 2026)
 
-Every bilingual text (364, listed by `node scripts/extract-arabic.mjs`) was read again in context, on the rendered screens as well as in the source. 70 corrections, applied by `scripts/arabic_fixes_2026-10-18.py` and four small edits:
+Every bilingual text (364, listed by `node scripts/extract-arabic.mjs`) was read again in context, on the rendered screens as well as in the source. 70 corrections, applied in the source (commit af15151) with four small edits:
 
 - **Kinship terms.** "Second cousin" was rendered قريب من الدرجة الثانية, which in Arabic names a second-degree relative (a sibling or grandparent). Now أحد أبناء العمومة أو الخؤولة من الدرجة الثانية; first cousins and double first cousins follow the same pattern.
 - **Meaning.** The teach-back button read تحقّقي من فهمي ("check my understanding" addressed to the user); now التحقق من فهمي. A partner's shared finding now reads اختار أن يشاركك: يحمل تغيّراً في الجين … instead of a noun phrase.
@@ -104,7 +104,7 @@ The official compatible-couple wording quoted on the result screen was checked a
 
 ## Third pass (19 Oct 2026): every string read in context
 
-All 365 bilingual texts were read against their English, then 52 Arabic screens (six personas, eight pages each, after the guided story) were captured at phone width and read in place. Changes (`scripts/arabic_fixes_2026-10-19.py`, plus two layout fixes):
+All 365 bilingual texts were read against their English, then 52 Arabic screens (six personas, eight pages each, after the guided story) were captured at phone width and read in place. Changes (commit 442803e, plus two layout fixes):
 
 | Where | Before | After | Why |
 |---|---|---|---|
@@ -121,3 +121,16 @@ All 365 bilingual texts were read against their English, then 52 Arabic screens 
 | Due-date chip, source chips | Arabic set in the monospace font | Plex Sans Arabic in right-to-left pages | Words looked small and spaced |
 
 Checked and kept: the official certificate quote matches the genetic-test section of the DoH standard («لا توجد خطورة على الطرف الآخر والأطفال»); كلاكما with a singular verb is correct; numerals, RTL order of the four children and gene names inside sentences render correctly. Narration re-rendered for the changed sentences (66 now: the partner card has two forms).
+
+## Fourth pass (19 Oct 2026, evening)
+
+All 364 bilingual texts were read again against their English, as was the Arabic product page (`site/ar.html`). Fixes:
+
+- **Gender.** Saeed's invitation screen said «ولا يرى شريكك» to a man whose partner is a woman. A masculine-reader form now reads «ولا ترى شريكتك». A scan for feminine forms without a masculine variant found no other case.
+- **Official wording.** The compatible-couple certificate is now quoted exactly as the DoH standard prints it: «لا توجد خطورة على الطرف الآخر والطفل» (it was «…والأطفال»).
+- **Grammar.** «حثل المادة البيضاء متبدّل اللون» → «…المتبدّل اللون» (the adjective follows a definite construct). «لدى كل زوجين، أقارب كانا أم لا» → «لدى أي زوجين، سواء أكانا قريبين أم لا» (dual, not plural). «بالنسبة للطفل» → «بالنسبة إلى الطفل». «هم الأرجح أن يحملوا» → «هم الأكثر احتمالاً أن يحملوا».
+- **Meaning.** «حالة التغيّر في الجين X» did not mean "carrier status"; now «أنكِ تحملين تغيّراً في الجين X، لا أكثر», with a masculine form. «قرأ برنامج الجينوم جينومَيكما» (a calque of "read your genomes") → «حلّل». The teach-back count said «بكلماتك» ("in your own words"), but the check is four multiple-choice questions; now «أجبتِ إجابة صحيحة عن 4 من 4 أسئلة», and the English was corrected too.
+- **Readability.** The longest Arabic sentences (the four outcomes of a pregnancy, the cousin background chance, what the panel does not test, the prenatal tests) were split. No Arabic explanation is now longer than 25 words (`docs/READABILITY.md`).
+- **Product page.** «أربعة أطفال بالعدد» → «الاحتمال في صورة أربعة أطفال».
+
+The narration was re-rendered for every changed sentence (`python scripts/render_audio.py`).

@@ -1,0 +1,132 @@
+{
+ "silah_en": {
+  "sentences": 75,
+  "words": 1040,
+  "words_per_sentence": 13.9,
+  "long_sentences_over_25_words": 1,
+  "percent": 1,
+  "one_in_n": 15,
+  "flesch_kincaid_grade": 6.9,
+  "flesch_reading_ease": 70.0,
+  "smog": 10.2,
+  "hardest": [
+   [
+    13.1,
+    "The premarital programme refers couples at risk to fertility services."
+   ],
+   [
+    11.1,
+    "Spinal muscular atrophy (SMA): A condition that weakens the muscles a baby uses to move, sit, swallow and breathe."
+   ],
+   [
+    10.7,
+    "Only embryos without the condition are transferred."
+   ],
+   [
+    10.7,
+    "Natural pregnancy with a test during pregnancy."
+   ],
+   [
+    10.7,
+    "A small sample from the placenta at 11 to 14 weeks, or of the fluid around the baby from 15 weeks, shows if the baby is affected."
+   ]
+  ]
+ },
+ "silah_ar": {
+  "sentences": 72,
+  "words": 926,
+  "words_per_sentence": 12.9,
+  "long_sentences_over_25_words": 0,
+  "percent": 1,
+  "one_in_n": 15,
+  "osman": 84.1,
+  "letters_per_word": 4.49,
+  "hardest": [
+   [
+    23,
+    "عينة صغيرة من المشيمة بين الأسبوع 11 و14، أو من السائل المحيط بالجنين ابتداءً من الأسبوع 15، تبيّن ما إذا كان الجنين مصاباً."
+   ],
+   [
+    21,
+    "تظهر علامات الثلاسيميا الشديدة عادةً خلال السنتين الأوليين من العمر، ومعرفة الحالة منذ الولادة تعني أن الفريق يتابع الطفل قبل ذلك."
+   ],
+   [
+    20,
+    "في دراسة على أطفال عولجوا قبل ظهور أي علامة، تمكّن 22 منهم من أصل 25 من المشي لاحقاً دون مساعدة."
+   ],
+   [
+    20,
+    "إذا كان الطفل مصاباً، فإن زراعة الخلايا الجذعية في الأسابيع الأولى من العمر، قبل ظهور العلامات، قد تغيّر مسار المرض."
+   ],
+   [
+    19,
+    "وهناك احتمال 2 من 4 أن يكون حاملاً للتغيّر الجيني وسليماً، واحتمال 1 من 4 ألا يحمل أي تغيّر."
+   ]
+  ]
+ },
+ "doh_en": {
+  "sentences": 24,
+  "words": 579,
+  "words_per_sentence": 24.1,
+  "long_sentences_over_25_words": 12,
+  "percent": 1,
+  "one_in_n": 0,
+  "flesch_kincaid_grade": 14.2,
+  "flesch_reading_ease": 36.5,
+  "smog": 16.2,
+  "hardest": [
+   [
+    21.5,
+    "This preventive program aims to identify carriers of some recessive genetic diseases who are planning to get married, to reveal the possibility of them having children with chronic and dangerous genetic diseases that are difficult to treat in the future."
+   ],
+   [
+    20.5,
+    "This program also includes providing sound medical advice to carriers of recessive genetic diseases enabling them to have healthy children and reduce (if not prevent) these genetic diseases through modern global technologies."
+   ],
+   [
+    20.1,
+    "Blood samples are sent to G42 laboratories in the UAE for complete or partial genetic sequencing, which includes only some recessive genetic diseases that cause serious genetic diseases that are difficult to treat as previously mentioned."
+   ],
+   [
+    19.9,
+    "In case a mutation / mutation that may cause a genetic disease to children exists, a specialist geneticist will explain these results to the two parties along with modern scientific methods to avoid these mutations when planning to have children."
+   ],
+   [
+    18.6,
+    "Individuals who carry a mutation on only one copy of the two copies of the recessive gene do not suffer from genetic disease, because the healthy copy of the gene is still working, but they carry and transmit the disease."
+   ]
+  ]
+ },
+ "doh_ar": {
+  "sentences": 24,
+  "words": 551,
+  "words_per_sentence": 23.0,
+  "long_sentences_over_25_words": 8,
+  "percent": 1,
+  "one_in_n": 0,
+  "osman": 67.4,
+  "letters_per_word": 4.91,
+  "hardest": [
+   [
+    55,
+    "سيقوم المعمل بعمل تقرير وراثي مشترك لكلا الطرفين سواء في حالة عدم وجود أو وجود طفرة أو طفرات في نفس الجين بالنسبة للجينات المختبرة والتي قد تسبب مرض لدى الاطفال دون ذكر تفاصيل الجينات أو الطفرات في التقرير المشترك وتكون النتيجة سالبة أو ايجابية فقط في هذا التقرير وذلك للحفاظ على سرية النتائج وخصوصية الطرفين."
+   ],
+   [
+    50,
+    "الأمراض المتنحية تنتج عن وجود طفرة أو أكثر من طفرة في نسختي الجين الواحد كي يظهر المرض، أما الافراد الذين يحملون طفرة على نسخة واحدة فقط من نسختي الجين المتنحي، فهؤلاء لا يعانون من المرض الوراثي وذلك لأن النسخة السليمة من الجين ما زالت تعمل ولكنهم يكونوا حاملين وناقلين للمرض."
+   ],
+   [
+    35,
+    "سيوفر المعمل تقارير تفصيلية وراثية فردية وشخصية على حدى لكل مشارك من الطرفين إذا وجدت طفرة أو طفرات متنحية مسببة للمرض أو غالبا ما تسبب المرض في نفس الجين لدى الطرفين المشاركين بالنسبة للجينات المختبرة."
+   ],
+   [
+    35,
+    "إرسال عينات الدم لمعامل جي 42 في دولة الامارات لعمل التسلسل الجيني الكامل أو الجزئي والذي يشمل فقط بعض الأمراض الوراثية المتنحية التي تسبب أمراض وراثية خطيرة لدى المصابين بالمرض يصعب علاجها كما سبق ذكره."
+   ],
+   [
+    33,
+    "في حال وجود طفرة أو طفرات قد تسبب مرض وراثي للأطفال سيقوم طبيب أمراض وراثية متخصص بشرح هذه النتائج للطرفين كما يقوم بشرح الطرق العلمية الحديثة لتفادي هذه الطفرات عند الرغبة في الإنجاب."
+   ]
+  ]
+ }
+}

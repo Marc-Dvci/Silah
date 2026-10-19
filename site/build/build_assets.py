@@ -48,10 +48,12 @@ for n in ['invitation', 'result', 'ask', 'family', 'birth', 'counsellor', 'fatim
 # film: 1080p H.264 for the web (captions are burnt in) and a poster from the closing card
 film = os.path.join(CHALLENGE, 'film', 'Silah_film_1440p.mp4')
 mp4 = os.path.join(OUT, 'silah-film.mp4')
-if not os.path.exists(mp4):
+if not os.path.exists(mp4) or os.path.getmtime(mp4) < os.path.getmtime(film):
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', film, '-vf', 'scale=1920:-2', '-c:v', 'libx264', '-preset', 'slow', '-crf', '26',
                     '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', mp4], check=True)
-subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', '139.5', '-i', film, '-frames:v', '1', '-vf', 'scale=1600:-2', os.path.join(OUT, 'img', 'film-poster.jpg')], check=True)
+# poster: the closing card after the last caption has gone (1.5 s before the end)
+dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', film], capture_output=True, text=True, check=True).stdout)
+subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', f'{dur - 1.5:.2f}', '-i', film, '-frames:v', '1', '-vf', 'scale=1600:-2', os.path.join(OUT, 'img', 'film-poster.jpg')], check=True)
 
 # deck
 shutil.copy(os.path.join(CHALLENGE, 'deck', 'Silah_deck.pdf'), os.path.join(OUT, 'silah-deck.pdf'))

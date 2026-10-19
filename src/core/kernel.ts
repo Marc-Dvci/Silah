@@ -117,8 +117,8 @@ export function coupleView(own: PersonResult, couple: CoupleSection): CoupleView
         neither: AR_OUTCOMES.neither.toJSON(),
       },
       text: {
-        en: `You both carry a change in ${s.gene}. In each pregnancy there is a 1 in 4 chance the child has ${cond.name.en}, a 2 in 4 chance the child is a healthy carrier, and a 1 in 4 chance the child carries neither change.`,
-        ar: `أنتما تحملان تغيّراً في الجين ${s.gene}. في كل حمل، هناك احتمال 1 من 4 أن يكون الطفل مصاباً ب${cond.name.ar}، واحتمال 2 من 4 أن يكون حاملاً للتغيّر الجيني وسليماً، واحتمال 1 من 4 ألا يحمل أي تغيّر.`,
+        en: `You both carry a change in ${s.gene}. In each pregnancy, there is a 1 in 4 chance the child has ${cond.name.en}. There is a 2 in 4 chance the child is a healthy carrier, and a 1 in 4 chance the child carries neither change.`,
+        ar: `أنتما تحملان تغيّراً في الجين ${s.gene}. في كل حمل، هناك احتمال 1 من 4 أن يكون الطفل مصاباً ب${cond.name.ar}. وهناك احتمال 2 من 4 أن يكون حاملاً للتغيّر الجيني وسليماً، واحتمال 1 من 4 ألا يحمل أي تغيّر.`,
       },
       sources: ['doh-pms-2024', 'medlineplus-ar'],
       arithmetic: 'Each parent passes one of two copies at random: 1/2 × 1/2 = 1/4 affected; 2 × 1/2 × 1/2 = 1/2 carrier.',
@@ -144,7 +144,7 @@ export function coupleView(own: PersonResult, couple: CoupleSection): CoupleView
         en: `You carry a change in ${f.gene}; ${couple.partnerName} tested negative for it. A negative test lowers the chance a lot but not to zero: about ${fmt(affected)} per pregnancy for this gene.`,
         ar: `لديك تغيّر في الجين ${f.gene}، وجاءت نتيجة فحص ${own.sex === 'M' ? 'شريكتك' : 'شريكك'} لهذا الجين سلبية. النتيجة السلبية تخفض الاحتمال كثيراً لكن ليس إلى الصفر: نحو 1 من ${affected.oneIn().toLocaleString('en-US')} في كل حمل لهذا الجين.`,
       },
-      sources: [src.ref ?? 'assumption-carrier', 'assumption-detection', ...(famPrior.isZero() ? [] : ['bennett-2002'])],
+      sources: [src.ref ?? 'assumption-carrier', 'assumption-detection', ...(famPrior.isZero() ? [] : ['hamamy-2012'])],
       arithmetic: `Partner residual = (r(1−d_fam) + p(1−d)) / (1 − r·d_fam − p·d) with r=${famPrior}, p=${src.carrier}, d=${DETECTION_GENE}, d_fam=${DETECTION_FAMILIAL}; × 1 (you carry) × 1/4.`,
     });
     cards.push({
@@ -154,7 +154,7 @@ export function coupleView(own: PersonResult, couple: CoupleSection): CoupleView
       numbers: {},
       text: {
         en: `Carrying a change in ${f.gene} does not make you ill. It matters only if a child also receives a change in the same gene from the other parent.`,
-        ar: `وجود تغيّر في الجين ${f.gene} لديك لا يسبب المرض، ولا تكون له أهمية إلا إذا ورث الطفل تغيّراً في الجين نفسه من الوالد الآخر أيضاً.`,
+        ar: `وجود تغيّر في الجين ${f.gene} لديك لا يسبب المرض. ولا تكون له أهمية إلا إذا ورث الطفل تغيّراً في الجين نفسه من الوالد الآخر أيضاً.`,
       },
       sources: ['medlineplus-ar'],
     });
@@ -241,8 +241,8 @@ export function notAssessedCard(): FactCard {
     kind: 'not-assessed',
     numbers: {},
     text: {
-      en: 'The premarital panel looks only at recessive conditions, and not all of them. It does not look at conditions passed through the X chromosome, dominant conditions, chromosome differences, new changes that arise in the child, or causes that are not genetic.',
-      ar: 'تفحص لوحة ما قبل الزواج الحالات المتنحية فقط، وليس جميعها. ولا تفحص الحالات المرتبطة بالصبغي X، ولا الحالات السائدة، ولا الاختلالات الصبغية، ولا التغيرات الجديدة التي تنشأ لدى الطفل، ولا الأسباب غير الوراثية.',
+      en: 'The premarital panel looks only at recessive conditions, and not all of them. It does not look at dominant conditions or conditions linked to the X chromosome. It also does not look at chromosome differences, new changes that start in the child, or causes that are not genetic.',
+      ar: 'تفحص لوحة ما قبل الزواج الحالات المتنحية فقط، وليس جميعها. ولا تفحص الحالات السائدة ولا الحالات المرتبطة بالصبغي X. ولا تفحص كذلك الاختلالات الصبغية، ولا التغيرات الجديدة التي تنشأ لدى الطفل، ولا الأسباب غير الوراثية.',
     },
     sources: ['doh-pms-2024'],
   };
@@ -256,7 +256,7 @@ export function backgroundCard(): FactCard {
     numbers: { birthDefects: b.toJSON() },
     text: {
       en: 'For every couple, related or not, about 1 in 33 babies is born with a birth defect. No test removes this background chance.',
-      ar: 'لدى كل زوجين، أقارب كانا أم لا، يولد نحو 1 من كل 33 طفلاً بعيب خلقي. لا يوجد فحص يزيل هذا الاحتمال الأساسي.',
+      ar: 'لدى أي زوجين، سواء أكانا قريبين أم لا، يولد نحو 1 من كل 33 طفلاً بعيب خلقي. لا يوجد فحص يزيل هذا الاحتمال الأساسي.',
     },
     sources: ['cdc-birth-defects-1-in-33'],
   };
@@ -269,13 +269,13 @@ export function consanguinityCard(rel: Relationship): FactCard | null {
     return {
       id: 'consanguinity',
       kind: 'consanguinity',
-      numbers: { inbreeding: F.toJSON() },
+      numbers: { inbreeding: F.toJSON(), births: Q.of(100, 1).toJSON() },
       ranges: { added: [Q.of(17, 1000).toJSON(), Q.of(28, 1000).toJSON()] },
       text: {
-        en: `For first cousins, the background chance of a child with a serious condition is about 1.7 to 2.8 percentage points higher than for unrelated parents, mostly from recessive conditions the panel does not test.`,
-        ar: `لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يرتفع الاحتمال الأساسي لإنجاب طفل بحالة خطيرة بنحو 1.7 إلى 2.8 نقطة مئوية مقارنة بالوالدين غير الأقارب، ومعظم ذلك من حالات متنحية لا تفحصها اللوحة.`,
+        en: `For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions the panel does not test.`,
+        ar: `لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية لا تفحصها اللوحة.`,
       },
-      sources: ['bennett-2002'],
+      sources: ['hamamy-2012'],
       arithmetic: `Inbreeding coefficient F = ${F}.`,
     };
   }
@@ -293,7 +293,7 @@ export function consanguinityCard(rel: Relationship): FactCard | null {
           en: 'Because you are related, the background chance is slightly higher than for unrelated parents. It is lower than for first cousins.',
           ar: 'لأنكما قريبان، فإن الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب، لكنه أقل منه لدى أبناء العمومة من الدرجة الأولى.',
         },
-    sources: ['bennett-2002'],
+    sources: ['hamamy-2012'],
     arithmetic: `Inbreeding coefficient F = ${F}.`,
   };
 }
@@ -304,20 +304,20 @@ export const OPTIONS: FactCard[] = [
     kind: 'option',
     numbers: {},
     text: {
-      en: 'IVF with testing of embryos before pregnancy (PGT). Only embryos without the condition are transferred. The premarital programme links at-risk couples to reproductive medicine services.',
+      en: 'IVF with testing of embryos before pregnancy (PGT). Only embryos without the condition are transferred. The premarital programme refers couples at risk to fertility services.',
       ar: 'أطفال الأنابيب مع فحص الأجنة قبل الحمل (الفحص الجيني قبل الزرع). تُنقل فقط الأجنة غير المصابة. ويربط برنامج فحص ما قبل الزواج الأزواجَ المعرّضين للخطر بخدمات الطب الإنجابي.',
     },
-    sources: ['doh-pms-2024', 'law-7-2019-mar'],
+    sources: ['doh-pms-2024'],
   },
   {
     id: 'option:prenatal',
     kind: 'option',
     numbers: { cvsFrom: { n: '11', d: '1' }, cvsTo: { n: '14', d: '1' }, amnioFrom: { n: '15', d: '1' } },
     text: {
-      en: 'Natural pregnancy with a test during pregnancy: a placenta sample at 11 to 14 weeks, or a fluid sample from 15 weeks, shows whether the baby is affected.',
-      ar: 'حمل طبيعي مع فحص أثناء الحمل: عينة من المشيمة بين الأسبوع 11 و14، أو عينة من السائل الأمنيوسي ابتداءً من الأسبوع 15، تبيّن ما إذا كان الجنين مصاباً.',
+      en: 'Natural pregnancy with a test during pregnancy. A small sample from the placenta at 11 to 14 weeks, or of the fluid around the baby from 15 weeks, shows if the baby is affected.',
+      ar: 'حمل طبيعي مع فحص أثناء الحمل. عينة صغيرة من المشيمة بين الأسبوع 11 و14، أو من السائل المحيط بالجنين ابتداءً من الأسبوع 15، تبيّن ما إذا كان الجنين مصاباً.',
     },
-    sources: ['acog-162'],
+    sources: ['nhs-cvs', 'nhs-amniocentesis'],
   },
   {
     id: 'option:birth',
@@ -363,8 +363,8 @@ export function relativeCard(rel: Relative, gene: string): FactCard {
       en: `For ${names[rel].en}, the chance of carrying the same change is about 1 in ${p.oneIn()}.`,
       ar: `بالنسبة إلى ${names[rel].ar}، فإن احتمال أن يحمل التغيّر نفسه يبلغ نحو 1 من ${p.oneIn()}.`,
     },
-    sources: ['bennett-2002'],
-    arithmetic: 'Coefficient of relationship to a known carrier.',
+    sources: ['doh-pms-2024', 'hamamy-2012'],
+    arithmetic: 'Coefficient of relationship to a known carrier: a carrier passes the change to each child with chance 1/2 (DoH booklet), so each step through a parent halves it: brother or sister 1/2, aunt or uncle 1/4, first cousin 1/8 (as Hamamy 2012 prints).',
   };
 }
 

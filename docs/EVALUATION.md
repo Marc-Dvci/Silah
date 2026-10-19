@@ -90,6 +90,8 @@ The official premarital report wording (DoH Premarital Screening Standard V3, re
 
 This is a content comparison, not a measure of understanding. The protocol to measure understanding with people is in `docs/PILOT.md`.
 
+**Readability, in both languages** (`docs/READABILITY.md`, `python eval/readability/score.py`). Silah's explanations were measured against the DoH information sheet couples sign before the test (Appendix 5). In English, Silah is at Flesch-Kincaid grade 6.9 against 14.2 for the sheet, within the NIH and CDC target of grade 8 or lower. In Arabic, Silah scores 84.1 on OSMAN against 67.4 (higher is easier). Sentences average 13.9 words (English) and 12.9 (Arabic), against 24.1 and 23.0. Silah writes every chance as a natural frequency ("1 in 4"); the sheet uses percentages.
+
 ## 5. Which couples to invite first: simulated population
 
 `node scripts/sim_app.mjs` · `src/core/population.ts` · `tests/population.test.ts`

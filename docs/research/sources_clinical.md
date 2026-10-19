@@ -4,6 +4,22 @@ Checked 18 October 2026. The machine-readable version is `sources_clinical.json`
 
 Method: abstracts came from Europe PMC records, which carry the same PMIDs and DOIs as PubMed. Open-access full texts came from PMC. PubMed, Springer, ASH and AAP pages returned blocks or 403 to the fetch tool, so they were not read directly. Quotes from the CDC and FDA pages were extracted by the fetch tool, so re-check their wording in a browser before submission.
 
+## Re-check of 19 October 2026
+
+Every source the app cites is now checked for the exact statement it supports, and the app shows no unchecked source (`tests/sources.test.ts` enforces it). The five records below, open on 18 October, were closed as follows:
+
+| Record | Outcome |
+|---|---|
+| Bennett 2002 (cousin risk 1.7–2.8%) | Replaced by Hamamy 2012, J Community Genet 3:185–192 (PMC3419292, open access), which states the figure and attributes it to Bennett et al. 2002. Hamamy also prints 1/8 for genes shared by first cousins. |
+| Chien 2009 | The app states only that earlier treatment does best. The abstract (PMID 19948615) supports it: screened infants treated early had normal growth and motor gains and significantly better survival. Ventilator-free survival is not stated anywhere. |
+| Aldenhoven 2015 | The app states only that younger age at transplant predicts better outcomes. The abstract (PMID 25624320) supports it. No age threshold is stated. |
+| Speiser 2018 | The app states that in the severe form a crisis can happen in infancy if the condition is not known. The full text (PMC6456929) supports it: salt wasting in 75% of severe cases, potentially fatal shock, and higher early neonatal morbidity and mortality when the diagnosis is missed. |
+| TIF 2021 | Replaced by MedlinePlus Genetics, Beta thalassemia: signs of thalassemia major appear within the first 2 years of life. |
+
+Also checked on 19 October: Jain 2025 carrier rates against the PMC12397869 full text (all seven figures match); MedlinePlus on carriers; NHS pages for CVS (11th to 14th week) and amniocentesis (15 to 20 weeks), replacing ACOG Practice Bulletin 162; the CDC 1 in 33 wording and the FDA Lenmeldy release (18 March 2024) in a browser. The legal record for Federal Law No. 7 of 2019 is no longer cited in the app; the IVF option rests on the DoH standard's wording.
+
+## First check, 18 October 2026
+
 Summary: 13 of 18 records are verified as written. Five are not verified: Bennett 2002 (risk figures), Chien 2009 (ventilator-free survival), Aldenhoven 2015 (age threshold), Speiser 2018 (crisis timing), and TIF 2021 (transfusion onset age).
 
 ---

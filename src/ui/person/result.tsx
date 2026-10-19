@@ -80,7 +80,7 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
               <p class="eyebrow">{t({ en: 'Conditions on the panel, per pregnancy', ar: 'الحالات التي تفحصها اللوحة، في كل حمل' })}</p>
               <div style={{ margin: '14px 0' }}><Field n={view.panelRisk.oneIn()} /></div>
               <p><b class="num">{t({ en: `1 in ${view.panelRisk.oneIn().toLocaleString('en-US')}`, ar: `1 من ${view.panelRisk.oneIn().toLocaleString('en-US')}` })}</b> {t({ en: 'per pregnancy: about one dot in this whole field.', ar: 'في كل حمل: نحو نقطة واحدة بين كل هذه النقاط.' })}</p>
-              <p class="muted small" style={{ marginTop: '8px' }}>{t({ en: 'The official certificate wording for a compatible couple reads “No risk for either the other partner or children to be carrier or diseased”. The same standard also says the test does not cover all genetic disorders. Silah shows both halves.', ar: 'تنص صيغة الشهادة الرسمية للزوجين المتوافقين على «لا توجد خطورة على الطرف الآخر والأطفال»، بينما يذكر المعيار نفسه أن الفحص لا يغطي جميع الاضطرابات الوراثية. يعرض تطبيق صلة الأمرين معاً.' })}</p>
+              <p class="muted small" style={{ marginTop: '8px' }}>{t({ en: 'The official certificate wording for a compatible couple reads “No risk for either the other partner or children to be carrier or diseased”. The same standard also says the test does not cover all genetic disorders. Silah shows both halves.', ar: 'تنص صيغة الشهادة الرسمية للزوجين المتوافقين على «لا توجد خطورة على الطرف الآخر والطفل»، بينما يذكر المعيار نفسه أن الفحص لا يغطي جميع الاضطرابات الوراثية. يعرض تطبيق صلة الأمرين معاً.' })}</p>
               <div style={{ marginTop: '10px' }}><SourceChips ids={['doh-pms-2024']} /></div>
             </div>
           </section>
@@ -144,7 +144,7 @@ function OwnFindings({ s, act }: { s: PersonState; act: Act }) {
               <Toggle on={!!g} label={t({ en: `Share ${f.gene} with ${partner}`, ar: `مشاركة ${f.gene} مع ${partner}` })}
                 onChange={on => act(st => on ? shareFinding(st, f.gene) : seq !== undefined ? revoke(st, seq) : Promise.resolve())} />
             </div>
-            {g && <Receipt><b>{t({ en: 'Shared', ar: 'تمت المشاركة' })}</b> · {partner} · {t({ en: `${f.gene} carrier status only`, ar: `حالة التغيّر في الجين ${f.gene} فقط` })} · {t({ en: 'you can stop sharing at any time', ar: 'يمكنك إيقاف المشاركة في أي وقت' })}</Receipt>}
+            {g && <Receipt><b>{t({ en: 'Shared', ar: 'تمت المشاركة' })}</b> · {partner} · {t({ en: `${f.gene} carrier status only`, ar: `أنكِ تحملين تغيّراً في الجين ${f.gene}، لا أكثر`, arM: `أنك تحمل تغيّراً في الجين ${f.gene}، لا أكثر` })} · {t({ en: 'you can stop sharing at any time', ar: 'يمكنك إيقاف المشاركة في أي وقت' })}</Receipt>}
           </div>
         );
       })}

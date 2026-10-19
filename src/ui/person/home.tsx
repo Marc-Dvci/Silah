@@ -48,8 +48,8 @@ export function Home({ s, act, base }: { s: PersonState; act: Act; base: string 
       key: 'check', done: !!s.teachback && s.teachback.correct === s.teachback.total,
       title: t({ en: 'Make sure it is clear', ar: 'تأكدي من وضوح الصورة', arM: 'تأكد من وضوح الصورة' }),
       sub: s.teachback
-        ? t({ en: `You explained back ${s.teachback.correct} of ${s.teachback.total} points.`, ar: `شرحتِ ${s.teachback.correct} من ${s.teachback.total} نقاط بكلماتك.`, arM: `شرحت ${s.teachback.correct} من ${s.teachback.total} نقاط بكلماتك.` })
-        : t({ en: 'Four short questions, in your own words.', ar: 'أربعة أسئلة قصيرة بكلماتك.' }),
+        ? t({ en: `You explained back ${s.teachback.correct} of ${s.teachback.total} points.`, ar: `أجبتِ إجابة صحيحة عن ${s.teachback.correct} من ${s.teachback.total} أسئلة.`, arM: `أجبت إجابة صحيحة عن ${s.teachback.correct} من ${s.teachback.total} أسئلة.` })
+        : t({ en: 'Four short questions to check the picture is clear.', ar: 'أربعة أسئلة قصيرة للتأكد من وضوح الصورة.' }),
       to: 'check',
     },
     ...(atRisk ? [{
@@ -123,14 +123,14 @@ function Invitation({ s, act }: { s: PersonState; act: Act }) {
         <h1>{t({ en: `A couple check for you and ${partner}, before your next pregnancy.`, ar: `فحص ثنائي لكِ ول${partner} قبل حملكما القادم.`, arM: `فحص ثنائي لك ول${partner} قبل حملكما القادم.` })}</h1>
         <p class="muted">{t({
           en: 'You married before genetic testing became part of premarital screening. Your genomes were already read by the Emirati Genome Programme, so there is no new blood test: only a check of the genes that matter for children.',
-          ar: 'تزوجتما قبل أن يصبح الفحص الجيني جزءاً من فحص ما قبل الزواج. وقد سبق أن قرأ برنامج الجينوم الإماراتي جينومَيكما، فلا حاجة إلى فحص دم جديد، بل يقتصر الأمر على فحص الجينات المهمة لصحة الأطفال.',
+          ar: 'تزوجتما قبل أن يصبح الفحص الجيني جزءاً من فحص ما قبل الزواج. وقد سبق أن حلّل برنامج الجينوم الإماراتي جينومَيكما، فلا حاجة إلى فحص دم جديد، بل يقتصر الأمر على فحص الجينات المهمة لصحة الأطفال.',
         })}</p>
         <div class="pool stack">
           <h3>{t({ en: 'What happens if you agree', ar: 'ماذا يحدث إذا وافقتِ', arM: 'ماذا يحدث إذا وافقت' })}</h3>
           {[
             { en: 'Both of you have to agree. If one says no, nothing is checked.', ar: 'يجب أن يوافق كلاكما، وإذا رفض أحدكما فلن يُفحص شيء.' },
             { en: 'Only the 563 genes of the premarital panel are looked at, for this couple only.', ar: 'تُفحص فقط الجينات الـ563 في لوحة ما قبل الزواج، ولهذين الزوجين فقط.' },
-            { en: 'You each see your own result. Your partner sees only the genes you both carry.', ar: 'يرى كل منكما نتيجته، ولا يرى شريكك إلا الجينات التي تحملانها كلاكما.' },
+            { en: 'You each see your own result. Your partner sees only the genes you both carry.', ar: 'يرى كل منكما نتيجته، ولا يرى شريكك إلا الجينات التي تحملانها كلاكما.', arM: 'يرى كل منكما نتيجته، ولا ترى شريكتك إلا الجينات التي تحملانها كلاكما.' },
             { en: 'A genetic counsellor sees the result only if you both carry a change in the same gene.', ar: 'لا يرى المستشار الوراثي النتيجة إلا إذا كنتما تحملان تغيّراً في الجين نفسه.' },
           ].map((x, i) => <p key={i} class="row" style={{ alignItems: 'flex-start' }}><span class="dot" style={{ color: 'var(--saffron)', marginTop: '10px' }} /><span>{t(x)}</span></p>)}
         </div>

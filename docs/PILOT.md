@@ -3,7 +3,7 @@
 ## Who it is for
 
 - **Couples who receive a premarital genetic result** in Abu Dhabi: about 565 incompatible couples since 2022, and every "compatible" couple who reads a certificate that says "No risk".
-- **Couples married before the mandate**, who were never offered a genetic couple check. Abu Dhabi recorded 15,628 Emirati births in 2024. Assuming about 3,500 screened couples a year since the mandate and about 0.3 births per couple per year, roughly 85% of a year's Emirati births in 2026 are to couples the genetic test has not reached. This is an estimate from stated inputs, not a published figure.
+- **Couples married before the mandate**, who were never offered a genetic couple check. Abu Dhabi recorded 15,628 Emirati births in 2024. All 11,748 couples tested from 2022 to July 2026, at an assumed 0.3 births per couple per year, would account for at most about 3,500 births a year (11,748 × 0.3), about 22% of 15,628. So at least 78% of this year's Emirati births, roughly three in four, are to couples the genetic test has not reached. This is an estimate from stated inputs, not a published figure.
 - **Genetic counsellors and family physicians**, who start each session already knowing what the couple has understood.
 - **Delivery hospitals**, who know before birth which babies need a targeted test.
 
@@ -53,7 +53,8 @@ Each figure is marked as measured (published), assumed (my input, to be replaced
 | Re-check volume | DoH invites 20,000 couples married before the mandate each year | Assumed |
 | At-risk couples found by the re-check | 20,000 × 4.8% ≈ 960 a year, about 8 times today's flow | Priced |
 | Licence | AED 100 per couple served, all moments included | Assumed |
-| Annual cost at that volume | (20,000 re-check + 3,500 premarital couples) × AED 100 ≈ AED 2.35 million | Priced |
+| Premarital couples tested each year | 11,748 from 2022 to July 2026: about 2,600 a year | Measured |
+| Annual cost at that volume | (20,000 re-check + 2,600 premarital couples) × AED 100 ≈ AED 2.26 million | Priced |
 | Running cost per question | None on the server: the model runs on the phone or the counsellor's computer | Design |
 
 **Why the programme owner would pay.** The re-check would multiply the number of at-risk couples needing counselling by about eight, against a national genetics workforce of 17. Silah takes the explaining, the understanding check and the triage off that workforce: every counselling visit starts from a brief that shows what the couple already understood, and urgent cases (a pregnancy, distress) come first. The genomes, the panel and the referral KPI already exist; Silah is the delivery layer that lets them reach married couples.

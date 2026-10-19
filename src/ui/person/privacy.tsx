@@ -104,7 +104,7 @@ function scopeLabel(scope: string, t: (x: any) => string): string {
   };
   if (fixed[scope]) return t(fixed[scope]);
   const gene = scope.match(/^([A-Z0-9, ]+?) carrier status only$/);
-  if (gene) return t({ en: `${gene[1]} carrier status only`, ar: `حالة التغيّر في الجين ${gene[1]} فقط` });
+  if (gene) return t({ en: `${gene[1]} carrier status only`, ar: `أنكِ تحملين تغيّراً في الجين ${gene[1]}، لا أكثر`, arM: `أنك تحمل تغيّراً في الجين ${gene[1]}، لا أكثر` });
   const plan = scope.match(/^([A-Z0-9, ]+?) only, this pregnancy$/);
   if (plan) return t({ en: `${plan[1]} only, this pregnancy`, ar: `${plan[1]} فقط، لهذا الحمل` });
   return scope;

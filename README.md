@@ -4,6 +4,10 @@
 
 Future Health Digital Innovation Challenge · Fertility · Challenge 03, *Understanding and Reducing Inherited Disease Risk*.
 
+**[Live demo](https://marc-dvci.github.io/Silah/demo/)** · [Product page](https://marc-dvci.github.io/Silah/) ([العربية](https://marc-dvci.github.io/Silah/ar.html)) · [Film, 2:23](https://marc-dvci.github.io/Silah/#film) · [Deck (PDF)](https://marc-dvci.github.io/Silah/assets/silah-deck.pdf) · [Assumptions and limitations](docs/ASSUMPTIONS_AND_LIMITATIONS.md)
+
+The demo runs in the browser with a fictional family: on a desktop it shows a phone and the health-system side together, with a ten-step guided story.
+
 Silah serves three moments where knowing a genetic risk can still change an outcome:
 
 1. **Before the next pregnancy.** Couples who married before genetic testing joined premarital screening are invited, by non-genetic signals only, to a couple check run on genomes the Emirati Genome Programme already holds. Both partners must consent.
@@ -30,6 +34,7 @@ python tests/e2e/a11y.py      # axe-core WCAG 2.2 AA on 18 screens, both languag
 python tests/e2e/webgpu.py    # Gemma 4 E2B inside the browser (WebGPU, ~3 GB download once)
 python tests/e2e/offline.py   # the built app with the network off (needs `npx vite preview --port 4173`)
 python tests/e2e/site.py      # the product page in both languages, as GitHub Pages serves it (after `npm run build`)
+python eval/readability/score.py   # readability of the explanations vs the DoH information sheet (pip install textstat==0.7.13)
 ```
 
 Everything runs on one machine at no cost: no server, no cloud, no API key. The optional language model runs either on the same computer (llama.cpp) or inside the browser (WebGPU).
@@ -45,7 +50,7 @@ Everything runs on one machine at no cost: no server, no cloud, no API key. The 
  ┌──────────────────────────────────────────┐   signed   ┌────────────────────────────────────┐
  │ Vault: AES-GCM, key kept by the browser  │◀──bundle───│ Genomics lab / EGP couple check     │
  │ Kernel: exact fractions → fact cards     │            │  (Ed25519 signatures)               │
- │ Explain: fixed text + Emirati narration  │──consent──▶│ Counselling queue + pre-visit brief │
+ │ Explain: fixed text + narration (AR, EN) │──consent──▶│ Counselling queue + pre-visit brief │
  │ Teach-back, options, birth plan          │──brief────▶│ Pathway tracker, DoH referral KPI   │
  │ Ask: FAQ → hard routes → model → verifier│──plan─────▶│ Delivery hospital: birth plans      │
  │ Receipts: signed, hash-chained, revocable│──blinded──▶│ Invitation service (RFC 9474)       │
@@ -71,3 +76,7 @@ Privacy rule, enforced in code and checked end to end: **each partner learns onl
 - Arabic text is Modern Standard Arabic written for this prototype, using the DoH booklet's wording where possible, with masculine and feminine forms for the reader.
 - Carrier frequencies are published Emirati figures for seven genes; the rest use a stated 1 in 200 assumption. Detection rates for the DoH panel are not published; Silah assumes 90% per gene and 99% for a known family variant and shows this next to every number that uses it.
 - See `docs/` for sources, the threat model, evaluation results and the full list of assumptions.
+
+## Licence
+
+Apache License 2.0, see `LICENSE`. Third-party components keep their own licences (`docs/DATA_AND_RIGHTS.md`).

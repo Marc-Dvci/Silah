@@ -85,7 +85,7 @@ export const CONDITIONS: Condition[] = [
   {
     id: 'mld',
     genes: ['ARSA'],
-    name: { en: 'Metachromatic leukodystrophy (MLD)', ar: 'حثل المادة البيضاء متبدّل اللون' },
+    name: { en: 'Metachromatic leukodystrophy (MLD)', ar: 'حثل المادة البيضاء المتبدّل اللون' },
     what: {
       en: 'A condition that slowly damages the nervous system. In its early-onset forms, signs begin in early childhood.',
       ar: 'حالة تُتلف الجهاز العصبي تدريجياً، وفي أشكالها المبكرة تبدأ العلامات في الطفولة المبكرة.',
@@ -200,8 +200,8 @@ export const CONDITIONS: Condition[] = [
     },
     birthPlan: {
       action: {
-        en: 'Routine newborn screening already looks for sickle cell. Knowing in advance means care, including daily penicillin by four months of age, is planned before birth. In the trial that established penicillin, serious pneumococcal infections fell by 84%.',
-        ar: 'يبحث فحص حديثي الولادة الروتيني عن فقر الدم المنجلي أصلاً. والمعرفة المسبقة تعني التخطيط للرعاية قبل الولادة، ومنها البنسلين اليومي بحلول سن أربعة أشهر. وفي التجربة التي أثبتت فائدة البنسلين، انخفضت العدوى الخطيرة بالمكوّرات الرئوية بنسبة 84%.',
+        en: 'Routine newborn screening already looks for sickle cell. Knowing in advance means care, including daily penicillin by four months of age, is planned before birth. In the trial that showed this works, serious pneumococcal blood infections fell by 84%.',
+        ar: 'يبحث فحص حديثي الولادة الروتيني عن فقر الدم المنجلي أصلاً. والمعرفة المسبقة تعني التخطيط للرعاية قبل الولادة، ومنها البنسلين اليومي بحلول سن أربعة أشهر. وفي التجربة التي أثبتت فائدته، انخفضت عدوى الدم الخطيرة بالمكوّرات الرئوية بنسبة 84%.',
       },
       window: {
         en: 'The risk of serious infection is highest in early childhood.',
@@ -231,13 +231,13 @@ export const CONDITIONS: Condition[] = [
         ar: 'المعرفة عند الولادة تتيح لفريق أمراض الدم التخطيط للرعاية قبل أن يصاب الطفل بفقر الدم.',
       },
       window: {
-        en: 'Planning early means the first transfusion is a scheduled visit, not an emergency.',
-        ar: 'التخطيط المبكر يعني أن يكون أول نقل للدم موعداً مرتّباً لا حالة طارئة.',
+        en: 'Signs of severe thalassaemia usually appear within the first two years. Knowing from birth means the team is watching before then.',
+        ar: 'تظهر علامات الثلاسيميا الشديدة عادةً خلال السنتين الأوليين من العمر، ومعرفة الحالة منذ الولادة تعني أن الفريق يتابع الطفل قبل ذلك.',
       },
       urgency: 'first-months',
-      sources: ['tif-2021'],
+      sources: ['medlineplus-bthal'],
     },
-    sources: ['tif-2021'],
+    sources: ['medlineplus-bthal'],
   },
   {
     id: 'sbthal',
@@ -366,7 +366,7 @@ export function genericCondition(gene: string): Condition {
     name: { en: `A recessive condition linked to ${gene}`, ar: `حالة متنحية مرتبطة بالجين ${gene}` },
     what: {
       en: `Your counsellor will explain what changes in ${gene} mean for a child, and how serious the condition is.`,
-      ar: `سيشرح لكما المستشار الوراثي ما تعنيه التغيرات في الجين ${gene} بالنسبة للطفل، ومدى شدة الحالة.`,
+      ar: `سيشرح لكما المستشار الوراثي ما تعنيه التغيرات في الجين ${gene} بالنسبة إلى الطفل، ومدى شدة الحالة.`,
     },
     notChanged: {
       en: 'Carriers of recessive conditions are almost always healthy.',

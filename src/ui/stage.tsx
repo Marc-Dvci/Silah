@@ -75,18 +75,25 @@ export function Stage() {
     const w = clinic.current?.contentWindow;
     if (w) w.location.hash = `#/c/${s.clinic}`;
   };
-  // One switch for every phone, so a viewer who does not read Arabic can follow the story in English.
-  const [phoneLang, setPhoneLang] = useState<Lang | null>(null);
+  // One switch for every phone. The stage starts in English so a viewer who does not read Arabic can
+  // follow the story; Arabic is one tap away. Phones opened on their own keep each person's language.
+  const [phoneLang, setPhoneLang] = useState<Lang>(() => sessionStorageGet('silah-phone-lang') === 'ar' ? 'ar' : 'en');
+  const [ready, setReady] = useState(false);
+  const applyLang = async (lang: Lang) => {
+    await ensureSeeded();
+    for (const p of PERSONAS) await withPerson(p.id, st => setLang(st, lang))();
+  };
+  useEffect(() => { if (wide && !ready) applyLang(phoneLang).then(() => setReady(true)); }, [wide]);
   const switchLang = async (lang: Lang) => {
     setPhoneLang(lang);
-    for (const p of PERSONAS) await withPerson(p.id, st => setLang(st, lang))();
+    try { sessionStorage.setItem('silah-phone-lang', lang); } catch { /* private mode */ }
+    await applyLang(lang);
     phone.current?.contentWindow?.location.reload();
   };
   const reset = async () => {
     await dbClearAll();
-    await ensureSeeded();
+    await applyLang(phoneLang);
     setStep(null);
-    setPhoneLang(null);
     setNonce(n => n + 1);
   };
   if (!wide) return <Chooser reset={reset} />;
@@ -106,7 +113,7 @@ export function Stage() {
         </header>
         <div class="stage">
           <div class="stack" style={{ '--gap': '10px' } as any}>
-            <div class="device"><iframe ref={phone} key={`phone-${nonce}`} src={firstSrc.current} title="Person's phone" /></div>
+            <div class="device">{ready && <iframe ref={phone} key={`phone-${nonce}`} src={firstSrc.current} title="Person's phone" />}</div>
             <p class="small muted" style={{ maxWidth: '410px' }}>{PERSONAS.find(p => p.id === who)?.blurb.en}</p>
           </div>
           <div class="stack" style={{ '--gap': '14px' } as any}>
@@ -139,7 +146,7 @@ function Story({ step, play }: { step: number | null; play: (i: number) => void 
         </button>
       </div>
       <p class="small" style={{ minHeight: '1.6em' }}>
-        {s ? <><b>{s.title}.</b> <span class="muted">{s.text}</span></> : <span class="muted">Ten steps. Each step moves both screens; act on the phone or the clinic yourself, or press Next and the story completes the step for you.</span>}
+        {s ? <><b>{s.title}.</b> <span class="muted">{s.text}</span></> : <span class="muted">Ten steps. Each step moves both screens; act on the phone or the clinic yourself, or press Next and the story completes the step for you. Phones are in English; press <span lang="ar">العربية</span> to see them as the family reads them.</span>}
       </p>
     </div>
   );
