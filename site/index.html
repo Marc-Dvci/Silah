@@ -84,7 +84,7 @@
       <p class="outcome">An at-risk couple knows before the next pregnancy and reaches a counsellor.</p>
     </article>
     <article class="moment">
-      <div class="phone"><img src="assets/img/en-birth.webp" width="640" height="1657" loading="lazy" alt="Noura's phone: a birth plan for spinal muscular atrophy, with the switch that tells the delivery hospital."></div>
+      <div class="phone"><img src="assets/img/en-birth.webp" width="640" height="1385" loading="lazy" alt="Noura's phone: a birth plan for spinal muscular atrophy, with the switch that tells the delivery hospital."></div>
       <p class="n">2 · At birth</p>
       <h3>A test in the first days, whatever they chose</h3>
       <p>One switch tells the delivery hospital which change to look for. DoH’s newborn genome screening reports within 21 days; a targeted test of the known change can answer in the first days, in any delivery hospital.</p>
@@ -294,9 +294,15 @@
       <h3 style="margin-top:12px">Built by Marc Donovici</h3>
       <p class="muted" style="margin-top:14px">An independent entry. I lead AI for the internal audit function of a European banking group, where I audit information systems against the GDPR and the EU AI Act, and I build offline clinical AI. I placed 3rd of more than 850 teams in Google’s MedGemma Impact Challenge 2026. I wrote Silah’s risk kernel, verifier, cryptography, phone app and simulated health-system side, and ran the model evaluation.</p>
     </div>
-    <div class="pool saffron">
+    <div>
       <p class="eyebrow">Built with</p>
-      <p class="small" style="margin-top:10px">Preact and Vite · Gemma 4 through llama.cpp and Transformers.js · Ed25519 and RSA blind signatures · the DoH Premarital Screening Standard V3 · published Emirati carrier frequencies. Everything open-licensed; no personal data.</p>
+      <ul class="built">
+        <li><b>Phone app</b>Preact (a lightweight React) and Vite. It installs from the browser and works offline.</li>
+        <li><b>Language model</b>Gemma 4, on the phone through Transformers.js or on the counsellor’s computer through llama.cpp.</li>
+        <li><b>Signatures</b>Ed25519 on results and receipts; RSA blind signatures so relatives can be invited without revealing who sent the invitation.</li>
+        <li><b>Clinical sources</b>The DoH Premarital Screening Standard V3 and published Emirati carrier frequencies.</li>
+      </ul>
+      <p class="small muted" style="margin-top:14px">Every component is open-licensed. No personal data.</p>
     </div>
   </div>
 </section>

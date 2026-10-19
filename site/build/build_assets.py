@@ -35,7 +35,7 @@ def webp(src, name, width, crop=None):
 
 # English phone screens (780 px wide at 2x) and wide screens
 for src, name in [('p01_mariam_invitation_still', 'en-invitation'), ('p04_mariam_result_top', 'en-result'), ('p07_ask_top', 'en-ask'),
-                  ('p11_family_still', 'en-family'), ('p18_noura_birth_on_still', 'en-birth'), ('p08_counsellor_still', 'en-counsellor'),
+                  ('p11_family_still', 'en-family'), ('p18c_noura_birth_phone', 'en-birth'), ('p08_counsellor_still', 'en-counsellor'),
                   ('p20_fatima_result_still', 'en-fatima'), ('p10_mariam_privacy_still', 'en-privacy')]:
     print(name, webp(os.path.join(SHOTS_EN, src + '.png'), name, 640))
 for src, name, w in [('s01_stage_result', 'stage', 1800), ('c03_queue_brief', 'clinic-queue', 1600), ('c01b_outreach_sim', 'clinic-outreach', 1600)]:

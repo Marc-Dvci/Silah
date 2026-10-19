@@ -23,7 +23,7 @@ with sync_playwright() as p:
 
     def still(route, name, scroll=0, wait=2200):
         ph.goto(BASE + route); ph.wait_for_timeout(wait)
-        if scroll: ph.evaluate(f'window.scrollTo(0, {scroll})'); ph.wait_for_timeout(500)
+        if scroll: ph.evaluate(f'window.scrollTo(0, {scroll})'); ph.wait_for_timeout(500)   # pixels, or a JS expression
         ph.screenshot(path=f'{OUT}/{name}.png', style='.fab { display: none !important; }')
         print('shot', name)
 
@@ -35,7 +35,7 @@ with sync_playwright() as p:
     still('#/p/mariam/result', 'result')
     still('#/p/mariam/counsellor', 'counsellor')
     still('#/p/mariam/family', 'family')
-    ph.set_viewport_size({'width': 390, 'height': 1010}); still('#/p/noura/birth', 'birth'); ph.set_viewport_size(PHONE)
+    still('#/p/noura/birth', 'birth', scroll="document.querySelector('h1').getBoundingClientRect().bottom + scrollY - 36")   # plan and switch on one screen
     still('#/p/fatima/result', 'fatima_result', scroll=380)
     still('#/p/mariam/privacy', 'privacy')
     print('page errors:', errors or 'none')

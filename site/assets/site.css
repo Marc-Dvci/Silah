@@ -200,8 +200,12 @@ section { padding-block: 72px; }
 .docs small { color: var(--ink-2); font-size: 14px; white-space: nowrap; }
 
 /* team */
-.team { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 56px; align-items: center; }
+.team { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 56px; align-items: start; }
 .team h3 { font-size: 26px; }
+.built { margin: 14px 0 0; padding: 0; list-style: none; font-size: 15px; color: var(--ink-2); line-height: 1.55; }
+.built li { padding-block: 11px; border-top: 1px solid var(--line); }
+.built li:last-child { border-bottom: 1px solid var(--line); }
+.built b { display: block; color: var(--ink); font-weight: 600; margin-bottom: 2px; }
 
 /* footer */
 footer { position: relative; padding-block: 62px 70px; font-size: 14.5px; color: #B9BFD3; background: var(--deep); }
