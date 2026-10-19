@@ -1,5 +1,5 @@
 """Assembles the Pages site as the workflow does (product page at the root, app under /demo/), serves it under
-/silah/, and checks both languages: every request succeeds, no page error, no sideways scroll on a phone, no WCAG 2.2 AA
+/Silah/, and checks both languages: every request succeeds, no page error, no sideways scroll on a phone, no WCAG 2.2 AA
 violation (axe-core), and the demo opens from the page. Needs `npm run build` first. Usage: python tests/e2e/site.py"""
 import sys, os, shutil, tempfile, threading, functools
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
@@ -8,7 +8,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 tmp = tempfile.mkdtemp()
-site = os.path.join(tmp, 'silah')
+site = os.path.join(tmp, 'Silah')
 os.makedirs(site)
 for f in ('index.html', 'ar.html'):
     shutil.copy(os.path.join(ROOT, 'site', f), site)
@@ -19,7 +19,7 @@ class Quiet(SimpleHTTPRequestHandler):
     def log_message(self, *a): pass
 srv = ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(Quiet, directory=tmp))
 threading.Thread(target=srv.serve_forever, daemon=True).start()
-BASE = f'http://127.0.0.1:{srv.server_address[1]}/silah/'
+BASE = f'http://127.0.0.1:{srv.server_address[1]}/Silah/'
 
 fails = []
 def check(ok, what):
@@ -48,7 +48,7 @@ with sync_playwright() as p:
             pg.close()
         pg = b.new_page(viewport={'width': 1440, 'height': 900})
         pg.goto(BASE + page); pg.get_by_role('link', name=demo_label).first.click(); pg.wait_for_timeout(4000)
-        check(pg.url.endswith('/silah/demo/') and 'Mariam' in pg.locator('body').inner_text(), f'{lang}: the demo opens from the page')
+        check(pg.url.endswith('/Silah/demo/') and 'Mariam' in pg.locator('body').inner_text(), f'{lang}: the demo opens from the page')
         pg.close()
     b.close()
 srv.shutdown(); shutil.rmtree(tmp, ignore_errors=True)

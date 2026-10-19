@@ -10,7 +10,7 @@ CHALLENGE = os.path.dirname(ROOT)
 SHOTS_EN = os.path.join(CHALLENGE, 'media', 'shots')
 SHOTS_AR = os.path.join(ROOT, 'site', 'build', 'shots_ar')
 OUT = os.path.join(ROOT, 'site', 'assets')
-SITE_URL = 'https://marc-dvci.github.io/silah/'
+SITE_URL = 'https://marc-dvci.github.io/Silah/'
 DEMO_URL = SITE_URL + 'demo/'
 for d in ('fonts', 'img'):
     os.makedirs(os.path.join(OUT, d), exist_ok=True)

@@ -95,7 +95,7 @@ export const IconSpark = I('M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5
 // ---------- counted figures (Isotype) ----------
 
 export type KidKind = 'aff' | 'car' | 'non';
-const KID_FILL: Record<KidKind, string> = { aff: '#A3392B', car: '#D19A3A', non: '#FFFFFF' };
+const KID_FILL: Record<KidKind, string> = { aff: '#A3392B', car: '#D19A3A', non: '#F8F9FD' };
 const KID_STROKE: Record<KidKind, string> = { aff: '#A3392B', car: '#D19A3A', non: '#A9B0C4' };
 
 export function KidFigure({ kind, size = 1 }: { kind: KidKind; size?: number }) {

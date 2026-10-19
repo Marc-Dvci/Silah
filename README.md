@@ -36,7 +36,7 @@ Everything runs on one machine at no cost: no server, no cloud, no API key. The 
 
 ## Product page
 
-`site/` holds the bilingual product page (`index.html`, `ar.html`) published at https://marc-dvci.github.io/silah/, with the app under `/demo/`. `python site/build/build_assets.py` rebuilds its fonts, screenshots, film and QR codes; `python site/build/capture_ar.py` recaptures the Arabic phone screens from the running app.
+`site/` holds the bilingual product page (`index.html`, `ar.html`) published at https://marc-dvci.github.io/Silah/, with the app under `/demo/`. `python site/build/build_assets.py` rebuilds its fonts, screenshots, film and QR codes; `python site/build/capture_ar.py` recaptures the Arabic phone screens from the running app.
 
 ## How it is built
 
