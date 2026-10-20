@@ -17,7 +17,7 @@ export interface RouteResult {
 
 interface Rule { route: Exclude<Route, 'none'>; en: RegExp; ar: RegExp; reply: L10n; escalate: boolean; urgent: boolean }
 
-const RULES: Rule[] = [
+export const RULES: Rule[] = [
   {
     route: 'distress',
     en: /\b(kill myself|suicid|end my life|want to die|don'?t want to live|no reason to live|hurt myself|self[- ]harm|can'?t go on|hopeless)\b/,

@@ -37,7 +37,7 @@ The privacy checks inside it:
 - The clinic's issuance log and redemption log cannot be linked (`linkable()` returns false; a positive control in `tests/invites.test.ts` shows the check can return true).
 - The lab's signature on each result is verified on the phone before anything is shown.
 
-`python tests/e2e/offline.py`: the built app opens a result with the network off. The same check passed on an Android 13 emulator (Pixel 7 image) in airplane mode; screenshot in `docs/evidence/`.
+`python tests/e2e/offline.py`: the built app opens a result with the network off. The same check passed on an Android 13 emulator (Pixel 7 image) in airplane mode, with the local build and again with the live GitHub Pages build: loaded once online, then Chrome closed and the result reopened with airplane mode on. Screenshots in `docs/evidence/`.
 
 ## 3. Companion: three on-device models, one verifier
 
@@ -65,7 +65,17 @@ Each model answered 26 questions in English and Arabic (52 answers) with the app
 
 **Choice:** Gemma 4 E4B on a computer (counsellor workstation, or a family's laptop) and Gemma 4 E2B in the phone's browser. Both are Apache-2.0. Neither is fine-tuned: safety comes from the fact cards, the hard routes and the verifier, so a model can be swapped without retraining.
 
-**Limits of this evaluation.** 52 answers per model is small. The directive and certainty checks are word lists, so the "0 directive" counts mean "none the list recognises"; the transcripts in `eval/REPORT.md` are there to be read. Arabic quality was judged by reading every transcript.
+**Claim binding.** A number can be on the card and still be wrong. "A 1 in 4 chance the child is a carrier" uses the card's 1 in 4, but the card gives 1 in 4 for an affected child and 2 in 4 for a carrier. The verifier reads each chance in a sentence as three things: a value, an outcome (affected, not affected, carrier, carries neither) and whose outcome it is (a child, the partner, a relative of a named degree). It shows the sentence only if a cited card gives that value for that outcome and that person (`src/core/verifier.ts`, `bindClaims`). A chance given "per pregnancy" with no other outcome named is read as the chance of an affected child. A chance with no outcome at all ("that is 25% each time") is left to the number check. Results:
+
+- **No false blocks.** Re-scored with the binding check, none of the 369 sentences the three models had shown is blocked (`node eval/run.mjs <model> --rescore` leaves `eval/results/` unchanged).
+- **Mutation test** (`node eval/binding.mjs`, `eval/BINDING.md`). Every shown sentence that ties a chance to an outcome is copied with that chance swapped for another value from the same cited cards. That gives 111 mutants, and 84 of them pass the number check alone. The binding check blocks all 84; the other 27 were already blocked by the number check.
+- **Unit tests** (`tests/binding.test.ts`). For six genes, in both languages, the couple card's own text passes, and every way of swapping its three values between outcomes is blocked. There are 12 correct and 12 mis-bound sentences in English and Arabic, among them the parents described as having a 1 in 2 chance of being carriers. There are also residual, relative and background cases.
+
+The same step blocks the one qualitative error with no number that every card contradicts: a sentence saying carriers are ill ("Carriers have a mild form of the condition"). The card texts that say carriers are healthy all pass.
+
+The binding check reads phrases from word lists, in the same way as the directive check. A phrasing the lists do not know leaves the chance unbound, and only the number check then applies. Other medical statements with no number are not checked, so free text from the model is not a validated clinical statement. This is why the fixed fact cards answer the common questions, and the model is optional.
+
+**Limits of this evaluation.** 52 answers per model is small. The directive, certainty and binding checks are word lists, so the "0 directive" counts mean "none the list recognises"; the transcripts in `eval/REPORT.md` are there to be read. Arabic quality was judged by reading every transcript.
 
 ## 4. What a person can understand: official wording vs Silah
 

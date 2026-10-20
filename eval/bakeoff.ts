@@ -13,7 +13,7 @@ const result = (id: string): PersonResult => {
   return { personId: id, displayName: p.name.en, sex: p.sex, findings: p.genome, panelVersion: PANEL_VERSION, testedAt: '2026-01-01', method: 'premarital' };
 };
 
-function cardsFor(id: string): FactCard[] {
+export function cardsFor(id: string): FactCard[] {
   const c = demoCouples().find(x => x.a === id || x.b === id)!;
   const [fa, fb] = labCouple(result(c.a), result(c.b), c.rel, c.id);
   return coupleView(result(id), id === c.a ? fa : fb).cards;

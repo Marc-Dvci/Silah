@@ -35,6 +35,9 @@ python tests/e2e/webgpu.py    # Gemma 4 E2B inside the browser (WebGPU, ~3 GB do
 python tests/e2e/offline.py   # the built app with the network off (needs `npx vite preview --port 4173`)
 python tests/e2e/site.py      # the product page in both languages, as GitHub Pages serves it (after `npm run build`)
 python eval/readability/score.py   # readability of the explanations vs the DoH information sheet (pip install textstat==0.7.13)
+node eval/binding.mjs              # claim-binding mutation test over the saved model answers -> eval/BINDING.md
+node eval/sensitivity.mjs          # how the numbers move with the two assumptions -> docs/SENSITIVITY.md
+node eval/statements.mjs           # every statement the app can show, for clinical review -> docs/review/
 ```
 
 Everything runs on one machine at no cost: no server, no cloud, no API key. The optional language model runs either on the same computer (llama.cpp) or inside the browser (WebGPU).
@@ -61,7 +64,7 @@ Everything runs on one machine at no cost: no server, no cloud, no API key. The 
 |---|---|---|
 | Risk kernel | `src/core/kernel.ts`, `fraction.ts` | Every number is an exact fraction with its arithmetic and sources; tested against a hand-calculated grid |
 | Gene panel | `src/core/data/panel.ts` | The 563 genes of the DoH premarital panel (Standard V3, Appendix 12: 570 printed names, 5 repeated and 2 older names of listed genes), mapped to current HGNC symbols |
-| Verifier | `src/core/verifier.ts` | A model sentence is shown only if it cites a fact card, uses only that card's numbers, does not steer a marriage or pregnancy decision, and states no certainty about a child |
+| Verifier | `src/core/verifier.ts` | A model sentence is shown only if it cites a fact card, uses only that card's numbers, gives each chance the value the card states for that outcome and that person (not 1 in 4 for a carrier), does not steer a marriage or pregnancy decision, and states no certainty about a child |
 | Hard routes | `src/core/routes.ts` | Distress, termination, religious rulings, other people's results and blame go to a person, before any model |
 | Receipts | `src/core/crypto/receipts.ts` | Every consent and share is signed on the device, hash-chained, and revocable |
 | Invitations | `src/core/crypto/invites.ts` | RSA blind signatures (RFC 9474): issuance and redemption logs cannot be linked |
