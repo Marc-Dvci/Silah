@@ -73,7 +73,7 @@ Each model answered 26 questions in English and Arabic (52 answers) with the app
 
 The same step blocks the one qualitative error with no number that every card contradicts: a sentence saying carriers are ill ("Carriers have a mild form of the condition"). The card texts that say carriers are healthy all pass.
 
-The binding check reads phrases from word lists, in the same way as the directive check. A phrasing the lists do not know leaves the chance unbound, and only the number check then applies. Other medical statements with no number are not checked, so free text from the model is not a validated clinical statement. This is why the fixed fact cards answer the common questions, and the model is optional.
+The binding check reads phrases from word lists, in the same way as the directive check. A phrasing the lists do not know leaves the chance unbound, and only the number check then applies. Other medical statements with no number are not checked. This is why the fixed fact cards answer the common questions, and the model is optional.
 
 **Limits of this evaluation.** 52 answers per model is small. The directive, certainty and binding checks are word lists, so the "0 directive" counts mean "none the list recognises"; the transcripts in `eval/REPORT.md` are there to be read. Arabic quality was judged by reading every transcript.
 

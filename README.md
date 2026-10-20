@@ -37,7 +37,6 @@ python tests/e2e/site.py      # the product page in both languages, as GitHub Pa
 python eval/readability/score.py   # readability of the explanations vs the DoH information sheet (pip install textstat==0.7.13)
 node eval/binding.mjs              # claim-binding mutation test over the saved model answers -> eval/BINDING.md
 node eval/sensitivity.mjs          # how the numbers move with the two assumptions -> docs/SENSITIVITY.md
-node eval/statements.mjs           # every statement the app can show, for clinical review -> docs/review/
 ```
 
 Everything runs on one machine at no cost: no server, no cloud, no API key. The optional language model runs either on the same computer (llama.cpp) or inside the browser (WebGPU).

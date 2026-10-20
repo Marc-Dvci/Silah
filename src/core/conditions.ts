@@ -249,7 +249,7 @@ export const CONDITIONS: Condition[] = [
     },
     notChanged: {
       en: 'Each parent, as a carrier, is healthy.',
-      ar: 'كلٌّ من الوالدين حاملٌ للتغيّر الجيني وسليم.',
+      ar: 'كلٌّ من الوالدين حاملٌ لتغيّر جيني، وهو سليم.',
     },
     birthPlan: {
       action: {

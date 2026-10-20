@@ -117,7 +117,7 @@ export function Family({ s, act, base }: { s: PersonState; act: Act; base: strin
       <Enter k="family">
         <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'Your family', ar: 'عائلتك' })}</span></div>
         <h1>{t({ en: 'The same change often runs in a family.', ar: 'كثيراً ما يتوارث أفراد العائلة التغيّر نفسه.' })}</h1>
-        <p class="muted">{t({ en: 'Relatives who marry within the family are the people most likely to share it. Knowing early gives them the same choices you have.', ar: 'الأقارب الذين يتزوجون داخل العائلة هم الأكثر احتمالاً أن يحملوا التغيّر نفسه، والمعرفة المبكرة تمنحهم الخيارات نفسها المتاحة لك.' })}</p>
+        <p class="muted">{t({ en: 'It matters most for relatives who marry within the family, where both partners can carry the same change. Knowing early gives them the same choices you have.', ar: 'ويهمّ ذلك خاصةً الأقارب الذين يتزوجون داخل العائلة، إذ قد يحمل الزوجان كلاهما التغيّر نفسه. والمعرفة المبكرة تمنحهم الخيارات نفسها المتاحة لك.' })}</p>
         <div class="pool stack" style={{ '--gap': '10px' } as any}>
           {RELS.map(r => {
             const c = relativeCard(r, gene);

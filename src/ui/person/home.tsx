@@ -129,7 +129,7 @@ function Invitation({ s, act }: { s: PersonState; act: Act }) {
           <h3>{t({ en: 'What happens if you agree', ar: 'ماذا يحدث إذا وافقتِ', arM: 'ماذا يحدث إذا وافقت' })}</h3>
           {[
             { en: 'Both of you have to agree. If one says no, nothing is checked.', ar: 'يجب أن يوافق كلاكما، وإذا رفض أحدكما فلن يُفحص شيء.' },
-            { en: 'Only the 563 genes of the premarital panel are looked at, for this couple only.', ar: 'تُفحص فقط الجينات الـ563 في لوحة ما قبل الزواج، ولهذين الزوجين فقط.' },
+            { en: 'Only the 563 genes of the premarital panel are looked at, for this couple only.', ar: 'تُفحص الجينات الـ563 في لوحة ما قبل الزواج فقط، ولكما وحدكما.' },
             { en: 'You each see your own result. Your partner sees only the genes you both carry.', ar: 'يرى كل منكما نتيجته، ولا يرى شريكك إلا الجينات التي تحملانها كلاكما.', arM: 'يرى كل منكما نتيجته، ولا ترى شريكتك إلا الجينات التي تحملانها كلاكما.' },
             { en: 'A genetic counsellor sees the result only if you both carry a change in the same gene.', ar: 'لا يرى المستشار الوراثي النتيجة إلا إذا كنتما تحملان تغيّراً في الجين نفسه.' },
           ].map((x, i) => <p key={i} class="row" style={{ alignItems: 'flex-start' }}><span class="dot" style={{ color: 'var(--saffron)', marginTop: '10px' }} /><span>{t(x)}</span></p>)}
