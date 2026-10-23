@@ -1,6 +1,5 @@
 {
- "commit": "218085c",
- "note": "The fact cards each persona had when the transcripts in eval/results/ were produced. --rescore uses them, so a later change to the kernel does not silently re-mark old answers.",
+ "note": "The fact cards each persona had when this run was made.",
  "cards": {
   "mariam": [
    {
@@ -92,10 +91,10 @@
     },
     "sources": [
      "jain-2025-gimo",
-     "assumption-detection",
+     "lab-detection",
      "hamamy-2012"
     ],
-    "arithmetic": "Partner residual = (r(1−d_fam) + p(1−d)) / (1 − r·d_fam − p·d) with r=1/8, p=59/1000, d=9/10, d_fam=99/100; × 1 (you carry) × 1/4."
+    "arithmetic": "Partner residual = (r(1−d_x) + p(1−d)) / (1 − r·d_x − p·d) with r=1/8, p=59/1000, d=9/10, d_x=99/100, stated by the lab (partner checked for this exact change); × 1 (you carry) × 1/4."
    },
    {
     "id": "carrier:MEFV",
@@ -115,8 +114,8 @@
     "kind": "residual-panel",
     "numbers": {
      "affected": {
-      "n": "3757703303854432950804904602648915635881",
-      "d": "36499537531939285593181290182361067250930329"
+      "n": "478060795027194247977688466187441498337347613441921492298372490839",
+      "d": "178402847474629803161926790819052285488763263175196579574527343273504"
      },
      "genes": {
       "n": "561",
@@ -124,15 +123,16 @@
      }
     },
     "text": {
-     "en": "For the other 561 genes on the panel, you both tested negative. The remaining chance for all of them together is very small: about 1 in 9,700 per pregnancy.",
-     "ar": "بالنسبة إلى الجينات الـ561 الأخرى في اللوحة، جاءت نتيجتكما سلبية. الاحتمال المتبقي لها جميعاً صغير جداً: نحو 1 من 9,700 في كل حمل."
+     "en": "For the other 561 genes on the panel, you both tested negative. Because you are related, you may both have the same change, passed down from an ancestor you share. The test can miss such a change. The remaining chance for all of these genes together is about 1 in 370 per pregnancy.",
+     "ar": "بالنسبة إلى الجينات الـ561 الأخرى في اللوحة، جاءت نتيجتكما سلبية. ولأنكما قريبان، فقد يحمل كلاكما التغيّر نفسه موروثاً من جدٍّ مشترك. وقد لا يكشف الفحص مثل هذا التغيّر. الاحتمال المتبقي لهذه الجينات كلها معاً نحو 1 من 370 في كل حمل."
     },
     "sources": [
      "assumption-carrier",
-     "assumption-detection",
-     "doh-pms-2024"
+     "lab-detection",
+     "doh-pms-2024",
+     "hamamy-2012"
     ],
-    "arithmetic": "Σ over genes of r_g² / 4, r_g = p_g(1−d)/(1−p_g·d)."
+    "arithmetic": "Σ over genes of (1−F)·r_g²/4 + F·u_g, with r_g = p_g(1−d)/(1−p_g·d), u_g = q_g(1−d)/(1−q_g·d), q_g = p_g/2, F = 1/16. The sum is never below the chance of at least one."
    },
    {
     "id": "not-assessed",
@@ -144,6 +144,18 @@
     },
     "sources": [
      "doh-pms-2024"
+    ]
+   },
+   {
+    "id": "family-history",
+    "kind": "not-assessed",
+    "numbers": {},
+    "text": {
+     "en": "These numbers do not include your family history. If someone in either family has a genetic condition, tell your counsellor. It can change the numbers.",
+     "ar": "لا تشمل هذه الأرقام التاريخ الصحي لعائلتيكما. إذا كان أحد أفراد العائلتين مصاباً بحالة وراثية، فأخبرا المستشار بذلك. فقد يغيّر هذا الأرقام."
+    },
+    "sources": [
+     "hamamy-2012"
     ]
    },
    {
@@ -189,8 +201,8 @@
      ]
     },
     "text": {
-     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions the panel does not test.",
-     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية لا تفحصها اللوحة."
+     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions. A negative panel lowers part of it, but not all.",
+     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية. والنتيجة السلبية للوحة تخفض جزءاً منه، لا كله."
     },
     "sources": [
      "hamamy-2012"
@@ -240,11 +252,13 @@
     "kind": "option",
     "numbers": {},
     "text": {
-     "en": "Natural pregnancy with a birth plan: the baby is tested in the first days, so care can start early if needed.",
-     "ar": "حمل طبيعي مع خطة للولادة: يُفحص الطفل في أيامه الأولى، فتبدأ الرعاية مبكراً عند الحاجة."
+     "en": "Natural pregnancy with a birth plan. The baby is tested for spinal muscular atrophy (SMA) in the first days, so care can start early if needed.",
+     "ar": "حمل طبيعي مع خطة للولادة. يُفحص الطفل بحثاً عن ضمور العضلات الشوكي في أيامه الأولى، فتبدأ الرعاية مبكراً عند الحاجة."
     },
     "sources": [
-     "doh-pms-2024"
+     "doh-pms-2024",
+     "devivo-2019-nurture",
+     "strauss-2022-2copy"
     ]
    },
    {
@@ -348,10 +362,10 @@
     },
     "sources": [
      "jain-2025-gimo",
-     "assumption-detection",
+     "lab-detection",
      "hamamy-2012"
     ],
-    "arithmetic": "Partner residual = (r(1−d_fam) + p(1−d)) / (1 − r·d_fam − p·d) with r=1/8, p=53/500, d=9/10, d_fam=99/100; × 1 (you carry) × 1/4."
+    "arithmetic": "Partner residual = (r(1−d_x) + p(1−d)) / (1 − r·d_x − p·d) with r=1/8, p=53/500, d=9/10, d_x=99/100, stated by the lab (partner checked for this exact change); × 1 (you carry) × 1/4."
    },
    {
     "id": "carrier:CYP21A2",
@@ -371,8 +385,8 @@
     "kind": "residual-panel",
     "numbers": {
      "affected": {
-      "n": "12530684174015542310093130691029139869229",
-      "d": "159971427180026311057590714218737800629357161"
+      "n": "3993420972418359625857241788619045401354685951717272473528271527553",
+      "d": "1598551749870171333846793844414021772669891633625053432510541311191008"
      },
      "genes": {
       "n": "561",
@@ -380,15 +394,16 @@
      }
     },
     "text": {
-     "en": "For the other 561 genes on the panel, you both tested negative. The remaining chance for all of them together is very small: about 1 in 13,000 per pregnancy.",
-     "ar": "بالنسبة إلى الجينات الـ561 الأخرى في اللوحة، جاءت نتيجتكما سلبية. الاحتمال المتبقي لها جميعاً صغير جداً: نحو 1 من 13,000 في كل حمل."
+     "en": "For the other 561 genes on the panel, you both tested negative. Because you are related, you may both have the same change, passed down from an ancestor you share. The test can miss such a change. The remaining chance for all of these genes together is about 1 in 400 per pregnancy.",
+     "ar": "بالنسبة إلى الجينات الـ561 الأخرى في اللوحة، جاءت نتيجتكما سلبية. ولأنكما قريبان، فقد يحمل كلاكما التغيّر نفسه موروثاً من جدٍّ مشترك. وقد لا يكشف الفحص مثل هذا التغيّر. الاحتمال المتبقي لهذه الجينات كلها معاً نحو 1 من 400 في كل حمل."
     },
     "sources": [
      "assumption-carrier",
-     "assumption-detection",
-     "doh-pms-2024"
+     "lab-detection",
+     "doh-pms-2024",
+     "hamamy-2012"
     ],
-    "arithmetic": "Σ over genes of r_g² / 4, r_g = p_g(1−d)/(1−p_g·d)."
+    "arithmetic": "Σ over genes of (1−F)·r_g²/4 + F·u_g, with r_g = p_g(1−d)/(1−p_g·d), u_g = q_g(1−d)/(1−q_g·d), q_g = p_g/2, F = 1/16. The sum is never below the chance of at least one."
    },
    {
     "id": "not-assessed",
@@ -400,6 +415,18 @@
     },
     "sources": [
      "doh-pms-2024"
+    ]
+   },
+   {
+    "id": "family-history",
+    "kind": "not-assessed",
+    "numbers": {},
+    "text": {
+     "en": "These numbers do not include your family history. If someone in either family has a genetic condition, tell your counsellor. It can change the numbers.",
+     "ar": "لا تشمل هذه الأرقام التاريخ الصحي لعائلتيكما. إذا كان أحد أفراد العائلتين مصاباً بحالة وراثية، فأخبرا المستشار بذلك. فقد يغيّر هذا الأرقام."
+    },
+    "sources": [
+     "hamamy-2012"
     ]
    },
    {
@@ -445,8 +472,8 @@
      ]
     },
     "text": {
-     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions the panel does not test.",
-     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية لا تفحصها اللوحة."
+     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions. A negative panel lowers part of it, but not all.",
+     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية. والنتيجة السلبية للوحة تخفض جزءاً منه، لا كله."
     },
     "sources": [
      "hamamy-2012"
@@ -496,11 +523,13 @@
     "kind": "option",
     "numbers": {},
     "text": {
-     "en": "Natural pregnancy with a birth plan: the baby is tested in the first days, so care can start early if needed.",
-     "ar": "حمل طبيعي مع خطة للولادة: يُفحص الطفل في أيامه الأولى، فتبدأ الرعاية مبكراً عند الحاجة."
+     "en": "Natural pregnancy with a birth plan. The baby is tested for spinal muscular atrophy (SMA) in the first days, so care can start early if needed.",
+     "ar": "حمل طبيعي مع خطة للولادة. يُفحص الطفل بحثاً عن ضمور العضلات الشوكي في أيامه الأولى، فتبدأ الرعاية مبكراً عند الحاجة."
     },
     "sources": [
-     "doh-pms-2024"
+     "doh-pms-2024",
+     "devivo-2019-nurture",
+     "strauss-2022-2copy"
     ]
    },
    {
@@ -581,8 +610,8 @@
     "kind": "residual-panel",
     "numbers": {
      "affected": {
-      "n": "1474747078467749920798601171490509156847098165813",
-      "d": "13090480442827105916894730825042163599085169490060676"
+      "n": "1792670920765284481465019613366470710171540265436454188371526284160006071400109",
+      "d": "622850268102350359355318281418245011566855777827096336383763053225625194537572672"
      },
      "genes": {
       "n": "562",
@@ -590,15 +619,16 @@
      }
     },
     "text": {
-     "en": "For the other 562 genes on the panel, you both tested negative. The remaining chance for all of them together is very small: about 1 in 8,900 per pregnancy.",
-     "ar": "بالنسبة إلى الجينات الـ562 الأخرى في اللوحة، جاءت نتيجتكما سلبية. الاحتمال المتبقي لها جميعاً صغير جداً: نحو 1 من 8,900 في كل حمل."
+     "en": "For the other 562 genes on the panel, you both tested negative. Because you are related, you may both have the same change, passed down from an ancestor you share. The test can miss such a change. The remaining chance for all of these genes together is about 1 in 350 per pregnancy.",
+     "ar": "بالنسبة إلى الجينات الـ562 الأخرى في اللوحة، جاءت نتيجتكما سلبية. ولأنكما قريبان، فقد يحمل كلاكما التغيّر نفسه موروثاً من جدٍّ مشترك. وقد لا يكشف الفحص مثل هذا التغيّر. الاحتمال المتبقي لهذه الجينات كلها معاً نحو 1 من 350 في كل حمل."
     },
     "sources": [
      "assumption-carrier",
-     "assumption-detection",
-     "doh-pms-2024"
+     "lab-detection",
+     "doh-pms-2024",
+     "hamamy-2012"
     ],
-    "arithmetic": "Σ over genes of r_g² / 4, r_g = p_g(1−d)/(1−p_g·d)."
+    "arithmetic": "Σ over genes of (1−F)·r_g²/4 + F·u_g, with r_g = p_g(1−d)/(1−p_g·d), u_g = q_g(1−d)/(1−q_g·d), q_g = p_g/2, F = 1/16. The sum is never below the chance of at least one."
    },
    {
     "id": "not-assessed",
@@ -610,6 +640,18 @@
     },
     "sources": [
      "doh-pms-2024"
+    ]
+   },
+   {
+    "id": "family-history",
+    "kind": "not-assessed",
+    "numbers": {},
+    "text": {
+     "en": "These numbers do not include your family history. If someone in either family has a genetic condition, tell your counsellor. It can change the numbers.",
+     "ar": "لا تشمل هذه الأرقام التاريخ الصحي لعائلتيكما. إذا كان أحد أفراد العائلتين مصاباً بحالة وراثية، فأخبرا المستشار بذلك. فقد يغيّر هذا الأرقام."
+    },
+    "sources": [
+     "hamamy-2012"
     ]
    },
    {
@@ -655,8 +697,8 @@
      ]
     },
     "text": {
-     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions the panel does not test.",
-     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية لا تفحصها اللوحة."
+     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions. A negative panel lowers part of it, but not all.",
+     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية. والنتيجة السلبية للوحة تخفض جزءاً منه، لا كله."
     },
     "sources": [
      "hamamy-2012"
@@ -706,11 +748,13 @@
     "kind": "option",
     "numbers": {},
     "text": {
-     "en": "Natural pregnancy with a birth plan: the baby is tested in the first days, so care can start early if needed.",
-     "ar": "حمل طبيعي مع خطة للولادة: يُفحص الطفل في أيامه الأولى، فتبدأ الرعاية مبكراً عند الحاجة."
+     "en": "Natural pregnancy with a birth plan. The baby is tested for spinal muscular atrophy (SMA) in the first days, so care can start early if needed.",
+     "ar": "حمل طبيعي مع خطة للولادة. يُفحص الطفل بحثاً عن ضمور العضلات الشوكي في أيامه الأولى، فتبدأ الرعاية مبكراً عند الحاجة."
     },
     "sources": [
-     "doh-pms-2024"
+     "doh-pms-2024",
+     "devivo-2019-nurture",
+     "strauss-2022-2copy"
     ]
    },
    {
@@ -814,10 +858,10 @@
     },
     "sources": [
      "jain-2025-gimo",
-     "assumption-detection",
+     "lab-detection",
      "hamamy-2012"
     ],
-    "arithmetic": "Partner residual = (r(1−d_fam) + p(1−d)) / (1 − r·d_fam − p·d) with r=1/8, p=12/125, d=9/10, d_fam=99/100; × 1 (you carry) × 1/4."
+    "arithmetic": "Partner residual = (r(1−d_x) + p(1−d)) / (1 − r·d_x − p·d) with r=1/8, p=12/125, d=9/10, d_x=99/100, stated by the lab (partner checked for this exact change); × 1 (you carry) × 1/4."
    },
    {
     "id": "carrier:HBB",
@@ -837,8 +881,8 @@
     "kind": "residual-panel",
     "numbers": {
      "affected": {
-      "n": "3414904543420437785035367016570238935733529",
-      "d": "40149798469600773880876119337881320444622515236"
+      "n": "210864480152589272418064299011084518822451790542342226116123626030468889",
+      "d": "83058408111963293940935179987132188038615012519377242417199737779794458304"
      },
      "genes": {
       "n": "561",
@@ -846,15 +890,16 @@
      }
     },
     "text": {
-     "en": "For the other 561 genes on the panel, you both tested negative. The remaining chance for all of them together is very small: about 1 in 12,000 per pregnancy.",
-     "ar": "بالنسبة إلى الجينات الـ561 الأخرى في اللوحة، جاءت نتيجتكما سلبية. الاحتمال المتبقي لها جميعاً صغير جداً: نحو 1 من 12,000 في كل حمل."
+     "en": "For the other 561 genes on the panel, you both tested negative. Because you are related, you may both have the same change, passed down from an ancestor you share. The test can miss such a change. The remaining chance for all of these genes together is about 1 in 390 per pregnancy.",
+     "ar": "بالنسبة إلى الجينات الـ561 الأخرى في اللوحة، جاءت نتيجتكما سلبية. ولأنكما قريبان، فقد يحمل كلاكما التغيّر نفسه موروثاً من جدٍّ مشترك. وقد لا يكشف الفحص مثل هذا التغيّر. الاحتمال المتبقي لهذه الجينات كلها معاً نحو 1 من 390 في كل حمل."
     },
     "sources": [
      "assumption-carrier",
-     "assumption-detection",
-     "doh-pms-2024"
+     "lab-detection",
+     "doh-pms-2024",
+     "hamamy-2012"
     ],
-    "arithmetic": "Σ over genes of r_g² / 4, r_g = p_g(1−d)/(1−p_g·d)."
+    "arithmetic": "Σ over genes of (1−F)·r_g²/4 + F·u_g, with r_g = p_g(1−d)/(1−p_g·d), u_g = q_g(1−d)/(1−q_g·d), q_g = p_g/2, F = 1/16. The sum is never below the chance of at least one."
    },
    {
     "id": "not-assessed",
@@ -866,6 +911,18 @@
     },
     "sources": [
      "doh-pms-2024"
+    ]
+   },
+   {
+    "id": "family-history",
+    "kind": "not-assessed",
+    "numbers": {},
+    "text": {
+     "en": "These numbers do not include your family history. If someone in either family has a genetic condition, tell your counsellor. It can change the numbers.",
+     "ar": "لا تشمل هذه الأرقام التاريخ الصحي لعائلتيكما. إذا كان أحد أفراد العائلتين مصاباً بحالة وراثية، فأخبرا المستشار بذلك. فقد يغيّر هذا الأرقام."
+    },
+    "sources": [
+     "hamamy-2012"
     ]
    },
    {
@@ -911,8 +968,8 @@
      ]
     },
     "text": {
-     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions the panel does not test.",
-     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية لا تفحصها اللوحة."
+     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions. A negative panel lowers part of it, but not all.",
+     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية. والنتيجة السلبية للوحة تخفض جزءاً منه، لا كله."
     },
     "sources": [
      "hamamy-2012"
@@ -962,11 +1019,13 @@
     "kind": "option",
     "numbers": {},
     "text": {
-     "en": "Natural pregnancy with a birth plan: the baby is tested in the first days, so care can start early if needed.",
-     "ar": "حمل طبيعي مع خطة للولادة: يُفحص الطفل في أيامه الأولى، فتبدأ الرعاية مبكراً عند الحاجة."
+     "en": "Natural pregnancy with a birth plan. The baby is tested for spinal muscular atrophy (SMA) in the first days, so care can start early if needed.",
+     "ar": "حمل طبيعي مع خطة للولادة. يُفحص الطفل بحثاً عن ضمور العضلات الشوكي في أيامه الأولى، فتبدأ الرعاية مبكراً عند الحاجة."
     },
     "sources": [
-     "doh-pms-2024"
+     "doh-pms-2024",
+     "devivo-2019-nurture",
+     "strauss-2022-2copy"
     ]
    },
    {
@@ -1009,10 +1068,10 @@
     },
     "sources": [
      "jain-2025-gimo",
-     "assumption-detection",
+     "lab-detection",
      "hamamy-2012"
     ],
-    "arithmetic": "Partner residual = (r(1−d_fam) + p(1−d)) / (1 − r·d_fam − p·d) with r=1/8, p=53/500, d=9/10, d_fam=99/100; × 1 (you carry) × 1/4."
+    "arithmetic": "Partner residual = (r(1−d_x) + p(1−d)) / (1 − r·d_x − p·d) with r=1/8, p=53/500, d=9/10, d_x=99/100, stated by the lab (partner checked for this exact change); × 1 (you carry) × 1/4."
    },
    {
     "id": "carrier:CYP21A2",
@@ -1032,8 +1091,8 @@
     "kind": "residual-panel",
     "numbers": {
      "affected": {
-      "n": "11109452293112222864237570075529286835575501616837",
-      "d": "141090192235566130315141795558720097381386093033191844"
+      "n": "449123799208229586514593030671726351084817340513861064396850865568509052729317",
+      "d": "176939514741907382802392411171451743894146766641555815184674685296820435966570816"
      },
      "genes": {
       "n": "562",
@@ -1041,15 +1100,16 @@
      }
     },
     "text": {
-     "en": "For the other 562 genes on the panel, you both tested negative. The remaining chance for all of them together is very small: about 1 in 13,000 per pregnancy.",
-     "ar": "بالنسبة إلى الجينات الـ562 الأخرى في اللوحة، جاءت نتيجتكما سلبية. الاحتمال المتبقي لها جميعاً صغير جداً: نحو 1 من 13,000 في كل حمل."
+     "en": "For the other 562 genes on the panel, you both tested negative. Because you are related, you may both have the same change, passed down from an ancestor you share. The test can miss such a change. The remaining chance for all of these genes together is about 1 in 390 per pregnancy.",
+     "ar": "بالنسبة إلى الجينات الـ562 الأخرى في اللوحة، جاءت نتيجتكما سلبية. ولأنكما قريبان، فقد يحمل كلاكما التغيّر نفسه موروثاً من جدٍّ مشترك. وقد لا يكشف الفحص مثل هذا التغيّر. الاحتمال المتبقي لهذه الجينات كلها معاً نحو 1 من 390 في كل حمل."
     },
     "sources": [
      "assumption-carrier",
-     "assumption-detection",
-     "doh-pms-2024"
+     "lab-detection",
+     "doh-pms-2024",
+     "hamamy-2012"
     ],
-    "arithmetic": "Σ over genes of r_g² / 4, r_g = p_g(1−d)/(1−p_g·d)."
+    "arithmetic": "Σ over genes of (1−F)·r_g²/4 + F·u_g, with r_g = p_g(1−d)/(1−p_g·d), u_g = q_g(1−d)/(1−q_g·d), q_g = p_g/2, F = 1/16. The sum is never below the chance of at least one."
    },
    {
     "id": "not-assessed",
@@ -1061,6 +1121,18 @@
     },
     "sources": [
      "doh-pms-2024"
+    ]
+   },
+   {
+    "id": "family-history",
+    "kind": "not-assessed",
+    "numbers": {},
+    "text": {
+     "en": "These numbers do not include your family history. If someone in either family has a genetic condition, tell your counsellor. It can change the numbers.",
+     "ar": "لا تشمل هذه الأرقام التاريخ الصحي لعائلتيكما. إذا كان أحد أفراد العائلتين مصاباً بحالة وراثية، فأخبرا المستشار بذلك. فقد يغيّر هذا الأرقام."
+    },
+    "sources": [
+     "hamamy-2012"
     ]
    },
    {
@@ -1106,8 +1178,8 @@
      ]
     },
     "text": {
-     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions the panel does not test.",
-     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية لا تفحصها اللوحة."
+     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions. A negative panel lowers part of it, but not all.",
+     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية. والنتيجة السلبية للوحة تخفض جزءاً منه، لا كله."
     },
     "sources": [
      "hamamy-2012"
@@ -1122,12 +1194,12 @@
     "gene": "GJB2",
     "numbers": {
      "affected": {
-      "n": "7",
-      "d": "13948"
+      "n": "27",
+      "d": "70028"
      },
      "partnerResidual": {
-      "n": "7",
-      "d": "3487"
+      "n": "27",
+      "d": "17507"
      },
      "familialPrior": {
       "n": "1",
@@ -1135,19 +1207,19 @@
      },
      "carrierFreq": {
       "n": "1",
-      "d": "200"
+      "d": "1000"
      }
     },
     "text": {
-     "en": "You carry a change in GJB2; Fatima tested negative for it. A negative test lowers the chance a lot but not to zero: about 1 in 2,000 per pregnancy for this gene.",
-     "ar": "لديك تغيّر في الجين GJB2، وجاءت نتيجة فحص شريكتك لهذا الجين سلبية. النتيجة السلبية تخفض الاحتمال كثيراً لكن ليس إلى الصفر: نحو 1 من 2,000 في كل حمل لهذا الجين."
+     "en": "You carry a change in GJB2; Fatima tested negative for it. A negative test lowers the chance a lot but not to zero: about 1 in 2,600 per pregnancy for this gene.",
+     "ar": "لديك تغيّر في الجين GJB2، وجاءت نتيجة فحص شريكتك لهذا الجين سلبية. النتيجة السلبية تخفض الاحتمال كثيراً لكن ليس إلى الصفر: نحو 1 من 2,600 في كل حمل لهذا الجين."
     },
     "sources": [
      "assumption-carrier",
-     "assumption-detection",
+     "lab-detection",
      "hamamy-2012"
     ],
-    "arithmetic": "Partner residual = (r(1−d_fam) + p(1−d)) / (1 − r·d_fam − p·d) with r=1/8, p=1/200, d=9/10, d_fam=99/100; × 1 (you carry) × 1/4."
+    "arithmetic": "Partner residual = (r(1−d_x) + p(1−d)) / (1 − r·d_x − p·d) with r=1/8, p=1/1000, d=9/10, d_x=99/100, stated by the lab (partner checked for this exact change); × 1 (you carry) × 1/4."
    },
    {
     "id": "carrier:GJB2",
@@ -1167,8 +1239,8 @@
     "kind": "residual-panel",
     "numbers": {
      "affected": {
-      "n": "326170498063275820920625421013445007246973931113584541773",
-      "d": "2886356699274668942339792421754587595062530058423220111193476"
+      "n": "100488860666846034139065075682774421538390250799682206940377805992414868351308351068620439",
+      "d": "34470834054589534539820281211220188871268010733248671391429625758033576214059583845773902272"
      },
      "genes": {
       "n": "562",
@@ -1176,15 +1248,16 @@
      }
     },
     "text": {
-     "en": "For the other 562 genes on the panel, you both tested negative. The remaining chance for all of them together is very small: about 1 in 8,800 per pregnancy.",
-     "ar": "بالنسبة إلى الجينات الـ562 الأخرى في اللوحة، جاءت نتيجتكما سلبية. الاحتمال المتبقي لها جميعاً صغير جداً: نحو 1 من 8,800 في كل حمل."
+     "en": "For the other 562 genes on the panel, you both tested negative. Because you are related, you may both have the same change, passed down from an ancestor you share. The test can miss such a change. The remaining chance for all of these genes together is about 1 in 340 per pregnancy.",
+     "ar": "بالنسبة إلى الجينات الـ562 الأخرى في اللوحة، جاءت نتيجتكما سلبية. ولأنكما قريبان، فقد يحمل كلاكما التغيّر نفسه موروثاً من جدٍّ مشترك. وقد لا يكشف الفحص مثل هذا التغيّر. الاحتمال المتبقي لهذه الجينات كلها معاً نحو 1 من 340 في كل حمل."
     },
     "sources": [
      "assumption-carrier",
-     "assumption-detection",
-     "doh-pms-2024"
+     "lab-detection",
+     "doh-pms-2024",
+     "hamamy-2012"
     ],
-    "arithmetic": "Σ over genes of r_g² / 4, r_g = p_g(1−d)/(1−p_g·d)."
+    "arithmetic": "Σ over genes of (1−F)·r_g²/4 + F·u_g, with r_g = p_g(1−d)/(1−p_g·d), u_g = q_g(1−d)/(1−q_g·d), q_g = p_g/2, F = 1/16. The sum is never below the chance of at least one."
    },
    {
     "id": "not-assessed",
@@ -1196,6 +1269,18 @@
     },
     "sources": [
      "doh-pms-2024"
+    ]
+   },
+   {
+    "id": "family-history",
+    "kind": "not-assessed",
+    "numbers": {},
+    "text": {
+     "en": "These numbers do not include your family history. If someone in either family has a genetic condition, tell your counsellor. It can change the numbers.",
+     "ar": "لا تشمل هذه الأرقام التاريخ الصحي لعائلتيكما. إذا كان أحد أفراد العائلتين مصاباً بحالة وراثية، فأخبرا المستشار بذلك. فقد يغيّر هذا الأرقام."
+    },
+    "sources": [
+     "hamamy-2012"
     ]
    },
    {
@@ -1241,8 +1326,8 @@
      ]
     },
     "text": {
-     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions the panel does not test.",
-     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية لا تفحصها اللوحة."
+     "en": "For first cousins, the background chance is a little higher than for unrelated parents. In every 100 births, about 1.7 to 2.8 more children have a serious condition. Most of this comes from recessive conditions. A negative panel lowers part of it, but not all.",
+     "ar": "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يكون الاحتمال الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب. ففي كل 100 ولادة، يولد نحو 1.7 إلى 2.8 طفل إضافي بحالة خطيرة. ومعظم ذلك من حالات متنحية. والنتيجة السلبية للوحة تخفض جزءاً منه، لا كله."
     },
     "sources": [
      "hamamy-2012"

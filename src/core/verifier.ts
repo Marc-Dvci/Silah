@@ -72,7 +72,9 @@ const round = (x: number, dp: number) => Math.round(x * 10 ** dp) / 10 ** dp;
 // Each chance in a sentence is read as (value, outcome, whose outcome) and must equal the value a
 // cited card gives for that outcome and that person.
 
-export type Outcome = 'affected' | 'unaffected' | 'carrier' | 'neither';
+// 'defect' is the background chance of a birth defect from any cause, kept apart from the panel's conditions so a
+// figure cannot move between the two ("1 in 33 for the other panel genes").
+export type Outcome = 'affected' | 'unaffected' | 'carrier' | 'neither' | 'defect';
 export type Subject = 'child' | 'adult' | 'any';
 export interface Claim { text: string; value: number; parts: number[]; pct?: number; outcome: Outcome | null; subject: Subject }
 interface Stated { outcome: Outcome; subject: Subject; value?: Q; range?: [Q, Q]; relative?: string }
@@ -103,10 +105,11 @@ const conditionTerms = CONDITIONS.flatMap(c => {
 // Each outcome's phrases. When two match at the same place, the longer wins ("healthy carrier" is
 // a carrier, "not affected" is unaffected).
 const OUTCOME_TERMS: [Outcome, RegExp][] = [
+  ['defect', /\b((affected by|born with|ha(ve|s|ving)) (a |an )?)?birth defects?\b|((لل|ل|ب|ال)?اصابه\S* |يولد\S* )?(ب)?عيب\S* خلقي\S*|(ال)?عيوب (ال)?خلقيه/g],
   ['neither', /\b(carr(y|ies|ying) neither|neither change|neither (copy|variant)|not (be )?a carrier|non-?carrier|(does not|doesn't|will not|won't|not) carry|carr(y|ies|ying) no change|no change at all)\b|(ا|ال)?لا يحمل|لن يحمل|غير حامل\S*|لا يكون حاملا/g],
   ['carrier', /\b(healthy carriers?|carriers?|carr(y|ies|ying))\b|حامل\S* و?سليم\S*|سليم\S* و?حامل\S*|حامل\S*|(^|\s)(ي|ت)حمل(ان|ون|ه|ها)?(?=\s|$)/g],
   ['unaffected', /\b(unaffected|not (be )?affected|(does not|doesn't|will not|won't|would not|not) (have|get|develop|be born with)( it| the condition)?|free of (it|the condition)|healthy)\b|غير مصاب\S*|(الا|لا|لن) (يصاب|تصاب)|(الا|لا|لن) (يكون|تكون)( \S+){0,2} مصاب\S*|سليم\S*|معافي/g],
-  ['affected', new RegExp(`\\b(affected|ill|sick|illness|disease|disorder|condition|born with|birth defects?|symptoms)\\b|${conditionTerms.join('|')}|مصاب\\S*|يصاب|سيصاب|(ال|ل|ب)?اصابه\\S*|مريض\\S*|(ال)?مرض\\S*|بالحاله|حاله وراثيه|خلقي|حاله خطيره`, 'g')],
+  ['affected', new RegExp(`\\b(affected|ill|sick|illness|disease|disorder|condition|born with|symptoms)\\b|${conditionTerms.join('|')}|مصاب\\S*|يصاب|سيصاب|(ال|ل|ب)?اصابه\\S*|مريض\\S*|(ال)?مرض\\S*|بالحاله|حاله وراثيه|حاله خطيره`, 'g')],
 ];
 const CHILD_TERMS = /\b(child|children|baby|babies|son|daughter|kids?|pregnanc(y|ies)|embryos?|fetus|births?)\b|(^|\s)(ال)?(طفل|اطفال|جنين|اجنه|مولود|ولاده|حمل)\S*|يولد/;
 const ADULT_TERMS = /\b(you|your partner|partner|husband|wife|people|person|brother|sister|cousin|aunt|uncle|parent|parents|relative)\b|(^|\s)(انت|انتما|كلاكما|شريك\S*|زوج\S*|الناس|شخص|اخ|اخت|عم|خال|قريب\S*)(?=\s|$)/;
@@ -157,12 +160,21 @@ export function extractClaims(text: string): Claim[] {
     const prevEnd = i > 0 ? found[i - 1].end : 0;
     const nextStart = found[i + 1]?.start ?? n.length;
     const fwdClause = n.slice(f.end, Math.min(nextStart, after(soft, f.end), after(hard, f.end)));
-    const fwd = outcomeHits(fwdClause).length ? fwdClause : n.slice(f.end, Math.min(nextStart, after(hard, f.end)));
+    const ext = n.slice(f.end, Math.min(nextStart, after(hard, f.end)));
     const back = n.slice(Math.max(prevEnd, before(hard, f.start), before(soft, f.start)), f.start);
     // The phrase right after the chance names its outcome ("1 in 4 chance the child has SMA");
-    // failing that, the nearest phrase before it ("the chance of being a carrier is 1 in 2").
-    const outcome = outcomeHits(fwd)[0]?.outcome ?? outcomeHits(back).at(-1)?.outcome ?? (PER_PREGNANCY.test(n) ? 'affected' : null);
-    const subject = subjectOf(fwd) ?? subjectOf(back) ?? subjectOf(n) ?? 'any';
+    // failing that, the nearest phrase before it ("the chance of being a carrier is 1 in 2"), or "per pregnancy"
+    // in its own clause. Only then does the next clause count ("Half of your children, on average, would be
+    // carriers"), so "1 in 390 per pregnancy for other genes, and the chance of birth defects is 1 in 33" keeps
+    // each chance to its own clause. Whose chance it is comes first from the clause that named the outcome.
+    let outcome: Outcome | null = null, from: string[] = [];
+    if (outcomeHits(fwdClause).length) [outcome, from] = [outcomeHits(fwdClause)[0].outcome, [fwdClause, back]];
+    else if (outcomeHits(back).length) [outcome, from] = [outcomeHits(back).at(-1)!.outcome, [back, fwdClause]];
+    else if (PER_PREGNANCY.test(fwdClause) || PER_PREGNANCY.test(back)) [outcome, from] = ['affected', [fwdClause, back]];
+    else if (outcomeHits(ext).length) [outcome, from] = [outcomeHits(ext)[0].outcome, [ext, back]];
+    else if (PER_PREGNANCY.test(n)) [outcome, from] = ['affected', [ext, back]];
+    else from = [ext, back];
+    const subject = from.map(subjectOf).find(x => x) ?? subjectOf(n) ?? 'any';
     return { text: f.text, value: f.value, parts: f.parts, pct: f.pct, outcome, subject };
   });
 }
@@ -193,7 +205,7 @@ export function statedOutcomes(c: FactCard): Stated[] {
       push('affected', 'child', q('affected'));
       break;
     case 'background':
-      push('affected', 'child', q('birthDefects'));
+      push('defect', 'child', q('birthDefects'));
       break;
     case 'relative':
       // "For a child, the chance of carrying the same change": the relative may be any age.

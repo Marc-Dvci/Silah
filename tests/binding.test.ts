@@ -65,6 +65,7 @@ describe('claim binding: sentences a model could write', () => {
     'احتمال أن يكون الطفل حاملاً سليماً هو 2 من 4 في كل حمل.',
     'هناك احتمال 3 من 4 ألا يكون الطفل مصاباً.',
     'هناك احتمال ١ من ٤ ألا يحمل الطفل أي تغيّر.',
+    'There is a 1 in 4 chance for you, in each pregnancy, that the child has SMA.',
   ];
   const wrong = [
     'There is a 1 in 4 chance the child is a carrier.',                 // the reviewer's example
@@ -107,6 +108,24 @@ describe('claim binding: residual, relatives and background', () => {
   it('the background chance is for a baby born with a birth defect', () => {
     passes(shared, 'For any couple, about 1 in 33 babies is born with a birth defect.', ['background']);
     misbound(shared, 'About 1 in 33 people are carriers.', ['background']);
+  });
+
+  it('a figure cannot move between the rest of the panel and the background chance of a birth defect', () => {
+    // Found by the mutation test on Qwen3.5-4B's answer to "So we have zero risk?" (eval/BINDING.md).
+    const rest = residual.find(c => c.id === 'panel-residual')!;
+    const r = Q.from(rest.numbers.affected).oneIn();
+    const ids = ['panel-residual', 'background'];
+    passes(residual, `There is also a remaining chance of about 1 in ${r} per pregnancy for other genes on the panel, and the background chance for birth defects is about 1 in 33.`, ids);
+    misbound(residual, 'There is also a remaining chance of about 1 in 33 per pregnancy for other genes on the panel, and the background chance for birth defects is about 1 in 33.', ids);
+    misbound(residual, `There is also a remaining chance of about 1 in ${r} per pregnancy for other genes on the panel, and the background chance for birth defects is about 1 in ${r}.`, ids);
+    for (const lang of ['en', 'ar'] as const) passes(residual, residual.find(c => c.id === 'background')!.text[lang], ['background']);
+    // Gemma 4 E4B, Arabic: "for the other 562 genes, about 1 in 390 per pregnancy, given that you are related, and the
+    // test may miss changes inherited from a shared ancestor". "You are related" does not make it an adult's chance.
+    passes(residual, `بالنسبة للجينات الـ562 الأخرى، الاحتمال المتبقي في كل حمل هو نحو 1 من ${r}، مع الأخذ في الاعتبار أنكما قريبان، وقد لا يكشف الفحص بعض التغييرات الموروثة من جد مشترك.`, ['panel-residual']);
+    // Gemma 4 E4B, Arabic: "a background chance of about 1 in 33 children of having a birth defect, for any couple".
+    passes(residual, 'بالإضافة إلى ذلك، هناك احتمال أساسي يبلغ نحو 1 من كل 33 طفلاً للإصابة بعيب خلقي لدى أي زوجين.', ['background']);
+    // Qwen3.5-4B, Arabic: the 1 in 33 for birth defects from any cause, restated as "born with a hereditary condition".
+    misbound(residual, 'الفحص لا يزيل الخطر الأساسي لوجود عيب خلقي، حيث يولد نحو 1 من كل 33 طفل بحالة وراثية.', ['background']);
   });
 
   it('a chance with no outcome or person named is left to the number check', () => {
