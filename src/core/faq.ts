@@ -27,7 +27,7 @@ export const INTENTS: Intent[] = [
     label: { en: 'Does “compatible” mean no risk?', ar: 'هل تعني كلمة «متوافق» عدم وجود أي خطر؟' },
     en: /\b(compatible|no risk|zero risk|safe|normal result|all clear)\b/,
     ar: /(متوافق|توافق|لا يوجد خطر|بدون خطر|لا خطر|النتيجه طبيعيه)/,
-    answer: ['panel-residual', 'kind:residual-gene', 'not-assessed', 'background', 'consanguinity'],
+    answer: ['panel-residual', 'kind:residual-gene', 'not-assessed', 'family-history', 'background', 'consanguinity'],
     lead: {
       en: '“Compatible” means the panel found no gene where you both carry a change. It does not mean zero chance.',
       ar: '«متوافق» يعني أن لوحة الفحص لم تجد جيناً يحمل كلاكما تغيّراً فيه، ولا يعني أن الاحتمال صفر.',
@@ -74,7 +74,7 @@ export const INTENTS: Intent[] = [
     label: { en: 'Does being cousins change anything?', ar: 'هل تغيّر القرابة بيننا شيئاً؟' },
     en: /\b(cousin|related|relatives?|family marriage|consanguin)\b/,
     ar: /(ابن عم|بنت عم|ابن خال|بنت خال|قرابه|اقارب|زواج الاقارب)/,
-    answer: ['consanguinity', 'background', 'kind:residual-gene'],
+    answer: ['consanguinity', 'panel-residual', 'background', 'kind:residual-gene', 'family-history'],
   },
   {
     id: 'what-is',

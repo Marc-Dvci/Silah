@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import type { PersonState } from '../../app/person';
-import { currentView, recordQuestion, escalate } from '../../app/person';
+import { currentView, recordQuestion, escalate, escalationRef } from '../../app/person';
 import { route } from '../../core/routes';
 import { INTENTS, matchIntent, answerFrom } from '../../core/faq';
 import type { FactCard, L10n } from '../../core/types';
-import { askModel, detectLocalServer, localServer, webgpuBackend, type Backend } from '../../llm/answer';
+import { askModel, detectLocalServer, localServer, quoteCards, webgpuBackend, type Backend } from '../../llm/answer';
 import { Enter, Listen, go, useT, IconSpark } from '../kit';
 import { Back } from './shell';
 import { SourceChips } from './sources';
+import { EscalationStatus } from './escalation';
 
 type Act = (f: (st: PersonState) => Promise<void>) => Promise<void>;
 
@@ -17,7 +18,7 @@ interface Turn {
   cards?: FactCard[];
   sentences?: { text: string; cards: string[] }[];
   blocked?: number;
-  routed?: { reply: L10n; urgent: boolean };
+  routed?: { reply: L10n; urgent: boolean; ref?: string };
   none?: boolean;
   via: 'faq' | 'model' | 'route' | 'none';
 }
@@ -48,7 +49,11 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
     let turn: Turn;
     if (r.route !== 'none') {
       turn = { q: question, routed: { reply: r.reply, urgent: r.urgent }, via: 'route' };
-      if (r.escalate) await act(st => escalate(st, r.route));
+      if (r.escalate) {
+        const ref = escalationRef(s.id);
+        turn.routed!.ref = ref;
+        await act(st => escalate(st, r.route, ref));
+      }
     } else {
       const intent = matchIntent(question);
       if (intent && view) {
@@ -57,10 +62,8 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
       } else if (backend && view) {
         try {
           const res = await askModel(backend, question, cards, s.lang);
-          const shown = res.verified?.shown ?? [];
-          turn = shown.length
-            ? { q: question, sentences: shown, blocked: res.verified!.blocked.length, via: 'model' }
-            : { q: question, none: true, blocked: res.verified?.blocked.length ?? 0, via: 'none' };
+          const picked = res.parsed ? quoteCards(res.parsed, cards) : [];
+          turn = picked.length ? { q: question, cards: picked, via: 'model' } : { q: question, none: true, via: 'none' };
         } catch {
           turn = { q: question, none: true, via: 'none' };
         }
@@ -105,6 +108,7 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
             <div class="bubble silah stack" style={{ '--gap': '8px' } as any}>
               {x.routed && <p>{t(x.routed.reply)}</p>}
               {x.routed?.urgent && <p class="row wrap"><a class="btn palm" href="tel:999">999</a><a class="btn palm" href="tel:998">998</a></p>}
+              {x.routed?.ref && <EscalationStatus e={s.escalations?.find(e => e.ref === x.routed!.ref)} lang={s.lang} />}
               {x.lead && <p><b>{t(x.lead)}</b></p>}
               {x.cards?.map(c => (
                 <div key={c.id}>
@@ -116,7 +120,7 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
                 <p key={j}>{sn.text}{sn.cards.map(id => <span class="cite" key={id}>{byId.get(id) ? id : 'counsellor'}</span>)}</p>
               ))}
               {x.none && <p>{t({ en: 'Silah does not have a checked answer to that. It has been added to the questions for your counsellor, who can answer it.', ar: 'لا يملك تطبيق صلة إجابة موثّقة عن ذلك، وقد أُضيف السؤال إلى قائمة أسئلتك للمستشار الوراثي الذي يستطيع الإجابة عنه.' })}</p>}
-              {x.via === 'model' && <p class="tiny muted"><IconSpark size={12} /> {t({ en: `Worded by the on-device model from your cards${x.blocked ? `; ${x.blocked} sentence(s) held back by the safety check` : ''}.`, ar: `صاغها النموذج على الجهاز من بطاقاتك${x.blocked ? `، وحُجبت ${x.blocked === 1 ? 'جملة واحدة' : x.blocked === 2 ? 'جملتان' : `${x.blocked} ${x.blocked <= 10 ? 'جمل' : 'جملة'}`} بفحص السلامة` : ''}.` })}</p>}
+              {x.via === 'model' && <p class="tiny muted"><IconSpark size={12} /> {t({ en: 'Chosen by the on-device model from your checked sentences. The wording is fixed; the model only chooses.', ar: 'اختارها النموذج على الجهاز من جملك الموثّقة. الصياغة ثابتة، والنموذج يختار فقط.' })}</p>}
               {(x.cards?.length || x.sentences?.length) ? <div><Listen text={[x.lead ? t(x.lead) : '', ...(x.cards?.map(c => t(c.text)) ?? []), ...(x.sentences?.map(z => z.text) ?? [])].join(' ')} label={t({ en: 'Listen', ar: 'استماع' })} /></div> : null}
             </div>
           </div>

@@ -1,13 +1,13 @@
 {
  "silah_en": {
-  "sentences": 75,
-  "words": 1040,
-  "words_per_sentence": 13.9,
+  "sentences": 93,
+  "words": 1236,
+  "words_per_sentence": 13.3,
   "long_sentences_over_25_words": 1,
   "percent": 1,
   "one_in_n": 15,
-  "flesch_kincaid_grade": 6.9,
-  "flesch_reading_ease": 70.0,
+  "flesch_kincaid_grade": 6.4,
+  "flesch_reading_ease": 72.7,
   "smog": 10.2,
   "hardest": [
    [
@@ -28,18 +28,18 @@
    ],
    [
     10.7,
-    "A small sample from the placenta at 11 to 14 weeks, or of the fluid around the baby from 15 weeks, shows if the baby is affected."
+    "If someone in either family has a genetic condition, tell your counsellor."
    ]
   ]
  },
  "silah_ar": {
-  "sentences": 72,
-  "words": 926,
-  "words_per_sentence": 12.9,
+  "sentences": 90,
+  "words": 1077,
+  "words_per_sentence": 12.0,
   "long_sentences_over_25_words": 0,
   "percent": 1,
   "one_in_n": 15,
-  "osman": 84.1,
+  "osman": 83.4,
   "letters_per_word": 4.49,
   "hardest": [
    [

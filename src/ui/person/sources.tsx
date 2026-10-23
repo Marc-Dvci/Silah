@@ -33,7 +33,8 @@ export function SourceChips({ ids }: { ids: string[] }) {
 function short(id: string, ar = false): string {
   const fixed: Record<string, string> = {
     'assumption-carrier': ar ? 'نسبة حاملين مفترضة' : 'assumed frequency',
-    'assumption-detection': ar ? 'نسبة كشف مفترضة' : 'assumed detection',
+    'assumption-detection': ar ? 'نسبة الكشف غير مذكورة' : 'detection not stated',
+    'lab-detection': ar ? 'نسبة الكشف من المختبر (محاكاة)' : 'lab-stated detection (simulated)',
     'medlineplus-ar': 'MedlinePlus', 'medlineplus-bthal': 'MedlinePlus', 'cdc-birth-defects-1-in-33': 'CDC',
     'nhs-cvs': 'NHS · CVS', 'nhs-amniocentesis': 'NHS · amniocentesis',
   };

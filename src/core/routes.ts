@@ -23,8 +23,9 @@ const RULES: Rule[] = [
     en: /\b(kill myself|suicid|end my life|want to die|don'?t want to live|no reason to live|hurt myself|self[- ]harm|can'?t go on|hopeless)\b/,
     ar: /(انتحار|انتحر|اقتل نفسي|انهي حياتي|انهاء حياتي|اريد ان اموت|ابي اموت|ما ابي اعيش|لا اريد ان اعيش|اوذي نفسي|ايذاء نفسي|لا امل)/,
     reply: {
-      en: 'I’m sorry you are carrying this. You do not have to carry it alone. If you are in danger now, call 999 (police) or 998 (ambulance). I have asked your counsellor to contact you today.',
-      ar: 'نأسف لأنكِ تحملين هذا العبء، ولستِ مضطرةً لحمله وحدكِ. إذا كنتِ في خطر الآن فاتصلي بالرقم 999 (الشرطة) أو 998 (الإسعاف). وقد طلبنا من مستشاركِ التواصل معكِ اليوم.', arM: 'نأسف لأنك تحمل هذا العبء، ولست مضطراً لحمله وحدك. إذا كنت في خطر الآن فاتصل بالرقم 999 (الشرطة) أو 998 (الإسعاف). وقد طلبنا من مستشارك التواصل معك اليوم.',
+      // Never says a person has been reached: the screen shows the clinic's receipt, then a counsellor's, as they arrive.
+      en: 'I’m sorry you are carrying this. You do not have to carry it alone. If you are in danger now, call 999 (police) or 998 (ambulance). I am letting the counselling clinic know that you need support, and this screen will show when a counsellor has seen it.',
+      ar: 'نأسف لأنكِ تحملين هذا العبء، ولستِ مضطرةً لحمله وحدكِ. إذا كنتِ في خطر الآن فاتصلي بالرقم 999 (الشرطة) أو 998 (الإسعاف). ونُبلغ الآن عيادة الاستشارة الوراثية بأنكِ تحتاجين إلى الدعم، وستبيّن هذه الشاشة متى يطّلع أحد المستشارين على ذلك.', arM: 'نأسف لأنك تحمل هذا العبء، ولست مضطراً لحمله وحدك. إذا كنت في خطر الآن فاتصل بالرقم 999 (الشرطة) أو 998 (الإسعاف). ونُبلغ الآن عيادة الاستشارة الوراثية بأنك تحتاج إلى الدعم، وستبيّن هذه الشاشة متى يطّلع أحد المستشارين على ذلك.',
     },
     escalate: true,
     urgent: true,

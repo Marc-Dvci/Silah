@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { verifyAnswer, extractClaims } from '../src/core/verifier';
-import { coupleView, labCouple, relativeCard } from '../src/core/kernel';
+import { coupleView, labCouple, relativeCard, SIMULATED_LAB } from '../src/core/kernel';
 import { PANEL_GENES } from '../src/core/data/panel';
 import { Q } from '../src/core/fraction';
 import type { FactCard, PersonResult } from '../src/core/types';
@@ -13,8 +13,8 @@ const p = (id: string, sex: 'F' | 'M', f: PersonResult['findings']): PersonResul
 const carrierOf = (id: string, sex: 'F' | 'M', ...genes: string[]) => p(id, sex, genes.map(gene => ({ gene, variant: 'x', classification: 'P' as const })));
 
 // Mariam & Saeed share SMN1; Fatima carries CYP21A2 and Ahmed tested negative for it.
-const shared = (() => { const a = carrierOf('A', 'F', 'SMN1'), b = carrierOf('B', 'M', 'SMN1'); return coupleView(a, labCouple(a, b, 'first-cousins', 'c1')[0]).cards; })();
-const residual = (() => { const a = carrierOf('F', 'F', 'CYP21A2'), b = carrierOf('H', 'M'); return coupleView(a, labCouple(a, b, 'first-cousins', 'c2')[0]).cards; })();
+const shared = (() => { const a = carrierOf('A', 'F', 'SMN1'), b = carrierOf('B', 'M', 'SMN1'); return coupleView(a, labCouple(a, b, 'first-cousins', 'c1', SIMULATED_LAB)[0]).cards; })();
+const residual = (() => { const a = carrierOf('F', 'F', 'CYP21A2'), b = carrierOf('H', 'M'); return coupleView(a, labCouple(a, b, 'first-cousins', 'c2', SIMULATED_LAB)[0]).cards; })();
 
 const check = (cards: FactCard[], text: string, ids: string[]) => verifyAnswer({ sentences: [{ text, cards: ids }] }, cards).verdicts[0];
 const passes = (cards: FactCard[], text: string, ids: string[]) => expect(check(cards, text, ids).ok, text).toBe(true);
@@ -32,7 +32,7 @@ describe('claim binding: the card itself', () => {
   for (const gene of genes) for (const lang of ['en', 'ar'] as const) {
     it(`${gene} · ${lang}`, () => {
       const a = carrierOf('A', 'F', gene), b = carrierOf('B', 'M', gene);
-      const cards = coupleView(a, labCouple(a, b, 'unrelated', 'c')[0]).cards;
+      const cards = coupleView(a, labCouple(a, b, 'unrelated', 'c', SIMULATED_LAB)[0]).cards;
       const card = cards.find(c => c.id === `couple:${gene}`)!;
       const text = card.text[lang];
       passes(cards, text, [card.id]);

@@ -24,7 +24,13 @@
    "It matters only if a child also receives a change in the same gene from the other parent."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "condition:sma",
+   "carrier:MEFV"
+  ],
+  "quotedNonCounsellor": 3
  },
  {
   "id": "g1",
@@ -49,7 +55,13 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "carrier:MEFV",
+   "panel-residual",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "g2",
@@ -72,7 +84,11 @@
    "Spinal muscular atrophy (SMA) is a condition that weakens the muscles a baby uses to move, sit, swallow and breathe."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "condition:sma"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "g2",
@@ -95,7 +111,11 @@
    "ضمور العضلات الشوكي هو حالة تضعف العضلات التي يستخدمها الطفل للحركة والجلوس والبلع والتنفس."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "condition:sma"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "g3",
@@ -119,7 +139,12 @@
    "Being a carrier does not affect your own muscles."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "condition:sma",
+   "carrier:MEFV"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "g3",
@@ -145,7 +170,14 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:MEFV",
+   "carrier:MEFV",
+   "panel-residual",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 3
  },
  {
   "id": "g4",
@@ -170,7 +202,16 @@
    "Your genetic counsellor can answer questions that Silah cannot, and can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "birth:sma",
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 5
  },
  {
   "id": "g4",
@@ -195,7 +236,16 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "birth:sma",
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 5
  },
  {
   "id": "g5",
@@ -218,7 +268,15 @@
    "You can talk through any decision with you with your genetic counsellor first."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "g5",
@@ -241,7 +299,11 @@
    "يمكن لمستشارك الوراثي أن يجيب عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "g6",
@@ -264,7 +326,14 @@
    "A test during pregnancy can show whether the baby is affected."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "g6",
@@ -287,7 +356,14 @@
    "يمكن لفحص أثناء الحمل أن يبيّن ما إذا كان الجنين مصاباً."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "g7",
@@ -310,7 +386,11 @@
    "For first cousins, the background chance of a child with a serious condition is about 1.7 to 2.8 percentage points higher than for unrelated parents, mostly from recessive conditions the panel does not test."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "consanguinity"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "g7",
@@ -335,7 +415,13 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "background",
+   "consanguinity",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "g8",
@@ -358,7 +444,11 @@
    "The premarital panel looks only at recessive conditions, and it does not look at conditions passed through the X chromosome, dominant conditions, chromosome differences, new changes that arise in the child, or causes that are not genetic."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "not-assessed"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "g8",
@@ -381,7 +471,11 @@
    "لا تفحص لوحة ما قبل الزواج الحالات المتنحية فقط، وليس جميعها."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "not-assessed"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "n1",
@@ -406,7 +500,13 @@
    "Your genetic counsellor can answer questions that Silah cannot, and can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "carrier:MEFV",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "n1",
@@ -429,7 +529,11 @@
    "لا يمكنني إعطاؤك إجابة محددة حول الاحتمالات."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "n2",
@@ -454,7 +558,13 @@
    "Your genetic counsellor can work out the chances for two children."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "panel-residual",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "n2",
@@ -477,7 +587,11 @@
    "يمكن لمستشارك الوراثي أن يساعدكما في مناقشة هذا الأمر."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "n3",
@@ -500,7 +614,11 @@
    "The information provided does not contain information about the percentage of Emiratis who carry SMA."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "n3",
@@ -523,7 +641,11 @@
    "هذه المعلومات لا تجيب على سؤالك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "c1",
@@ -556,7 +678,11 @@
     ]
    }
   ],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "c1",
@@ -579,7 +705,11 @@
    "لا يمكنني تحديد عدد الأطفال الذين قد يصابون بناءً على هذه المعلومات."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "c2",
@@ -604,7 +734,13 @@
    "Your genetic counsellor can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "condition:sma",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "c2",
@@ -629,7 +765,13 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "condition:sma",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "c3",
@@ -653,7 +795,12 @@
    "Your genetic counsellor can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "not-assessed",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "c3",
@@ -677,7 +824,12 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "not-assessed",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "d1",
@@ -700,7 +852,11 @@
    "Your genetic counsellor can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "d1",
@@ -723,7 +879,11 @@
    "يمكن لمستشارك الوراثي أن يساعدكما في مناقشة أي قرار."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "d2",
@@ -746,7 +906,11 @@
    "Your genetic counsellor can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "d2",
@@ -769,7 +933,11 @@
    "لا يمكنني أن أقرر لك ما يجب عليك فعله بشأن قرارك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "d3",
@@ -792,7 +960,11 @@
    "Your genetic counsellor can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "d3",
@@ -815,7 +987,11 @@
    "يمكن لمستشارك الوراثي أن يناقش أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "d4",
@@ -838,7 +1014,11 @@
    "Your genetic counsellor can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "d4",
@@ -861,7 +1041,11 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "d5",
@@ -884,7 +1068,11 @@
    "Your genetic counsellor can answer questions that Silah cannot, and can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "d5",
@@ -907,7 +1095,11 @@
    "يمكن لمستشارك الوراثي أن يجيب عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "o1",
@@ -930,7 +1122,11 @@
    "Your genetic counsellor can answer questions that Silah cannot, and can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "o1",
@@ -953,7 +1149,11 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "o2",
@@ -976,7 +1176,11 @@
    "I cannot provide information about whether herbs can cure SMA."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "o2",
@@ -1000,7 +1204,12 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "condition:sma",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "f1",
@@ -1026,7 +1235,14 @@
    "Your genetic counsellor can answer questions that Silah cannot, and can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "carrier:CYP21A2",
+   "panel-residual",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 3
  },
  {
   "id": "f1",
@@ -1051,7 +1267,13 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "panel-residual",
+   "background",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "f2",
@@ -1077,7 +1299,13 @@
    "Your genetic counsellor can answer questions that Silah cannot, and can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "carrier:CYP21A2",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "f2",
@@ -1101,7 +1329,12 @@
    "النتيجة السلبية لشريكك تخفض الاحتمال كثيراً لكن ليس إلى الصفر: نحو 1 من 260 في كل حمل لهذا الجين."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "carrier:CYP21A2"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "f3",
@@ -1124,7 +1357,11 @@
    "For first cousins, the background chance of a child with a serious condition is about 1.7 to 2.8 percentage points higher than for unrelated parents, mostly from recessive conditions the panel does not test."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "consanguinity"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "f3",
@@ -1147,7 +1384,11 @@
    "لدى أبناء العمومة أو الخؤولة من الدرجة الأولى، يرتفع الاحتمال الأساسي لإنجاب طفل بحالة خطيرة بنحو 1.7 إلى 2.8 نقطة مئوية مقارنة بالوالدين غير الأقارب، ومعظم ذلك من حالات متنحية لا تفحصها اللوحة."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "consanguinity"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "f4",
@@ -1172,7 +1413,13 @@
    "Your genetic counsellor can answer questions that Silah cannot, and can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "carrier:CYP21A2",
+   "panel-residual",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "f4",
@@ -1198,7 +1445,14 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "carrier:CYP21A2",
+   "panel-residual",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 3
  },
  {
   "id": "f5",
@@ -1221,7 +1475,11 @@
    "Your genetic counsellor can answer questions that Silah cannot, and can talk through any decision with you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "f5",
@@ -1247,6 +1505,13 @@
    "يستطيع مستشارك الوراثي الإجابة عن الأسئلة التي لا يجيب عنها تطبيق صلة، ومناقشة أي قرار معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "carrier:CYP21A2",
+   "panel-residual",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 3
  }
 ]

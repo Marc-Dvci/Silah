@@ -9,7 +9,8 @@ Schema: `schema/result-bundle.schema.json` (JSON Schema 2020-12). `tests/schema.
 - **One bundle per person**, not per couple. It holds that person's own findings and a `couple` section with only:
   - the genes both partners carry (`shared`),
   - this person's own carrier genes for which the partner tested negative (`partnerNegativeFor`),
-  - genes with a variant of uncertain significance that matters for the couple (`vusGenes`).
+  - genes with a variant of uncertain significance that matters for the couple (`vusGenes`),
+  - what the lab states about its own tests (`detection`): the share of each gene's disease-causing changes the panel detects, from its validation, and, for each gene in `partnerNegativeFor`, whether the partner's sample was checked for this person's exact change, with that check's sensitivity. Without `detection`, the phone gives every remaining chance as a range (99% to 80% detection), never one figure; a gene missing from `exactChange` is treated as covered by the panel only.
 - **Signature:** Ed25519 (RFC 8032) over the UTF-8 bytes of the canonical JSON of `payload`, with keys sorted recursively and no whitespace. `keyId` is the first 16 hex characters of SHA-256 of the lab's public key. Code: `src/core/crypto/sign.ts`.
 - **Delivery:** alongside the existing digital premarital certificate, as a file, a QR code or a download link inside the TAMM or Sahatna apps. The phone verifies the signature against the lab keys it trusts before showing anything.
 - **Gene symbols:** current HGNC symbols, restricted to the DoH panel (`src/core/data/panel.ts`, mapped from Appendix 12 of the Premarital Screening Standard V3).
@@ -23,7 +24,7 @@ Schema: `schema/result-bundle.schema.json` (JSON Schema 2020-12). `tests/schema.
 | `brief.packet` | Counselling clinic | Teach-back score and missed points, questions asked, sharing choices, language | Signed receipt; `brief.revoke` deletes it at the clinic |
 | `birthplan.notify` | Delivery hospital | Shared genes, condition, due date | Signed receipt; expires six weeks after the due date; `birthplan.revoke` |
 | `booking` | Counselling clinic | Couple id, person id | — |
-| `escalate` | Counselling clinic | The safety route that fired (for example distress); never the message text | — |
+| `escalate` | Counselling clinic | The safety route that fired (for example distress) and a reference; never the message text | — |
 | `invite.request` | Invitation service | Blinded values and a pseudonym used only for the per-person cap | Signed receipt |
 
 Message definitions: `src/app/net.ts`. In the prototype they travel inside the browser; in a deployment each is a single HTTPS call to a UAE-hosted service, or a QR code where there is no connection.
@@ -36,5 +37,7 @@ Message definitions: `src/app/net.ts`. In the prototype they travel inside the b
 - **Unlinkability:** the issuance log holds blinded values only. `linkable()` in `src/core/crypto/invites.ts` checks that no redemption can be matched to an issuance; a test includes a positive control.
 
 ## What the services return to the phone
+
+`escalate.received` tells the phone the request reached the clinic's list; `escalate.seen` tells it a counsellor has marked it seen. The phone says no more than these two messages confirm: it never states that a person has been contacted. In the demo the clinic acknowledges receipt automatically, and a counsellor marks a request seen from the queue.
 
 `pathway.update` carries the next step (counselling booked with a time slot, referred, closed) and, from maternity, the newborn result: affected or not affected only. A child's carrier status is not tested or reported.

@@ -112,7 +112,7 @@
       <p class="lede">The result arrives signed by the lab and is checked on the phone before it is shown.</p>
       <ul class="points">
         <li><b>Four children, counted.</b> One may have the condition, two are healthy carriers, one carries neither, in every pregnancy.</li>
-        <li><b>What “compatible” does not mean.</b> A cousin couple’s certificate can say “No risk” where the remaining chance is about 1 in 260. Silah shows it.</li>
+        <li><b>What “compatible” does not mean.</b> In the demo, a cousin couple’s certificate says “No risk”, where Silah’s model gives about 1 in 160 per pregnancy for the panel’s conditions. Silah shows it, and names the lab’s detection rates it rests on.</li>
         <li><b>Four short questions</b> check that the picture is clear, in the person’s own language.</li>
         <li><b>Options at equal weight</b>, in a fixed order, with no recommendation.</li>
         <li><b>Private by default.</b> Each partner sees only the genes both carry. Anything else is shared by choice, with a signed receipt that can be withdrawn.</li>
@@ -126,8 +126,8 @@
       <h3>Answers only from checked facts</h3>
       <p class="lede">Common questions are answered from fact cards built for this family’s result. Questions about distress, ending a pregnancy, religious rulings or someone else’s result go to a person before any model sees them.</p>
       <ul class="points">
-        <li><b>A language model on the device</b> (Gemma 4) handles the rest. It runs on the phone or the counsellor’s computer; nothing leaves the device.</li>
-        <li><b>A verifier reads every sentence.</b> It drops any sentence that adds a number, predicts a child or steers a decision.</li>
+        <li><b>The model chooses, the cards speak.</b> For other questions, a language model on the device (Gemma 4) picks which checked sentences answer. The person reads those sentences, never the model’s own wording. Nothing leaves the device.</li>
+        <li><b>Options never appear alone.</b> If the model picks one, all of them are shown, in a fixed order.</li>
         <li><b>Narration</b> of the fixed explanations in Arabic and English, and larger text, for people who read less easily.</li>
       </ul>
     </div>
@@ -165,18 +165,18 @@
     <div class="promises">
       <div class="promise">
         <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 7h14M7 7l-3 7a3 3 0 0 0 6 0zM17 7l-3 7a3 3 0 0 0 6 0z"/></svg>It never steers a decision</h3>
-        <p>Options appear at equal weight in a fixed order. The verifier removes directive or certain sentences, and any chance given for the wrong outcome. Cancelled marriages and any single reproductive choice are never counted as success.</p>
+        <p>Options appear at equal weight in a fixed order. What a person reads is written in advance and checked; in testing, a verifier also removes the model’s directive or certain sentences, and any chance given for the wrong outcome. Cancelled marriages and any single reproductive choice are never counted as success.</p>
         <p class="proof">0 directive sentences from Gemma 4 E4B across 52 test answers, many of them traps.</p>
       </div>
       <div class="promise">
         <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>A person for the hard questions</h3>
-        <p>Distress, ending a pregnancy, religious rulings, blame and other people’s results go to a counsellor or a scholar, before any model. A call back is one tap away.</p>
-        <p class="proof">Checked end to end: a religious question on Mariam’s phone is routed to a scholar, in the feminine form.</p>
+        <p>Distress, ending a pregnancy, religious rulings, blame and other people’s results go to a counsellor or a scholar, before any model. A call back is one tap away, and the phone says a counsellor has seen a request only once the clinic confirms it.</p>
+        <p class="proof">Checked end to end: a distress message gets 999 and 998, and “seen by a counsellor” appears only after the counsellor marks it.</p>
       </div>
       <div class="promise">
         <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg>Every number can be checked</h3>
-        <p>The risk kernel computes with exact fractions, and each number carries its arithmetic and its source. Assumptions are labelled where they are used.</p>
-        <p class="proof">158 unit tests, including a grid of values worked out by hand.</p>
+        <p>The risk kernel computes with exact fractions, and each number carries its arithmetic and its source. For cousins it counts changes inherited from a shared ancestor. Detection rates come from the lab; without them, a range. Assumptions are labelled where they are used.</p>
+        <p class="proof">173 unit tests, including a grid of values worked out by hand.</p>
       </div>
       <div class="promise">
         <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Each person’s result stays theirs</h3>
@@ -196,8 +196,8 @@
     <h2>Tested through the real interface</h2>
   </div>
   <div class="proofs">
-    <div><strong>158</strong><span>unit tests: risk kernel, verifier, typed questions, routes, cryptography, population model</span></div>
-    <div><strong>23</strong><span>end-to-end checks that play the whole story through the real screens</span></div>
+    <div><strong>173</strong><span>unit tests: risk kernel, verifier, typed questions, routes, cryptography, population model</span></div>
+    <div><strong>30</strong><span>end-to-end checks that play the whole story through the real screens</span></div>
     <div><strong>0</strong><span>WCAG 2.2 AA violations on 18 screens, in Arabic and English</span></div>
     <div><strong>22/22</strong><span>grounded questions answered by Gemma 4 E4B, with no directive sentence</span></div>
   </div>
@@ -212,7 +212,7 @@
       <div class="bar"><span>Random</span><div class="track"><div class="fill light" style="--w:22%;--c:#C5CBDD">1.3</div></div></div>
     </div>
   </div>
-  <p class="small" style="margin-top:40px"><b>Readable in both languages.</b> Silah’s explanations read at US school grade 6.9 in English, against 14.2 for the DoH information sheet couples sign today, and score 84.1 against 67.4 on OSMAN, the Arabic readability scale. Every chance is written as a count, like “1 in 4”, never as a percentage.</p>
+  <p class="small" style="margin-top:40px"><b>Readable in both languages.</b> Silah’s explanations read at US school grade 6.4 in English, against 14.2 for the DoH information sheet couples sign today, and score 83.4 against 67.4 on OSMAN, the Arabic readability scale. Every chance is written as a count, like “1 in 4”, never as a percentage.</p>
   <p class="muted small" style="margin-top:12px">Also verified: offline use on an Android 13 emulator in airplane mode; Gemma 4 E2B running inside the browser on WebGPU. All figures come from scripts in the repository.</p>
 </section>
 

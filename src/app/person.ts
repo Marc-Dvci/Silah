@@ -16,6 +16,8 @@ export type PathState = 'result-issued' | 'notified' | 'understood' | 'counselli
 export interface Teachback { at: string; correct: number; total: number; missed: string[] }
 export interface Question { at: string; q: string; route: Route; cards: string[]; via: 'faq' | 'model' | 'route' | 'none' }
 export interface Received { from: string; fromName: string; gene: string; variant?: string; at: string; seq: number; revoked?: boolean }
+/** A request for a person. `received` and `seen` are set only when the clinic and then a counsellor confirm them. */
+export interface Escalation { ref: string; at: string; route: Route; received?: string; seen?: string }
 
 export interface PersonState {
   id: string;
@@ -34,6 +36,7 @@ export interface PersonState {
   big?: boolean;
   booking?: { at: string; status: 'requested' | 'confirmed'; slot?: string };
   briefShared?: string;
+  escalations?: Escalation[];
   pathway: { state: PathState; at: string; note?: string }[];
   seen: string[];
 }
@@ -150,6 +153,12 @@ async function apply(s: PersonState, m: Msg): Promise<void> {
       s.invites.pending = undefined;
       break;
     }
+    case 'escalate.received':
+    case 'escalate.seen': {
+      const e = s.escalations?.find(x => x.ref === body.ref);
+      if (e) e[m.kind === 'escalate.seen' ? 'seen' : 'received'] = m.at;
+      break;
+    }
     case 'pathway.update':
       if (body.birth) s.birthOutcome = { at: m.at, ...body.birth };
       push(s, body.state as PathState, body.note);
@@ -252,8 +261,15 @@ export async function requestBooking(s: PersonState): Promise<void> {
   await savePerson(s);
 }
 
-export async function escalate(s: PersonState, route: Route): Promise<void> {
-  await send(owner(s.id), 'clinic', 'escalate', { coupleId: coupleOf(s.id)?.id, personId: s.id, route });
+export const escalationRef = (id: string) => `${id}:${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
+
+/** Tell the clinic that this person needs a human. The phone records it as sent; the clinic's receipt and a
+ *  counsellor's acknowledgement come back as messages, and only then does the screen say so. */
+export async function escalate(s: PersonState, route: Route, ref = escalationRef(s.id)): Promise<void> {
+  const at = new Date().toISOString();
+  s.escalations = [...(s.escalations ?? []), { ref, at, route }];
+  await send(owner(s.id), 'clinic', 'escalate', { coupleId: coupleOf(s.id)?.id, personId: s.id, route, ref });
+  await savePerson(s);
 }
 
 export async function askForInvites(s: PersonState, n: number): Promise<void> {

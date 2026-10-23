@@ -46,6 +46,19 @@ export interface CoupleSection {
   partnerNegativeFor: string[];
   /** Genes where either partner has a VUS that matters for the couple. Routed to a counsellor. */
   vusGenes: string[];
+  /** How sensitive the lab's tests are, as the lab states them. Without it, remaining chances are shown as ranges. */
+  detection?: Detection;
+}
+
+/** What the lab states about its own tests. Silah gives a single remaining-chance figure only from these. */
+export interface Detection {
+  /** Share of a gene's disease-causing changes the panel detects, from the lab's validation. */
+  panel: QLike;
+  /** Genes with their own validated rate, for example a gene with a look-alike pseudogene. */
+  genes?: Record<string, QLike>;
+  /** This person's carrier genes for which the lab checked the partner's sample for this person's exact change,
+   *  with the sensitivity of that check. A gene not listed was covered by the panel only. */
+  exactChange?: Record<string, QLike>;
 }
 
 export interface ResultBundle {

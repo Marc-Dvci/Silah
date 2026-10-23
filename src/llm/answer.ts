@@ -1,9 +1,10 @@
 import type { FactCard, Lang } from '../core/types';
 import { Q } from '../core/fraction';
-import { parseModelAnswer, verifyAnswer, type ModelAnswer, type VerifiedAnswer } from '../core/verifier';
+import { parseModelAnswer, resolveIds, verifyAnswer, type ModelAnswer, type VerifiedAnswer } from '../core/verifier';
 
-// The language model only rephrases fact cards in answer to a question. Its output is JSON,
-// every sentence cites cards, and the verifier decides what the person sees.
+// The language model answers in JSON, and every sentence cites fact cards. On a person's phone the model only
+// chooses: the person reads the cited cards in their own fixed, checked words (quoteCards). The model's wording
+// and the verifier's verdict on it are kept for the evaluation (eval/), where they measure the model.
 
 export interface ChatMessage { role: 'system' | 'user' | 'assistant'; content: string }
 export interface Backend { name: string; generate(messages: ChatMessage[]): Promise<string> }
@@ -65,6 +66,21 @@ export function composeMessages(question: string, cards: FactCard[], lang: Lang)
 }
 
 export interface ModelResult { raw: string; parsed: ModelAnswer | null; verified: VerifiedAnswer | null; ms: number; backend: string }
+
+/**
+ * What the person reads: every card any sentence cites, in the card's own words, in the kernel's order.
+ * A card is shown whatever the verifier made of the model's sentence, since its words are fixed; blocking a
+ * sentence therefore never hides a number. An option is never shown alone: if the model chose one, all are
+ * shown, in their fixed order, so the choice of cards cannot steer.
+ */
+export function quoteCards(a: ModelAnswer, cards: FactCard[]): FactCard[] {
+  const all = [...cards, COUNSELLOR_CARD];
+  const ids = new Set(a.sentences.flatMap(s => resolveIds(s.cards ?? [], all)));
+  const isOption = (c: FactCard) => c.kind === 'option' && c.id !== COUNSELLOR_CARD.id;
+  const picked = all.filter(c => ids.has(c.id));
+  if (!picked.some(isOption)) return picked;
+  return [...picked.filter(c => !isOption(c)), ...cards.filter(isOption)];
+}
 
 export async function askModel(backend: Backend, question: string, cards: FactCard[], lang: Lang): Promise<ModelResult> {
   const t0 = performance.now();

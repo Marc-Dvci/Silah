@@ -1,14 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { verifyAnswer, extractNumbers, isDirective, parseModelAnswer, resolveIds, stripInlineIds } from '../src/core/verifier';
 import { route } from '../src/core/routes';
-import { coupleView, labCouple } from '../src/core/kernel';
+import { coupleView, labCouple, SIMULATED_LAB } from '../src/core/kernel';
 import type { PersonResult } from '../src/core/types';
 
 const p = (id: string, f: PersonResult['findings']): PersonResult =>
   ({ personId: id, displayName: id, sex: 'F', findings: f, panelVersion: 't', testedAt: '2026-01-01', method: 'premarital' });
 const a = p('A', [{ gene: 'SMN1', variant: 'del', classification: 'P' }]);
 const b = p('B', [{ gene: 'SMN1', variant: 'del', classification: 'P' }]);
-const cards = coupleView(a, labCouple(a, b, 'first-cousins', 'c')[0]).cards;
+const cards = coupleView(a, labCouple(a, b, 'first-cousins', 'c', SIMULATED_LAB)[0]).cards;
 
 const one = (text: string, ids = ['couple:SMN1']) => verifyAnswer({ sentences: [{ text, cards: ids }] }, cards).verdicts[0];
 

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'preact/hooks';
 import { useClinic } from '../hooks';
-import { PATH, pathOwner, counsellorAdvance, recordNewborn, referralKpi, sendOutreach, urgency, OUTREACH_REGISTER, type Case, type ClinicState, type Referral } from '../../app/clinic';
+import { PATH, pathOwner, counsellorAdvance, markEscalationSeen, recordNewborn, referralKpi, sendOutreach, urgency, OUTREACH_REGISTER, type Case, type ClinicState, type Referral } from '../../app/clinic';
 import type { PathState } from '../../app/person';
 import { conditionFor } from '../../core/conditions';
 import { linkable } from '../../core/crypto/invites';
@@ -73,6 +73,7 @@ function Queue({ c, act, sel }: { c: ClinicState; act: Act; sel?: string }) {
         </div>
         <Kpi c={c} />
       </div>
+      <Requests c={c} act={act} />
       <div class="split">
         <div class="stack" style={{ '--gap': '2px' } as any}>
           {list.map(k => (
@@ -91,6 +92,31 @@ function Queue({ c, act, sel }: { c: ClinicState; act: Act; sel?: string }) {
         {selected && <Brief k={selected} c={c} act={act} />}
       </div>
     </Enter>
+  );
+}
+
+const ROUTE_LABEL: Record<string, string> = {
+  distress: 'Distress language in Silah: call now', termination: 'Asked about ending a pregnancy', none: 'Asked for a call back',
+};
+
+/** Requests for a person from any phone, newest first. The phone says a counsellor has seen one only after this button. */
+function Requests({ c, act }: { c: ClinicState; act: Act }) {
+  const list = [...(c.escalations ?? [])].reverse().slice(0, 6);
+  if (!list.length) return null;
+  const time = (iso: string) => new Date(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  return (
+    <section class="stack" style={{ '--gap': '6px', margin: '4px 0 18px' } as any} aria-label="Requests for a person">
+      <p class="eyebrow">Requests for a person</p>
+      {list.map(e => (
+        <div key={e.ref} class="row wrap" style={{ gap: '10px' }}>
+          <span class={`chip ${e.route === 'distress' ? 'madder' : 'saffron'}`}>{ROUTE_LABEL[e.route] ?? e.route}</span>
+          <b>{e.name}</b><span class="tiny muted num">{time(e.at)}{e.coupleId ? ` · ${e.coupleId}` : ''}</span>
+          {e.seenAt
+            ? <span class="small muted">Seen {time(e.seenAt)}</span>
+            : <button class="btn calm" style={{ padding: '8px 14px', fontSize: '14px' }} onClick={() => act(st => markEscalationSeen(st, e.ref))}>Mark seen: I will call</button>}
+        </div>
+      ))}
+    </section>
   );
 }
 
@@ -127,7 +153,7 @@ function Brief({ k, c, act }: { k: Case; c: ClinicState; act: Act }) {
   if (k.flags.includes('distress')) agenda.push('Call today: distress language was detected in Silah. Start with how they are, not with the result.');
   if (k.flags.includes('asked-for-human')) agenda.push('The couple asked for a call back.');
   if (birth?.outcome) agenda.push(birth.outcome.affected ? 'Baby born and confirmed affected; referred to the treating team. Offer the family support and invitations for relatives.' : 'Baby born and not affected; pathway complete.');
-  else if (weeks !== null) agenda.push(`Pregnancy due in about ${weeks} weeks${birth ? '; the birth plan is shared with the maternity team' : '; offer a birth plan'}.`);
+  else if (weeks !== null) agenda.push(`Pregnancy due in about ${weeks} weeks${birth ? '; the birth plan is shared with the maternity team' : conds.some(x => x.birthPlan) ? '; offer a birth plan' : '; plan the newborn check with a specialist'}.`);
   for (const b of k.briefs) {
     const who = personaById(b.personId)?.name.en ?? b.personId;
     for (const m of b.teachback?.missed ?? []) agenda.push(`Revisit with ${who}: ${MISSED[m] ?? m}.`);

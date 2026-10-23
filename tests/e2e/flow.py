@@ -156,6 +156,32 @@ with sync_playwright() as p:
     check(pg.get_by_text('Your baby was referred this week to the treating team').count() == 1, 'parents see the newborn result on the phone')
     shot('noura_newborn')
 
+    # Fatima's compatible result: the detection the lab stated, the whole-panel figure, family history.
+    pg.set_viewport_size({'width': 412, 'height': 900})
+    goto('#/p/fatima/result', 3000)
+    check(pg.get_by_text('قيم توضيحية من مختبر محاكى').count() == 1, 'the result names the detection the (simulated) lab stated')
+    check(pg.get_by_text('1 من 160').count() >= 1 and pg.get_by_text('1 من 260').count() >= 1, 'whole panel 1 in 160, her gene 1 in 260')
+    check(pg.get_by_text('التاريخ الصحي لعائلتيكما').count() == 1, 'family history is named as not included')
+    shot('fatima_result')
+
+    # A request for a person: the phone never says more than the clinic has confirmed.
+    goto('#/p/fatima/ask', 2500)
+    pg.get_by_role('textbox').fill('لا أريد أن أعيش')
+    pg.get_by_role('button', name='إرسال').click(); pg.wait_for_timeout(1500)
+    check(pg.get_by_text('999').count() >= 1 and pg.get_by_text('طلبنا من مستشار').count() == 0, 'distress reply gives 999 and 998 and does not claim a counsellor was reached')
+    check(pg.get_by_text('ولم يطّلع عليه أي مستشار بعد').count() + pg.get_by_text('بانتظار وصوله إلى العيادة').count() == 1, 'the phone shows only what the clinic has confirmed')
+    shot('fatima_distress')
+    pg.set_viewport_size({'width': 1440, 'height': 900})
+    goto('#/c/queue', 2500)
+    req = pg.locator('section[aria-label="Requests for a person"]')
+    check('Fatima' in req.inner_text(), 'the clinic lists the request, though the couple has no open case')
+    shot('clinic_requests')
+    req.get_by_role('button', name='Mark seen: I will call').first.click(); pg.wait_for_timeout(1500)
+    pg.set_viewport_size({'width': 412, 'height': 900})
+    goto('#/p/fatima/counsellor', 3000)
+    check(pg.get_by_text('اطّلع عليه أحد المستشارين').count() == 1, 'the phone says a counsellor has seen it only after the counsellor marked it')
+    shot('fatima_seen')
+
     # Mariam withdraws the summary she shared; it disappears from the counsellor's brief.
     goto('#/p/mariam/counsellor', 2500)
     pg.get_by_role('button', name='إيقاف المشاركة').click(); pg.wait_for_timeout(2500)

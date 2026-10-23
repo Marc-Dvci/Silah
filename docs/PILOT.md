@@ -26,6 +26,13 @@
 - **Equity:** every measure reported by language (Arabic, English) and by self-reported reading confidence, with counts under 5 suppressed.
 - **Not a success measure:** marriages cancelled or any single reproductive choice. Choices are reported, never ranked.
 
+- **Trust:** a short questionnaire at the counselling visit, both arms, on whether the person trusted the explanation they received and knew where its numbers came from.
+- **Time:** days from result to the first counselling visit, from the pathway log, both arms.
+
+**Size.** Understanding is compared among compatible couples, where the misconception "compatible means zero risk" is the clearest single outcome. To detect a fall from 50% to 30% holding it (assumed figures), with 80% power at a two-sided 5% level, a two-proportion test needs 93 people per arm. Randomising by week groups people, so with an assumed design effect of 1.5 the target is 140 per arm, 280 in all: about 5% of the roughly 5,200 people tested each year in Abu Dhabi (2,600 couples, measured).
+
+**What is already measured, and what the pilot adds.** The software and the text are measured in this repository: arithmetic, privacy, accessibility, readability against the DoH information sheet, and the model's answers (`docs/EVALUATION.md`). Whether couples understand their risk better, trust the explanation more and reach counselling sooner is what the pilot measures.
+
 Pre-registration: the protocol above is fixed before any data is collected; deviations are reported.
 
 ## What must happen before a pilot
@@ -34,7 +41,8 @@ Pre-registration: the protocol above is fixed before any data is collected; devi
 2. DoH approval of the signed result format and of the couple re-check consent wording.
 3. Hosting of the clinic services inside the UAE (Federal Law No. 2 of 2019).
 4. A clinical safety review of the birth-plan statements by a paediatric geneticist.
-5. Classification under DoH's Policy on Use of AI in the Healthcare Sector (2018): Silah's model only rephrases checked facts, and no decision depends on it.
+5. Classification under DoH's Policy on Use of AI in the Healthcare Sector (2018): Silah's model only chooses which fixed, checked sentences to show; it writes nothing a person reads, and no decision depends on it.
+6. The lab's validated detection rates, per gene, and a check of each partner's sample for the other partner's exact change, carried in the signed result.
 
 ## How it scales
 

@@ -5,6 +5,7 @@ import { isCarrierFinding } from '../../core/kernel';
 import { Q } from '../../core/fraction';
 import type { FactCard } from '../../core/types';
 import { activeGrants } from '../../core/crypto/receipts';
+import { formatPct } from '../../core/kernel';
 import { PANEL_VERSION } from '../../core/data/panel';
 import { Enter, Kids, Field, KidFigure, Listen, ListenAll, Toggle, Receipt, IconSeal, go, useT, type Tx, type KidKind } from '../kit';
 import { Back } from './shell';
@@ -79,7 +80,11 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
             <div class="pool">
               <p class="eyebrow">{t({ en: 'Conditions on the panel, per pregnancy', ar: 'الحالات التي تفحصها اللوحة، في كل حمل' })}</p>
               <div style={{ margin: '14px 0' }}><Field n={view.panelRisk.oneIn()} /></div>
-              <p><b class="num">{t({ en: `1 in ${view.panelRisk.oneIn().toLocaleString('en-US')}`, ar: `1 من ${view.panelRisk.oneIn().toLocaleString('en-US')}` })}</b> {t({ en: 'per pregnancy: about one dot in this whole field.', ar: 'في كل حمل: نحو نقطة واحدة بين كل هذه النقاط.' })}</p>
+              {view.panelRiskRange ? (
+                <p><b class="num">{t({ en: `Up to 1 in ${view.panelRisk.oneIn().toLocaleString('en-US')}`, ar: `حتى 1 من ${view.panelRisk.oneIn().toLocaleString('en-US')}` })}</b> {t({ en: `per pregnancy: about one dot in this whole field. The result does not state the lab’s detection, so the chance lies between 1 in ${view.panelRiskRange[0].oneIn().toLocaleString('en-US')} and this figure.`, ar: `في كل حمل: نحو نقطة واحدة بين كل هذه النقاط. ولا تذكر النتيجة نسبة الكشف لدى المختبر، لذلك يقع الاحتمال بين 1 من ${view.panelRiskRange[0].oneIn().toLocaleString('en-US')} وهذا الرقم.` })}</p>
+              ) : (
+                <p><b class="num">{t({ en: `1 in ${view.panelRisk.oneIn().toLocaleString('en-US')}`, ar: `1 من ${view.panelRisk.oneIn().toLocaleString('en-US')}` })}</b> {t({ en: 'per pregnancy, for any of the conditions on the panel: about one dot in this whole field.', ar: 'في كل حمل، لأيٍّ من الحالات التي تفحصها اللوحة: نحو نقطة واحدة بين كل هذه النقاط.' })}</p>
+              )}
               <p class="muted small" style={{ marginTop: '8px' }}>{t({ en: 'The official certificate wording for a compatible couple reads “No risk for either the other partner or children to be carrier or diseased”. The same standard also says the test does not cover all genetic disorders. Silah shows both halves.', ar: 'تنص صيغة الشهادة الرسمية للزوجين المتوافقين على «لا توجد خطورة على الطرف الآخر والطفل»، بينما يذكر المعيار نفسه أن الفحص لا يغطي جميع الاضطرابات الوراثية. يعرض تطبيق صلة الأمرين معاً.' })}</p>
               <div style={{ marginTop: '10px' }}><SourceChips ids={['doh-pms-2024']} /></div>
             </div>
@@ -89,8 +94,9 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
         <OwnFindings s={s} act={act} />
 
         <h2>{t({ en: 'What this test cannot see', ar: 'ما لا يستطيع هذا الفحص رؤيته' })}</h2>
+        <Detection view={view} issuer={bundle.payload.issuer} partner={partner} />
         <section class="flow">
-          {[...byKind('vus'), ...byKind('residual-gene'), card('panel-residual'), card('not-assessed'), card('consanguinity'), card('background')]
+          {[...byKind('vus'), ...byKind('residual-gene'), card('panel-residual'), card('not-assessed'), card('family-history'), card('consanguinity'), card('background')]
             .filter((c): c is FactCard => !!c)
             .map(c => <CardLine key={c.id} c={c} />)}
         </section>
@@ -105,6 +111,26 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
 }
 
 const issuerAr = (x: string) => x.includes('EGP') ? 'خدمة الجينوم الإماراتي (محاكاة)' : 'مختبر الجينوم لفحص ما قبل الزواج (محاكاة)';
+
+/** Where the remaining chances come from: the detection the lab stated in the signed result, or a range. */
+function Detection({ view, issuer, partner }: { view: NonNullable<ReturnType<typeof currentView>>; issuer: string; partner: string }) {
+  const t = useT();
+  const det = view.detection;
+  if (!det) {
+    return <p class="small muted">{t({ en: 'This result does not state how sensitive the lab’s test is, so each remaining chance below is a range, not one figure.', ar: 'لا تذكر هذه النتيجة مدى دقة فحص المختبر، لذلك يأتي كل احتمال متبقٍّ أدناه في صورة نطاق، لا رقماً واحداً.' })} <SourceChips ids={['assumption-detection']} /></p>;
+  }
+  const exact = Object.values(det.exactChange ?? {})[0];
+  const panel = formatPct(Q.from(det.panel), 0);
+  const ex = exact ? formatPct(Q.from(exact), 0) : '';
+  return (
+    <p class="small muted">
+      {t({
+        en: `Detection stated by ${issuer}: ${panel} of disease-causing changes in each panel gene${exact ? `; ${partner}’s sample was checked for your exact change (${ex})` : ''}. These are example values from a simulated lab.`,
+        ar: `نسبة الكشف كما ذكرها ${issuerAr(issuer)}: ${panel} من التغيّرات المسبّبة للمرض في كل جين من جينات اللوحة${exact ? `، وفُحصت عيّنة ${partner} بحثاً عن التغيّر نفسه الموجود لديك (${ex})` : ''}. وهذه قيم توضيحية من مختبر محاكى.`,
+      })} <SourceChips ids={['lab-detection']} />
+    </p>
+  );
+}
 
 export function CardLine({ c }: { c: FactCard }) {
   const t = useT();
@@ -172,7 +198,7 @@ function questions(atRisk: boolean): TQ[] {
     { id: 'zero', kind: 'tf', answer: false, ask: { en: '“Compatible means there is no chance at all.”', ar: '«متوافق يعني أنه لا يوجد أي احتمال على الإطلاق.»' }, explain: { en: 'Compatible lowers the chance a lot, but not to zero.', ar: '«متوافق» يخفض الاحتمال كثيراً، لكن ليس إلى الصفر.' } },
     { id: 'all', kind: 'tf', answer: false, ask: { en: '“The test checks every genetic condition.”', ar: '«الفحص يكشف كل الحالات الوراثية.»' }, explain: { en: 'It checks recessive conditions on the panel only, not all of them.', ar: 'يفحص الحالات المتنحية المدرجة في اللوحة فقط، لا كل الحالات الوراثية.' } },
     { id: 'ill', kind: 'tf', answer: false, ask: { en: '“Being a carrier means I am ill.”', ar: '«أن يحمل الشخص تغيّراً في الجين يعني أنه مريض.»' }, explain: { en: 'Carriers are healthy.', ar: 'الحاملون أصحّاء.' } },
-    { id: 'cousins', kind: 'tf', answer: true, ask: { en: '“Because we are cousins, our background chance is a little higher than for unrelated parents.”', ar: '«لأننا أقارب، فإن احتمالنا الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب.»' }, explain: { en: 'Yes, mostly from recessive conditions the panel does not test.', ar: 'نعم، ومعظم ذلك من حالات متنحية لا تفحصها اللوحة.' } },
+    { id: 'cousins', kind: 'tf', answer: true, ask: { en: '“Because we are cousins, our background chance is a little higher than for unrelated parents.”', ar: '«لأننا أقارب، فإن احتمالنا الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب.»' }, explain: { en: 'Yes. Most of it comes from recessive conditions. A negative panel lowers part of it, but not all.', ar: 'نعم. ومعظم ذلك من حالات متنحية. والنتيجة السلبية للوحة تخفض جزءاً منه، لا كله.' } },
   ];
 }
 

@@ -19,6 +19,8 @@ export type MsgKind =
   | 'invite.issued'            // clinic → person: blind signatures
   | 'invite.redeem'            // relative → clinic
   | 'escalate'                 // person → clinic: a hard route or the person asked for a human
+  | 'escalate.received'        // clinic → person: the request reached the clinic's list
+  | 'escalate.seen'            // clinic → person: a counsellor marked it seen
   | 'booking'                  // person → clinic: counselling appointment request
   | 'pathway.update';          // clinic → person
 

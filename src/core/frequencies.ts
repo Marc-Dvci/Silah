@@ -22,13 +22,18 @@ export const CARRIER_FREQS: CarrierFreq[] = [
   F('CFTR', '0.0068', 'emirati-exomes', 'jain-2025-gimo'),
 ];
 
-/** Assumed carrier frequency for a panel gene with no published local figure. */
-export const DEFAULT_CARRIER = Q.of(1, 200);
+/**
+ * Assumed carrier frequency for a panel gene with no published local figure. It is calibrated, not round: for an
+ * untested first-cousin couple, the panel's share of the added chance is F·Σq over the panel genes (q = p/2), and
+ * it cannot exceed the published 1.7 to 2.8 added children per 100 births (Hamamy 2012). With the seven published
+ * Emirati figures, 1 in 1,000 for each of the other genes reaches the top of that range; 1 in 200 would imply 9.8 in
+ * 100. tests/kernel.test.ts checks the bound.
+ */
+export const DEFAULT_CARRIER = Q.of(1, 1000);
 
-/** Assumed share of a gene's pathogenic variants that the panel detects (unpublished for the DoH panel). */
-export const DETECTION_GENE = Q.of(9, 10);
-/** A known familial variant tested directly is assumed to be detected 99 times in 100. */
-export const DETECTION_FAMILIAL = Q.of(99, 100);
+/** When a result does not state the lab's detection, remaining chances are given as a range over these detection
+ *  rates (share of a gene's disease-causing changes a sequencing panel finds), never as one personal figure. */
+export const DETECTION_RANGE: [Q, Q] = [Q.of(80, 100), Q.of(99, 100)];
 
 const BY_GENE = new Map(CARRIER_FREQS.map(f => [f.gene, f]));
 

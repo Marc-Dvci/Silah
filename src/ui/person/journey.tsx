@@ -1,27 +1,32 @@
 import { useState } from 'preact/hooks';
 import type { PersonState, PathState } from '../../app/person';
 import { coupleOf, currentView, setBirthPlan, askForInvites, requestBooking, shareBrief, revoke, escalate, HOSPITAL } from '../../app/person';
-import { OPTIONS, relativeCard, type Relative } from '../../core/kernel';
+import { optionCards, relativeCard, type Relative } from '../../core/kernel';
 import { activeGrants } from '../../core/crypto/receipts';
 import { Enter, Listen, Toggle, Receipt, Step, KidFigure, go, useT, useN, IconShare, IconCheck } from '../kit';
 import { Back } from './shell';
 import { fmtSlot } from './home';
 import { SourceChips } from './sources';
 import { CardLine } from './result';
+import { EscalationStatus } from './escalation';
 
 type Act = (f: (st: PersonState) => Promise<void>) => Promise<void>;
 
 // ---------- options: equal weight, fixed order, no ranking ----------
 
-export function Options({ base }: { s: PersonState; base: string }) {
+export function Options({ s, base }: { s: PersonState; base: string }) {
   const t = useT();
+  const view = currentView(s);
+  // The kernel's options for this couple: a birth plan only where testing in the first days changes care.
+  const options = view?.cards.filter(c => c.kind === 'option') ?? [];
+  const shown = options.length ? options : optionCards(view?.birthPlanConditions ?? []);
   return (
     <main class="page">
       <Enter k="options">
         <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'Your options', ar: 'خياراتكما' })}</span></div>
         <h1>{t({ en: 'There is no single right choice for every family.', ar: 'لا يوجد خيار واحد صحيح لكل الأسر.' })}</h1>
         <p class="muted">{t({ en: 'These are the paths the programme offers. Silah will not tell you which to take. Many couples talk them through with a counsellor and with their family first.', ar: 'هذه هي المسارات التي يقدّمها البرنامج، ولن يخبركما تطبيق صلة أيّها تسلكان. كثير من الأزواج يناقشونها أولاً مع مستشار وراثي ومع أسرهم.' })}</p>
-        <div class="flow">{OPTIONS.map(o => <CardLine key={o.id} c={o} />)}</div>
+        <div class="flow">{shown.map(o => <CardLine key={o.id} c={o} />)}</div>
         <button class="btn primary full" onClick={() => go(`${base}/counsellor`)}>{t({ en: 'Talk it through with a counsellor', ar: 'ناقشا الأمر مع مستشار وراثي' })}</button>
       </Enter>
     </main>
@@ -181,7 +186,8 @@ const ORDER: PathState[] = ['result-issued', 'notified', 'understood', 'counsell
 export function Counsellor({ s, act, base }: { s: PersonState; act: Act; base: string }) {
   const t = useT();
   const [sent, setSent] = useState(false);
-  const [called, setCalled] = useState(false);
+  // The latest request for a person, from this page or from a hard route in Ask, with what the clinic has confirmed.
+  const latest = s.escalations?.at(-1);
   const has = (x: PathState) => s.pathway.some(p => p.state === x);
   const firstOpen = ORDER.findIndex(x => !has(x));
   const briefGrant = activeGrants(s.ledger, new Date()).find(g => g.subject.kind === 'brief');
@@ -222,10 +228,9 @@ export function Counsellor({ s, act, base }: { s: PersonState; act: Act; base: s
 
         <div class="pool soft stack" style={{ '--gap': '8px' } as any}>
           <h3>{t({ en: 'Need someone now?', ar: 'هل تحتاجين إلى التحدث مع أحد الآن؟', arM: 'هل تحتاج إلى التحدث مع أحد الآن؟' })}</h3>
-          <p class="small muted">{t({ en: 'The counsellor will call you back today. In an emergency, call 999 or 998.', ar: 'سيتصل بك المستشار اليوم. وفي حالة الطوارئ يُرجى الاتصال بالرقم 999 أو 998.' })}</p>
-          {called
-            ? <p class="chip palm"><IconCheck size={15} /> {t({ en: 'Your counsellor has been asked to call you today.', ar: 'طُلب من مستشارك الاتصال بك اليوم.' })}</p>
-            : <button class="btn calm" onClick={() => act(st => escalate(st, 'none')).then(() => setCalled(true))}>{t({ en: 'Ask for a call back', ar: 'طلب معاودة الاتصال' })}</button>}
+          <p class="small muted">{t({ en: 'Ask the clinic to call you back. This screen shows when a counsellor has seen your request. In an emergency, call 999 or 998.', ar: 'يمكن طلب معاودة الاتصال من العيادة، وستبيّن هذه الشاشة متى يطّلع أحد المستشارين على الطلب. وفي حالة الطوارئ يُرجى الاتصال بالرقم 999 أو 998.' })}</p>
+          <EscalationStatus e={latest} lang={s.lang} />
+          {(!latest || latest.seen) && <button class="btn calm" onClick={() => act(st => escalate(st, 'none'))}>{t({ en: 'Ask for a call back', ar: 'طلب معاودة الاتصال' })}</button>}
         </div>
       </Enter>
     </main>

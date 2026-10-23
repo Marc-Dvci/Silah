@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import Ajv2020 from 'ajv/dist/2020';
 import schema from '../schema/result-bundle.schema.json';
-import { labCouple } from '../src/core/kernel';
+import { labCouple, SIMULATED_LAB } from '../src/core/kernel';
 import { generateKeyPair, signPayload } from '../src/core/crypto/sign';
 import { PANEL_VERSION } from '../src/core/data/panel';
 import { PERSONAS, demoCouples } from '../src/app/demo';
@@ -21,7 +21,7 @@ const result = (id: string): PersonResult => {
 describe('result bundle schema', () => {
   for (const c of demoCouples()) {
     it(`bundles for ${c.a} and ${c.b} validate`, () => {
-      const [fa, fb] = labCouple(result(c.a), result(c.b), c.rel, c.id);
+      const [fa, fb] = labCouple(result(c.a), result(c.b), c.rel, c.id, SIMULATED_LAB);
       for (const [pid, couple] of [[c.a, fa], [c.b, fb]] as const) {
         const bundle: ResultBundle = { v: 1, kind: 'silah.result', person: result(pid), couple, issuer: 'Test lab', issuedAt: '2026-02-11T10:00:00.000Z' };
         const ok = validate(signPayload(bundle, lab));

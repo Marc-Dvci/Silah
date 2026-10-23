@@ -66,10 +66,30 @@
               }
             },
             "partnerNegativeFor": { "type": "array", "items": { "type": "string" }, "description": "This person's own carrier genes for which the partner tested negative. Nothing else about the partner." },
-            "vusGenes": { "type": "array", "items": { "type": "string" }, "description": "Genes where a variant of uncertain significance matters for the couple; routed to a counsellor first." }
+            "vusGenes": { "type": "array", "items": { "type": "string" }, "description": "Genes where a variant of uncertain significance matters for the couple; routed to a counsellor first." },
+            "detection": {
+              "type": "object",
+              "required": ["panel"],
+              "additionalProperties": false,
+              "description": "What the lab states about its own tests, from its validation. Without it the phone gives every remaining chance as a range (99% to 80% detection), never one personal figure.",
+              "properties": {
+                "panel": { "$ref": "#/$defs/fraction", "description": "Share of a gene's pathogenic or likely pathogenic variants the panel detects." },
+                "genes": { "type": "object", "additionalProperties": { "$ref": "#/$defs/fraction" }, "description": "Genes with their own validated rate, for example CYP21A2 or HBA1/HBA2." },
+                "exactChange": { "type": "object", "additionalProperties": { "$ref": "#/$defs/fraction" }, "description": "This person's carrier genes for which the lab checked the partner's sample for this person's exact variant, with that check's sensitivity. A gene not listed was covered by the panel only." }
+              }
+            }
           }
         }
       }
+    }
+  },
+  "$defs": {
+    "fraction": {
+      "type": "object",
+      "required": ["n", "d"],
+      "additionalProperties": false,
+      "description": "An exact fraction n/d, both as decimal integer strings.",
+      "properties": { "n": { "type": "string", "pattern": "^[0-9]+$" }, "d": { "type": "string", "pattern": "^[1-9][0-9]*$" } }
     }
   }
 }

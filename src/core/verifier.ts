@@ -172,6 +172,10 @@ export function statedOutcomes(c: FactCard): Stated[] {
   const q = (k: string) => (c.numbers[k] ? Q.from(c.numbers[k]) : undefined);
   const out: Stated[] = [];
   const push = (outcome: Outcome, subject: Subject, value?: Q) => { if (value) out.push({ outcome, subject, value }); };
+  // A remaining chance given as a range, because the result does not state the lab's detection.
+  if ((c.kind === 'residual-gene' || c.kind === 'residual-panel') && c.ranges?.affected) {
+    out.push({ outcome: 'affected', subject: 'child', range: [Q.from(c.ranges.affected[0]), Q.from(c.ranges.affected[1])] });
+  }
   switch (c.kind) {
     case 'couple-gene':
       push('affected', 'child', q('affected'));

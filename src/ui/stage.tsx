@@ -101,7 +101,7 @@ const STORY: StoryStep[] = [
     text: 'The demo moves to the due date. Maternity tests the baby on day 2, confirms SMA and refers that week, before any signs; Noura sees it on her phone.',
     action: newborn,
   },
-  { who: 'fatima', page: 'result', clinic: 'pathway', title: '“Compatible” is not zero', text: 'Fatima’s certificate says compatible. Silah shows 1 in 260 for her gene, because her fiancé is her cousin.' },
+  { who: 'fatima', page: 'result', clinic: 'pathway', title: '“Compatible” is not zero', text: 'Fatima’s certificate says compatible. Her fiancé is her cousin, so Silah shows 1 in 260 for her gene and 1 in 160 for the whole panel, from the detection the simulated lab states. Fictional couple.' },
 ];
 
 export function Stage() {

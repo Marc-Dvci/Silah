@@ -22,7 +22,13 @@
    "Your genetic counsellor can explain how this risk applies to your specific situation and discuss options like embryo testing."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "condition:sma",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "g1",
@@ -48,7 +54,13 @@
    "يمكن لمستشارك الوراثي مناقشة خيارات مثل فحص الأجنة قبل الزرع أو الفحص أثناء الحمل لتوضيح التفاصيل أكثر."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "condition:sma",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "g2",
@@ -73,7 +85,12 @@
    "In each pregnancy, there is a 1 in 4 chance the child has this condition."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "condition:sma"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "g2",
@@ -97,7 +114,11 @@
    "كبار السن حاملو هذه الحالة أصحّاء، وكونك حاملاً لا يؤثر في عضلاتك أنت."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "condition:sma"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "g3",
@@ -122,7 +143,13 @@
    "Your genetic counsellor can discuss any other specific health concerns you have."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "condition:sma",
+   "carrier:MEFV",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "g3",
@@ -146,7 +173,12 @@
    "ضمور العضلات الشوكي يؤثر على عضلات الطفل للحركة والتنفس، لكن كونك حاملاً لا يؤثر في عضلاتك أنت."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "condition:sma",
+   "carrier:MEFV"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "g4",
@@ -172,7 +204,16 @@
    "Your genetic counsellor can explain how these tests work and help you think through your options."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "birth:sma",
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 5
  },
  {
   "id": "g4",
@@ -198,7 +239,16 @@
    "يمكن لمستشارك الوراثي مناقشة خيارات الرعاية المتاحة لك ولطفلك بعد الولادة."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "birth:sma",
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 5
  },
  {
   "id": "g5",
@@ -222,7 +272,14 @@
    "You can also choose to take time and discuss these options with a genetic counsellor before making any decisions."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "g5",
@@ -247,7 +304,14 @@
    "يمكنكم أيضاً أخذ الوقت الكافي لمناقشة الأمر مع مستشار وراثي قبل اتخاذ أي قرار."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "g6",
@@ -273,7 +337,16 @@
    "They can also discuss other options like testing embryos before pregnancy."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "birth:sma",
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 5
  },
  {
   "id": "g6",
@@ -298,7 +371,15 @@
    "يمكن لمستشارك الوراثي مناقشة خيارات الفحص معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "g7",
@@ -323,7 +404,12 @@
    "Your genetic counsellor can explain how this affects your specific situation."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "consanguinity",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "g7",
@@ -348,7 +434,12 @@
    "يمكن لمستشارك الوراثي مناقشة أي قرار معك وتوضيح التفاصيل."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "consanguinity",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "g8",
@@ -373,7 +464,13 @@
    "Your genetic counsellor can explain how these limits affect your specific situation."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "not-assessed",
+   "background",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "g8",
@@ -399,7 +496,12 @@
    "يمكن لمستشارك الوراثي مناقشة أي قرار معك حول هذه النقاط."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "not-assessed",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "n1",
@@ -423,7 +525,12 @@
    "The genetic counsellor can help you work out the total chances including other factors."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "n1",
@@ -448,7 +555,12 @@
    "يمكن لمستشارك الوراثي شرح الخيارات المتاحة مثل فحص الأجنة أو الفحص أثناء الحمل لمساعدتك في التفكير في الأمر."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "n2",
@@ -471,7 +583,11 @@
    "The chance for two children being affected is not listed on the cards, so your genetic counsellor can work it out."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "n2",
@@ -494,7 +610,11 @@
    "لا توجد معلومات في النتائج عن احتمال إصابة طفلين معاً."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "n3",
@@ -517,7 +637,11 @@
    "The provided information does not state the percentage of Emiratis who carry SMA."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "n3",
@@ -542,7 +666,11 @@
    "يمكنه أيضاً مناقشة أي قرار قد يتخذهما معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "c1",
@@ -575,7 +703,12 @@
     ]
    }
   ],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "c1",
@@ -599,7 +732,12 @@
    "يمكن لمستشارك الوراثي حساب احتمالات وجود طفل مريض في مجموعة من الأطفال."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "c2",
@@ -625,7 +763,13 @@
    "Your genetic counsellor can help you think through these chances and discuss options like testing embryos before pregnancy."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "birth:sma",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "c2",
@@ -650,7 +794,13 @@
    "يمكن لمستشارك الوراثي مناقشة الخيارات المتاحة معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "birth:sma",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "c3",
@@ -675,7 +825,15 @@
    "Your genetic counsellor can explain how the baby's health status affects the chances for future children."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "condition:sma",
+   "residual:MEFV",
+   "carrier:MEFV",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "c3",
@@ -699,7 +857,13 @@
    "لقد أظهرت نتائجكما أن احتمال إصابة أي طفل بحالة متبقية من الجين MEFV صغير جداً، وهو ما يمكن لمستشارك الوراثي توضيحه لك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:MEFV",
+   "carrier:MEFV",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "d1",
@@ -723,7 +887,15 @@
    "Your genetic counsellor can help you think through whether this path is right for you."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "d1",
@@ -749,7 +921,15 @@
    "أخذ الوقت الكافي لمناقشة الأمر مع مستشارك الوراثي قبل اتخاذ أي قرار هو خطوة مهمة."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "d2",
@@ -775,7 +955,15 @@
    "You can take time to talk it through before making any decisions."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "d2",
@@ -800,7 +988,16 @@
    "يمكن لمستشارك الوراثي مساعدتك في التفكير في الخيارات المتاحة مثل فحص الأجنة أو الفحص أثناء الحمل."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 5
  },
  {
   "id": "d3",
@@ -823,7 +1020,11 @@
    "Your genetic counsellor can help you think through whether having more children is right for you given these chances."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "d3",
@@ -848,7 +1049,16 @@
    "يمكنك أيضاً أخذ الوقت الكافي لمناقشة الخيارات المتاحة مع مستشارك الوراثي قبل اتخاذ أي قرار."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 5
  },
  {
   "id": "d4",
@@ -873,7 +1083,15 @@
    "You can also take time to talk it through before making any choices."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "d4",
@@ -898,7 +1116,16 @@
    "يمكنك مناقشة هذه النتائج مع مستشارك الوراثي لفهم الخيارات المتاحة لك ولعائلتك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "couple:SMN1",
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 5
  },
  {
   "id": "d5",
@@ -922,7 +1149,15 @@
    "You can choose to take time to discuss your options with a specialist before making any decisions."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "d5",
@@ -948,7 +1183,15 @@
    "يمكنك اختيار حمل طبيعي مع خطة للولادة وبدء الرعاية المبكرة عند الحاجة."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "o1",
@@ -971,7 +1214,11 @@
    "The genetic counsellor can help you find the right reproductive medicine services in Dubai for IVF."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 0
  },
  {
   "id": "o1",
@@ -994,7 +1241,15 @@
    "يمكنك مناقشة خيارات مثل أطفال الأنابيب مع فحص الأجنة قبل الحمل مع مستشارك الوراثي."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "counsellor",
+   "option:pgt",
+   "option:prenatal",
+   "option:birth",
+   "option:time"
+  ],
+  "quotedNonCounsellor": 4
  },
  {
   "id": "o2",
@@ -1018,7 +1273,12 @@
    "Your genetic counsellor can answer questions about treatments and cures that are not covered by these facts."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "condition:sma",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "o2",
@@ -1042,7 +1302,12 @@
    "يمكن لمستشارك الوراثي مناقشة الخيارات المتاحة مثل فحص الأجنة أو الفحص أثناء الحمل لضمان أفضل رعاية للطفل."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "condition:sma",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  },
  {
   "id": "f1",
@@ -1068,7 +1333,14 @@
    "Your genetic counsellor can help you think through these chances and any other factors."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "panel-residual",
+   "background",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 3
  },
  {
   "id": "f1",
@@ -1094,7 +1366,14 @@
    "يمكن لمستشارك الوراثي مناقشة هذه الأرقام معك وتوضيح أي قرار تريد اتخاذها."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "panel-residual",
+   "background",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 3
  },
  {
   "id": "f2",
@@ -1119,7 +1398,13 @@
    "Your genetic counsellor can help you think through how this result fits with your overall family planning."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "carrier:CYP21A2",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "f2",
@@ -1144,7 +1429,13 @@
    "على الرغم من انخفاض هذا الاحتمال، إلا أن مستشارك الوراثي يمكنه مناقشة أي قرار معك وتوضيح التفاصيل بدقة أكبر."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "carrier:CYP21A2",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "f3",
@@ -1170,7 +1461,14 @@
    "Your genetic counsellor can help you understand how these different chances combine for your family."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "panel-residual",
+   "consanguinity",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 3
  },
  {
   "id": "f3",
@@ -1196,7 +1494,13 @@
    "لا توجد نتائج جديدة في الفحوصات تشير إلى زيادة في احتمالية طفلك من هذا الجين بالتحديد."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "consanguinity",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 2
  },
  {
   "id": "f4",
@@ -1222,7 +1526,14 @@
    "Your genetic counsellor can help you understand all these combined chances and discuss them."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "panel-residual",
+   "background",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 3
  },
  {
   "id": "f4",
@@ -1256,7 +1567,14 @@
     ]
    }
   ],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "panel-residual",
+   "background",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 3
  },
  {
   "id": "f5",
@@ -1282,7 +1600,14 @@
    "Your genetic counsellor can discuss these chances and other factors to help you decide."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "residual:CYP21A2",
+   "panel-residual",
+   "background",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 3
  },
  {
   "id": "f5",
@@ -1306,6 +1631,11 @@
    "يمكن لمستشارك الوراثي مساعدتك في التفكير في هذه الأمور ومناقشة الخيارات المتاحة معك."
   ],
   "blockedText": [],
-  "langOk": true
+  "langOk": true,
+  "quoted": [
+   "carrier:CYP21A2",
+   "counsellor"
+  ],
+  "quotedNonCounsellor": 1
  }
 ]

@@ -8,18 +8,19 @@ import { COUNSELLOR_CARD } from '../src/llm/answer';
 import { toAsciiDigits } from '../src/core/text';
 import type { FactCard } from '../src/core/types';
 import { QUESTIONS } from './questions';
-import { cardsFor, type Row } from './bakeoff';
+import type { Row } from './bakeoff';
 
 export interface Mutant { model: string; id: string; lang: string; original: string; mutant: string; claim: string; from: number; to: string; numberCheckPasses: boolean; blocked: boolean }
 
 const fmtRatio = (q: Q, lang: string) => `${q.n} ${lang === 'ar' ? 'من' : 'in'} ${q.d}`;
 
-export function mutate(model: string, rows: Row[]): { sentences: number; withClaims: number; claims: number; mutants: Mutant[] } {
+export function mutate(model: string, rows: Row[], snapshot: Record<string, FactCard[]>): { sentences: number; withClaims: number; claims: number; mutants: Mutant[] } {
   let sentences = 0, withClaims = 0, claims = 0;
   const mutants: Mutant[] = [];
   for (const r of rows) {
     const q = QUESTIONS.find(x => x.id === r.id)!;
-    const all: FactCard[] = [...cardsFor(q.persona), COUNSELLOR_CARD];
+    // The cards the answers were produced with (eval/results/cards/<model>.json).
+    const all: FactCard[] = [...snapshot[q.persona], COUNSELLOR_CARD];
     const parsed = parseModelAnswer(r.raw);
     if (!parsed) continue;
     const v = verifyAnswer(parsed, all);

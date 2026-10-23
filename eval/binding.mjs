@@ -5,7 +5,11 @@ import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 const server = await createServer({ configFile: false, cacheDir: 'node_modules/.vite-scripts', server: { middlewareMode: true }, appType: 'custom', logLevel: 'silent' });
 const { mutate } = await server.ssrLoadModule('/eval/binding.ts');
 const files = readdirSync('eval/results').filter(f => f.endsWith('.json')).sort();
-const runs = files.map(f => ({ label: f.replace(/\.json$/, ''), ...mutate(f.replace(/\.json$/, ''), JSON.parse(readFileSync(`eval/results/${f}`, 'utf8'))) }));
+const runs = files.map(f => {
+  const label = f.replace(/\.json$/, '');
+  const cards = JSON.parse(readFileSync(`eval/results/cards/${f}`, 'utf8')).cards;
+  return { label, ...mutate(label, JSON.parse(readFileSync(`eval/results/${f}`, 'utf8')), cards) };
+});
 await server.close();
 
 const all = runs.flatMap(r => r.mutants);

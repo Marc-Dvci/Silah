@@ -1,7 +1,7 @@
 import type { PersonResult, ResultBundle, Signed } from '../core/types';
 import { b64url, fromB64url, generateKeyPair, signPayload, type KeyPair } from '../core/crypto/sign';
 import { clinicKeygen, exportPublicKey, InviteIssuer, InviteRedeemer } from '../core/crypto/invites';
-import { labCouple } from '../core/kernel';
+import { labCouple, SIMULATED_LAB } from '../core/kernel';
 import { PANEL_VERSION } from '../core/data/panel';
 import { dbGet, dbPut } from './db';
 import { allMessages, send, type Msg } from './net';
@@ -72,8 +72,12 @@ export interface ClinicState {
   issuerLog: InviteIssuer['log'];
   redeemLog: InviteRedeemer['log'];
   births: Birth[];
+  /** Requests for a person, from any phone, whether or not the couple has a case. */
+  escalations?: EscalationEntry[];
   seen: string[];
 }
+
+export interface EscalationEntry { ref: string; from: string; personId: string; name: string; coupleId?: string; route: string; at: string; seenAt?: string }
 
 const daysAgo = (d: number) => new Date(Date.now() - d * 864e5).toISOString();
 
@@ -94,7 +98,7 @@ function personResult(id: string, method: PersonResult['method'], testedAt: stri
 async function issueCouple(c: ClinicState, dc: DemoCouple, method: PersonResult['method'], testedAt: string): Promise<Case> {
   const a = personResult(dc.a, method, testedAt);
   const b = personResult(dc.b, method, testedAt);
-  const [forA, forB] = labCouple(a, b, dc.rel, dc.id);
+  const [forA, forB] = labCouple(a, b, dc.rel, dc.id, SIMULATED_LAB);
   const issuer = method === 'premarital' ? 'Simulated premarital genomics lab' : 'Simulated EGP genomics service';
   for (const [person, couple, to] of [[a, forA, dc.a], [b, forB, dc.b]] as const) {
     const bundle: ResultBundle = { v: 1, kind: 'silah.result', person, couple, issuer, issuedAt: testedAt };
@@ -236,6 +240,9 @@ async function handle(c: ClinicState, m: Msg): Promise<void> {
       break;
     }
     case 'escalate': {
+      // Every request is kept and acknowledged, including from a couple with no open case.
+      (c.escalations ??= []).push({ ref: b.ref, from: m.from, personId: b.personId, name: personaById(b.personId)?.name.en ?? b.personId, coupleId: b.coupleId, route: b.route, at: m.at });
+      if (b.ref) await send('clinic', m.from, 'escalate.received', { ref: b.ref });
       const k = caseOf(c, b.coupleId);
       if (!k) break;
       const flag = b.route === 'distress' ? 'distress' : 'asked-for-human';
@@ -301,6 +308,15 @@ function nextSlot(k: Case): string {
 }
 
 // ---------- counsellor actions ----------
+
+/** A counsellor has seen a request for a person. Only this makes the phone say so. */
+export async function markEscalationSeen(c: ClinicState, ref: string): Promise<void> {
+  const e = c.escalations?.find(x => x.ref === ref);
+  if (!e || e.seenAt) return;
+  e.seenAt = new Date().toISOString();
+  await send('clinic', e.from, 'escalate.seen', { ref });
+  await saveClinic(c);
+}
 
 export async function counsellorAdvance(c: ClinicState, caseId: string, state: PathState, extra: { referral?: Referral; note?: string; closeReason?: string } = {}): Promise<void> {
   const k = caseOf(c, caseId);

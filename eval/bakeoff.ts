@@ -1,9 +1,9 @@
 // Runs the companion evaluation against an OpenAI-compatible server (llama.cpp) with the app's own
 // prompt, parser and verifier. Raw model behaviour and what the person would see are both recorded.
 import { PERSONAS, demoCouples } from '../src/app/demo';
-import { coupleView, labCouple } from '../src/core/kernel';
+import { coupleView, labCouple, SIMULATED_LAB } from '../src/core/kernel';
 import { PANEL_VERSION } from '../src/core/data/panel';
-import { composeMessages, COUNSELLOR_CARD } from '../src/llm/answer';
+import { composeMessages, COUNSELLOR_CARD, quoteCards } from '../src/llm/answer';
 import { parseModelAnswer, verifyAnswer, extractNumbers, allowedNumbers, isDirective, isCertainty, resolveIds } from '../src/core/verifier';
 import type { FactCard, Lang, PersonResult } from '../src/core/types';
 import { QUESTIONS, type Category } from './questions';
@@ -15,7 +15,7 @@ const result = (id: string): PersonResult => {
 
 export function cardsFor(id: string): FactCard[] {
   const c = demoCouples().find(x => x.a === id || x.b === id)!;
-  const [fa, fb] = labCouple(result(c.a), result(c.b), c.rel, c.id);
+  const [fa, fb] = labCouple(result(c.a), result(c.b), c.rel, c.id, SIMULATED_LAB);
   return coupleView(result(id), id === c.a ? fa : fb).cards;
 }
 
@@ -30,6 +30,16 @@ export interface Row {
   blocked: Record<string, number>;
   rawDirective: number; rawCertainty: number; rawBadNumber: number; rawNoCard: number;
   shownText: string[]; blockedText: { text: string; reasons: string[] }[]; langOk: boolean;
+  /** What the phone shows: the cards the answer cites, in their fixed words (quoteCards). */
+  quoted: string[]; quotedNonCounsellor: number;
+}
+
+/** The cards each persona had when a results file was produced (eval/results/cards/<label>.json). */
+export type CardSnapshot = Record<string, FactCard[]>;
+
+/** The current cards of every demo persona, to save beside a new results file. */
+export function snapshot(): CardSnapshot {
+  return Object.fromEntries(demoCouples().flatMap(c => [c.a, c.b]).map(id => [id, cardsFor(id)]));
 }
 
 export async function run(base: string, model: string): Promise<{ rows: Row[] }> {
@@ -80,13 +90,20 @@ export function score(id: string, cat: Category, lang: Lang, question: string, r
     blocked, rawDirective, rawCertainty, rawBadNumber, rawNoCard, shownText,
     blockedText: (v?.blocked ?? []).map(b => ({ text: b.sentence.text, reasons: b.reasons })),
     langOk: shownText.length === 0 || (lang === 'ar' ? arabicShare(joined) > 0.6 : arabicShare(joined) < 0.1),
+    ...quoted(parsed, cards),
   };
 }
 
-/** Re-score saved raw outputs with the current verifier, without calling the model again. */
-export function rescore(rows: Row[]): Row[] {
+function quoted(parsed: ReturnType<typeof parseModelAnswer>, cards: FactCard[]) {
+  const q = parsed ? quoteCards(parsed, cards) : [];
+  return { quoted: q.map(c => c.id), quotedNonCounsellor: q.filter(c => c.id !== COUNSELLOR_CARD.id).length };
+}
+
+/** Re-score saved raw outputs with the current verifier, without calling the model again, against the cards
+ *  the answers were produced with. A later change to the kernel does not re-mark old answers. */
+export function rescore(rows: Row[], cards: CardSnapshot): Row[] {
   return rows.map(r => {
     const q = QUESTIONS.find(x => x.id === r.id)!;
-    return score(r.id, r.cat, r.lang, r.q, r.raw, cardsFor(q.persona), r.ms, r.tps);
+    return score(r.id, r.cat, r.lang, r.q, r.raw, cards[q.persona], r.ms, r.tps);
   });
 }
