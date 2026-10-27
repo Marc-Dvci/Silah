@@ -41,8 +41,9 @@ Pre-registration: the protocol above is fixed before any data is collected; devi
 2. DoH approval of the signed result format and of the couple re-check consent wording.
 3. Hosting of the clinic services inside the UAE (Federal Law No. 2 of 2019).
 4. A clinical safety review of the birth-plan statements by a paediatric geneticist.
-5. Classification under DoH's Policy on Use of AI in the Healthcare Sector (2018): Silah's model only chooses which fixed, checked sentences to show; it writes nothing a person reads, and no decision depends on it.
+5. A conformity assessment with DoH's Data and Digital Governance Office under the Responsible AI Standard (DoH/ST/DDGO/RAI/V1/2025, October 2025), where Silah is treated as high risk, and a second one at month 9. Silah's model only chooses which fixed, checked sentences to show; it writes nothing a person reads, and no decision depends on it. The clause-by-clause mapping and the risk register are in `RESPONSIBLE_AI.md`.
 6. The lab's validated detection rates, per gene, and a check of each partner's sample for the other partner's exact change, carried in the signed result.
+7. Working sessions with the pilot clinic's counsellors and with couples at the screening centre on the cards and the four questions, and a short session for staff on what the model does and when human judgment takes over (`RESPONSIBLE_AI.md`, section 3.4).
 
 ## How it scales
 

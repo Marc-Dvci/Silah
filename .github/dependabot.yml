@@ -1,0 +1,11 @@
+# Weekly update requests for the npm dependencies and the workflow actions; the tests run on each one.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

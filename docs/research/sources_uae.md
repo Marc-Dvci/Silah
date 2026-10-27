@@ -140,7 +140,7 @@ Source used: https://gulfnews.com/living-in-uae/ask-us/uae-introduces-new-aborti
 
 (e) Confirmed. "Policy on Use of Artificial Intelligence (AI) in the Healthcare Sector of the Emirate of Abu Dhabi", Department of Health, Ref Policy/AI/0.9, version 0.9, publication date 30 April 2018. Source: https://www.doh.gov.ae/-/media/E9C1470A575146B18015DEBE57E47F8D.ashx
 - A press release is dated 28 May 2018 (search summary).
-- The 2025 "Responsible AI Standard" is mentioned in search results but not read.
+- The **Responsible AI Standard** now sets the minimum requirements under the DoH AI Policy (its reference list cites an AI policy document dated June 2025): DoH/ST/DDGO/RAI/V1/2025, published and effective October 2025 (owner: Data and Digital Governance Office), read in full on 27 October 2026. Source: https://www.doh.gov.ae/-/media/B84FF5DD027846699C51F36C439A580F.ashx . Silah's clause-by-clause mapping: `docs/RESPONSIBLE_AI.md`.
 
 ---
 

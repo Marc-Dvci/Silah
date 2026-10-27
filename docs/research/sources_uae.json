@@ -662,6 +662,46 @@
         "quote": ""
       }
     ],
-    "note": "Read from the PDF text saved by the fetch tool. Press-release date 28 May 2018 is from a search summary. The 2025 Responsible AI Standard is mentioned in search results but not read."
+    "note": "Read from the PDF text saved by the fetch tool. Press-release date 28 May 2018 is from a search summary. The Responsible AI Standard of October 2025 (doh-rai-standard-2025) now sets the minimum requirements under the DoH AI Policy; its reference list cites an AI policy document dated June 2025."
+  },
+  {
+    "id": "doh-rai-standard-2025",
+    "cite": "Department of Health Abu Dhabi. Responsible Artificial Intelligence (AI) Standard. Ref DoH/ST/DDGO/RAI/V1/2025, Version V1 (new), publication and effective date October 2025. Owner: Data and Digital Governance Office.",
+    "url": "https://www.doh.gov.ae/-/media/B84FF5DD027846699C51F36C439A580F.ashx",
+    "year": 2025,
+    "verified": true,
+    "facts": [
+      {
+        "claim": "Reference, version and dates.",
+        "value": "DoH/ST/DDGO/RAI/V1/2025; V1, new; published and effective October 2025; revision October 2026, yearly",
+        "quote": "Document Ref. Number: DoH/ST/DDGO/RAI/V1/2025 Version: V1"
+      },
+      {
+        "claim": "Scope: every licensed healthcare entity in Abu Dhabi that develops, procures or deploys AI, over the whole lifecycle.",
+        "value": "Clause 1.2",
+        "quote": "The standard applies to the DoH and all licensed healthcare entities within the Emirate of Abu Dhabi that are engaged in the development, procurement, or deployment of artificial intelligence (AI) systems"
+      },
+      {
+        "claim": "It puts the DoH AI Policy into practice as minimum requirements.",
+        "value": "Clause 1.1",
+        "quote": "the following standard represents the minimum requirements to operationalizing responsible AI across healthcare eco-system in Abu Dhabi"
+      },
+      {
+        "claim": "High-risk systems need conformity assessments before and after deployment, with the DDGO.",
+        "value": "Clause 3.3.1.2.2.2",
+        "quote": "If AI systems pose High Risk, such systems must undergo conformity assessments both prior to and following deployment."
+      },
+      {
+        "claim": "Compute, storage and support access must be inside the UAE.",
+        "value": "Clause 3.1.4.5.1",
+        "quote": "The compute and storage infrastructure of AI systems for both active and disaster recovery sites must be situated within the UAE."
+      },
+      {
+        "claim": "Patients must be told of their right to opt out of AI-driven services.",
+        "value": "Clause 3.1.6.1.3",
+        "quote": "Patients must be informed of their right to opt out of AI-driven services where applicable."
+      }
+    ],
+    "note": "Read in full from the 15-page PDF on 27 October 2026 (copy in the project's research folder). Silah's clause-by-clause mapping is docs/RESPONSIBLE_AI.md."
   }
 ]
