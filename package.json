@@ -20,7 +20,7 @@
     "@huggingface/transformers": "^4.3.1",
     "@noble/curves": "^2.4.0",
     "@noble/hashes": "^2.4.0",
-    "preact": "^11.0.1",
+    "preact": "^11.0.2",
     "qrcode": "^1.5.4"
   },
   "devDependencies": {
