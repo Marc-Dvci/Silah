@@ -25,7 +25,7 @@ jobs:
       - run: npm run build
       # the product page at the root, the app under /demo/
       - run: mkdir -p _site && cp -r site/index.html site/ar.html site/assets _site/ && cp -r dist _site/demo
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
   deploy:
