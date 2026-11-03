@@ -1,0 +1,1665 @@
+[
+ {
+  "case": "mariam",
+  "label": "Mariam",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:51:00.014Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "You both have a change in a gene called SMN1. In each pregnancy, there is a 1 in 4 chance of Spinal muscular atrophy.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "There is a 2 in 4 chance the baby is a healthy carrier, and a 1 in 4 chance the baby has no change.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Carrying a change in this gene does not make you sick; carriers are healthy, and this does not change.",
+     "cards": [
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For other genes, the test found no changes, but there is still a small chance of a change.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test is very good, finding about 90% of changes, but it might miss some.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The chance for some genes depends on how well the test finds changes, which is not certain.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test only looks at certain types of changes, not all possible ones.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Your genetic counsellor can talk through all of these results and help you with questions.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5200,
+   "cardsKey": "bf892967e4189b1c"
+  }
+ },
+ {
+  "case": "mariam",
+  "label": "Mariam",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T14:51:05.927Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغيّراً في الجين SMN1، وهذا يعني أن هناك احتمال 1 من 4 أن يكون الطفل مصاباً بضمور العضلات الشوكي.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال 2 من 4 أن يكون الطفل حاملاً للتغيّر الجيني وسليماً، واحتمال 1 من 4 ألا يحمل أي تغيّر.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "وجود التغيّر في الجين MEFV لديك لا يسبب المرض، وأنتِ بصحة جيدة لأنكِ حاملة للتغيّر.",
+     "cards": [
+      "condition:sma",
+      "carrier:MEFV"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة للجينات الأخرى، الاحتمال المتبقي في كل حمل نحو 1 من 370، لكن هذا ليس مؤكداً تماماً.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 90% من التغيّرات المسبّبة للمرض، وهذا يعني أن هناك ما لا يراه الفحص.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الاحتمال المتبقي يعتمد على قدرة الفحص على الكشف، فإذا كشف 99% يكون الاحتمال 1 من 3,800.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن لمستشارك الوراثي أن يشرح لكِ كل هذه النتائج ويناقش معكِ أي شيء يخطر ببالك.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5911,
+   "cardsKey": "bf892967e4189b1c"
+  }
+ },
+ {
+  "case": "mariam",
+  "label": "Mariam",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:51:08.809Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "Both parents carry a change in SMN1, resulting in a 1 in 4 chance of SMA per pregnancy.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "There is a 1 in 460 chance of MEFV-related condition due to residual risk, as Saeed tested negative.",
+     "cards": [
+      "residual:MEFV"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the 561 other genes, the residual chance is about 1 in 370 per pregnancy, but detection is only 9/10.",
+     "cards": [
+      "panel-residual",
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The panel does not assess dominant conditions or new changes; family history should be discussed with the counsellor.",
+     "cards": [
+      "not-assessed",
+      "family-history"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 2879,
+   "cardsKey": "bf892967e4189b1c"
+  }
+ },
+ {
+  "case": "saeed",
+  "label": "Saeed",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:51:13.983Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "You both carry a change in SMN1, which means there is a 1 in 4 chance for your child to have SMA.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 2 in 4 chance the child is a healthy carrier, and a 1 in 4 chance they have neither change.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Carrying a change in a gene does not make you ill; you are healthy if you are a carrier.",
+     "cards": [
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For other genes, the test found you both negative, but there is still a small chance of a change.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of the changes, so some changes might not show up on the result.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The chance for the genes not tested depends on how well the test finds changes, which is not certain.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The panel only looks at certain types of changes, not all possible ones.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Your genetic counsellor can answer questions and talk through any of these results with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5173,
+   "cardsKey": "2f89772e31442df3"
+  }
+ },
+ {
+  "case": "saeed",
+  "label": "Saeed",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T14:51:19.930Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغيّراً في الجين SMN1، وهذا يعني أن هناك احتمال 1 من 4 أن يكون الطفل مصاباً بضمور العضلات الشوكي في كل حمل.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال 2 من 4 أن يكون الطفل حاملاً للتغيّر الجيني وسليماً، واحتمال 1 من 4 ألا يحمل أي تغيّر.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "وجود هذا التغيّر لديك لا يسبب المرض، فالحامل للتغيّر يكون صحيحاً، وهذا ينطبق على الجينات الأخرى أيضاً.",
+     "cards": [
+      "condition:sma",
+      "carrier:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة للجينات الأخرى، الاحتمال المتبقي في كل حمل نحو 1 من 400، لكن هذا يعتمد على قدرة الفحص على الكشف.",
+     "cards": [
+      "panel-residual",
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص لا يرى كل شيء، فهو لا يفحص الحالات السائدة أو التغيرات الجديدة التي قد تظهر على الطفل.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    },
+    {
+     "text": "هناك بعض الاحتمالات المتبقية تعتمد على مدى دقة الفحص، فإذا كشف 99% يكون الاحتمال 1 من 4,100.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن لمستشارك الوراثي أن يشرح لك كل هذه النتائج ويناقش معك أي شيء يخطر ببالك.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5947,
+   "cardsKey": "2f89772e31442df3"
+  }
+ },
+ {
+  "case": "saeed",
+  "label": "Saeed",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:51:22.925Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "Both parents carry a change in SMN1, resulting in a 1 in 4 chance of SMA per pregnancy.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For CYP21A2, the chance is low at about 1 in 260 per pregnancy, despite parental carrier status.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the 561 other genes, the residual risk is about 1 in 400 per pregnancy, which is subject to detection limits.",
+     "cards": [
+      "panel-residual",
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The panel does not assess dominant conditions or new changes, and assumed frequencies are based on 1 in 1,000.",
+     "cards": [
+      "not-assessed",
+      "uncertainty:frequency"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 2993,
+   "cardsKey": "2f89772e31442df3"
+  }
+ },
+ {
+  "case": "noura",
+  "label": "Noura",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:51:27.897Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "Both of you carry a change in a gene called SMN1.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance the baby has SMA, which weakens muscles.",
+     "cards": [
+      "couple:SMN1",
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "There is a 2 in 4 chance the baby is a healthy carrier, and a 1 in 4 chance they have no change.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Being a carrier means you are healthy, and it does not affect your own muscles.",
+     "cards": [
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test checks many genes, but it might miss some changes, which is uncertain.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For genes not checked, the chance is small, but it depends on how well the test works.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test does not look at all types of changes, like new ones in the child.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Your genetic counsellor can talk through all of these results with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4971,
+   "cardsKey": "a3c89f89e34f5647"
+  }
+ },
+ {
+  "case": "noura",
+  "label": "Noura",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T14:51:33.588Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغييراً في الجين SMN1، وهذا يعني أن هناك احتمال 1 من 4 أن يكون الطفل مصاباً بضمور العضلات الشوكي في كل حمل.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال 2 من 4 أن يكون الطفل حاملاً للتغيّر الجيني وسليماً، واحتمال 1 من 4 ألا يحمل أي تغيّر.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "كونكما حاملين للتغيّر لا يغير شيئاً في صحتكما، فالحاملون للتغيّر يكونون أصحاء.",
+     "cards": [
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 90% من التغيّرات، لكنه لا يرى كل شيء، وهذا يقلل الاحتمال لكن لا يلغيه.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الاحتمال المتبقي يعتمد على قدرة الفحص على الكشف، فإذا كشف 99% يكون الاحتمال 1 من 3,600 في كل حمل.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "هناك أيضاً احتمالات أخرى غير محسوبة، مثل التغيّرات الجديدة التي قد تظهر لدى الطفل.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن لمستشارك الوراثي أن يشرح لك كل هذه الأشياء ويناقش أي قرار معك.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5691,
+   "cardsKey": "a3c89f89e34f5647"
+  }
+ },
+ {
+  "case": "noura",
+  "label": "Noura",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:51:36.792Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "Both parents carry a change in SMN1, resulting in a 1 in 4 chance of SMA per pregnancy.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the 562 genes tested, the residual chance is about 1 in 350 per pregnancy, but this is uncertain.",
+     "cards": [
+      "panel-residual",
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The panel does not assess dominant conditions or X-linked genes, and detection is estimated at 9/10.",
+     "cards": [
+      "not-assessed",
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The assumed carrier frequency for most genes is 1 in 1,000, which may need adjustment by the counsellor.",
+     "cards": [
+      "uncertainty:frequency",
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 3204,
+   "cardsKey": "a3c89f89e34f5647"
+  }
+ },
+ {
+  "case": "khalid",
+  "label": "Khalid",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:51:41.395Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "You both have a change in a gene called SMN1, which is important to know.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance the baby has a muscle weakness called SMA.",
+     "cards": [
+      "couple:SMN1",
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "There is a 2 in 4 chance the baby is a healthy carrier, and a 1 in 4 chance they have no change.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Carrying the change itself means you are healthy, and it does not affect your own muscles.",
+     "cards": [
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of the changes, so some changes might not show up.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For other genes, the chance of a change is small, but not zero, because of how the test works.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Your genetic counsellor can talk through all of these results and help you understand everything.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4603,
+   "cardsKey": "67e4f7d072741743"
+  }
+ },
+ {
+  "case": "khalid",
+  "label": "Khalid",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T14:51:47.500Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغيّراً في الجين SMN1، وهذا يعني أن هناك احتمال 1 من 4 أن يكون الطفل مصاباً بضمور العضلات الشوكي في كل حمل.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال 2 من 4 أن يكون الطفل حاملاً للتغيّر الجيني وسليماً، واحتمال 1 من 4 ألا يحمل أي تغيّر.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "وجود هذا التغيّر لديك لا يؤثر في عضلاتك، لأن حاملي التغيّر المرتبط بضمور العضلات الشوكي أصحّاء.",
+     "cards": [
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة للجينات الأخرى، الاحتمال المتبقي في كل حمل نحو 1 من 390، لكن هذا يعتمد على قدرة الفحص على الكشف.",
+     "cards": [
+      "panel-residual",
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 90% من التغيّرات المسبّبة للمرض، والتغيّر الذي لا يكشفه الفحص لا يظهر في النتيجة.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "هناك أيضاً احتمالات أخرى مثل الجينات الأخرى، ويُفترض أن 1 من 1,000 شخص يحمل تغيّراً فيها.",
+     "cards": [
+      "uncertainty:frequency"
+     ],
+     "ok": true
+    },
+    {
+     "text": "مستشارك الوراثي يستطيع الإجابة عن الأسئلة التي لا يجيب عنها هذا التقرير، ومناقشة أي قرار معك.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 6105,
+   "cardsKey": "67e4f7d072741743"
+  }
+ },
+ {
+  "case": "khalid",
+  "label": "Khalid",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:51:50.420Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "Both partners carry a change in SMN1, resulting in a 1 in 4 chance of SMA per pregnancy.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the 561 genes tested, the residual chance is about 1 in 390 per pregnancy, considering relatedness.",
+     "cards": [
+      "panel-residual",
+      "consanguinity"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test has a 90% detection rate, and residual risk for the panel depends on this detection rate.",
+     "cards": [
+      "uncertainty:detection",
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "A change in HBB is present in one partner, with a low residual risk of about 1 in 290 per pregnancy.",
+     "cards": [
+      "residual:HBB"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 2919,
+   "cardsKey": "67e4f7d072741743"
+  }
+ },
+ {
+  "case": "fatima",
+  "label": "Fatima",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:51:54.239Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "For one gene, you carry a change, but your partner did not have it.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Carrying this change does not make you sick, but it matters if a child gets it too.",
+     "cards": [
+      "carrier:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes checked, both of you tested negative.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Because you are related, there is a slightly higher chance for some issues.",
+     "cards": [
+      "consanguinity"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of the changes, so some might be missed.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The chance for the other genes depends on how well the test finds changes.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Your genetic counsellor can answer questions and talk through any choice with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 3818,
+   "cardsKey": "06a93cf6012757c1"
+  }
+ },
+ {
+  "case": "fatima",
+  "label": "Fatima",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T14:51:59.331Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "بخصوص جين CYP21A2، لديكِ تغيّر، ونتيجة فحص شريكك لهذا الجين كانت سلبية.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "هذا يعني أن الاحتمال في كل حمل لهذا الجين هو نحو 1 من 260، لكنه ليس صفراً.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "وجود التغيّر لديكِ في جين CYP21A2 لا يسبب المرض وحده، بل يحتاج لتغيّر آخر من الشريك.",
+     "cards": [
+      "carrier:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة للجينات الأخرى الـ562، كانت نتيجتكما سلبية، لكن الاحتمال المتبقي هو نحو 1 من 390 في كل حمل.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص لا يرى كل شيء؛ فهو لا يفحص كل الحالات، ولا التغيرات الجديدة التي قد تظهر عند الطفل.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    },
+    {
+     "text": "كما أن الفحص يكشف نحو 90% من التغيّرات، والتغيّر الذي لا يظهر لا يلغى الاحتمال.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن لمستشارك الوراثي أن يشرح لكِ كل هذه النتائج ويناقش معكِ أي شيء.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5092,
+   "cardsKey": "06a93cf6012757c1"
+  }
+ },
+ {
+  "case": "fatima",
+  "label": "Fatima",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:52:02.902Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "You carry a CYP21A2 change, but Ahmed tested negative for it. The chance for this gene is about 1 in 260 per pregnancy.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, both partners tested negative. The remaining chance for these genes is about 1 in 390 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test detects about 90% of changes, so a negative result does not eliminate risk. The remaining risk depends on test sensitivity.",
+     "cards": [
+      "uncertainty:detection",
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The panel only screens for recessive conditions, not dominant or X-linked ones. Family history should be discussed with your counsellor [family-history].",
+     "cards": [
+      "not-assessed",
+      "family-history"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 3571,
+   "cardsKey": "06a93cf6012757c1"
+  }
+ },
+ {
+  "case": "ahmed",
+  "label": "Ahmed",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:52:07.416Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "For one gene, you carry a change, but your partner did not test positive for it.",
+     "cards": [
+      "residual:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For this gene, there is a small chance, about 1 in 2,600 per pregnancy.",
+     "cards": [
+      "residual:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Carrying this change does not make you sick; it only matters if a child gets it from both parents.",
+     "cards": [
+      "carrier:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other genes, you both tested negative, but there is still a small chance, about 1 in 340 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of changes, so a missed change means the chance is not zero.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The chance for the other genes changes based on how well the test finds changes, like 1 in 3,500 or 1 in 170.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Your genetic counsellor can answer questions and talk through all of this with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4514,
+   "cardsKey": "cb19034dd691eb13"
+  }
+ },
+ {
+  "case": "ahmed",
+  "label": "Ahmed",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T14:52:12.722Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "لديك تغيّر في الجين GJB2، ونتيجة فحص شريكتك لهذا الجين كانت سلبية.",
+     "cards": [
+      "residual:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "هذا التغيّر في الجين لديك لا يسبب المرض وحده، بل يحتاج لورث الطفل تغيّراً آخر.",
+     "cards": [
+      "carrier:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة للجينات الأخرى الـ562، كانت نتيجتكما سلبية، لكن الاحتمال المتبقي هو 1 من 340 في كل حمل.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بعض التغيّرات قد لا يكتشفها الفحص، وهذا يعني أن الاحتمال المتبقي يعتمد على قدرة الفحص على الكشف.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "لأنكما قريبان، هناك احتمال أعلى قليلاً لوجود تغيّر موروث من جد مشترك، وهذا قد لا يظهره الفحص.",
+     "cards": [
+      "consanguinity"
+     ],
+     "ok": true
+    },
+    {
+     "text": "لأننا نفترض أن 1 من 1,000 شخص يحمل تغيّرًا لمعظم الجينات، فهذا جزء من التقديرات.",
+     "cards": [
+      "uncertainty:frequency"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن لمستشارك الوراثي أن يشرح لك كل هذه النقاط ويناقش أي قرار معك.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5306,
+   "cardsKey": "cb19034dd691eb13"
+  }
+ },
+ {
+  "case": "ahmed",
+  "label": "Ahmed",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:52:16.465Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "You carry a GJB2 change, but Fatima tested negative for it, lowering the risk to about 1 in 2,600 per pregnancy for this gene.",
+     "cards": [
+      "residual:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, both tested negative, but a residual chance of about 1 in 340 remains per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test detects about 90% of disease-causing changes, meaning a negative result does not eliminate all risk.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The remaining risk for the panel genes depends on test sensitivity, ranging from 1 in 3,500 to 1 in 170.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The panel only assesses recessive conditions and excludes dominant or X-linked conditions.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 3743,
+   "cardsKey": "cb19034dd691eb13"
+  }
+ },
+ {
+  "case": "sample:da2c20ddce88617c",
+  "label": "aisha-khalfan-sample",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:52:20.970Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "You both carry a change in HBB, which means there is a 1 in 4 chance of a child having Sickle beta-thalassaemia.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 2 in 4 chance the child is a healthy carrier, and a 1 in 4 chance they have neither change.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "If you carry a change, it does not make you ill; you are healthy as a carrier.",
+     "cards": [
+      "condition:sbthal",
+      "carrier:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 95% of the changes, but it cannot see everything, so some risk remains.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For some genes, the chance depends on how well the test finds changes, which is still uncertain.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Some numbers are based on what we assume, as not everyone has measured the exact chance for every gene.",
+     "cards": [
+      "uncertainty:frequency"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Your genetic counsellor can talk through all of these results and help you with your questions.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4504,
+   "cardsKey": "da2c20ddce88617c"
+  }
+ },
+ {
+  "case": "sample:da2c20ddce88617c",
+  "label": "aisha-khalfan-sample",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T14:52:25.618Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغيّراً في الجين HBB، وهذا يعني أنكما تحملان شيئاً وراثياً معيناً.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال 1 من 4 أن يكون الطفل مصاباً بالثلاسيميا بيتا المنجلية.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "وجود هذا التغيّر في الجين لديكِ لا يسبب المرض، بل أنتِ سليمة.",
+     "cards": [
+      "carrier:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة للجينات الأخرى، الاحتمال المتبقي في كل حمل نحو 1 من 780.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 95% من التغيّرات المسبّبة للمرض في كل جين يفحصه.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "النتيجة السلبية لا تلغي الاحتمال تماماً، لأن الفحص قد لا يرى كل شيء.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "هذه الأرقام مبنية على ما قرأناه، والمستشار يمكنه شرح كل شيء لكِ.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4649,
+   "cardsKey": "da2c20ddce88617c"
+  }
+ },
+ {
+  "case": "sample:da2c20ddce88617c",
+  "label": "aisha-khalfan-sample",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:52:28.864Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "Both parents carry a change in HBB, resulting in a 1 in 4 chance of Sickle beta-thalassaemia per pregnancy.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "A change in MEFV was found, but its clinical significance is currently unknown and requires specialist review.",
+     "cards": [
+      "vus:MEFV"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the 561 genes tested, the residual risk is about 1 in 780 per pregnancy, though this is subject to detection limits.",
+     "cards": [
+      "panel-residual",
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test has a detection rate of about 95% for changes in each gene checked.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The counsellor can discuss these results and address any questions regarding the findings.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 3245,
+   "cardsKey": "da2c20ddce88617c"
+  }
+ },
+ {
+  "case": "sample:2334b65ee34a4be1",
+  "label": "rashid-khalfan-sample",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:52:33.249Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "You both have a change in HBB, which means there is a 1 in 4 chance for your child to have Sickle beta-thalassaemia.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 2 in 4 chance the child is a healthy carrier, and a 1 in 4 chance they have no change.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "If you are a carrier, you are healthy, and this does not change.",
+     "cards": [
+      "condition:sbthal"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 95% of changes, so there is still some chance the test missed something.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The chance for other genes depends on how well the test finds changes, which is still a question.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Some numbers are based on what we read, and if the report was read wrongly, the numbers could be off.",
+     "cards": [
+      "uncertainty:entry"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Your genetic counsellor can talk through all of these results and help you with your questions.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4384,
+   "cardsKey": "2334b65ee34a4be1"
+  }
+ },
+ {
+  "case": "sample:2334b65ee34a4be1",
+  "label": "rashid-khalfan-sample",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T14:52:38.599Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغيّراً في الجين HBB، وهذا يعني أنكما تحملان شيئاً وراثياً معيناً.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال 1 من 4 أن يكون الطفل مصاباً بالثلاسيميا بيتا المنجلية.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "وجود هذا التغيّر في الجين لديك لا يسبب المرض، بل هو سليم طالما لم يرثه الطفل من الطرف الآخر.",
+     "cards": [
+      "carrier:CFTR"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة للجينات الأخرى، الاحتمال المتبقي معاً نحو 1 من 790 في كل حمل.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 95% من التغيّرات المسبّبة للمرض، لكنه لا يكشف كل شيء.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الاحتمال المتبقي يعتمد على قدرة الفحص على كشف التغيّرات، وهذا أمر غير مؤكد تماماً.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "هذه الأرقام مبنية على ما قرأناه، وإذا كان هناك خطأ في القراءة، ستكون الأرقام خاطئة.",
+     "cards": [
+      "uncertainty:entry"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن لمستشارك الوراثي أن يشرح لك كل شيء ويناقش معك أي قرار.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5351,
+   "cardsKey": "2334b65ee34a4be1"
+  }
+ },
+ {
+  "case": "sample:2334b65ee34a4be1",
+  "label": "rashid-khalfan-sample",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:52:41.407Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "Both parents carry a change in HBB, resulting in a 1 in 4 chance of Sickle beta-thalassaemia per pregnancy.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "There is a 1 in 2,200 chance for CFTR, though a negative test lowers this risk significantly.",
+     "cards": [
+      "residual:CFTR"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the 561 genes tested, the remaining chance is about 1 in 790 per pregnancy, accounting for relatedness.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Uncertainties include test detection rates (95%) and assumed population frequencies (1 in 1,000).",
+     "cards": [
+      "uncertainty:detection",
+      "uncertainty:frequency"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 2807,
+   "cardsKey": "2334b65ee34a4be1"
+  }
+ },
+ {
+  "case": "sample:5bab283895f60d80",
+  "label": "noor-hamdan-sample",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:52:45.774Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "For the gene CYP21A2, you carry a change, but the other parent tested negative for it.",
+     "cards": [
+      "residual:CYP21A2",
+      "carrier:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, the chance for this gene is between about 1 in 3,400 and 1 in 170.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Carrying a change in this gene does not make you sick by itself.",
+     "cards": [
+      "carrier:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, you both tested negative, but there is still some chance.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "This remaining chance depends on how well the lab's test finds changes, like 99% or 80%.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test does not look at all types of changes, like those on the X chromosome.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Your genetic counsellor can answer questions that Silah cannot, and can talk through any decision with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4367,
+   "cardsKey": "5bab283895f60d80"
+  }
+ },
+ {
+  "case": "sample:5bab283895f60d80",
+  "label": "noor-hamdan-sample",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T14:52:50.341Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "لديكِ تغيّر في جين CYP21A2، ونتيجة فحص شريكك لهذا الجين كانت سلبية.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "وجود هذا التغيّر في جين CYP21A2 لديكِ لا يسبب المرض وحده.",
+     "cards": [
+      "carrier:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة للجينات الأخرى الـ562، كانت نتيجتكما سلبية أيضاً.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "لكن، الاحتمال المتبقي لهذه الجينات يعتمد على قدرة الفحص على كشف التغيّرات.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "هناك أشياء لا يراها الفحص، مثل التغيرات الجديدة التي قد تظهر عند الطفل.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    },
+    {
+     "text": "هذه الأرقام تعتمد على ما قرأناه من تقريركِ، وإذا كان هناك خطأ في القراءة فالأرقام ستكون خاطئة.",
+     "cards": [
+      "uncertainty:entry"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يستطيع مستشارك الوراثي أن يجيب على أي سؤال لا يجيب عنه هذا التقرير.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4567,
+   "cardsKey": "5bab283895f60d80"
+  }
+ },
+ {
+  "case": "sample:5bab283895f60d80",
+  "label": "noor-hamdan-sample",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T14:52:54.433Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the model on this computer (llama.cpp, http://127.0.0.1:8080)",
+   "model": "Gemma 4 E4B (llama.cpp)",
+   "sentences": [
+    {
+     "text": "You carry a change in CYP21A2, but Hamad Obaid tested negative for it. The chance for this gene is between 1 in 3,400 and 1 in 170 per pregnancy. This is based on the CYP21A2 result.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, both tested negative. The remaining chance is between 1 in 2,200,000 and 1 in 5,600 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The remaining chance for the panel depends on test sensitivity, ranging from 1 in 2,200,000 to 1 in 5,600.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The panel does not assess dominant conditions, X-linked traits, or new changes in the child.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Your counsellor can discuss these results and answer further questions.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4091,
+   "cardsKey": "5bab283895f60d80"
+  }
+ }
+]

@@ -7,6 +7,8 @@ import { dbGet, dbPut } from './db';
 import { allMessages, send, type Msg } from './net';
 import { BACKGROUND_CASES, demoCouples, OUTREACH_REGISTER, personaById, type DemoCouple } from './demo';
 import type { PathState, Teachback } from './person';
+import type { PhysicianSummary } from '../core/summary-types';
+import { parseSlotId } from '../core/booking';
 
 // The simulated health-system side: the genomics lab, the counselling service, the delivery
 // hospital and the invitation service. Labelled "simulated" everywhere it appears in the UI.
@@ -45,8 +47,14 @@ export interface Case {
   personIds?: [string, string];
   status: 'at-risk' | 'compatible';
   genes: string[];
-  source: 'premarital' | 'egp-recheck';
+  source: 'premarital' | 'egp-recheck' | 'self-upload';
   state: PathState;
+  /** Pre-counselling summaries the couple chose to send (one per person, newest kept). */
+  summaries?: { personId: string; at: string; summary: PhysicianSummary }[];
+  /** For a self-upload: how the result reached Silah (PDF, FHIR file, typed). Not verified by a lab. */
+  origin?: string;
+  /** The condition for each shared gene, when the phone knows the allele classes (HbS with beta-plus, for example). */
+  conditionIds?: string[];
   events: { at: string; state: PathState; by: string; note?: string }[];
   flags: string[];
   due?: string;
@@ -74,7 +82,15 @@ export interface ClinicState {
   births: Birth[];
   /** Requests for a person, from any phone, whether or not the couple has a case. */
   escalations?: EscalationEntry[];
+  /** Counselling appointments booked directly from a phone. */
+  appointments?: Appointment[];
   seen: string[];
+}
+
+export interface Appointment {
+  slotId: string; siteId: string; counsellorId: string; start: string; format: string; lang: string;
+  coupleId?: string; personId: string; name: string; withSummary: boolean; urgent: boolean; at: string;
+  status: 'booked' | 'cancelled';
 }
 
 export interface EscalationEntry { ref: string; from: string; personId: string; name: string; coupleId?: string; route: string; at: string; seenAt?: string }
@@ -203,10 +219,45 @@ export async function syncClinic(c: ClinicState): Promise<boolean> {
   return true;
 }
 
-const caseOf = (c: ClinicState, id?: string) => c.cases.find(k => k.id === id);
+const findCase = (c: ClinicState, id?: string) => c.cases.find(k => k.id === id);
+
+/** Someone who brought their own result has no case until their phone first contacts the clinic. */
+function ownCaseFor(c: ClinicState, b: any): Case | undefined {
+  const o = b?.own;
+  if (!o || !b.coupleId || typeof b.coupleId !== 'string' || !b.coupleId.startsWith('own-')) return undefined;
+  let k = findCase(c, b.coupleId);
+  const now = new Date().toISOString();
+  if (!k) {
+    k = {
+      id: b.coupleId,
+      names: [String(o.names?.[0] ?? 'Self-referred'), String(o.names?.[1] ?? 'partner')],
+      personIds: [b.personId, b.personId],
+      status: o.status === 'at-risk' ? 'at-risk' : 'compatible',
+      genes: Array.isArray(o.genes) ? o.genes.map(String) : [],
+      conditionIds: Array.isArray(o.conditionIds) ? o.conditionIds.map(String) : undefined,
+      source: 'self-upload',
+      origin: String(o.origin ?? 'manual'),
+      state: 'result-issued',
+      events: [{ at: now, state: 'result-issued', by: 'The person, through Silah', note: `Result brought by the person (${o.origin ?? 'typed'}); the original report is to be checked at the visit` }],
+      flags: Array.isArray(o.flags) ? o.flags.map(String) : [],
+      briefs: [],
+      createdAt: now,
+    };
+    c.cases.push(k);
+  } else {
+    // The person may have re-entered the result or told Silah about a pregnancy since.
+    k.status = o.status === 'at-risk' ? 'at-risk' : 'compatible';
+    k.genes = Array.isArray(o.genes) ? o.genes.map(String) : k.genes;
+    if (Array.isArray(o.conditionIds)) k.conditionIds = o.conditionIds.map(String);
+    for (const f of o.flags ?? []) if (!k.flags.includes(f)) k.flags.push(f);
+  }
+  return k;
+}
+const caseOf = (c: ClinicState, id?: string, b?: any) => findCase(c, id) ?? (b ? ownCaseFor(c, b) : undefined);
 
 async function handle(c: ClinicState, m: Msg): Promise<void> {
   const b = m.body as any;
+  if (b?.own) ownCaseFor(c, b);
   switch (m.kind) {
     case 'consent.couple-check': {
       const list = (c.outreach.consents[b.coupleId] ??= []);
@@ -233,10 +284,46 @@ async function handle(c: ClinicState, m: Msg): Promise<void> {
     }
     case 'booking': {
       const k = caseOf(c, b.coupleId);
+      const list = (c.appointments ??= []);
+      if (b.slotId) {
+        // Direct booking: the slot must exist in the timetable and still be free.
+        const s = parseSlotId(String(b.slotId));
+        const taken = list.some(a => a.slotId === b.slotId && a.status === 'booked' && a.personId !== b.personId);
+        if (!s || taken || new Date(s.start).getTime() < Date.now()) {
+          await send('clinic', m.from, 'booking.declined', { slotId: b.slotId, reason: taken ? 'taken' : 'unavailable' });
+          break;
+        }
+        for (const a of list) if (a.personId === b.personId && a.status === 'booked') a.status = 'cancelled';
+        list.push({
+          slotId: s.id, siteId: s.siteId, counsellorId: s.counsellorId, start: s.start, format: String(b.format ?? 'in-person'), lang: String(b.lang ?? 'ar'),
+          coupleId: b.coupleId, personId: b.personId, name: personaById(b.personId)?.name.en ?? k?.names[0] ?? b.personId,
+          withSummary: !!b.withSummary, urgent: !!b.urgent, at: m.at, status: 'booked',
+        });
+        if (k) advance(k, 'counselling-booked', undefined, `Booked by the person: ${s.start.slice(0, 16).replace('T', ' ')} UTC, ${b.format ?? 'in person'}`);
+        await send('clinic', m.from, 'pathway.update', { state: 'counselling-booked', slot: s.start, slotId: s.id, booking: { siteId: s.siteId, counsellorId: s.counsellorId, format: b.format, lang: b.lang } });
+        break;
+      }
       if (!k) break;
       advance(k, 'counselling-booked');
       const slot = nextSlot(k);
-      await send('clinic', m.from, 'pathway.update', { state: 'counselling-booked', slot });
+      list.push({ slotId: `auto-${k.id}-${slot}`, siteId: 'corniche-fmu', counsellorId: 'fmu-1', start: slot, format: 'in-person', lang: 'ar', coupleId: k.id, personId: b.personId, name: personaById(b.personId)?.name.en ?? b.personId, withSummary: false, urgent: false, at: m.at, status: 'booked' });
+      await send('clinic', m.from, 'pathway.update', { state: 'counselling-booked', slot, booking: { siteId: 'corniche-fmu', format: 'in-person' } });
+      break;
+    }
+    case 'booking.cancel': {
+      for (const a of c.appointments ?? []) if (a.slotId === b.slotId && a.personId === b.personId) a.status = 'cancelled';
+      break;
+    }
+    case 'summary.packet': {
+      const k = caseOf(c, b.coupleId);
+      if (!k || !b.summary) break;
+      k.summaries = [...(k.summaries ?? []).filter(x => x.personId !== b.personId), { personId: b.personId, at: m.at, summary: b.summary as PhysicianSummary }];
+      if (!k.flags.includes('summary')) k.flags.push('summary');
+      break;
+    }
+    case 'summary.revoke': {
+      const k = caseOf(c, b.coupleId);
+      if (k) k.summaries = (k.summaries ?? []).filter(x => x.personId !== b.personId);
       break;
     }
     case 'escalate': {

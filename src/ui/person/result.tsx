@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import type { PersonState } from '../../app/person';
-import { acknowledgeResult, bundleVerified, currentBundle, currentView, recordTeachback, shareFinding, revoke, requestBooking } from '../../app/person';
+import { acknowledgeResult, bundleVerified, canShareWithPartner, currentBundle, currentView, recordTeachback, shareFinding, revoke } from '../../app/person';
+import { ExplainPanel } from './explain';
 import { isCarrierFinding } from '../../core/kernel';
 import { Q } from '../../core/fraction';
 import type { FactCard } from '../../core/types';
@@ -24,25 +25,42 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
   const byKind = (k: FactCard['kind']) => view.cards.filter(c => c.kind === k);
   const partner = partnerName(s, s.lang);
   const atRisk = view.status === 'at-risk';
+  const entered = bundle.keyId === 'self';
+  const liveBooking = s.booking && (s.booking.status === 'requested' || s.booking.status === 'confirmed');
 
   return (
     <main class="page">
       <Enter k="result">
         <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'Your result, together', ar: 'نتيجتكما معاً' })}</span></div>
-        <p class="row small" style={{ color: verified ? 'var(--palm)' : 'var(--ink-2)', gap: '6px' }}>
-          <IconSeal size={18} />
-          {verified === null ? '…' : verified
-            ? t({ en: `Signed by ${bundle.payload.issuer}. Checked on this phone.`, ar: `موقّعة من ${issuerAr(bundle.payload.issuer)}، وتم التحقق منها على هذا الهاتف.` })
-            : t({ en: 'This result could not be verified. Do not rely on it.', ar: 'تعذّر التحقق من هذه النتيجة، فلا تعتمدي عليها.', arM: 'تعذّر التحقق من هذه النتيجة، فلا تعتمد عليها.' })}
-        </p>
+        {entered ? (
+          <p class="row small wrap" style={{ color: 'var(--ink-2)', gap: '6px' }}>
+            <IconSeal size={18} />
+            {t({ en: `${ORIGIN[s.origin ?? 'manual'].en}. Not checked by the lab: compare it with your report.`, ar: `${ORIGIN[s.origin ?? 'manual'].ar}، ولم يتحقق منها المختبر: قارنيها بتقريركِ.`, arM: `${ORIGIN[s.origin ?? 'manual'].ar}، ولم يتحقق منها المختبر: قارنها بتقريرك.` })}
+            <button class="link" onClick={() => go(`${base}/import`)}>{t({ en: 'Enter again', ar: 'إدخال من جديد' })}</button>
+          </p>
+        ) : (
+          <p class="row small" style={{ color: verified ? 'var(--palm)' : 'var(--ink-2)', gap: '6px' }}>
+            <IconSeal size={18} />
+            {verified === null ? '…' : verified
+              ? t({ en: `Signed by ${bundle.payload.issuer}. Checked on this phone.`, ar: `موقّعة من ${issuerAr(bundle.payload.issuer)}، وتم التحقق منها على هذا الهاتف.` })
+              : t({ en: 'This result could not be verified. Do not rely on it.', ar: 'تعذّر التحقق من هذه النتيجة، فلا تعتمدي عليها.', arM: 'تعذّر التحقق من هذه النتيجة، فلا تعتمد عليها.' })}
+          </p>
+        )}
 
         <ListenAll label={t({ en: 'Listen to this page', ar: 'الاستماع إلى الصفحة كلها' })} texts={view.cards.filter(c => !c.id.startsWith('option:')).map(c => t(c.text))} />
+
+        {!!s.profile?.specialistGenes?.length && (
+          <div class="pool saffron stack" style={{ '--gap': '8px' } as any}>
+            <h3>{t({ en: `Two changed copies: ${s.profile.specialistGenes.join(', ')}`, ar: `نسختان متغيّرتان: ${s.profile.specialistGenes.join('، ')}` })}</h3>
+            <p class="small">{t({ en: 'Your report lists two changed copies of this gene. That can mean the condition itself, not carrier status, so Silah does not work out chances for it. A clinical geneticist will go through it with you.', ar: 'يذكر تقريرك نسختين متغيّرتين من هذا الجين، وقد يعني ذلك وجود الحالة نفسها لا مجرد حملها، لذلك لا يحسب تطبيق صلة احتمالات لهذا الجين، وسيراجعه معك طبيب وراثة سريرية.' })}</p>
+          </div>
+        )}
 
         {view.counsellorFirst && (
           <div class="pool indigo stack" style={{ '--gap': '8px' } as any}>
             <h3>{t({ en: 'Part of this result needs a specialist first', ar: 'جزء من هذه النتيجة يحتاج إلى مختص أولاً' })}</h3>
             <p class="small">{t({ en: 'Some findings, like a change whose meaning is not yet known, are explained by a genetics professional before anything else. Nothing here is a diagnosis.', ar: 'بعض النتائج، مثل تغيّر لم يُعرف معناه بعد، يشرحها مختص في علم الوراثة قبل أي شيء آخر، ولا شيء هنا يُعد تشخيصاً.' })}</p>
-            {!s.booking && <button class="btn primary" onClick={() => act(st => requestBooking(st))}>{t({ en: 'Book a counselling appointment', ar: 'حجز موعد استشارة' })}</button>}
+            {!liveBooking && <button class="btn primary" onClick={() => go(`${base}/book`)}>{t({ en: 'Book a counselling appointment', ar: 'حجز موعد استشارة' })}</button>}
           </div>
         )}
 
@@ -91,12 +109,14 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
           </section>
         )}
 
-        <OwnFindings s={s} act={act} />
+        <ExplainPanel s={s} act={act} />
 
-        <h2>{t({ en: 'What this test cannot see', ar: 'ما لا يستطيع هذا الفحص رؤيته' })}</h2>
-        <Detection view={view} issuer={bundle.payload.issuer} partner={partner} />
+        <OwnFindings s={s} act={act} base={base} />
+
+        <h2 id="focus-uncertain" style={{ scrollMarginTop: '72px' }}>{t({ en: 'What is still uncertain', ar: 'ما زال غير مؤكد' })}</h2>
+        <Detection view={view} issuer={bundle.payload.issuer} partner={partner} simulated={!entered && /simulated/i.test(bundle.payload.issuer)} />
         <section class="flow">
-          {[...byKind('vus'), ...byKind('residual-gene'), card('panel-residual'), card('not-assessed'), card('family-history'), card('consanguinity'), card('background')]
+          {[...byKind('vus'), ...byKind('residual-gene'), card('panel-residual'), card('uncertainty:range'), card('uncertainty:detection'), card('uncertainty:frequency'), card('uncertainty:entry'), card('not-assessed'), card('family-history'), card('consanguinity'), card('background')]
             .filter((c): c is FactCard => !!c)
             .map(c => <CardLine key={c.id} c={c} />)}
         </section>
@@ -110,10 +130,18 @@ export function Result({ s, act, base }: { s: PersonState; act: Act; base: strin
   );
 }
 
-const issuerAr = (x: string) => x.includes('EGP') ? 'خدمة الجينوم الإماراتي (محاكاة)' : 'مختبر الجينوم لفحص ما قبل الزواج (محاكاة)';
+const issuerAr = (x: string) => !/simulated/i.test(x) ? x : x.includes('EGP') ? 'خدمة الجينوم الإماراتي (محاكاة)' : 'مختبر الجينوم لفحص ما قبل الزواج (محاكاة)';
+
+const ORIGIN: Record<string, { en: string; ar: string }> = {
+  'uploaded-pdf': { en: 'Read from your PDF report and confirmed by you', ar: 'مقروءة من تقرير PDF ومؤكَّدة منك' },
+  'uploaded-fhir': { en: 'Read from your FHIR file and confirmed by you', ar: 'مقروءة من ملف FHIR ومؤكَّدة منك' },
+  'uploaded-file': { en: 'Read from your result file and confirmed by you', ar: 'مقروءة من ملف النتيجة ومؤكَّدة منك' },
+  'manual': { en: 'Typed in by you', ar: 'مُدخلة يدوياً منك' },
+  'lab-signed': { en: 'Signed by the lab', ar: 'موقّعة من المختبر' },
+};
 
 /** Where the remaining chances come from: the detection the lab stated in the signed result, or a range. */
-function Detection({ view, issuer, partner }: { view: NonNullable<ReturnType<typeof currentView>>; issuer: string; partner: string }) {
+function Detection({ view, issuer, partner, simulated }: { view: NonNullable<ReturnType<typeof currentView>>; issuer: string; partner: string; simulated: boolean }) {
   const t = useT();
   const det = view.detection;
   if (!det) {
@@ -125,8 +153,8 @@ function Detection({ view, issuer, partner }: { view: NonNullable<ReturnType<typ
   return (
     <p class="small muted">
       {t({
-        en: `Detection stated by ${issuer}: ${panel} of disease-causing changes in each panel gene${exact ? `; ${partner}’s sample was checked for your exact change (${ex})` : ''}. These are example values from a simulated lab.`,
-        ar: `نسبة الكشف كما ذكرها ${issuerAr(issuer)}: ${panel} من التغيّرات المسبّبة للمرض في كل جين من جينات اللوحة${exact ? `، وفُحصت عيّنة ${partner} بحثاً عن التغيّر نفسه الموجود لديك (${ex})` : ''}. وهذه قيم توضيحية من مختبر محاكى.`,
+        en: `Detection stated by ${issuer}: ${panel} of disease-causing changes in each panel gene${exact ? `; ${partner}’s sample was checked for your exact change (${ex})` : ''}.${simulated ? ' These are example values from a simulated lab.' : ''}`,
+        ar: `نسبة الكشف كما ذكرها ${issuerAr(issuer)}: ${panel} من التغيّرات المسبّبة للمرض في كل جين من جينات اللوحة${exact ? `، وفُحصت عيّنة ${partner} بحثاً عن التغيّر نفسه الموجود لديك (${ex})` : ''}.${simulated ? ' وهذه قيم توضيحية من مختبر محاكى.' : ''}`,
       })} <SourceChips ids={['lab-detection']} />
     </p>
   );
@@ -146,7 +174,7 @@ export function CardLine({ c }: { c: FactCard }) {
 }
 
 /** The person's own carrier findings. Private by default; each can be shared with the partner. */
-function OwnFindings({ s, act }: { s: PersonState; act: Act }) {
+function OwnFindings({ s, act, base }: { s: PersonState; act: Act; base: string }) {
   const t = useT();
   const b = currentBundle(s)!;
   const view = currentView(s)!;
@@ -159,6 +187,7 @@ function OwnFindings({ s, act }: { s: PersonState; act: Act }) {
     <section class="stack" id="focus-own" style={{ scrollMarginTop: '72px' }}>
       <h2>{t({ en: 'Your own findings', ar: 'نتائجك الخاصة' })}</h2>
       <p class="muted">{t({ en: `These are yours. ${partner} does not see them unless you share them.`, ar: `هذه نتائجك أنتِ، ولا يراها ${partner} إلا إذا شاركتِها.`, arM: `هذه نتائجك أنت، ولا تراها ${partner} إلا إذا شاركتها.` })}</p>
+      {!canShareWithPartner(s) && <p class="small">{t({ en: 'To share one with your partner, first link your phones.', ar: 'لمشاركة إحداها مع الطرف الآخر، اربطي الهاتفين أولاً.', arM: 'لمشاركة إحداها مع الطرف الآخر، اربط الهاتفين أولاً.' })} <button class="link" onClick={() => go(`${base}/partner`)}>{t({ en: 'Link phones', ar: 'ربط الهاتفين' })}</button></p>}
       {own.map(f => {
         const g = grants.find(x => x.subject.kind === 'finding' && x.subject.gene === f.gene);
         const seq = g ? s.ledger.find(e => e.payload.action === 'share' && e.payload.subject.gene === f.gene && e.payload.at === g.at)?.payload.seq : undefined;
@@ -167,8 +196,8 @@ function OwnFindings({ s, act }: { s: PersonState; act: Act }) {
             <div class="row">
               <span class="chip saffron num">{f.gene}</span>
               <span class="grow small muted">{t({ en: 'You carry one changed copy. You are healthy.', ar: 'تحملين نسخة متغيرة واحدة، وأنتِ سليمة.', arM: 'تحمل نسخة متغيرة واحدة، وأنت سليم.' })}</span>
-              <Toggle on={!!g} label={t({ en: `Share ${f.gene} with ${partner}`, ar: `مشاركة ${f.gene} مع ${partner}` })}
-                onChange={on => act(st => on ? shareFinding(st, f.gene) : seq !== undefined ? revoke(st, seq) : Promise.resolve())} />
+              {(canShareWithPartner(s) || g) && <Toggle on={!!g} label={t({ en: `Share ${f.gene} with ${partner}`, ar: `مشاركة ${f.gene} مع ${partner}` })}
+                onChange={on => act(st => on ? shareFinding(st, f.gene) : seq !== undefined ? revoke(st, seq) : Promise.resolve())} />}
             </div>
             {g && <Receipt><b>{t({ en: 'Shared', ar: 'تمت المشاركة' })}</b> · {partner} · {t({ en: `${f.gene} carrier status only`, ar: `أنكِ تحملين تغيّراً في الجين ${f.gene}، لا أكثر`, arM: `أنك تحمل تغيّراً في الجين ${f.gene}، لا أكثر` })} · {t({ en: 'you can stop sharing at any time', ar: 'يمكنك إيقاف المشاركة في أي وقت' })}</Receipt>}
           </div>
@@ -182,7 +211,7 @@ function OwnFindings({ s, act }: { s: PersonState; act: Act }) {
 
 interface TQ { id: string; ask: Tx; kind: 'pick' | 'tf'; answer: number | boolean; options?: KidKind[][]; explain: Tx }
 
-function questions(atRisk: boolean): TQ[] {
+function questions(atRisk: boolean, related = true): TQ[] {
   if (atRisk) return [
     {
       id: 'chance', kind: 'pick', answer: 0,
@@ -198,14 +227,16 @@ function questions(atRisk: boolean): TQ[] {
     { id: 'zero', kind: 'tf', answer: false, ask: { en: '“Compatible means there is no chance at all.”', ar: '«متوافق يعني أنه لا يوجد أي احتمال على الإطلاق.»' }, explain: { en: 'Compatible lowers the chance a lot, but not to zero.', ar: '«متوافق» يخفض الاحتمال كثيراً، لكن ليس إلى الصفر.' } },
     { id: 'all', kind: 'tf', answer: false, ask: { en: '“The test checks every genetic condition.”', ar: '«الفحص يكشف كل الحالات الوراثية.»' }, explain: { en: 'It checks recessive conditions on the panel only, not all of them.', ar: 'يفحص الحالات المتنحية المدرجة في اللوحة فقط، لا كل الحالات الوراثية.' } },
     { id: 'ill', kind: 'tf', answer: false, ask: { en: '“Being a carrier means I am ill.”', ar: '«أن يحمل الشخص تغيّراً في الجين يعني أنه مريض.»' }, explain: { en: 'Carriers are healthy.', ar: 'الحاملون أصحّاء.' } },
-    { id: 'cousins', kind: 'tf', answer: true, ask: { en: '“Because we are cousins, our background chance is a little higher than for unrelated parents.”', ar: '«لأننا أقارب، فإن احتمالنا الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب.»' }, explain: { en: 'Yes. Most of it comes from recessive conditions. A negative panel lowers part of it, but not all.', ar: 'نعم. ومعظم ذلك من حالات متنحية. والنتيجة السلبية للوحة تخفض جزءاً منه، لا كله.' } },
+    related
+      ? { id: 'cousins', kind: 'tf', answer: true, ask: { en: '“Because we are cousins, our background chance is a little higher than for unrelated parents.”', ar: '«لأننا أقارب، فإن احتمالنا الأساسي أعلى قليلاً منه لدى الوالدين غير الأقارب.»' }, explain: { en: 'Yes. Most of it comes from recessive conditions. A negative panel lowers part of it, but not all.', ar: 'نعم. ومعظم ذلك من حالات متنحية. والنتيجة السلبية للوحة تخفض جزءاً منه، لا كله.' } }
+      : { id: 'miss', kind: 'tf', answer: true, ask: { en: '“A test can miss a change, so a negative result lowers the chance but does not remove it.”', ar: '«قد لا يكشف الفحص تغيّراً ما، لذلك تخفض النتيجة السلبية الاحتمال ولا تلغيه.»' }, explain: { en: 'Yes. No test finds every change, which is why a small chance remains.', ar: 'نعم. لا يكشف أي فحص كل التغيّرات، ولهذا يبقى احتمال صغير.' } },
   ];
 }
 
 export function Check({ s, act, base }: { s: PersonState; act: Act; base: string }) {
   const t = useT();
   const view = currentView(s)!;
-  const qs = questions(view.status === 'at-risk');
+  const qs = questions(view.status === 'at-risk', view.relationship !== 'unrelated');
   const [i, setI] = useState(0);
   const [picked, setPicked] = useState<(number | boolean | null)[]>(qs.map(() => null));
   const done = i >= qs.length;

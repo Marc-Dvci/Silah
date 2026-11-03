@@ -1,0 +1,27 @@
+SAMPLE: fictional person, not a real result
+Al Waha Genomics Laboratory (fictional)
+Premarital Genetic Screening Report
+Patient name: Rashid Khalfan (sample)
+Sex: Male
+Date of birth: 1996-07-02
+Report date: 2026-10-20
+Test: Premarital genetic screening, DoH panel (Premarital Screening Standard V3, Appendix 12), 563 genes
+Partner: Aisha Khalfan (sample)
+Declared relationship: First cousins
+Results: variants reported
+Gene Variant (HGVS) Protein Zygosity Classification Associated condition
+HBB NM_000518.5:c.92+5G>C IVS-I-5 (beta-plus) Heterozygous Pathogenic Beta-thalassaemia
+CFTR NM_000492.4:c.1521_1523del p.Phe508del Heterozygous Pathogenic Cystic fibrosis
+Couple analysis
+Couple status: AT RISK (not compatible)
+Both partners carry a pathogenic variant in: HBB
+Partner's variant in the shared gene: HBB c.20A>T (HbS)
+Your partner was tested for your other carrier variants and none was found in: CFTR
+Methods and limitations
+Analytical sensitivity: the panel detects 95% of disease-causing single-nucleotide variants and small insertions or deletions in the
+panel genes.
+Targeted analysis of the partner's sample for your familial variant: 99% sensitivity.
+This test does not detect all genetic disorders. A negative result reduces but does not remove the chance of being a carrier.
+Reported by: Dr. Sample Geneticist (fictional)
+SAMPLE
+Fictional sample for the Silah demo. No real person, laboratory or result.

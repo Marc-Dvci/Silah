@@ -74,7 +74,7 @@ const round = (x: number, dp: number) => Math.round(x * 10 ** dp) / 10 ** dp;
 
 // 'defect' is the background chance of a birth defect from any cause, kept apart from the panel's conditions so a
 // figure cannot move between the two ("1 in 33 for the other panel genes").
-export type Outcome = 'affected' | 'unaffected' | 'carrier' | 'neither' | 'defect';
+export type Outcome = 'affected' | 'unaffected' | 'carrier' | 'neither' | 'defect' | 'detection';
 export type Subject = 'child' | 'adult' | 'any';
 export interface Claim { text: string; value: number; parts: number[]; pct?: number; outcome: Outcome | null; subject: Subject }
 interface Stated { outcome: Outcome; subject: Subject; value?: Q; range?: [Q, Q]; relative?: string }
@@ -127,6 +127,9 @@ function outcomeHits(s: string): Hit[] {
 }
 // A chance given "per pregnancy" with no other outcome named is the chance of an affected child.
 const PER_PREGNANCY = /\b(per|each|every) pregnancy\b|(في|لكل) كل حمل|لكل حمل/;
+// How well a test finds changes ("finds 95% of the changes"). Read only for a chance that names no other outcome in
+// its own clause, so "the test finds most changes, but 1 in 160 per pregnancy remains" keeps 1 in 160 a child's chance.
+const DETECTION_TERMS = /\b(finds?|found|detects?|detected|detection|picks? up|misses|sensitivity)\b|(^|\s)(ي|ت)?كشف\S*|(ال)?حساسيه/;
 const subjectOf = (s: string): Subject | null => CHILD_TERMS.test(s) ? 'child' : ADULT_TERMS.test(s) ? 'adult' : null;
 
 /** Every chance a sentence states, with the outcome and the person it is attached to. */
@@ -167,13 +170,24 @@ export function extractClaims(text: string): Claim[] {
     // in its own clause. Only then does the next clause count ("Half of your children, on average, would be
     // carriers"), so "1 in 390 per pregnancy for other genes, and the chance of birth defects is 1 in 33" keeps
     // each chance to its own clause. Whose chance it is comes first from the clause that named the outcome.
+    // "finds about 95% of the disease-causing changes": a share of changes found, right after the verb that says so,
+    // even though "disease" follows. Only a percentage or an "N in 100" share is read this way.
+    const near = back.slice(-40);
+    if (DETECTION_TERMS.test(near) && (f.pct !== undefined || f.parts[1] === 100) && !PER_PREGNANCY.test(fwdClause)) {
+      return { text: f.text, value: f.value, parts: f.parts, pct: f.pct, outcome: 'detection' as Outcome, subject: 'any' as Subject };
+    }
     let outcome: Outcome | null = null, from: string[] = [];
+    let weak = false;   // the outcome came only from the sentence as a whole, or from nothing
     if (outcomeHits(fwdClause).length) [outcome, from] = [outcomeHits(fwdClause)[0].outcome, [fwdClause, back]];
     else if (outcomeHits(back).length) [outcome, from] = [outcomeHits(back).at(-1)!.outcome, [back, fwdClause]];
     else if (PER_PREGNANCY.test(fwdClause) || PER_PREGNANCY.test(back)) [outcome, from] = ['affected', [fwdClause, back]];
     else if (outcomeHits(ext).length) [outcome, from] = [outcomeHits(ext)[0].outcome, [ext, back]];
-    else if (PER_PREGNANCY.test(n)) [outcome, from] = ['affected', [ext, back]];
-    else from = [ext, back];
+    else if (PER_PREGNANCY.test(n)) [outcome, from, weak] = ['affected', [ext, back], true];
+    else [from, weak] = [[ext, back], true];
+    // "If the test finds 99% of changes": a share of changes found, named in the chance's own clause.
+    if (weak && (DETECTION_TERMS.test(back) || DETECTION_TERMS.test(fwdClause))) {
+      return { text: f.text, value: f.value, parts: f.parts, pct: f.pct, outcome: 'detection' as Outcome, subject: 'any' as Subject };
+    }
     const subject = from.map(subjectOf).find(x => x) ?? subjectOf(n) ?? 'any';
     return { text: f.text, value: f.value, parts: f.parts, pct: f.pct, outcome, subject };
   });
@@ -213,6 +227,11 @@ export function statedOutcomes(c: FactCard): Stated[] {
       break;
     case 'consanguinity':
       if (c.ranges?.added) out.push({ outcome: 'affected', subject: 'child', range: [Q.from(c.ranges.added[0]), Q.from(c.ranges.added[1])] });
+      break;
+    case 'uncertainty':
+      for (const k of ['detected', 'high', 'low']) push('detection', 'any', q(k));
+      if (c.ranges?.affected) out.push({ outcome: 'affected', subject: 'child', range: [Q.from(c.ranges.affected[0]), Q.from(c.ranges.affected[1])] });
+      push('carrier', 'adult', q('assumed'));
       break;
   }
   return out;
@@ -373,5 +392,5 @@ export function parseModelAnswer(raw: string): ModelAnswer | null {
 
 /** Models sometimes repeat card ids inside the sentence, e.g. "... [couple:SMN1]". */
 export function stripInlineIds(text: string): string {
-  return text.replace(/\s*[\[(]\s*(?:[a-z]+:[A-Za-z0-9:-]+|counsellor|background|not-assessed|panel-residual|consanguinity)(?:\s*,\s*[a-zA-Z0-9:-]+)*\s*[\])]/g, '').trim();
+  return text.replace(/\s*[\[(]\s*(?:[a-z]+:[A-Za-z0-9:-]+|counsellor|background|not-assessed|panel-residual|consanguinity|family-history)(?:\s*,\s*[a-zA-Z0-9:-]+)*\s*[\])]/g, '').trim();
 }

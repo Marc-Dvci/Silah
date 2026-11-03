@@ -3,7 +3,10 @@ import { PERSONAS } from '../app/demo';
 import { dbClearAll } from '../app/db';
 import { send } from '../app/net';
 import { loadClinic, recordNewborn, sendOutreach, OUTREACH_REGISTER } from '../app/clinic';
-import { loadPerson, syncPerson, respondToInvitation, currentView, setBirthPlan, setLang, recordTeachback, shareBrief, requestBooking, askForInvites, type PersonState } from '../app/person';
+import { loadPerson, syncPerson, respondToInvitation, currentView, setBirthPlan, setLang, recordTeachback, shareBrief, requestBooking, askForInvites, bookSlot, bundleVerified, coupleOf, isUrgent, OWN_ID, type PersonState } from '../app/person';
+import { sitesFor, slotsFor } from '../core/booking';
+import { buildSummary } from '../app/summary';
+import { importSamplePdf } from './person/import';
 import type { Lang } from '../core/types';
 import { ensureSeeded, pumpClinic } from './hooks';
 import { LangCtx, Mark, go } from './kit';
@@ -71,6 +74,24 @@ const newborn = async () => {
   })();
 };
 
+// The person who brings their own report (a fictional sample PDF in the story).
+const ownImport = withPerson(OWN_ID, async st => {
+  if (/aisha/i.test(st.profile?.name ?? '') && currentView(st)) return;
+  await importSamplePdf(st, 'samples/aisha-khalfan-sample.pdf');
+});
+const ownBook = async () => {
+  await ownImport();
+  await withPerson(OWN_ID, async st => {
+    const v = currentView(st);
+    if (!v || (st.booking && st.booking.status !== 'cancelled' && st.booking.status !== 'declined')) return;
+    if (!st.teachback) await recordTeachback(st, { at: new Date().toISOString(), correct: 3, total: 4, missed: ['next'] });
+    const site = sitesFor({ status: v.status, sharedGenes: v.shared.map(x => x.gene), specialistFirst: !!st.profile?.specialistGenes?.length || (v.counsellorFirst && v.status !== 'at-risk'), pregnant: !!(coupleOf(st.id)?.pregnancyDue || st.profile?.pregnant) })[0].site;
+    const slot = slotsFor({ siteId: site.id, format: 'in-person', lang: st.lang, urgent: isUrgent(st) })[0];
+    if (slot) await bookSlot(st, slot, { format: 'in-person', lang: st.lang, summary: buildSummary(st, await bundleVerified(st)) });
+  })();
+  await until(holds(OWN_ID, st => st.booking?.status === 'confirmed'));
+};
+
 const STORY: StoryStep[] = [
   {
     who: 'mariam', clinic: 'outreach', title: 'The health system invites',
@@ -102,6 +123,20 @@ const STORY: StoryStep[] = [
     action: newborn,
   },
   { who: 'fatima', page: 'result', clinic: 'pathway', title: '“Compatible” is not zero', text: 'Fatima’s certificate says compatible. Her fiancé is her cousin, so Silah shows 1 in 260 for her gene and 1 in 160 for the whole panel, from the detection the simulated lab states. Fictional couple.' },
+  {
+    who: OWN_ID, page: 'result', clinic: 'queue', title: 'A couple brings their own report',
+    text: 'Aisha opens her PDF report (a fictional sample). Silah reads it on the phone, she confirms each line, and the same kernel works out her chances. The screen says the result was entered by her, not signed by a lab.',
+    action: ownImport,
+  },
+  {
+    who: OWN_ID, page: 'result/explain', clinic: 'queue', title: 'In plain words',
+    text: 'A language model explains her result and what is still uncertain. Every sentence is checked on the phone against her own numbers before she sees it; the fixed text it was checked against is one tap away.',
+  },
+  {
+    who: OWN_ID, page: 'book', clinic: 'appointments', title: 'She books, and sends a summary',
+    text: 'She picks the place Appendix 13 names for her result, the format, the language and the time. Her one-page summary goes with the booking and opens in the clinic; it can also be printed or filed as FHIR.',
+    action: ownBook,
+  },
 ];
 
 export function Stage() {
@@ -133,7 +168,7 @@ export function Stage() {
   const [ready, setReady] = useState(false);
   const applyLang = async (lang: Lang) => {
     await ensureSeeded();
-    for (const p of PERSONAS) await withPerson(p.id, st => setLang(st, lang))();
+    for (const id of [...PERSONAS.map(p => p.id), OWN_ID]) await withPerson(id, st => setLang(st, lang))();
   };
   useEffect(() => { if (wide && !ready) applyLang(phoneLang).then(() => setReady(true)); }, [wide]);
   const switchLang = async (lang: Lang) => {
@@ -158,6 +193,7 @@ export function Stage() {
           <span class="grow" />
           <span class="tiny muted" style={{ whiteSpace: 'nowrap' }}>Phone:</span>
           {PERSONAS.map(p => <button key={p.id} class={`chip ${p.id === who ? 'indigo' : ''}`} onClick={() => pick(p.id)}>{p.name.en}</button>)}
+          <button class={`chip ${who === OWN_ID ? 'indigo' : 'palm'}`} onClick={() => pick(OWN_ID)}>Your own result</button>
           <span class="tiny muted" style={{ marginInlineStart: '8px', whiteSpace: 'nowrap' }}>Phones in:</span>
           <button class={`chip ${phoneLang === 'ar' ? 'indigo' : ''}`} lang="ar" onClick={() => switchLang('ar')}>العربية</button>
           <button class={`chip ${phoneLang === 'en' ? 'indigo' : ''}`} onClick={() => switchLang('en')}>English</button>
@@ -166,7 +202,7 @@ export function Stage() {
         <div class="stage">
           <div class="stack" style={{ '--gap': '10px' } as any}>
             <div class="device">{ready && <iframe ref={phone} key={`phone-${nonce}`} src={firstSrc.current} title="Person's phone" />}</div>
-            <p class="small muted" style={{ maxWidth: '410px' }}>{PERSONAS.find(p => p.id === who)?.blurb.en}</p>
+            <p class="small muted" style={{ maxWidth: '410px' }}>{who === OWN_ID ? 'Bring your own premarital genetic report (PDF, FHIR or typed), or use a fictional sample. It is read and kept in this browser only.' : PERSONAS.find(p => p.id === who)?.blurb.en}</p>
           </div>
           <div class="stack" style={{ '--gap': '14px' } as any}>
             <Story step={step} play={play} />
@@ -198,7 +234,7 @@ function Story({ step, play }: { step: number | null; play: (i: number) => void 
         </button>
       </div>
       <p class="small" style={{ minHeight: '1.6em' }}>
-        {s ? <><b>{s.title}.</b> <span class="muted">{s.text}</span></> : <span class="muted">Ten steps. Each step moves both screens; act on the phone or the clinic yourself, or press Next and the story completes the step for you. Phones are in English; press <span lang="ar">العربية</span> to see them as the family reads them.</span>}
+        {s ? <><b>{s.title}.</b> <span class="muted">{s.text}</span></> : <span class="muted">Thirteen steps. Each step moves both screens; act on the phone or the clinic yourself, or press Next and the story completes the step for you. Phones are in English; press <span lang="ar">العربية</span> to see them as the family reads them.</span>}
       </p>
     </div>
   );
@@ -213,6 +249,10 @@ function Chooser({ reset }: { reset: () => void }) {
         <p class="muted">A private companion for inherited disease risk in Abu Dhabi: from the couple check to counselling, birth and family. This prototype runs entirely in your browser with a fictional family.</p>
         <p class="small">Start with Mariam: the Department of Health’s invitation is waiting on her phone. Each phone has an <span lang="ar">ع</span> / EN switch at the top.</p>
         <p class="eyebrow">Open a phone</p>
+        <button class="choice" onClick={() => go(`p/${OWN_ID}`)}>
+          <b>Use your own result</b>
+          <div class="small muted">Bring a PDF report or a result file, or try a fictional sample. Explained in plain words, booked, summarised for your clinician.</div>
+        </button>
         {PERSONAS.map(p => (
           <button key={p.id} class="choice" onClick={async () => { if (p.id === 'mariam' || p.id === 'saeed') await invite(); go(`p/${p.id}`); }}>
             <b>{p.name.en}</b> <span class="muted">· {p.name.ar}</span>

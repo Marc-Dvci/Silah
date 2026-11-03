@@ -18,6 +18,8 @@ import { PersonApp } from './ui/person';
 import { ClinicApp } from './ui/clinic';
 import { RelativePage } from './ui/relative';
 import { Stage } from './ui/stage';
+import { SummaryPage } from './ui/summary';
+import { JoinPair } from './ui/person/partner';
 
 function App() {
   const r = useRoute();
@@ -34,6 +36,8 @@ function App() {
   if (a === 'p' && b) return <PersonApp id={b} page={c} focus={d} />;
   if (a === 'c') return <ClinicApp page={b} sub={c} />;
   if (a === 'r' && b) return <RelativePage token={b} />;
+  if (a === 's' && b) return <SummaryPage id={b} />;
+  if (a === 'pair' && b) return <JoinPair token={b} />;
   return <Stage />;
 }
 

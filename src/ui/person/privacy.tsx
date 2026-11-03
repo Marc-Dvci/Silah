@@ -1,6 +1,6 @@
 import { useMemo } from 'preact/hooks';
 import type { PersonState } from '../../app/person';
-import { revoke, setDigits, setLang, setBig, partnerOf } from '../../app/person';
+import { revoke, setDigits, setLang, setBig, partnerOf, isOwn, forgetOwnResult, currentBundle } from '../../app/person';
 import { activeGrants, verifyLedger } from '../../core/crypto/receipts';
 import { fromB64url } from '../../core/crypto/sign';
 import { PERSONAS, personaById } from '../../app/demo';
@@ -16,6 +16,9 @@ const SUBJECT: Record<string, { en: string; ar: string }> = {
   'teachback': { en: 'Your check answers', ar: 'إجابات التحقق من الفهم' },
   'brief': { en: 'Your summary for the counsellor', ar: 'ملخصك للمستشار' },
   'invitation': { en: 'Anonymous invitations', ar: 'دعوات مجهولة المصدر' },
+  'summary': { en: 'Your summary for the clinician', ar: 'ملخصك للطبيب' },
+  'pairing': { en: 'Link with your partner’s phone', ar: 'الربط بهاتف الطرف الآخر' },
+  'booking': { en: 'Your appointment', ar: 'موعدك' },
 };
 
 export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: string }) {
@@ -52,7 +55,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
             <h2>{t({ en: 'Shared with you', ar: 'ما تمت مشاركته معك' })}</h2>
             {received.map(r => (
               <div key={r.seq} class="pool palm">
-                <p><b>{personaById(partner ?? '') ? t(personaById(partner!)!.name) : r.fromName}</b> {t({ en: `chose to share: carrier of ${r.gene}.`, ar: `اختار مشاركة نتيجته معك: يحمل تغيّراً في الجين ${r.gene}.`, arM: `اختارت مشاركة نتيجتها معك: تحمل تغيّراً في الجين ${r.gene}.` })}</p>
+                <p><b>{personaById(partner ?? '') ? t(personaById(partner!)!.name) : typeof r.fromName === 'string' ? r.fromName : t(r.fromName as any)}</b> {t({ en: `chose to share: carrier of ${r.gene}.`, ar: `اختار مشاركة نتيجته معك: يحمل تغيّراً في الجين ${r.gene}.`, arM: `اختارت مشاركة نتيجتها معك: تحمل تغيّراً في الجين ${r.gene}.` })}</p>
                 <p class="small muted">{t({ en: 'You tested negative for this gene. Your counsellor can explain what the small remaining chance means.', ar: 'جاءت نتيجة فحصك لهذا الجين سلبية، ويمكن لمستشارك شرح ما يعنيه الاحتمال الصغير المتبقي.' })}</p>
               </div>
             ))}
@@ -72,6 +75,14 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
           {s.lang === 'ar' && <div class="row"><span class="grow">{t({ en: 'Arabic-Indic digits', ar: 'الأرقام الهندية (١٢٣)' })}</span><Toggle on={s.digits === 'arab'} label="digits" onChange={v => act(st => setDigits(st, v ? 'arab' : 'latn'))} /></div>}
         </section>
 
+        {isOwn(s.id) && currentBundle(s) && (
+          <section class="stack">
+            <h2>{t({ en: 'Your result on this phone', ar: 'نتيجتك على هذا الهاتف' })}</h2>
+            <p class="small muted">{t({ en: 'Deleting it removes the result, your answers and your questions from this phone and ends any link with your partner. The clinic keeps only what you already sent.', ar: 'يؤدي الحذف إلى إزالة النتيجة وإجاباتك وأسئلتك من هذا الهاتف وإنهاء أي ربط مع الطرف الآخر، ولا يبقى لدى العيادة إلا ما أرسلته سابقاً.' })}</p>
+            <button class="btn calm" onClick={() => { if (confirm(t({ en: 'Delete your result from this phone?', ar: 'حذف نتيجتك من هذا الهاتف؟' }))) act(st => forgetOwnResult(st)).then(() => go(`p/${s.id}`)); }}>{t({ en: 'Delete my result from this phone', ar: 'حذف نتيجتي من هذا الهاتف' })}</button>
+          </section>
+        )}
+
         <section class="stack">
           <p class="eyebrow">{t({ en: 'Demonstration', ar: 'عرض توضيحي' })}</p>
           <p class="small muted">{t({ en: 'Silah is a prototype with a fictional family. Switch to another person’s phone:', ar: 'صلة نموذج أولي يستخدم عائلة خيالية. للانتقال إلى هاتف شخص آخر:' })}</p>
@@ -87,6 +98,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
 
 function recipientLabel(r: string, t: (x: any) => string): string {
   if (r.startsWith('p:')) { const p = personaById(r.slice(2)); return p ? t(p.name) : r; }
+  if (r.startsWith('pair:')) return t({ en: 'Your partner’s phone (linked)', ar: 'هاتف الطرف الآخر (مرتبط)' });
   const map: Record<string, { en: string; ar: string }> = {
     'DoH genomics service': { en: 'DoH genomics service', ar: 'خدمة الجينوم في دائرة الصحة' },
     'Corniche Hospital maternity': { en: 'Corniche Hospital maternity', ar: 'قسم الولادة في مستشفى الكورنيش' },
@@ -100,6 +112,8 @@ function scopeLabel(scope: string, t: (x: any) => string): string {
   const fixed: Record<string, { en: string; ar: string }> = {
     'carrier findings on the premarital panel, for this couple only': { en: 'carrier findings on the premarital panel, for this couple only', ar: 'نتائج التغيّرات الجينية في لوحة ما قبل الزواج، لهذين الزوجين فقط' },
     'teach-back results and questions asked in Silah': { en: 'your check answers and the questions you asked in Silah', ar: 'إجابات التحقق من الفهم والأسئلة التي طُرحت في صلة' },
+    'messages you choose to send, end-to-end encrypted': { en: 'only what you choose to send, end-to-end encrypted', ar: 'ما تختار إرساله فقط، بتشفير من طرف إلى طرف' },
+    'pre-counselling summary: findings, couple result, chances, understanding check, questions asked': { en: 'your summary: findings, couple result, chances, check answers, questions', ar: 'ملخصك: النتائج ونتيجة الزوجين والاحتمالات وإجابات التحقق والأسئلة' },
     'blinded requests only; the clinic cannot link invitations to you': { en: 'blinded requests only; the clinic cannot link invitations to you', ar: 'طلبات معمّاة فقط، ولا تستطيع العيادة ربط الدعوات بك' },
   };
   if (fixed[scope]) return t(fixed[scope]);

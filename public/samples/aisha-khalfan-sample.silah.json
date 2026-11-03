@@ -1,0 +1,61 @@
+{
+  "v": 1,
+  "kind": "silah.result",
+  "person": {
+    "personId": "sample-aisha-khalfan",
+    "displayName": "Aisha Khalfan (sample)",
+    "sex": "F",
+    "findings": [
+      {
+        "gene": "HBB",
+        "variant": "NM_000518.5:c.20A>T",
+        "classification": "P",
+        "tag": "HbS"
+      },
+      {
+        "gene": "GJB2",
+        "variant": "NM_004004.6:c.35delG",
+        "classification": "P"
+      },
+      {
+        "gene": "MEFV",
+        "variant": "NM_000243.3:c.442G>C",
+        "classification": "VUS"
+      }
+    ],
+    "panelVersion": "DoH Premarital Screening Standard V3 (Sep 2024), Appendix 12",
+    "testedAt": "2026-10-20",
+    "method": "premarital"
+  },
+  "couple": {
+    "coupleId": "sample-aisha-rashid",
+    "partnerName": "Rashid Khalfan (sample)",
+    "relationship": "first-cousins",
+    "status": "at-risk",
+    "shared": [
+      {
+        "gene": "HBB",
+        "ownTag": "HbS",
+        "partnerTag": "b+"
+      }
+    ],
+    "partnerNegativeFor": [
+      "GJB2"
+    ],
+    "vusGenes": [],
+    "detection": {
+      "panel": {
+        "n": "19",
+        "d": "20"
+      },
+      "exactChange": {
+        "GJB2": {
+          "n": "99",
+          "d": "100"
+        }
+      }
+    }
+  },
+  "issuer": "Al Waha Genomics Laboratory (fictional)",
+  "issuedAt": "2026-10-20T09:00:00Z"
+}

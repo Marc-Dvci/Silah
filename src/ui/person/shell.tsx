@@ -11,7 +11,7 @@ export function PersonShell({ s, act, base, children, showAsk = true }: {
   const [hidden, setHidden] = useState(false);
   const dir = s.lang === 'ar' ? 'rtl' : 'ltr';
   return (
-    <LangCtx.Provider value={{ lang: s.lang, digits: s.digits, sex: personaById(s.id)?.sex }}>
+    <LangCtx.Provider value={{ lang: s.lang, digits: s.digits, sex: personaById(s.id)?.sex ?? s.profile?.sex }}>
       <div dir={dir} lang={s.lang} class={`phone ${s.big ? 'big' : ''}`}>
         <Top s={s} act={act} base={base} onHide={() => setHidden(true)} />
         {children}

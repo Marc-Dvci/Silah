@@ -1,0 +1,25 @@
+name = "silah-relay"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+# Room state lives in a SQLite-backed Durable Object (free plan).
+[[durable_objects.bindings]]
+name = "ROOM"
+class_name = "Room"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Room"]
+
+# Workers AI, used only by POST /v1/explain.
+[ai]
+binding = "AI"
+
+[vars]
+ALLOWED_ORIGINS = "https://marc-dvci.github.io,http://127.0.0.1:5173,http://localhost:5173,http://127.0.0.1:4173,http://localhost:4173"
+EXPLAIN_MODEL = "@cf/google/gemma-3-12b-it"
+
+# Request logs can carry the URL, and the URL carries the room id.
+[observability]
+enabled = false

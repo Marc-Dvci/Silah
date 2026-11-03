@@ -1,0 +1,624 @@
+{
+  "resourceType": "Bundle",
+  "id": "aisha-khalfan-sample",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+        "code": "sample",
+        "display": "SAMPLE: fictional person, not a real result"
+      }
+    ]
+  },
+  "type": "collection",
+  "timestamp": "2026-10-20T09:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:5a1e0000-0000-4000-8000-000000000001",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "5a1e0000-0000-4000-8000-000000000001",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+              "code": "sample",
+              "display": "SAMPLE: fictional person, not a real result"
+            }
+          ]
+        },
+        "name": [
+          {
+            "text": "Aisha Khalfan (sample)"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1999-03-14"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5a1e0000-0000-4000-8000-000000000002",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "5a1e0000-0000-4000-8000-000000000002",
+        "name": "Al Waha Genomics Laboratory (fictional)"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5a1e0000-0000-4000-8000-000000000003",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "5a1e0000-0000-4000-8000-000000000003",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "51969-4",
+              "display": "Genetic analysis report"
+            }
+          ],
+          "text": "Genetic analysis report"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a1e0000-0000-4000-8000-000000000001"
+        },
+        "effectiveDateTime": "2026-10-20",
+        "issued": "2026-10-20T09:00:00Z",
+        "performer": [
+          {
+            "reference": "urn:uuid:5a1e0000-0000-4000-8000-000000000002",
+            "display": "Al Waha Genomics Laboratory (fictional)"
+          }
+        ],
+        "result": [
+          {
+            "reference": "urn:uuid:5a1e0000-0000-4000-8000-000000000004"
+          },
+          {
+            "reference": "urn:uuid:5a1e0000-0000-4000-8000-000000000005"
+          },
+          {
+            "reference": "urn:uuid:5a1e0000-0000-4000-8000-000000000006"
+          },
+          {
+            "reference": "urn:uuid:5a1e0000-0000-4000-8000-000000000007"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5a1e0000-0000-4000-8000-000000000004",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "5a1e0000-0000-4000-8000-000000000004",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "69548-6",
+              "display": "Genetic variant assessment"
+            }
+          ],
+          "text": "Genetic variant assessment"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a1e0000-0000-4000-8000-000000000001"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "48018-6",
+                  "display": "Gene studied"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://www.genenames.org/geneId",
+                  "code": "HBB",
+                  "display": "HBB"
+                }
+              ],
+              "text": "HBB"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "48004-6",
+                  "display": "DNA change (c.HGVS)"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://varnomen.hgvs.org",
+                  "code": "NM_000518.5:c.20A>T"
+                }
+              ],
+              "text": "NM_000518.5:c.20A>T"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "48005-3",
+                  "display": "Amino acid change (p.HGVS)"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://varnomen.hgvs.org",
+                  "code": "p.Glu7Val"
+                }
+              ],
+              "text": "p.Glu7Val"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "53034-5",
+                  "display": "Allelic state"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "LA6706-1",
+                  "display": "Heterozygous"
+                }
+              ],
+              "text": "heterozygous"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "53037-8",
+                  "display": "Clinical significance"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "LA6668-3",
+                  "display": "Pathogenic"
+                }
+              ],
+              "text": "Pathogenic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5a1e0000-0000-4000-8000-000000000005",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "5a1e0000-0000-4000-8000-000000000005",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "69548-6",
+              "display": "Genetic variant assessment"
+            }
+          ],
+          "text": "Genetic variant assessment"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a1e0000-0000-4000-8000-000000000001"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "48018-6",
+                  "display": "Gene studied"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://www.genenames.org/geneId",
+                  "code": "GJB2",
+                  "display": "GJB2"
+                }
+              ],
+              "text": "GJB2"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "48004-6",
+                  "display": "DNA change (c.HGVS)"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://varnomen.hgvs.org",
+                  "code": "NM_004004.6:c.35delG"
+                }
+              ],
+              "text": "NM_004004.6:c.35delG"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "48005-3",
+                  "display": "Amino acid change (p.HGVS)"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://varnomen.hgvs.org",
+                  "code": "p.Gly12fs"
+                }
+              ],
+              "text": "p.Gly12fs"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "53034-5",
+                  "display": "Allelic state"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "LA6706-1",
+                  "display": "Heterozygous"
+                }
+              ],
+              "text": "heterozygous"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "53037-8",
+                  "display": "Clinical significance"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "LA6668-3",
+                  "display": "Pathogenic"
+                }
+              ],
+              "text": "Pathogenic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5a1e0000-0000-4000-8000-000000000006",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "5a1e0000-0000-4000-8000-000000000006",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "69548-6",
+              "display": "Genetic variant assessment"
+            }
+          ],
+          "text": "Genetic variant assessment"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a1e0000-0000-4000-8000-000000000001"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "48018-6",
+                  "display": "Gene studied"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://www.genenames.org/geneId",
+                  "code": "MEFV",
+                  "display": "MEFV"
+                }
+              ],
+              "text": "MEFV"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "48004-6",
+                  "display": "DNA change (c.HGVS)"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://varnomen.hgvs.org",
+                  "code": "NM_000243.3:c.442G>C"
+                }
+              ],
+              "text": "NM_000243.3:c.442G>C"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "48005-3",
+                  "display": "Amino acid change (p.HGVS)"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://varnomen.hgvs.org",
+                  "code": "p.Glu148Gln"
+                }
+              ],
+              "text": "p.Glu148Gln"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "53034-5",
+                  "display": "Allelic state"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "LA6706-1",
+                  "display": "Heterozygous"
+                }
+              ],
+              "text": "heterozygous"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "53037-8",
+                  "display": "Clinical significance"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "LA26333-7",
+                  "display": "Uncertain significance"
+                }
+              ],
+              "text": "Uncertain significance"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5a1e0000-0000-4000-8000-000000000007",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "5a1e0000-0000-4000-8000-000000000007",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+              "code": "couple-analysis",
+              "display": "Couple analysis"
+            }
+          ],
+          "text": "Couple analysis"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a1e0000-0000-4000-8000-000000000001"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+                  "code": "couple-status"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+                  "code": "at-risk"
+                }
+              ],
+              "text": "at-risk"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+                  "code": "shared-gene"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://www.genenames.org/geneId",
+                  "code": "HBB",
+                  "display": "HBB"
+                }
+              ],
+              "text": "HBB"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+                  "code": "partner-allele"
+                }
+              ]
+            },
+            "valueString": "HBB:b+"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+                  "code": "partner-negative-gene"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://www.genenames.org/geneId",
+                  "code": "GJB2",
+                  "display": "GJB2"
+                }
+              ],
+              "text": "GJB2"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+                  "code": "relationship"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+                  "code": "first-cousins"
+                }
+              ],
+              "text": "first-cousins"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+                  "code": "partner-name"
+                }
+              ]
+            },
+            "valueString": "Rashid Khalfan (sample)"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+                  "code": "detection-panel"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 95,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah",
+                  "code": "detection-exact-change"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 99,
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

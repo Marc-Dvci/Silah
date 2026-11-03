@@ -4,7 +4,7 @@ import { canonicalJson, keyIdOf, sha256Hex, signPayload, verifySigned, type KeyP
 export type ReceiptAction = 'consent' | 'withdraw' | 'share' | 'revoke';
 
 export type ReceiptSubject = {
-  kind: 'couple-check' | 'finding' | 'birth-plan' | 'teachback' | 'brief' | 'invitation';
+  kind: 'couple-check' | 'finding' | 'birth-plan' | 'teachback' | 'brief' | 'invitation' | 'summary' | 'pairing' | 'booking';
   gene?: string;
   note?: string;
 };

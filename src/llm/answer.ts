@@ -7,7 +7,8 @@ import { parseModelAnswer, resolveIds, verifyAnswer, type ModelAnswer, type Veri
 // and the verifier's verdict on it are kept for the evaluation (eval/), where they measure the model.
 
 export interface ChatMessage { role: 'system' | 'user' | 'assistant'; content: string }
-export interface Backend { name: string; generate(messages: ChatMessage[]): Promise<string> }
+export interface GenOptions { maxTokens?: number; maxSentences?: number }
+export interface Backend { name: string; model?: string; generate(messages: ChatMessage[], opts?: GenOptions): Promise<string> }
 
 export const COUNSELLOR_CARD: FactCard = {
   id: 'counsellor',
@@ -96,13 +97,17 @@ export async function askModel(backend: Backend, question: string, cards: FactCa
 export function localServer(base = 'http://127.0.0.1:8080', model = 'local'): Backend {
   return {
     name: `the model on this computer (llama.cpp, ${base})`,
-    async generate(messages) {
+    model: 'Gemma 4 on this computer (llama.cpp)',
+    async generate(messages, opts = {}) {
+      const schema = opts.maxSentences
+        ? { ...SCHEMA, properties: { sentences: { ...SCHEMA.properties.sentences, maxItems: opts.maxSentences } } }
+        : SCHEMA;
       const r = await fetch(`${base}/v1/chat/completions`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
-          model, messages, temperature: 0.2, max_tokens: 420,
-          response_format: { type: 'json_schema', json_schema: { name: 'answer', schema: SCHEMA } },
+          model, messages, temperature: 0.2, max_tokens: opts.maxTokens ?? 420,
+          response_format: { type: 'json_schema', json_schema: { name: 'answer', schema } },
         }),
       });
       if (!r.ok) throw new Error(`server ${r.status}`);
@@ -143,8 +148,9 @@ export async function webgpuBackend(onProgress?: (p: number) => void): Promise<B
   });
   return {
     name: 'Gemma 4 E2B in this browser (WebGPU)',
-    async generate(messages) {
-      const out = await gen(messages, { max_new_tokens: 380, do_sample: false });
+    model: 'Gemma 4 E2B in this browser',
+    async generate(messages, opts = {}) {
+      const out = await gen(messages, { max_new_tokens: opts.maxTokens ?? 380, do_sample: false });
       const last = out?.[0]?.generated_text;
       return Array.isArray(last) ? String(last.at(-1)?.content ?? '') : String(last ?? '');
     },

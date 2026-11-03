@@ -1,6 +1,7 @@
 import { useState } from 'preact/hooks';
 import type { PersonState, PathState } from '../../app/person';
-import { coupleOf, currentView, setBirthPlan, askForInvites, requestBooking, shareBrief, revoke, escalate, HOSPITAL } from '../../app/person';
+import { coupleOf, currentView, setBirthPlan, askForInvites, shareBrief, revoke, escalate, HOSPITAL } from '../../app/person';
+import { siteById } from '../../core/booking';
 import { optionCards, relativeCard, type Relative } from '../../core/kernel';
 import { activeGrants } from '../../core/crypto/receipts';
 import { Enter, Listen, Toggle, Receipt, Step, KidFigure, go, useT, useN, IconShare, IconCheck } from '../kit';
@@ -196,14 +197,17 @@ export function Counsellor({ s, act, base }: { s: PersonState; act: Act; base: s
     <main class="page">
       <Enter k="counsellor">
         <div class="row"><Back to={base} /><span class="eyebrow">{t({ en: 'Your counsellor', ar: 'مستشارك الوراثي' })}</span></div>
-        <h1>{s.booking?.slot
+        <h1>{s.booking?.slot && s.booking.status === 'confirmed'
           ? t({ en: `You are booked for ${fmtSlot(s.booking.slot, 'en')}.`, ar: `حُجز موعدك في ${fmtSlot(s.booking.slot, 'ar')}.` })
           : t({ en: 'A genetic counsellor who already knows your result.', ar: 'مستشار وراثي يعرف نتيجتك مسبقاً.' })}</h1>
-        <p class="muted">{t({ en: 'Genetic Counselling Clinic, Corniche Hospital. The counsellor explains, answers, and supports whatever you decide.', ar: 'عيادة الاستشارة الوراثية، مستشفى الكورنيش. يشرح المستشار ويجيب عن أسئلتكما ويدعم أي قرار تتخذانه.' })}</p>
-        {!s.booking && (
-          <button class="btn primary full" onClick={() => act(st => requestBooking(st))}>{t({ en: 'Book a counselling appointment', ar: 'حجز موعد استشارة' })}</button>
-        )}
+        <p class="muted">{s.booking?.siteId && s.booking.status === 'confirmed'
+          ? t(siteById(s.booking.siteId)!.name)
+          : t({ en: 'The counsellor explains, answers, and supports whatever you decide. Choose the place, the format, the language and the time yourself.', ar: 'يشرح المستشار ويجيب عن أسئلتكما ويدعم أي قرار تتخذانه. اختاري بنفسكِ المكان والطريقة واللغة والموعد.', arM: 'يشرح المستشار ويجيب عن أسئلتكما ويدعم أي قرار تتخذانه. اختر بنفسك المكان والطريقة واللغة والموعد.' })}</p>
+        <button class={`btn ${s.booking?.status === 'confirmed' ? 'calm' : 'primary'} full`} onClick={() => go(`${base}/book`)}>
+          {s.booking?.status === 'confirmed' ? t({ en: 'See or change my appointment', ar: 'عرض الموعد أو تغييره' }) : t({ en: 'Book a counselling appointment', ar: 'حجز موعد استشارة' })}
+        </button>
         {s.booking?.status === 'requested' && <p class="chip indigo">{t({ en: 'Request sent. The clinic will confirm a time.', ar: 'أُرسل الطلب، وستؤكد العيادة الموعد.' })}</p>}
+        <button class="btn calm full" onClick={() => go(`${base}/summary`)}>{t({ en: 'Summary for my clinician', ar: 'ملخص لطبيبي' })}</button>
 
         <div class="thread">
           {ORDER.map((x, i) => (

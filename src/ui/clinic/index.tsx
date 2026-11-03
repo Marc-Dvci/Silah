@@ -1,8 +1,12 @@
 import { useMemo, useState } from 'preact/hooks';
 import { useClinic } from '../hooks';
 import { PATH, pathOwner, counsellorAdvance, markEscalationSeen, recordNewborn, referralKpi, sendOutreach, urgency, OUTREACH_REGISTER, type Case, type ClinicState, type Referral } from '../../app/clinic';
+import { counsellorById, counsellorLabel, siteById, SITES } from '../../core/booking';
+import { exportSummaryFhir } from '../../core/fhir';
+import { SummaryDoc } from '../summary';
+import { downloadText } from '../person/book';
 import type { PathState } from '../../app/person';
-import { conditionFor } from '../../core/conditions';
+import { conditionById, conditionFor } from '../../core/conditions';
 import { linkable } from '../../core/crypto/invites';
 import { personaById } from '../../app/demo';
 import { LangCtx, Mark, Step, go, Enter } from '../kit';
@@ -10,6 +14,7 @@ import { Population } from './population';
 
 const NAV = [
   { k: 'queue', label: 'Counselling queue', sub: 'Sorted by urgency' },
+  { k: 'appointments', label: 'Appointments', sub: 'Booked from phones' },
   { k: 'outreach', label: 'Outreach', sub: 'Married before the mandate' },
   { k: 'births', label: 'Birth plans', sub: 'Delivery hospital' },
   { k: 'invites', label: 'Family invitations', sub: 'Blind-signed' },
@@ -40,6 +45,7 @@ export function ClinicApp({ page, sub }: { page?: string; sub?: string }) {
             : p === 'births' ? <Births c={c} act={act} />
             : p === 'invites' ? <Invites c={c} />
             : p === 'pathway' ? <Pathway c={c} />
+            : p === 'appointments' ? <Appointments c={c} />
             : <Queue c={c} act={act} sel={sub} />}
         </main>
       </div>
@@ -57,12 +63,14 @@ const FLAG_LABEL: Record<string, string> = {
   'distress': 'Distress', 'asked-for-human': 'Asked for a call', 'pregnancy': 'Pregnant', 'planning': 'Planning a pregnancy',
   'wedding-date': 'Wedding date set', 'vus': 'Uncertain variant', 'birth-plan': 'Birth plan',
   'newborn-treatment': 'Newborn in treatment', 'consent-withdrawn': 'Consent withdrawn',
+  'summary': 'Summary sent', 'specialist': 'Specialist first',
 };
-const flagTone = (f: string) => f === 'distress' ? 'madder' : f === 'birth-plan' ? 'palm' : f === 'pregnancy' || f === 'asked-for-human' ? 'saffron' : 'indigo';
+const flagTone = (f: string) => f === 'distress' ? 'madder' : f === 'birth-plan' || f === 'summary' ? 'palm' : f === 'pregnancy' || f === 'asked-for-human' ? 'saffron' : 'indigo';
+const ORIGIN_LABEL: Record<string, string> = { 'uploaded-pdf': 'PDF report', 'uploaded-fhir': 'FHIR file', 'uploaded-file': 'result file', manual: 'typed in', 'lab-signed': 'lab-signed file' };
 const days = (iso: string) => Math.round((Date.now() - new Date(iso).getTime()) / 864e5);
 
 function Queue({ c, act, sel }: { c: ClinicState; act: Act; sel?: string }) {
-  const list = useMemo(() => [...c.cases].filter(k => k.status === 'at-risk').sort((a, b) => urgency(b, c.births) - urgency(a, c.births)), [c]);
+  const list = useMemo(() => [...c.cases].filter(k => k.status === 'at-risk' || k.source === 'self-upload').sort((a, b) => urgency(b, c.births) - urgency(a, c.births)), [c]);
   const selected = list.find(k => k.id === sel) ?? list[0];
   return (
     <Enter k="queue">
@@ -79,7 +87,7 @@ function Queue({ c, act, sel }: { c: ClinicState; act: Act; sel?: string }) {
           {list.map(k => (
             <button key={k.id} class={`queue-row ${selected?.id === k.id ? 'sel' : ''}`} onClick={() => go(`c/queue/${k.id}`)}>
               <div class="stack" style={{ '--gap': '6px' } as any}>
-                <div class="row" style={{ gap: '8px' }}><b>{k.names.join(' & ')}</b><span class="tiny muted num">{k.id}{k.demo ? ' · demo' : ''}</span></div>
+                <div class="row" style={{ gap: '8px' }}><b>{k.names.join(' & ')}</b><span class="tiny muted num">{k.id}{k.demo ? ' · demo' : ''}{k.source === 'self-upload' ? ' · self-referred' : ''}</span></div>
                 <div class="row wrap" style={{ gap: '5px' }}>
                   {k.genes.map(g => <span key={g} class="chip saffron num">{g}</span>)}
                   {k.flags.slice(0, 3).map(f => <span key={f} class={`chip ${flagTone(f)}`}>{FLAG_LABEL[f] ?? f}</span>)}
@@ -142,11 +150,12 @@ const MISSED: Record<string, string> = {
   zero: 'that “compatible” is not zero chance',
   all: 'what the panel does not test',
   cousins: 'the added background chance for cousins',
+  miss: 'that a test can miss a change',
 };
 
 /** The pre-visit brief. Built deterministically from the lab section and what the couple chose to share. */
 function Brief({ k, c, act }: { k: Case; c: ClinicState; act: Act }) {
-  const conds = k.genes.map(g => conditionFor(g));
+  const conds = k.genes.map((g, i) => (k.conditionIds?.[i] && conditionById(k.conditionIds[i])) || conditionFor(g));
   const birth = c.births.find(b => b.coupleId === k.id && b.active);
   const weeks = k.due ? Math.round((new Date(k.due).getTime() - Date.now()) / (7 * 864e5)) : null;
   const agenda: string[] = [];
@@ -160,7 +169,10 @@ function Brief({ k, c, act }: { k: Case; c: ClinicState; act: Act }) {
     if (b.questions.some(q => q.route === 'religion')) agenda.push(`${who} asked a religious question; offer to involve a scholar of their choice.`);
   }
   if (k.flags.includes('vus')) agenda.push('A variant of uncertain significance is involved; confirm before discussing reproductive options.');
-  if (!k.briefs.length) agenda.push('The couple has not shared a summary from Silah. Start from understanding.');
+  if (k.source === 'self-upload') agenda.push(`The result was entered by the person (${ORIGIN_LABEL[k.origin ?? 'manual'] ?? k.origin}), not received from the lab: check the original report before relying on any figure.`);
+  const appt = (c.appointments ?? []).filter(a => a.coupleId === k.id && a.status === 'booked').at(-1);
+  if (appt) agenda.push(`Booked: ${new Date(appt.start).toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Dubai' })}, ${siteById(appt.siteId)?.name.en ?? appt.siteId}, ${appt.format}, ${appt.lang === 'ar' ? 'Arabic' : 'English'}.`);
+  if (!k.briefs.length && !k.summaries?.length) agenda.push('The couple has not shared a summary from Silah. Start from understanding.');
 
   const next: { label: string; to: PathState; extra?: { referral?: Referral; note?: string; closeReason?: string } }[] = [];
   const at = PATH.indexOf(k.state);
@@ -176,7 +188,7 @@ function Brief({ k, c, act }: { k: Case; c: ClinicState; act: Act }) {
   return (
     <div class="pool stack" style={{ '--gap': '16px', position: 'sticky', top: '20px' } as any}>
       <div>
-        <p class="eyebrow">Pre-visit brief · {k.source === 'egp-recheck' ? 'EGP couple re-check' : 'Premarital 2026'}</p>
+        <p class="eyebrow">Pre-visit brief · {k.source === 'egp-recheck' ? 'EGP couple re-check' : k.source === 'self-upload' ? `Self-referred · result from ${ORIGIN_LABEL[k.origin ?? 'manual'] ?? 'the person'}` : 'Premarital 2026'}</p>
         <h2>{k.names.join(' & ')}</h2>
         <p class="small muted num">{k.id} · waiting {days(k.createdAt)} days</p>
       </div>
@@ -201,6 +213,7 @@ function Brief({ k, c, act }: { k: Case; c: ClinicState; act: Act }) {
           <p class="small muted">Language: {b.lang === 'ar' ? 'Arabic' : 'English'} · sharing: {b.sharing.map(s => s.kind + (s.gene ? ` ${s.gene}` : '')).join(', ') || 'none'}</p>
         </div>
       ))}
+      {(k.summaries ?? []).map(x => <ReceivedSummary key={x.personId} x={x} />)}
       {k.referral && <p class="small">Referral: <b>{k.referral}</b>{k.closeReason ? ` · ${k.closeReason}` : ''}</p>}
       <div class="row wrap">
         {next.map(n => <button key={n.label} class={`btn ${n.to === 'closed' || n.label.startsWith('Mark') ? 'primary' : 'calm'}`} style={{ padding: '10px 16px', fontSize: '14px' }} onClick={() => act(st => counsellorAdvance(st, k.id, n.to, n.extra))}>{n.label}</button>)}
@@ -365,6 +378,65 @@ function Pathway({ c }: { c: ClinicState }) {
           <p class="row small"><span class="grow">Birth plans active</span><span class="num">{suppress(c.births.filter(b => b.active).length)}</span></p>
         </div>
       </div>
+    </Enter>
+  );
+}
+
+/** A pre-counselling summary the person sent from their phone. */
+function ReceivedSummary({ x }: { x: NonNullable<Case['summaries']>[number] }) {
+  const [open, setOpen] = useState(false);
+  const when = new Date(x.at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  return (
+    <div class="stack" style={{ '--gap': '6px' } as any}>
+      <p class="eyebrow">Summary sent by {x.summary.patient.name} · {when}</p>
+      <p class="small">{x.summary.source.verified ? 'Lab-signed result, verified on the phone.' : 'Entered by the person from their report.'} {x.summary.understanding ? `Teach-back ${x.summary.understanding.correct}/${x.summary.understanding.total}.` : ''} {x.summary.questions.length} questions.{x.summary.aiSummary ? ' Includes a checked plain-language paragraph.' : ''}</p>
+      <div class="row wrap">
+        <button class="btn calm" style={{ padding: '8px 14px', fontSize: '14px' }} onClick={() => setOpen(!open)}>{open ? 'Hide summary' : 'Read summary'}</button>
+        <button class="btn calm" style={{ padding: '8px 14px', fontSize: '14px' }} onClick={() => downloadText(`summary-${x.summary.patient.name.replace(/\W+/g, '-')}.fhir.json`, JSON.stringify(exportSummaryFhir(x.summary), null, 2), 'application/fhir+json')}>FHIR</button>
+      </div>
+      {open && <div style={{ maxHeight: '520px', overflow: 'auto', borderRadius: '14px' }}><SummaryDoc x={x.summary} /></div>}
+    </div>
+  );
+}
+
+/** Appointments booked directly from phones, by site, soonest first. */
+function Appointments({ c }: { c: ClinicState }) {
+  const now = Date.now();
+  const list = (c.appointments ?? []).filter(a => new Date(a.start).getTime() > now - 864e5).sort((a, b) => a.start.localeCompare(b.start));
+  const when = (iso: string) => new Date(iso).toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Dubai' });
+  return (
+    <Enter k="appointments">
+      <p class="eyebrow">Genetic counselling · DoH Premarital Screening Standard, Appendix 13 sites</p>
+      <h1>Appointments booked from phones</h1>
+      <p class="muted" style={{ maxWidth: '760px' }}>People choose the place, format, language and time on their phone. Slots held for urgent cases (pregnancy, distress, a near wedding) are shown only to them. The timetable in this demo is simulated.</p>
+      {list.length === 0 && <p class="muted">No appointments yet. Book one from a phone.</p>}
+      {SITES.map(site => {
+        const here = list.filter(a => a.siteId === site.id);
+        if (!here.length) return null;
+        return (
+          <section key={site.id} class="stack" style={{ '--gap': '4px', marginTop: '18px' } as any}>
+            <h3>{site.name.en}</h3>
+            {here.map(a => {
+              const k = c.cases.find(x => x.id === a.coupleId);
+              const cs = counsellorById(a.counsellorId);
+              return (
+                <div key={a.slotId + a.at} class="queue-row" style={{ cursor: k ? 'pointer' : 'default', opacity: a.status === 'cancelled' ? .5 : 1 }} onClick={() => k && go(`c/queue/${k.id}`)}>
+                  <div class="stack" style={{ '--gap': '4px' } as any}>
+                    <div class="row wrap" style={{ gap: '8px' }}><b class="num">{when(a.start)}</b><span>{k ? k.names.join(' & ') : a.name}</span>{a.status === 'cancelled' && <span class="chip">Cancelled</span>}</div>
+                    <div class="row wrap" style={{ gap: '5px' }}>
+                      <span class="chip">{a.format}</span><span class="chip">{a.lang === 'ar' ? 'Arabic' : 'English'}</span>
+                      {cs && <span class="chip">{counsellorLabel(cs).en}</span>}
+                      {a.urgent && <span class="chip saffron">Urgent slot</span>}
+                      {a.withSummary && <span class="chip palm">Summary attached</span>}
+                      {k?.genes.map(g => <span key={g} class="chip saffron num">{g}</span>)}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </section>
+        );
+      })}
     </Enter>
   );
 }

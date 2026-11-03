@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks';
 import type { PersonState } from '../../app/person';
-import { currentView, respondToInvitation, coupleOf } from '../../app/person';
+import { currentView, respondToInvitation, coupleOf, isOwn, nameOf, partnerDisplay } from '../../app/person';
 import { personaById } from '../../app/demo';
 import { Enter, Step, go, useT, Receipt, Mark } from '../kit';
 
@@ -10,9 +10,10 @@ export function Home({ s, act, base }: { s: PersonState; act: Act; base: string 
   const t = useT();
   const me = personaById(s.id);
   const view = currentView(s);
-  const name = me ? t(me.name) : '';
+  const name = me ? t(me.name) : nameOf(s);
 
   if (s.invitation?.status === 'pending') return <Invitation s={s} act={act} />;
+  if (!view && isOwn(s.id)) return <OwnLanding s={s} />;
 
   if (!view) {
     return (
@@ -72,12 +73,20 @@ export function Home({ s, act, base }: { s: PersonState; act: Act; base: string 
       sub: t({ en: 'Invite relatives to test, without saying it came from you.', ar: 'ادعي أقاربك للفحص دون أن تذكري أن الدعوة منك.', arM: 'ادعُ أقاربك للفحص دون أن تذكر أن الدعوة منك.' }),
       to: 'family',
     },
+    ...(isOwn(s.id) ? [{
+      key: 'partner', done: !!s.pairing?.partner && !s.pairing.ended,
+      title: t({ en: 'Your partner', ar: 'الطرف الآخر' }),
+      sub: s.pairing?.partner && !s.pairing.ended
+        ? t({ en: `Linked with ${s.pairing.partner.name || 'your partner'}. Share what you choose, live.`, ar: `مرتبط بهاتف ${s.pairing.partner.name || 'الطرف الآخر'}. وما تختارين مشاركته يصل فوراً.`, arM: `مرتبط بهاتف ${s.pairing.partner.name || 'الطرف الآخر'}. وما تختار مشاركته يصل فوراً.` })
+        : t({ en: 'Link your phones to share findings you choose, and stop at any time.', ar: 'اربطي الهاتفين لمشاركة النتائج التي تختارينها، ويمكنكِ التوقف في أي وقت.', arM: 'اربط الهاتفين لمشاركة النتائج التي تختارها، ويمكنك التوقف في أي وقت.' }),
+      to: 'partner',
+    }] : []),
     {
       key: 'counsellor', done: s.booking?.status === 'confirmed' || has('counselled'),
       title: t({ en: 'Your counsellor', ar: 'مستشارك الوراثي' }),
-      sub: s.booking?.slot
+      sub: s.booking?.slot && s.booking.status === 'confirmed'
         ? t({ en: `Booked: ${fmtSlot(s.booking.slot, 'en')}`, ar: `موعدك: ${fmtSlot(s.booking.slot, 'ar')}` })
-        : t({ en: 'A person who already knows your result.', ar: 'شخص يعرف نتيجتك مسبقاً.' }),
+        : t({ en: 'Choose a time, and send a summary so they can prepare.', ar: 'اختاري موعداً، وأرسلي ملخصاً ليستعد المستشار.', arM: 'اختر موعداً، وأرسل ملخصاً ليستعد المستشار.' }),
       to: 'counsellor',
     },
   ];
@@ -102,9 +111,26 @@ export function Home({ s, act, base }: { s: PersonState; act: Act; base: string 
 }
 
 export function partnerName(s: PersonState, lang: 'en' | 'ar' = 'en'): string {
-  const c = coupleOf(s.id);
-  const pid = c ? (c.a === s.id ? c.b : c.a) : undefined;
-  return pid ? personaById(pid)!.name[lang] : '';
+  return partnerDisplay(s, lang);
+}
+
+/** Someone who brought their own result, before it is entered. */
+function OwnLanding({ s }: { s: PersonState }) {
+  const t = useT();
+  const paired = s.pairing && !s.pairing.ended;
+  return (
+    <main class="page">
+      <Enter k="own">
+        <p class="eyebrow">{t({ en: 'Your own result', ar: 'نتيجتك أنت' })}</p>
+        <h1>{t({ en: 'Silah can read your own premarital genetic result.', ar: 'يستطيع تطبيق صلة قراءة نتيجة فحصك الجيني قبل الزواج.' })}</h1>
+        <p class="muted">{t({ en: 'Bring the PDF report, a result file, or type it in. It is read on this phone and kept here, encrypted. Then Silah explains it, checks understanding, books counselling and prepares a summary for your clinician.', ar: 'أحضِري تقرير PDF أو ملف النتيجة، أو أدخليها يدوياً. تُقرأ على هذا الهاتف وتُحفظ فيه مشفّرة. ثم يشرحها تطبيق صلة، ويتحقق من الفهم، ويحجز موعد الاستشارة، ويُعدّ ملخصاً لطبيبكِ.', arM: 'أحضِر تقرير PDF أو ملف النتيجة، أو أدخلها يدوياً. تُقرأ على هذا الهاتف وتُحفظ فيه مشفّرة. ثم يشرحها تطبيق صلة، ويتحقق من الفهم، ويحجز موعد الاستشارة، ويُعدّ ملخصاً لطبيبك.' })}</p>
+        {paired && <p class="chip palm">{t({ en: 'Your phone is linked with your partner’s.', ar: 'هاتفك مرتبط بهاتف الطرف الآخر.' })}</p>}
+        <button class="btn primary full" onClick={() => go(`p/${s.id}/import`)}>{t({ en: 'Add my result', ar: 'إضافة نتيجتي' })}</button>
+        <p class="tiny muted">{t({ en: 'No report to hand? The next screen has fictional samples.', ar: 'لا يتوفر تقرير؟ تجد نماذج افتراضية في الشاشة التالية.' })}</p>
+        <div style={{ opacity: .3, display: 'flex', justifyContent: 'center', paddingTop: '24px' }}><Mark size={110} /></div>
+      </Enter>
+    </main>
+  );
 }
 
 export function fmtSlot(iso: string, lang: 'en' | 'ar'): string {

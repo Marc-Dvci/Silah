@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite';
 import preact from '@preact/preset-vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import { readFileSync } from 'node:fs';
 
-// The built app may talk only to itself, to a language model on this computer, and to the model host
-// (only if the person asks for the on-device model). Nothing else can receive data.
+// The relay that carries paired phones' encrypted messages and the opt-in explanation service (relay/).
+const RELAY = new URL(process.env.VITE_RELAY_URL ?? JSON.parse(readFileSync('src/app/relay-url.json', 'utf8')).url).origin;
+
+// The built app may talk only to itself, to a language model on this computer, to the model host (only if the
+// person asks for the on-device model) and to the relay (only once paired, or if the person asks for the
+// explanation service). Nothing else can receive data.
 const CSP = [
   "default-src 'self'",
   "script-src 'self' 'wasm-unsafe-eval'",
@@ -11,7 +16,7 @@ const CSP = [
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
   "media-src 'self' blob:",
-  "connect-src 'self' http://127.0.0.1:8080 http://localhost:8080 https://huggingface.co https://*.huggingface.co https://*.hf.co",
+  `connect-src 'self' http://127.0.0.1:8080 http://localhost:8080 https://huggingface.co https://*.huggingface.co https://*.hf.co ${RELAY}`,
   "worker-src 'self' blob:",
   "frame-src 'self'",
   "object-src 'none'",
@@ -53,7 +58,7 @@ export default defineConfig({
       workbox: {
         // The app shell, fonts and pre-rendered audio work offline. The ONNX runtime and the model are
         // fetched only if someone asks for the on-device model, and are then cached by Transformers.js.
-        globPatterns: ['**/*.{js,css,html,svg,png,woff2,mp3}'],
+        globPatterns: ['**/*.{js,mjs,css,html,svg,png,woff2,mp3,pdf,json}'],
         globIgnores: ['**/ort-*.{js,mjs}', '**/transformers*.js'],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
         navigateFallback: 'index.html',

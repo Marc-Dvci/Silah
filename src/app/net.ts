@@ -21,7 +21,11 @@ export type MsgKind =
   | 'escalate'                 // person → clinic: a hard route or the person asked for a human
   | 'escalate.received'        // clinic → person: the request reached the clinic's list
   | 'escalate.seen'            // clinic → person: a counsellor marked it seen
-  | 'booking'                  // person → clinic: counselling appointment request
+  | 'booking'                  // person → clinic: counselling appointment, with the chosen slot when booked directly
+  | 'booking.cancel'           // person → clinic: free the slot
+  | 'booking.declined'         // clinic → person: the slot was taken meanwhile
+  | 'summary.packet'           // person → clinic: the pre-counselling summary, with consent
+  | 'summary.revoke'           // person → clinic: delete it
   | 'pathway.update';          // clinic → person
 
 export interface Msg<B = unknown> { id: string; kind: MsgKind; from: string; to: string; at: string; body: B; done?: boolean }

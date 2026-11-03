@@ -34,6 +34,7 @@ function short(id: string, ar = false): string {
   const fixed: Record<string, string> = {
     'assumption-carrier': ar ? 'نسبة حاملين مفترضة' : 'assumed frequency',
     'assumption-detection': ar ? 'نسبة الكشف غير مذكورة' : 'detection not stated',
+    'report-detection': ar ? 'نسبة الكشف من تقريرك' : 'detection from your report',
     'lab-detection': ar ? 'نسبة الكشف من المختبر (محاكاة)' : 'lab-stated detection (simulated)',
     'medlineplus-ar': 'MedlinePlus', 'medlineplus-bthal': 'MedlinePlus', 'cdc-birth-defects-1-in-33': 'CDC',
     'nhs-cvs': 'NHS · CVS', 'nhs-amniocentesis': 'NHS · amniocentesis',

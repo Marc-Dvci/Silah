@@ -1,0 +1,22 @@
+SAMPLE: fictional person, not a real result
+Al Waha Genomics Laboratory (fictional)
+Premarital Genetic Screening Report
+Patient name: Noor Hamdan (sample)
+Sex: Female
+Date of birth: 2001-11-30
+Report date: 2026-09-08
+Test: Premarital genetic screening, DoH panel (Premarital Screening Standard V3, Appendix 12), 563 genes
+Partner: Hamad Obaid (sample)
+Declared relationship: Not related
+Results: variants reported
+Gene Variant (HGVS) Protein Zygosity Classification Associated condition
+CYP21A2 NM_000500.9:c.293-13C>G IVS2-13 Heterozygous Pathogenic Congenital adrenal hyperplasia
+Couple analysis
+Couple status: COMPATIBLE
+Certificate wording: No risk for either the other partner or children to be carrier or diseased
+Your partner was tested for your carrier variants and none was found in: CYP21A2
+Methods and limitations
+This test does not detect all genetic disorders.
+Reported by: Dr. Sample Geneticist (fictional)
+SAMPLE
+Fictional sample for the Silah demo. No real person, laboratory or result.

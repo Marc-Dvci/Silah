@@ -19,12 +19,18 @@
 | **Someone else holding the phone** | Reading results at a glance | Data is encrypted at rest; "hide screen" shows a blank page with one tap. |
 | **A forged or altered result** | Being shown as genuine | Results are Ed25519-signed by the lab and verified on the phone before anything is displayed. |
 | **A tampered consent history** | Going unnoticed | Receipts are signed and hash-chained; any edit breaks the chain and the app says so. |
+| **The relay** (paired phones) | Reading what partners share, or moving a message between pairings | Messages are AES-256-GCM encrypted on the phone; the key travels only in the link's #fragment, never to the server. The room id is the additional authenticated data, so a message replayed into another room fails to decrypt. The relay sees ciphertext, a random in-room sender id and times; it deletes a room when either partner ends the link, and after 30 days in any case. |
+| **Someone who sees the pairing link** | Joining the pairing | The link is the key, like a door key: it is shown as a QR code to the partner in person or sent by the person. Joining shows on the other phone ("Linked with …"), and ending the link deletes the room. |
+| **The explanation service** (opt-in) | Learning who the result belongs to | It receives the result's fact cards with the person's and partner's names replaced, and the request is not logged or stored. It cannot change what the person sees: the verifier runs on the phone. |
+| **A misleading report or file** | Being treated as a lab result | Only a Silah file signed by a trusted lab key is "verified". A PDF, FHIR file or typed entry is labelled "entered by you" on the phone, in the summary and in the clinic case, and genes off the DoH panel are ignored. |
 
 ## What is not protected, stated plainly
 
 - **The lab and the signing physician see everything.** That is how the premarital programme works under the DoH standard. Silah protects people from each other and from services that do not need their full result, not from the lab.
 - **Browser storage is not a hardware keystore.** The vault key is a non-extractable WebCrypto key. A native build would use the Android Keystore.
 - **Timing and small families.** If a family is small and an invitation arrives right after a known event, people can guess the sender. The cryptography hides the sender from the clinic, not from family logic.
+- **What a partner shares is their word, not the lab's.** A finding sent from a paired phone is shown as the partner's statement; it does not enter the couple's numbers.
+- **A model's sentence can pass the verifier and still mislead in meaning.** The fixed text is under every sentence and on the same page (see [`RESPONSIBLE_AI.md`](RESPONSIBLE_AI.md)).
 - **The demo runs every party in one browser**, so messages pass through shared browser storage. In a deployment each party is a separate device or service; every message is already self-contained and signed, or blinded.
 - **Truncation.** A hash chain shows edits, not a deleted tail of entries. A deployment would anchor the latest receipt hash with the clinic.
 

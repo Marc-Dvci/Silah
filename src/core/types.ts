@@ -89,7 +89,8 @@ export type CardKind =
   | 'option'           // a reproductive option offered by the programme
   | 'relative'         // a relative's chance of carrying the same variant
   | 'carrier'          // what being a carrier means
-  | 'vus';             // a variant of uncertain significance
+  | 'vus'              // a variant of uncertain significance
+  | 'uncertainty';     // what is uncertain: detection, the range it gives, assumed frequencies, report reading
 
 /** The only facts the language model may use. Every number shown anywhere comes from a card. */
 export interface FactCard {

@@ -1,6 +1,10 @@
 import { useEffect } from 'preact/hooks';
 import { usePerson } from '../hooks';
-import { currentView } from '../../app/person';
+import { currentView, isOwn } from '../../app/person';
+import { Import } from './import';
+import { Book } from './book';
+import { Partner } from './partner';
+import { Clinician } from './clinician';
 import { personaById } from '../../app/demo';
 import { PersonShell } from './shell';
 import { Home } from './home';
@@ -19,16 +23,20 @@ export function PersonApp({ id, page, focus }: { id: string; page?: string; focu
     const t = setTimeout(() => document.getElementById(`focus-${focus}`)?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 450);
     return () => clearTimeout(t);
   }, [id, page, focus, loaded]);
-  if (!personaById(id)) return <p style={{ padding: '24px' }}>Unknown person.</p>;
+  if (!personaById(id) && !isOwn(id)) return <p style={{ padding: '24px' }}>Unknown person.</p>;
   if (!s) return <div class="phone" style={{ alignItems: 'center', justifyContent: 'center' }}><Mark size={64} /></div>;
   const base = `p/${id}`;
   const hasResult = !!currentView(s);
-  const needResult = ['result', 'check', 'options', 'birth', 'family', 'counsellor'];
-  const p = page && needResult.includes(page) && !hasResult ? undefined : page;
+  const needResult = ['result', 'check', 'options', 'birth', 'family', 'counsellor', 'book', 'summary'];
+  const p = page && needResult.includes(page) && !hasResult ? (isOwn(id) ? 'import' : undefined) : page;
   const props = { s, act, base };
   return (
-    <PersonShell s={s} act={act} base={base} showAsk={p !== 'ask' && hasResult}>
-      {p === 'result' ? <Result {...props} />
+    <PersonShell s={s} act={act} base={base} showAsk={p !== 'ask' && p !== 'import' && hasResult}>
+      {p === 'import' ? <Import {...props} />
+        : p === 'book' ? <Book {...props} />
+        : p === 'partner' ? <Partner {...props} />
+        : p === 'summary' ? <Clinician {...props} />
+        : p === 'result' ? <Result {...props} />
         : p === 'check' ? <Check {...props} />
         : p === 'options' ? <Options {...props} />
         : p === 'birth' ? <BirthPlan {...props} />

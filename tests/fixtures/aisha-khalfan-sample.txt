@@ -1,0 +1,28 @@
+SAMPLE: fictional person, not a real result
+Al Waha Genomics Laboratory (fictional)
+Premarital Genetic Screening Report
+Patient name: Aisha Khalfan (sample)
+Sex: Female
+Date of birth: 1999-03-14
+Report date: 2026-10-20
+Test: Premarital genetic screening, DoH panel (Premarital Screening Standard V3, Appendix 12), 563 genes
+Partner: Rashid Khalfan (sample)
+Declared relationship: First cousins
+Results: variants reported
+Gene Variant (HGVS) Protein Zygosity Classification Associated condition
+HBB NM_000518.5:c.20A>T p.Glu7Val (HbS) Heterozygous Pathogenic Sickle cell disease
+GJB2 NM_004004.6:c.35delG p.Gly12fs Heterozygous Pathogenic Nonsyndromic hearing loss
+MEFV NM_000243.3:c.442G>C p.Glu148Gln Heterozygous Uncertain significance (VUS) Familial Mediterranean fever
+Couple analysis
+Couple status: AT RISK (not compatible)
+Both partners carry a pathogenic variant in: HBB
+Partner's variant in the shared gene: HBB c.92+5G>C (beta-plus thalassaemia)
+Your partner was tested for your other carrier variants and none was found in: GJB2
+Methods and limitations
+Analytical sensitivity: the panel detects 95% of disease-causing single-nucleotide variants and small insertions or deletions in the
+panel genes.
+Targeted analysis of the partner's sample for your familial variant: 99% sensitivity.
+This test does not detect all genetic disorders. A negative result reduces but does not remove the chance of being a carrier.
+Reported by: Dr. Sample Geneticist (fictional)
+SAMPLE
+Fictional sample for the Silah demo. No real person, laboratory or result.

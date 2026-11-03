@@ -4,7 +4,9 @@ import { currentView, recordQuestion, escalate, escalationRef } from '../../app/
 import { route } from '../../core/routes';
 import { INTENTS, matchIntent, answerFrom } from '../../core/faq';
 import type { FactCard, L10n } from '../../core/types';
-import { askModel, detectLocalServer, localServer, quoteCards, webgpuBackend, type Backend } from '../../llm/answer';
+import { askModel, detectLocalServer, quoteCards, type Backend } from '../../llm/answer';
+import { getBackend, backendKind, useComputer as pickComputer, useDevice as pickDevice, useService as pickService } from '../../llm/backends';
+import { nameOf, partnerDisplay } from '../../app/person';
 import { Enter, Listen, go, useT, IconSpark } from '../kit';
 import { Back } from './shell';
 import { SourceChips } from './sources';
@@ -23,9 +25,8 @@ interface Turn {
   via: 'faq' | 'model' | 'route' | 'none';
 }
 
-let sharedBackend: Backend | null = null;   // survives navigation within the session
-
 export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }) {
+  let sharedBackend: Backend | null = getBackend();   // chosen once per session, shared with "Explain in plain words"
   const t = useT();
   const view = currentView(s);
   const cards = view?.cards ?? [];
@@ -61,9 +62,17 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
         turn = { q: question, lead: intent.lead, cards: a.cards, via: 'faq' };
       } else if (backend && view) {
         try {
-          const res = await askModel(backend, question, cards, s.lang);
+          // The explanation service never receives a name: the question goes as typed, the cards with names replaced.
+          const named = backendKind() === 'service' ? [nameOf(s), partnerDisplay(s), partnerDisplay(s, 'ar')] : [];
+          const strip = (c: FactCard): FactCard => ({ ...c, text: { ...c.text, en: named.reduce((x, n) => (n ? x.split(n).join('your partner') : x), c.text.en), ar: named.reduce((x, n) => (n ? x.split(n).join('الطرف الآخر') : x), c.text.ar) } });
+          const res = await askModel(backend, question, named.length ? cards.map(strip) : cards, s.lang);
           const picked = res.parsed ? quoteCards(res.parsed, cards) : [];
-          turn = picked.length ? { q: question, cards: picked, via: 'model' } : { q: question, none: true, via: 'none' };
+          // The model's own wording is shown where the verifier passed it; the cards it cites stay one tap away.
+          // If nothing passed, the person reads the cited cards in their fixed words.
+          const ok = res.verified?.shown ?? [];
+          turn = ok.length
+            ? { q: question, sentences: ok, cards: picked, via: 'model', blocked: res.verified?.blocked.length ?? 0 }
+            : picked.length ? { q: question, cards: picked, via: 'model' } : { q: question, none: true, via: 'none' };
         } catch {
           turn = { q: question, none: true, via: 'none' };
         }
@@ -76,10 +85,11 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
     setBusy(false);
   };
 
-  const useServer = () => { sharedBackend = localServer(); setBackend(sharedBackend); };
+  const useServer = () => { pickComputer(); sharedBackend = getBackend(); setBackend(sharedBackend); };
+  const useCloud = () => { pickService(); sharedBackend = getBackend(); setBackend(sharedBackend); };
   const useDevice = async () => {
     setLoading(0);
-    try { sharedBackend = await webgpuBackend(p => setLoading(p)); setBackend(sharedBackend); }
+    try { await pickDevice(p => setLoading(p)); sharedBackend = getBackend(); setBackend(sharedBackend); }
     catch (e) {
       console.error('on-device model failed to start', e);
       alertLine(t({ en: 'The model could not start on this device’s graphics. Common questions still work, and your counsellor can answer the rest.', ar: 'تعذّر تشغيل النموذج على معالج الرسوميات في هذا الجهاز. ما زالت الأسئلة الشائعة متاحة، ويستطيع المستشار الوراثي الإجابة عن غيرها.' }));
@@ -89,7 +99,6 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
   const [note, setNote] = useState('');
   const alertLine = (m: string) => setNote(m);
 
-  const byId = new Map([...cards].map(c => [c.id, c]));
   return (
     <main class="page" style={{ paddingBottom: '150px' }}>
       <Enter k="ask">
@@ -110,18 +119,25 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
               {x.routed?.urgent && <p class="row wrap"><a class="btn palm" href="tel:999">999</a><a class="btn palm" href="tel:998">998</a></p>}
               {x.routed?.ref && <EscalationStatus e={s.escalations?.find(e => e.ref === x.routed!.ref)} lang={s.lang} />}
               {x.lead && <p><b>{t(x.lead)}</b></p>}
-              {x.cards?.map(c => (
+              {x.sentences?.map((sn, j) => <p key={`s${j}`}>{sn.text}</p>)}
+              {x.sentences?.length ? (
+                <details>
+                  <summary class="tiny">{t({ en: 'Checked against this fixed text from your result', ar: 'تم التحقق منها مقابل هذا النص الثابت من نتيجتك' })}</summary>
+                  <div class="stack" style={{ '--gap': '6px', marginTop: '6px' } as any}>
+                    {x.cards?.map(c => <div key={c.id}><p class="small">{t(c.text)}</p><div class="row wrap" style={{ marginTop: '4px' }}><SourceChips ids={c.sources} /></div></div>)}
+                  </div>
+                </details>
+              ) : x.cards?.map(c => (
                 <div key={c.id}>
                   <p>{t(c.text)}</p>
                   <div class="row wrap" style={{ marginTop: '6px' }}><SourceChips ids={c.sources} /></div>
                 </div>
               ))}
-              {x.sentences?.map((sn, j) => (
-                <p key={j}>{sn.text}{sn.cards.map(id => <span class="cite" key={id}>{byId.get(id) ? id : 'counsellor'}</span>)}</p>
-              ))}
-              {x.none && <p>{t({ en: 'Silah does not have a checked answer to that. It has been added to the questions for your counsellor, who can answer it.', ar: 'لا يملك تطبيق صلة إجابة موثّقة عن ذلك، وقد أُضيف السؤال إلى قائمة أسئلتك للمستشار الوراثي الذي يستطيع الإجابة عنه.' })}</p>}
-              {x.via === 'model' && <p class="tiny muted"><IconSpark size={12} /> {t({ en: 'Chosen by the on-device model from your checked sentences. The wording is fixed; the model only chooses.', ar: 'اختارها النموذج على الجهاز من جملك الموثّقة. الصياغة ثابتة، والنموذج يختار فقط.' })}</p>}
-              {(x.cards?.length || x.sentences?.length) ? <div><Listen text={[x.lead ? t(x.lead) : '', ...(x.cards?.map(c => t(c.text)) ?? []), ...(x.sentences?.map(z => z.text) ?? [])].join(' ')} label={t({ en: 'Listen', ar: 'استماع' })} /></div> : null}
+              {x.none &&<p>{t({ en: 'Silah does not have a checked answer to that. It has been added to the questions for your counsellor, who can answer it.', ar: 'لا يملك تطبيق صلة إجابة موثّقة عن ذلك، وقد أُضيف السؤال إلى قائمة أسئلتك للمستشار الوراثي الذي يستطيع الإجابة عنه.' })}</p>}
+              {x.via === 'model' && (x.sentences?.length
+                ? <p class="tiny muted"><IconSpark size={12} /> {t({ en: `Written by ${backend?.model ?? 'the model'} and checked against your numbers before it was shown${x.blocked ? `; ${x.blocked} held back` : ''}.`, ar: `كتبه ${backend?.model ?? 'النموذج'}، وتم التحقق منه مقابل أرقامك قبل عرضه${x.blocked ? `، وعدد الجمل المحجوبة: ${x.blocked}` : ''}.` })}</p>
+                : <p class="tiny muted"><IconSpark size={12} /> {t({ en: 'The model’s own wording did not pass the checks, so these are the fixed sentences it pointed to.', ar: 'لم تجتز صياغة النموذج الفحص، لذلك هذه هي الجمل الثابتة التي أشار إليها.' })}</p>)}
+              {(x.cards?.length || x.sentences?.length) ? <div><Listen text={[x.lead ? t(x.lead) : '', ...(x.sentences?.length ? x.sentences.map(z => z.text) : (x.cards?.map(c => t(c.text)) ?? []))].join(' ')} label={t({ en: 'Listen', ar: 'استماع' })} /></div> : null}
             </div>
           </div>
         ))}
@@ -139,6 +155,7 @@ export function Ask({ s, act, base }: { s: PersonState; act: Act; base: string }
                 <button class="chip" disabled={loading !== null} onClick={useDevice}>
                   {loading !== null ? `${Math.round(loading * 100)}%` : t({ en: 'Download the on-device model (about 3 GB)', ar: 'تنزيل النموذج على الجهاز (نحو 3 غيغابايت)' })}
                 </button>
+                <button class="chip" onClick={useCloud}>{t({ en: 'Use Silah’s explanation service (no names sent)', ar: 'استخدام خدمة الشرح في صلة (دون إرسال الأسماء)' })}</button>
               </div>
               {note && <p class="tiny muted">{note}</p>}
             </>
