@@ -78,7 +78,7 @@ export function ExplainPanel({ s, act, audience = 'person' }: { s: PersonState; 
               <div key={i}>
                 <p>{x.text} <button class="cite" aria-expanded={open === i} onClick={() => setOpen(open === i ? null : i)} title={t({ en: 'Checked against', ar: 'تم التحقق مقابل' })}>{t({ en: 'source', ar: 'المصدر' })}</button></p>
                 {open === i && (
-                  <div class="receipt stack" style={{ '--gap': '6px', marginTop: '6px' } as any}>
+                  <div class="stack" style={{ '--gap': '6px', marginTop: '8px', paddingInlineStart: '12px', borderInlineStart: '3px solid var(--palm)' } as any}>
                     <p class="tiny"><b>{t({ en: 'Checked against this fixed text from your result:', ar: 'تم التحقق منها مقابل هذا النص الثابت من نتيجتك:' })}</b></p>
                     {x.cards.map(id => byId.get(id)).filter((c): c is FactCard => !!c).map(c => (
                       <div key={c.id}><p class="tiny">{t(c.text)}</p><div class="row wrap" style={{ marginTop: '4px' }}><SourceChips ids={c.sources} /></div></div>
