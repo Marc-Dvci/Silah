@@ -25,7 +25,9 @@ def check(cond, msg):
 
 def relay_up():
     try:
-        return json.load(urllib.request.urlopen(RELAY + '/v1/health', timeout=3)).get('ok')
+        # Cloudflare refuses Python's default user agent; browsers are unaffected.
+        req = urllib.request.Request(RELAY + '/v1/health', headers={'User-Agent': 'silah-e2e'})
+        return json.load(urllib.request.urlopen(req, timeout=5)).get('ok')
     except Exception:
         return False
 

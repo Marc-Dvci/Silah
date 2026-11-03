@@ -224,14 +224,13 @@ await check('DELETE empties the room', async () => {
   expect(after.json?.messages?.length === 0, `still ${after.json?.messages?.length} messages`);
 });
 
-await check('room accepts posts again after DELETE', async () => {
+await check('room stays closed after DELETE, and says so', async () => {
   const r = await postMessage(room, samples[0]);
-  expect(r.status === 200 && Number.isInteger(r.json?.seq), `status ${r.status}: ${r.text.slice(0, 120)}`);
-  const cleanup = await call('DELETE', `/v1/rooms/${room}`);
-  expect(cleanup.status === 200, `cleanup status ${cleanup.status}`);
+  expect(r.status === 410 && r.json?.error === 'closed', `status ${r.status}: ${r.text.slice(0, 120)}`);
+  const after = await call('GET', `/v1/rooms/${room}/messages?after=0`);
+  expect(after.json?.closed === true && after.json?.messages?.length === 0, `body ${after.text.slice(0, 120)}`);
 });
 
-// Explain input checks (no model call)
 await check('explain with oversized body rejected with 413', async () => {
   const body = JSON.stringify({ messages: [{ role: 'user', content: 'x'.repeat(25 * 1024) }] });
   expect(Buffer.byteLength(body) > 24 * 1024, 'test body is not over 24 KB');

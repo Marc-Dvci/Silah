@@ -82,19 +82,23 @@ with sync_playwright() as p:
     # Ask: a FAQ answer and a hard route
     goto('#/p/mariam/ask', 1200)
     pg.get_by_role('textbox').fill('إذا كان طفلنا الأول سليماً، هل يكون الثاني بأمان؟')
-    pg.get_by_role('button', name='إرسال').click(); pg.wait_for_timeout(1200)
+    pg.get_by_role('button', name='إرسال', exact=True).click(); pg.wait_for_timeout(1200)
     check(pg.get_by_text('الاحتمال نفسه في كل حمل').count() >= 1, 'FAQ answered from cards')
     pg.get_by_role('textbox').fill('هل يجوز فحص الأجنة؟')
-    pg.get_by_role('button', name='إرسال').click(); pg.wait_for_timeout(1200)
+    pg.get_by_role('button', name='إرسال', exact=True).click(); pg.wait_for_timeout(1200)
     check(pg.get_by_text('عالم دين تثقين به').count() == 1, 'religious question routed to a scholar (feminine form for Mariam)')
     shot('mariam_ask')
 
     # Counsellor: share brief, book
     goto('#/p/mariam/counsellor', 1500)
     pg.get_by_role('button', name='مشاركة هذا مع مستشاري').click(); pg.wait_for_timeout(800)
-    pg.get_by_role('button', name='حجز موعد استشارة').click(); pg.wait_for_timeout(4000)
+    pg.get_by_role('button', name='حجز موعد استشارة').click(); pg.wait_for_timeout(1200)
+    # Direct booking: the first free time at the first suggested place.
+    pg.locator('button.chip.num').first.click(); pg.wait_for_timeout(300)
+    pg.get_by_role('button', name='حجز هذا الموعد').click(); pg.wait_for_timeout(3000)
+    check(pg.get_by_text('تم الحجز', exact=False).count() >= 1, 'direct booking confirmed by the clinic')
     goto('#/p/mariam/counsellor', 2000)
-    check(pg.get_by_text('موعدك').count() >= 1, 'appointment confirmed by the clinic')
+    check(pg.get_by_text('موعدك').count() >= 1, 'appointment shown on the counsellor page')
     shot('mariam_counsellor')
 
     # Saeed shares his private CYP21A2 finding with Mariam
@@ -167,7 +171,7 @@ with sync_playwright() as p:
     # A request for a person: the phone never says more than the clinic has confirmed.
     goto('#/p/fatima/ask', 2500)
     pg.get_by_role('textbox').fill('لا أريد أن أعيش')
-    pg.get_by_role('button', name='إرسال').click(); pg.wait_for_timeout(1500)
+    pg.get_by_role('button', name='إرسال', exact=True).click(); pg.wait_for_timeout(1500)
     check(pg.get_by_text('999').count() >= 1 and pg.get_by_text('طلبنا من مستشار').count() == 0, 'distress reply gives 999 and 998 and does not claim a counsellor was reached')
     check(pg.get_by_text('ولم يطّلع عليه أي مستشار بعد').count() + pg.get_by_text('بانتظار وصوله إلى العيادة').count() == 1, 'the phone shows only what the clinic has confirmed')
     shot('fatima_distress')

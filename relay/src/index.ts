@@ -22,7 +22,7 @@ const RETENTION_MS = 30 * 24 * 60 * 60 * 1000;
 const MAX_EXPLAIN_BYTES = 24 * 1024;
 const MAX_EXPLAIN_MESSAGES = 6;
 const EXPLAIN_WINDOW_MS = 10 * 60 * 1000;
-const EXPLAIN_PER_WINDOW = 20;
+const EXPLAIN_PER_WINDOW = 40;
 const DEFAULT_MAX_TOKENS = 700;
 const MIN_MAX_TOKENS = 64;
 const MAX_MAX_TOKENS = 900;
@@ -162,6 +162,9 @@ function extractText(out: unknown): string | null {
   if (typeof out !== 'object' || out === null) return null;
   const response = (out as { response?: unknown }).response;
   if (typeof response === 'string') return response;
+  // Newer models answer in the OpenAI chat-completions shape.
+  const choice = (out as { choices?: { message?: { content?: unknown } }[] }).choices?.[0]?.message?.content;
+  if (typeof choice === 'string') return choice;
   if (response === undefined || response === null) return null;
   return JSON.stringify(response);
 }
@@ -214,6 +217,9 @@ async function handleExplain(request: Request, env: Env, cors: string | null): P
       messages: parsed.messages,
       max_tokens: parsed.maxTokens,
       temperature: 0.2,
+      // Gemma 4 thinks by default; the explanation needs only the answer.
+      chat_template_kwargs: { enable_thinking: false },
+      reasoning_effort: 'low',
     });
   } catch {
     return reply(502, { error: 'model' }, cors);

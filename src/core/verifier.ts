@@ -172,8 +172,10 @@ export function extractClaims(text: string): Claim[] {
     // each chance to its own clause. Whose chance it is comes first from the clause that named the outcome.
     // "finds about 95% of the disease-causing changes": a share of changes found, right after the verb that says so,
     // even though "disease" follows. Only a percentage or an "N in 100" share is read this way.
+    // "a 90% detection rate": the same share, named right after it.
     const near = back.slice(-40);
-    if (DETECTION_TERMS.test(near) && (f.pct !== undefined || f.parts[1] === 100) && !PER_PREGNANCY.test(fwdClause)) {
+    const nearAfter = fwdClause.slice(0, 22);
+    if ((DETECTION_TERMS.test(near) || DETECTION_TERMS.test(nearAfter)) && (f.pct !== undefined || f.parts[1] === 100) && !PER_PREGNANCY.test(fwdClause)) {
       return { text: f.text, value: f.value, parts: f.parts, pct: f.pct, outcome: 'detection' as Outcome, subject: 'any' as Subject };
     }
     let outcome: Outcome | null = null, from: string[] = [];

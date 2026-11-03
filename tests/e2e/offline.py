@@ -14,5 +14,14 @@ with sync_playwright() as p:
     ok = pg.get_by_text('Spinal muscular atrophy (SMA)').count() > 0
     pg.screenshot(path='D:/tmp/silah_shots/08_offline_result.png')
     print('offline result renders:', ok)
+    # A report read on the phone with the network off: the PDF reader and the sample reports are cached.
+    pg.goto(BASE + '#/p/me/import'); pg.wait_for_timeout(1500)
+    pg.locator('.pool.soft .link').first.click()
+    try:
+        pg.locator('input[aria-label="Gene"]').first.wait_for(timeout=15000)
+        ok2 = pg.locator('input[aria-label="Gene"]').count() == 3
+    except Exception:
+        ok2 = False
+    print('offline PDF report read on the phone:', ok2)
     b.close()
-    sys.exit(0 if ok else 1)
+    sys.exit(0 if ok and ok2 else 1)

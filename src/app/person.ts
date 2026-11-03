@@ -522,7 +522,10 @@ export async function startPairing(s: PersonState): Promise<PairSecret> {
   const p = newPairSecret();
   s.pairing = { ...p, me: newPairId(), role: 'host', since: new Date().toISOString(), after: 0, outbox: [] };
   receipt(s, 'consent', { kind: 'pairing', note: 'Paired with the partner’s phone' }, `pair:${p.room}`, 'messages you choose to send, end-to-end encrypted');
-  await pairSend(s, 'hello', { name: nameOf(s) });
+  // Saved before the network: the link shows at once, and the hello goes when the relay answers.
+  s.pairing.outbox.push({ kind: 'hello', body: { name: nameOf(s) }, at: new Date().toISOString() });
+  await savePerson(s);
+  await flushPairing(s);
   await savePerson(s);
   return p;
 }
@@ -533,7 +536,9 @@ export async function joinPairing(s: PersonState, token: string): Promise<boolea
   if (s.pairing?.room === p.room && !s.pairing.ended) return true;
   s.pairing = { ...p, me: newPairId(), role: 'guest', since: new Date().toISOString(), after: 0, outbox: [] };
   receipt(s, 'consent', { kind: 'pairing', note: 'Paired with the partner’s phone' }, `pair:${p.room}`, 'messages you choose to send, end-to-end encrypted');
-  await pairSend(s, 'hello', { name: nameOf(s) });
+  s.pairing.outbox.push({ kind: 'hello', body: { name: nameOf(s) }, at: new Date().toISOString() });
+  await savePerson(s);
+  await flushPairing(s);
   await savePerson(s);
   return true;
 }

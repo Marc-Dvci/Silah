@@ -87,6 +87,9 @@ describe('what is still uncertain', () => {
     expect(verifySentence({ text: `If the test finds 80% of changes, the chance is about 1 in 4 per pregnancy.`, cards: [r.id] }, byId).ok).toBe(false);
     expect(verifySentence({ text: `If the test finds 80% of changes, the chance is about ${formatOneIn(hi)} per pregnancy.`, cards: [r.id] }, byId).ok).toBe(true);
     expect(verifySentence({ text: 'The test finds about 70% of the changes.', cards: ['uncertainty:detection'] }, byId).ok).toBe(false);
+    // The share named after the number ("a 95% detection rate") is detection too, and a wrong one is still blocked.
+    expect(verifySentence({ text: 'Uncertainties include a 95% detection rate and assumed carrier frequencies of 1 in 1,000.', cards: ['uncertainty:detection', 'uncertainty:frequency'] }, byId).ok).toBe(true);
+    expect(verifySentence({ text: 'Uncertainties include a 75% detection rate.', cards: ['uncertainty:detection'] }, byId).ok).toBe(false);
   });
 
   it('adds no reading-of-the-report card to a lab-signed result', () => {

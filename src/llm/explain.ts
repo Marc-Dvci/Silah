@@ -118,7 +118,7 @@ export function shown(e: Explanation): ExplainedSentence[] {
 export function cloudBackend(base: string): Backend {
   return {
     name: 'the Silah explanation service (Gemma on Cloudflare Workers AI)',
-    model: 'Gemma 3 12B (Cloudflare Workers AI)',
+    model: 'Gemma 4 26B A4B (Cloudflare Workers AI)',
     async generate(messages, opts = {}) {
       const r = await fetch(`${base}/v1/explain`, {
         method: 'POST',
@@ -128,7 +128,6 @@ export function cloudBackend(base: string): Backend {
       });
       if (!r.ok) throw new Error(`service ${r.status}`);
       const j = await r.json();
-      if (j.model) this.model = String(j.model);
       return String(j.content ?? '');
     },
   };

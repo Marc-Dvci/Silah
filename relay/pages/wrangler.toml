@@ -1,0 +1,9 @@
+# Silah's public address for the relay: a Cloudflare Pages project with its own *.pages.dev subdomain.
+# Every request is passed unchanged to the silah-relay Worker (../src/index.ts) through a service binding.
+name = "silah-relay"
+compatibility_date = "2026-10-01"
+pages_build_output_dir = "public"
+
+[[services]]
+binding = "RELAY"
+service = "silah-relay"

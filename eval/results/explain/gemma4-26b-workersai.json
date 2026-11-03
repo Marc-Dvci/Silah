@@ -1,0 +1,1567 @@
+[
+ {
+  "case": "mariam",
+  "label": "Mariam",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:48:48.374Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "You both carry a change in the SMN1 gene.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance the child has Spinal muscular atrophy (SMA).",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Carrying a change in MEFV or SMN1 does not make you ill.",
+     "cards": [
+      "condition:sma",
+      "carrier:MEFV"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of changes, so it might miss some.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Because you are related, there is a 1 in 370 chance for other genes.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "I am here to talk through these results with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 3929,
+   "cardsKey": "bf892967e4189b1c"
+  }
+ },
+ {
+  "case": "mariam",
+  "label": "Mariam",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T16:48:54.712Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغيّراً في الجين SMN1.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال 1 من 4 أن يكون الطفل مصاباً بضمور العضلات الشوكي.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "أنتِ تحملين تغيّراً في الجين MEFV، لكن هذا لا يسبب لكِ المرض.",
+     "cards": [
+      "carrier:MEFV"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بما أن شريكك سليم، فإن احتمال إصابة الطفل بمرض MEFV هو نحو 1 من 460 في كل حمل.",
+     "cards": [
+      "residual:MEFV"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 90% من التغيّرات، لذا فإن النتيجة السلبية لا تلغي الاحتمال تماماً.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكننا التحدث ومناقشة كل هذه التفاصيل معاً.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 6337,
+   "cardsKey": "bf892967e4189b1c"
+  }
+ },
+ {
+  "case": "mariam",
+  "label": "Mariam",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:49:01.479Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "Both partners carry a change in SMN1, which is associated with Spinal muscular atrophy.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance the child has SMA.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "One partner carries a change in MEFV, while the other tested negative, leaving a residual risk of about 1 in 460 per pregnancy.",
+     "cards": [
+      "residual:MEFV"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the 561 other genes, the remaining chance is about 1 in 370 per pregnancy due to detection limits and potential shared ancestry.",
+     "cards": [
+      "panel-residual",
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of disease-causing changes, and results do not include family history or dominant conditions.",
+     "cards": [
+      "uncertainty:detection",
+      "not-assessed",
+      "family-history"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 6763,
+   "cardsKey": "bf892967e4189b1c"
+  }
+ },
+ {
+  "case": "saeed",
+  "label": "Saeed",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:49:06.811Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "You both carry a change in the SMN1 gene.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance the child has Spinal muscular atrophy, which weakens muscles.",
+     "cards": [
+      "couple:SMN1",
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Being a carrier of this change does not make you ill or affect your own muscles.",
+     "cards": [
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of changes, so it might miss some.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Because you are related, there is a 1 in 400 chance for other genes where you both tested negative.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "I am here to talk through these results with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5331,
+   "cardsKey": "2f89772e31442df3"
+  }
+ },
+ {
+  "case": "saeed",
+  "label": "Saeed",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T16:49:11.362Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغيّراً في الجين SMN1.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال 1 من 4 أن يكون الطفل مصاباً بضمور العضلات الشوكي.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "حاملو التغيّر في الجين SMN1 أصحّاء، ووجود هذا التغيّر لديك لا يؤثر في عضلاتك.",
+     "cards": [
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة للجينات الأخرى، جاءت نتيجتكما سلبية، لكن الاحتمال المتبقي هو نحو 1 من 400 في كل حمل.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 90% من التغيّرات، لذا فإن النتيجة السلبية لا تلغي الاحتمال تماماً.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن لمستشارك الوراثي مناقشة كل هذه التفاصيل معك.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4550,
+   "cardsKey": "2f89772e31442df3"
+  }
+ },
+ {
+  "case": "saeed",
+  "label": "Saeed",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:49:15.386Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "Both partners carry a change in SMN1, which is associated with Spinal muscular atrophy (SMA).",
+     "cards": [
+      "couple:SMN1",
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance the child has SMA.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The partner tested negative for CYP21A2, but the residual risk is about 1 in 260 per pregnancy.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 561 genes, the remaining chance is about 1 in 400 per pregnancy due to detection limits and potential shared ancestry.",
+     "cards": [
+      "panel-residual",
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The clinician should consider family history and the assumed carrier frequency of 1 in 1,000.",
+     "cards": [
+      "family-history",
+      "uncertainty:frequency"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4023,
+   "cardsKey": "2f89772e31442df3"
+  }
+ },
+ {
+  "case": "noura",
+  "label": "Noura",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:49:28.299Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "You both carry a change in the SMN1 gene.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance the child has Spinal muscular atrophy (SMA).",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Carriers of SMA are healthy and being a carrier does not affect your own muscles.",
+     "cards": [
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of changes, so it might miss some.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, the remaining chance is about 1 in 350 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "I am here to talk through these results with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 12913,
+   "cardsKey": "a3c89f89e34f5647"
+  }
+ },
+ {
+  "case": "noura",
+  "label": "Noura",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T16:49:37.724Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغيّراً في الجين SMN1.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال 1 من 4 أن يكون الطفل مصاباً بضمور العضلات الشوكي.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "حاملو هذا التغيّر هم أشخاص أصحاء ولا يؤثر ذلك على عضلاتكِ.",
+     "cards": [
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 90% من التغيّرات، لذا قد لا يظهر كل شيء.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الاحتمال المتبقي لبقية الجينات هو نحو 1 من 350 في كل حمل.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن لمستشارك الوراثي التحدث معكِ ومناقشة كل هذه التفاصيل.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 9425,
+   "cardsKey": "a3c89f89e34f5647"
+  }
+ },
+ {
+  "case": "noura",
+  "label": "Noura",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:49:42.588Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "Both partners carry a change in SMN1, which is associated with Spinal muscular atrophy (SMA).",
+     "cards": [
+      "couple:SMN1",
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance the child has SMA.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, the remaining chance for all of them together is about 1 in 350 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of disease-causing changes, and results do not include family history or dominant conditions.",
+     "cards": [
+      "uncertainty:detection",
+      "not-assessed",
+      "family-history"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4864,
+   "cardsKey": "a3c89f89e34f5647"
+  }
+ },
+ {
+  "case": "khalid",
+  "label": "Khalid",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:49:47.199Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "You both carry a change in the SMN1 gene.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance the child has Spinal muscular atrophy, which weakens muscles.",
+     "cards": [
+      "couple:SMN1",
+      "condition:sma"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Being a carrier of this change does not make you ill or affect your own muscles.",
+     "cards": [
+      "condition:sma",
+      "carrier:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of changes, so it might miss some.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Because you are related, there is a 1 in 390 chance for other genes where you both tested negative.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "I am here to talk through these results with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 4610,
+   "cardsKey": "67e4f7d072741743"
+  }
+ },
+ {
+  "case": "khalid",
+  "label": "Khalid",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T16:49:54.345Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغيّراً في الجين SMN1، وفي كل حمل هناك احتمال 1 من 4 أن يكون الطفل مصاباً بضمور العضلات الشوكي.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة للجين HBB، النتيجة السلبية لشريكتك تخفض الاحتمال كثيراً لكنه يبقى نحو 1 من 290 في كل حمل.",
+     "cards": [
+      "residual:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "وجود التغيّر في الجين HBB لديك لا يسبب لك المرض، وأنت بصحة جيدة.",
+     "cards": [
+      "carrier:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 90% من التغيّرات، لذا فإن النتيجة السلبية لا تلغي الاحتمال تماماً.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الاحتمال المتبقي للجينات الـ561 الأخرى معاً هو نحو 1 من 390 في كل حمل.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكنني التحدث معك ومناقشة كل هذه التفاصيل والإجابة على أسئلتك.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 7146,
+   "cardsKey": "67e4f7d072741743"
+  }
+ },
+ {
+  "case": "khalid",
+  "label": "Khalid",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:49:58.714Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "Both partners carry a change in SMN1, which results in a 1 in 4 chance of the child having Spinal muscular atrophy.",
+     "cards": [
+      "couple:SMN1"
+     ],
+     "ok": true
+    },
+    {
+     "text": "One partner carries an HBB change, leaving a residual risk of about 1 in 290 per pregnancy.",
+     "cards": [
+      "residual:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 561 genes, the combined remaining risk is about 1 in 390 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Uncertainties include the 90% detection rate and assumed carrier frequencies of 1 in 1,000 for most genes.",
+     "cards": [
+      "uncertainty:detection",
+      "uncertainty:frequency"
+     ],
+     "ok": false,
+     "reasons": [
+      "binding"
+     ]
+    }
+   ],
+   "ms": 4368,
+   "cardsKey": "67e4f7d072741743"
+  }
+ },
+ {
+  "case": "fatima",
+  "label": "Fatima",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:50:25.764Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "You carry a change in one gene, but your partner tested negative for it.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For this gene, the chance of a child having a condition is about 1 in 260 per pregnancy.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Being a carrier means you are healthy and do not feel ill.",
+     "cards": [
+      "carrier:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, the chance is about 1 in 390 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of changes, so it might miss some.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "We cannot see all types of changes or differences in chromosomes.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    },
+    {
+     "text": "I am here to talk through these results with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 27050,
+   "cardsKey": "06a93cf6012757c1"
+  }
+ },
+ {
+  "case": "fatima",
+  "label": "Fatima",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T16:50:32.619Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "لقد وجدنا تغيراً في الجين CYP21A2 لديكِ، بينما كانت نتيجة شريكك سلبية لهذا الجين.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال نحو 1 من 260 أن يتأثر الطفل بهذا الجين.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "كونكِ تحملين هذا التغير لا يعني أنكِ مريضة، فهو لا يسبب المرض لكِ.",
+     "cards": [
+      "carrier:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة لبقية الجينات الـ562، كانت النتيجة سلبية، لكن الاحتمال المتبقي هو نحو 1 من 390 في كل حمل.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 90% من التغيرات، لذا قد لا تظهر بعض التغيرات في النتيجة.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن لمستشارك الوراثي مناقشة كل هذه التفاصيل معكِ والإجابة على أسئلتكِ.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 6855,
+   "cardsKey": "06a93cf6012757c1"
+  }
+ },
+ {
+  "case": "fatima",
+  "label": "Fatima",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:50:49.963Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "The patient carries a change in CYP21A2 while the partner tested negative.",
+     "cards": [
+      "carrier:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The chance for this gene is about 1 in 260 per pregnancy.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, the remaining chance is about 1 in 390 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Uncertainties include a 90% detection rate and assumed carrier frequencies of 1 in 1,000.",
+     "cards": [
+      "uncertainty:detection",
+      "uncertainty:frequency"
+     ],
+     "ok": false,
+     "reasons": [
+      "binding"
+     ]
+    },
+    {
+     "text": "A genetic counsellor can discuss these results and any family history.",
+     "cards": [
+      "counsellor",
+      "family-history"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 17344,
+   "cardsKey": "06a93cf6012757c1"
+  }
+ },
+ {
+  "case": "ahmed",
+  "label": "Ahmed",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:50:56.350Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "You carry a change in the GJB2 gene, but your partner does not.",
+     "cards": [
+      "residual:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For this gene, the chance of a child having a condition is about 1 in 2,600 per pregnancy.",
+     "cards": [
+      "residual:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Being a carrier means you are healthy and do not feel ill.",
+     "cards": [
+      "carrier:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, you both tested negative.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 90% of changes, so some small changes might be missed.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Because you are related, there is a remaining chance of about 1 in 340 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "I can talk through these results with you anytime.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 6387,
+   "cardsKey": "cb19034dd691eb13"
+  }
+ },
+ {
+  "case": "ahmed",
+  "label": "Ahmed",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T16:51:03.693Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "لقد وُجد لديك تغيّر في الجين GJB2، بينما كانت نتيجة شريكتك سلبية لهذا الجين.",
+     "cards": [
+      "residual:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال نحو 1 من 2,600 أن يولد الطفل متأثراً بهذا الجين.",
+     "cards": [
+      "residual:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "كونك حاملاً لهذا التغيّر لا يعني أنك مريض، فأنت بصحة جيدة.",
+     "cards": [
+      "carrier:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة للجينات الـ562 الأخرى، كانت نتيجتكما سلبية، لكن الاحتمال المتبقي هو نحو 1 من 340 في كل حمل.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 90% من التغيّرات، لذا قد لا يرى كل التغيّرات الموجودة.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكننا التحدث ومناقشة كل هذه التفاصيل معاً.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 7343,
+   "cardsKey": "cb19034dd691eb13"
+  }
+ },
+ {
+  "case": "ahmed",
+  "label": "Ahmed",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:51:09.533Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "One partner carries a GJB2 change while the other tested negative.",
+     "cards": [
+      "residual:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The chance for GJB2 is about 1 in 2,600 per pregnancy.",
+     "cards": [
+      "residual:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, the remaining chance is about 1 in 340 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Uncertainties include a 90% detection rate and assumed carrier frequencies.",
+     "cards": [
+      "uncertainty:detection",
+      "uncertainty:frequency"
+     ],
+     "ok": false,
+     "reasons": [
+      "binding"
+     ]
+    },
+    {
+     "text": "A genetic counsellor can discuss these results and any family history.",
+     "cards": [
+      "counsellor",
+      "family-history"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5839,
+   "cardsKey": "cb19034dd691eb13"
+  }
+ },
+ {
+  "case": "sample:da2c20ddce88617c",
+  "label": "aisha-khalfan-sample",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:51:15.033Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "You both carry a change in the HBB gene.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance a child has Sickle beta-thalassaemia.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Being a carrier means you are healthy and do not feel ill.",
+     "cards": [
+      "condition:sbthal"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 95% of changes, so it might miss some.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Because you are related, there is a 1 in 780 chance for other genes.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "We can talk through all of this together.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5500,
+   "cardsKey": "da2c20ddce88617c"
+  }
+ },
+ {
+  "case": "sample:da2c20ddce88617c",
+  "label": "aisha-khalfan-sample",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T16:51:20.383Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغيّراً في الجين HBB.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال 1 من 4 أن يكون الطفل مصاباً بالثلاسيميا بيتا المنجلية.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "كونكِ تحملين تغيّراً في الجين GJB2 لا يسبب لكِ المرض، وأنتِ سليمة.",
+     "cards": [
+      "carrier:GJB2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 95% من التغيّرات، لذا فإن النتيجة السلبية لا تلغي الاحتمال تماماً.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الاحتمال المتبقي للجينات الأخرى التي جاءت نتيجتكما فيها سلبية هو نحو 1 من 780 في كل حمل.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن لمستشارك الوراثي مناقشة كل هذه التفاصيل معكِ.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5350,
+   "cardsKey": "da2c20ddce88617c"
+  }
+ },
+ {
+  "case": "sample:da2c20ddce88617c",
+  "label": "aisha-khalfan-sample",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:51:25.445Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "Both parents carry a change in HBB, which results in a 1 in 4 chance of Sickle beta-thalassaemia in each pregnancy.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The remaining chance for the other 561 genes on the panel is about 1 in 780 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "A change in MEFV was found with an unknown meaning and requires professional review.",
+     "cards": [
+      "vus:MEFV"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Detection is limited by a 95% detection rate and assumed carrier frequencies of 1 in 1,000.",
+     "cards": [
+      "uncertainty:detection",
+      "uncertainty:frequency"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5061,
+   "cardsKey": "da2c20ddce88617c"
+  }
+ },
+ {
+  "case": "sample:2334b65ee34a4be1",
+  "label": "rashid-khalfan-sample",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:51:30.966Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "You both carry a change in the HBB gene.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance the child has Sickle beta-thalassaemia.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Being a carrier means you are healthy and do not feel ill.",
+     "cards": [
+      "condition:sbthal",
+      "carrier:CFTR"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 95% of changes, so it might miss some.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Because you are related, there is a chance you both share a hidden change.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "I am here to talk through these results with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 5521,
+   "cardsKey": "2334b65ee34a4be1"
+  }
+ },
+ {
+  "case": "sample:2334b65ee34a4be1",
+  "label": "rashid-khalfan-sample",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T16:51:37.272Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "أنتما تحملان تغيّراً في الجين HBB.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، هناك احتمال 1 من 4 أن يكون الطفل مصاباً بالثلاسيميا بيتا المنجلية.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "أنت حامل للتغيّر في الجين CFTR ولكن هذا لا يسبب لك المرض.",
+     "cards": [
+      "carrier:CFTR"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الفحص يكشف نحو 95% من التغيّرات، لذا فإن النتيجة السلبية لا تلغي الاحتمال تماماً.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الاحتمال المتبقي للجينات الأخرى التي جاءت سلبية هو نحو 1 من 790 في كل حمل.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن لمستشارك الوراثي التحدث معك ومناقشة كل هذه التفاصيل.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 6306,
+   "cardsKey": "2334b65ee34a4be1"
+  }
+ },
+ {
+  "case": "sample:2334b65ee34a4be1",
+  "label": "rashid-khalfan-sample",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:51:41.039Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "Both partners carry a change in HBB, which can result in Sickle beta-thalassaemia.",
+     "cards": [
+      "couple:HBB",
+      "condition:sbthal"
+     ],
+     "ok": true
+    },
+    {
+     "text": "In each pregnancy, there is a 1 in 4 chance the child has Sickle beta-thalassaemia.",
+     "cards": [
+      "couple:HBB"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The remaining chance for the other 561 genes on the panel is about 1 in 790 per pregnancy.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test finds about 95% of disease-causing changes, so a negative result does not remove all risk.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "A genetic counsellor should review the original report and any family history.",
+     "cards": [
+      "counsellor",
+      "family-history"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 3767,
+   "cardsKey": "2334b65ee34a4be1"
+  }
+ },
+ {
+  "case": "sample:5bab283895f60d80",
+  "label": "noor-hamdan-sample",
+  "audience": "person",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:51:49.909Z",
+   "lang": "en",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "You carry a change in the CYP21A2 gene, but your partner tested negative for it.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For this gene, the chance of a condition in each pregnancy is between about 1 in 3,400 and 1 in 170.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Being a carrier means you are healthy and do not feel ill.",
+     "cards": [
+      "carrier:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, the chance for each pregnancy is between about 1 in 2,200,000 and 1 in 5,600.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "We do not know exactly how well the lab finds every change, so we show a range of chances.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The test also cannot see all types of changes or chromosome differences.",
+     "cards": [
+      "not-assessed"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Your genetic counsellor can talk through these results with you.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 8870,
+   "cardsKey": "5bab283895f60d80"
+  }
+ },
+ {
+  "case": "sample:5bab283895f60d80",
+  "label": "noor-hamdan-sample",
+  "audience": "person",
+  "lang": "ar",
+  "e": {
+   "at": "2026-11-03T16:51:58.826Z",
+   "lang": "ar",
+   "audience": "person",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "لقد وجدنا تغييراً في الجين CYP21A2 لديكِ، بينما كانت نتيجة شريكك سلبية لهذا الجين.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "في كل حمل، تتراوح احتمالات الإصابة لهذا الجين بين نحو 1 من 3,400 و 1 من 170.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "حملك لهذا التغيّر لا يسبب لكِ المرض، فأنتِ سليمة وصحتكِ لا تتغير.",
+     "cards": [
+      "carrier:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "بالنسبة لبقية الجينات الـ562، كانت النتيجة سلبية لكما.",
+     "cards": [
+      "panel-residual"
+     ],
+     "ok": true
+    },
+    {
+     "text": "الاحتمال المتبقي لهذه الجينات يتراوح بين نحو 1 من 2,200,000 و 1 من 5,600 في كل حمل.",
+     "cards": [
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "هذه الأرقام غير مؤكدة تماماً لأن الفحص قد لا يكشف 100% من التغيّرات.",
+     "cards": [
+      "uncertainty:detection"
+     ],
+     "ok": true
+    },
+    {
+     "text": "يمكن للمستشار الوراثي التحدث معكِ ومناقشة كل هذه التفاصيل.",
+     "cards": [
+      "counsellor"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 8916,
+   "cardsKey": "5bab283895f60d80"
+  }
+ },
+ {
+  "case": "sample:5bab283895f60d80",
+  "label": "noor-hamdan-sample",
+  "audience": "clinician",
+  "lang": "en",
+  "e": {
+   "at": "2026-11-03T16:52:02.021Z",
+   "lang": "en",
+   "audience": "clinician",
+   "backend": "the Silah explanation service (Gemma on Cloudflare Workers AI)",
+   "model": "Gemma 4 26B A4B (Cloudflare Workers AI)",
+   "sentences": [
+    {
+     "text": "One partner carries a change in CYP21A2 while the other tested negative.",
+     "cards": [
+      "carrier:CYP21A2",
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "The chance for this gene is between about 1 in 3,400 and 1 in 170 per pregnancy.",
+     "cards": [
+      "residual:CYP21A2"
+     ],
+     "ok": true
+    },
+    {
+     "text": "For the other 562 genes, the remaining chance is between 1 in 2,200,000 and 1 in 5,600 per pregnancy.",
+     "cards": [
+      "panel-residual",
+      "uncertainty:range"
+     ],
+     "ok": true
+    },
+    {
+     "text": "Uncertainties include detection rates, assumed frequencies, and the exclusion of dominant or X-linked conditions.",
+     "cards": [
+      "not-assessed",
+      "uncertainty:detection",
+      "uncertainty:frequency"
+     ],
+     "ok": true
+    }
+   ],
+   "ms": 3194,
+   "cardsKey": "5bab283895f60d80"
+  }
+ }
+]

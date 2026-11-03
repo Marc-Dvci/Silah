@@ -9,7 +9,7 @@ import { uncertaintyCards, type ResultOrigin } from '../src/core/uncertainty';
 import { extractFromText } from '../src/core/import/extract';
 import { bundleFromImport } from '../src/app/person';
 import { localServer } from '../src/llm/answer';
-import { cardsKey, explain, type Audience, type Explanation } from '../src/llm/explain';
+import { cardsKey, cloudBackend, explain, type Audience, type Explanation } from '../src/llm/explain';
 import type { FactCard, Lang, PersonResult } from '../src/core/types';
 
 export interface Case { key: string; label: string; sex: 'F' | 'M'; cards: FactCard[]; redact: string[]; sample: boolean }
@@ -46,13 +46,15 @@ export function cases(): Case[] {
 export interface Row { case: string; label: string; audience: Audience; lang: Lang; e?: Explanation; error?: string }
 
 export async function run(base: string, model: string): Promise<Row[]> {
-  const backend = { ...localServer(base), model };
+  // A local llama.cpp server, or the relay's explanation service (names removed, as the phone does).
+  const cloud = base.startsWith('https://');
+  const backend = cloud ? { ...cloudBackend(base), model } : { ...localServer(base), model };
   const rows: Row[] = [];
   for (const c of cases()) {
     const jobs: [Audience, Lang][] = [['person', 'en'], ['person', 'ar'], ['clinician', 'en']];
     for (const [audience, lang] of jobs) {
       try {
-        const e = await explain(backend, c.cards, lang, audience, c.sex);
+        const e = await explain(backend, c.cards, lang, audience, c.sex, cloud ? c.redact : []);
         rows.push({ case: c.key, label: c.label, audience, lang, e });
         const ok = e.sentences.filter(s => s.ok).length;
         console.log(`${c.label.padEnd(22)} ${audience.padEnd(9)} ${lang}  ${ok}/${e.sentences.length} passed  ${e.ms} ms`);
