@@ -1,5 +1,5 @@
 """The built app keeps working with the network off, after one online visit. Usage: python offline.py [base]"""
-import sys
+import os, sys, tempfile
 from playwright.sync_api import sync_playwright
 BASE = sys.argv[1] if len(sys.argv) > 1 else 'http://127.0.0.1:4173/'
 with sync_playwright() as p:
@@ -12,7 +12,7 @@ with sync_playwright() as p:
     ctx.set_offline(True)
     pg.goto(BASE + '#/p/noura/result'); pg.wait_for_timeout(3000)
     ok = pg.get_by_text('Spinal muscular atrophy (SMA)').count() > 0
-    pg.screenshot(path='D:/tmp/silah_shots/08_offline_result.png')
+    pg.screenshot(path=os.path.join(tempfile.gettempdir(), 'silah_offline_result.png'))
     print('offline result renders:', ok)
     # A report read on the phone with the network off: the PDF reader and the sample reports are cached.
     pg.goto(BASE + '#/p/me/import'); pg.wait_for_timeout(1500)

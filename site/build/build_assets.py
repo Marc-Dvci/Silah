@@ -38,10 +38,9 @@ for src, name in [('p01_mariam_invitation_still', 'en-invitation'), ('p04_mariam
                   ('p11_family_still', 'en-family'), ('p18c_noura_birth_phone', 'en-birth'), ('p08_counsellor_still', 'en-counsellor'),
                   ('p20_fatima_result_still', 'en-fatima'), ('p10_mariam_privacy_still', 'en-privacy')]:
     print(name, webp(os.path.join(SHOTS_EN, src + '.png'), name, 640))
-for src, name, w in [('s01_stage_result', 'stage', 1800), ('c03_queue_brief', 'clinic-queue', 1600), ('c01b_outreach_sim', 'clinic-outreach', 1600)]:
+for src, name, w in [('c03_queue_brief', 'clinic-queue', 1600), ('c01b_outreach_sim', 'clinic-outreach', 1600)]:
     print(name, webp(os.path.join(SHOTS_EN, src + '.png'), name, w))
 # Arabic phone screens
-print('ar stage', webp(os.path.join(SHOTS_AR, 'stage.png'), 'ar-stage', 1800))
 for n in ['invitation', 'result', 'ask', 'family', 'birth', 'counsellor', 'fatima_result', 'privacy']:
     print('ar', n, webp(os.path.join(SHOTS_AR, n + '.png'), 'ar-' + n.replace('_result', ''), 640))
 

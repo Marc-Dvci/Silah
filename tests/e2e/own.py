@@ -1,4 +1,4 @@
-"""The reviewers' asks, through the real UI, headless: a person brings their own report (PDF), confirms what was
+"""A person's own report, through the real UI, headless: they bring their own report (PDF), confirms what was
 read, reads the result with what is uncertain, gets a plain-language explanation that passed the verifier, books
 counselling directly (place, format, language, time) with the physician summary attached, the clinic sees the
 appointment and the summary, the summary prints and exports as FHIR; two phones pair through the relay, share a
@@ -6,14 +6,14 @@ finding live, and the link ends on both.
 
 Usage: python tests/e2e/own.py [base_url] [relay_url]
   needs the app (npm run dev) and, for pairing, the relay (cd relay && npx wrangler dev --port 8787).
-  Screenshots in D:/tmp/silah_own.
+  Screenshots in the system temp folder, silah_own.
 """
-import sys, os, json, urllib.request
+import sys, os, json, tempfile, urllib.request
 from playwright.sync_api import sync_playwright
 
 BASE = sys.argv[1] if len(sys.argv) > 1 else 'http://127.0.0.1:5173/'
 RELAY = sys.argv[2] if len(sys.argv) > 2 else 'http://127.0.0.1:8787'
-OUT = 'D:/tmp/silah_own'
+OUT = os.path.join(tempfile.gettempdir(), 'silah_own')
 os.makedirs(OUT, exist_ok=True)
 errors, n, passed = [], [0], [0]
 

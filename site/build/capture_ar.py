@@ -30,7 +30,6 @@ with sync_playwright() as p:
     still('#/p/mariam', 'invitation')            # step 1: Mariam's invitation, before she agrees
     for i in range(2, 11):
         pg.get_by_role('button', name='Next step').click(); pg.wait_for_timeout(3500)
-        if i == 4: pg.screenshot(path=f'{OUT}/stage.png')   # Mariam reads her result; clinic beside it
         if i == 5: still('#/p/mariam/ask', 'ask')
     still('#/p/mariam/result', 'result')
     still('#/p/mariam/counsellor', 'counsellor')

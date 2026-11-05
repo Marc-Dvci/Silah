@@ -1,9 +1,10 @@
-"""Headless walk through the person app; screenshots to D:/tmp/silah_shots. Usage: python shots.py [base_url]"""
-import sys, time
+"""Headless walk through the person app; screenshots to the system temp folder, silah_shots. Usage: python shots.py [base_url]"""
+import os, sys, tempfile, time
 from playwright.sync_api import sync_playwright
 
 BASE = sys.argv[1] if len(sys.argv) > 1 else 'http://127.0.0.1:5173/'
-OUT = 'D:/tmp/silah_shots'
+OUT = os.path.join(tempfile.gettempdir(), 'silah_shots')
+os.makedirs(OUT, exist_ok=True)
 errors = []
 
 with sync_playwright() as p:

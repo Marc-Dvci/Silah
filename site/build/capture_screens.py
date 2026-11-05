@@ -1,6 +1,6 @@
-"""Captures the product page's screenshots of the screens added on 3 November (own result, plain-words explanation,
+"""Captures the product page's screenshots of the own-report screens (own result, plain-words explanation,
 booking, linking phones, the physician summary, the clinic's appointments) from the built app, in English and Arabic,
-straight to site/assets/img as WebP. Run `npx vite preview --port 4173` first, then: python site/build/capture_feedback.py"""
+straight to site/assets/img as WebP. Run `npx vite preview --port 4173` first, then: python site/build/capture_screens.py"""
 import io, os, sys
 from PIL import Image
 from playwright.sync_api import sync_playwright

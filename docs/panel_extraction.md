@@ -4,7 +4,7 @@
 
 - Document: Abu Dhabi Department of Health, Premarital Screening Standard V3, published September 2024.
 - Section: Appendix 12, "List of tested genes".
-- Text used: `research/DoH_Premarital_Screening_Standard_V3_2024.txt`, lines 1942 to 2024. This is text extracted from the PDF.
+- Text used: lines 1942 to 2024 of the text extracted from the PDF.
 - The appendix title says the list excludes X- or Y-linked genes and autosomal dominant genes. It also says not all autosomal recessive diseases are included.
 
 ## Method
@@ -27,8 +27,6 @@
 - Duplicates removed: 7 (570 minus 563). Five are repeated prints. Two are old names that point to a printed gene.
 - Aliases in `PANEL_ALIASES`: 21.
 - Unmapped tokens: none. All 570 gene tokens and all 21 parenthesised names map to an approved HGNC symbol.
-
-The count of 563 is inside the 540 to 600 range in the brief. No parsing change was needed.
 
 ## Aliases
 
@@ -70,7 +68,6 @@ The count of 563 is inside the 540 to 600 range in the brief. No parsing change 
 - Server date (Last-Modified header): 16 Oct 2026.
 - Licence: CC0.
 - Rows: 45,277. All have status Approved.
-- The working files (download, token dumps and build output) are in `D:\tmp\silah_panel\`. Nothing from that folder is in the repo.
 
 ## Check
 

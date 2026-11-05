@@ -68,7 +68,7 @@ describe('claim binding: sentences a model could write', () => {
     'There is a 1 in 4 chance for you, in each pregnancy, that the child has SMA.',
   ];
   const wrong = [
-    'There is a 1 in 4 chance the child is a carrier.',                 // the reviewer's example
+    'There is a 1 in 4 chance the child is a carrier.',
     'There is a 1 in 2 chance that the child has SMA.',
     'There is a 2 in 4 chance that the child will be affected.',
     'There is a 1 in 4 chance that the child will not have SMA.',

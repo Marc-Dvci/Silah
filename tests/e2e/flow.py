@@ -4,13 +4,13 @@ Outreach -> both partners consent -> signed bundles -> result -> teach-back -> b
 booking -> partner shares a private finding -> anonymous invitations -> relative redeems (and
 cannot redeem twice) -> birth plan -> clinic sees exactly what was shared.
 
-Usage: python tests/e2e/flow.py [base_url]   (screenshots in D:/tmp/silah_flow)
+Usage: python tests/e2e/flow.py [base_url]   (screenshots in the system temp folder, silah_flow)
 """
-import sys, os
+import sys, os, tempfile
 from playwright.sync_api import sync_playwright, expect
 
 BASE = sys.argv[1] if len(sys.argv) > 1 else 'http://127.0.0.1:5173/'
-OUT = 'D:/tmp/silah_flow'
+OUT = os.path.join(tempfile.gettempdir(), 'silah_flow')
 os.makedirs(OUT, exist_ok=True)
 errors, n = [], [0]
 

@@ -10,7 +10,13 @@
 <link rel="alternate" hreflang="ar" href="https://marc-dvci.github.io/Silah/ar.html">
 <meta property="og:title" content="Silah · صلة">
 <meta property="og:description" content="Inherited disease risk, explained privately and acted on in time. Arabic and English, on the phones families already have.">
-<meta property="og:image" content="https://marc-dvci.github.io/Silah/assets/img/stage.webp">
+<meta property="og:url" content="https://marc-dvci.github.io/Silah/">
+<meta property="og:site_name" content="Silah">
+<meta property="og:image" content="https://marc-dvci.github.io/Silah/assets/img/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Silah, صلة: understand what connects us. Woven threads in black, madder and wool.">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <link rel="icon" href="demo/icon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -50,7 +56,7 @@
         <a class="btn primary" href="demo/">Open the live demo <span class="arrow" aria-hidden="true">→</span></a>
         <a class="btn quiet" href="#film">Watch the film · 2:48</a>
       </div>
-      <p class="note">A working prototype with a fictional family. It runs in your browser and works offline; nothing you do is sent anywhere.</p>
+      <p class="note">A working prototype with a fictional family. It runs in your browser and works offline. Nothing leaves it unless you choose to link phones or use the explanation service.</p>
     </div>
     <figure class="shot" style="margin:0">
       <img src="assets/img/stage.webp" width="1800" height="1125" alt="The Silah demo: a family member's phone showing the couple result as four children, next to the genetic counselling clinic's queue and pre-visit brief.">
@@ -221,7 +227,7 @@
       <div class="promise">
         <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg>Every number can be checked</h3>
         <p>The risk kernel computes with exact fractions, and each number carries its arithmetic and its source. For cousins it counts changes inherited from a shared ancestor. Detection rates come from the lab; without them, a range. Assumptions are labelled where they are used.</p>
-        <p class="proof">175 unit tests, including a grid of values worked out by hand.</p>
+        <p class="proof">307 unit tests, including a grid of values worked out by hand.</p>
       </div>
       <div class="promise">
         <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Each person’s result stays theirs</h3>
@@ -242,9 +248,9 @@
     <h2>Tested through the real interface</h2>
   </div>
   <div class="proofs">
-    <div><strong>175</strong><span>unit tests: risk kernel, verifier, typed questions, routes, cryptography, population model</span></div>
-    <div><strong>30</strong><span>end-to-end checks that play the whole story through the real screens</span></div>
-    <div><strong>0</strong><span>WCAG 2.2 AA violations on 18 screens, in Arabic and English</span></div>
+    <div><strong>307</strong><span>unit tests: risk kernel, verifier, report reader, FHIR, booking, routes, cryptography, population model</span></div>
+    <div><strong>61</strong><span>end-to-end checks through the real screens: the whole story (31), and a person’s own report through to linked phones (30)</span></div>
+    <div><strong>0</strong><span>WCAG 2.2 AA violations on 39 screens, in Arabic and English</span></div>
     <div><strong>22/22</strong><span>grounded questions answered by Gemma 4 E4B, with no directive sentence</span></div>
   </div>
   <div class="chart">
@@ -274,6 +280,7 @@
     <source src="assets/silah-film.mp4" type="video/mp4">
     <a href="assets/silah-film.mp4">Download the film (MP4)</a>
   </video>
+  <p class="small muted" style="margin-top:12px"><a href="https://youtu.be/WRUiVqy99SY">Watch on YouTube</a> · <a href="assets/silah-film.mp4">Download the film (MP4)</a></p>
 </section>
 
 <div class="knot"></div>
@@ -305,7 +312,7 @@
     <div class="pool palm">
       <p class="eyebrow" style="color:var(--palm)">Who pays</p>
       <p style="margin-top:12px">The programme owner, DoH or M42. Families never pay and never see advertising.</p>
-      <p style="margin-top:12px">There is no server cost per question: the language model runs on the device. Silah does the explaining and the triage, so a national genetics workforce of 17 can do the counselling.</p>
+      <p style="margin-top:12px">By default the language model runs on the device, so a question has no server cost. Silah does the explaining and the triage, so a national genetics workforce of 17 can do the counselling.</p>
     </div>
   </div>
 </section>
@@ -320,7 +327,8 @@
   </div>
   <div class="docs">
     <a href="demo/"><b>Live demo</b><small>Opens in the browser</small></a>
-    <a href="assets/silah-deck.pdf"><b>Submission deck</b><small>PDF · 0.9 MB</small></a>
+    <a href="assets/silah-deck.pdf"><b>Submission deck</b><small>PDF · 1.0 MB</small></a>
+    <a href="https://github.com/Marc-Dvci/Silah/blob/main/docs/SOURCES.md"><b>Sources, with the statement each supports</b><small>GitHub</small></a>
     <a href="https://github.com/Marc-Dvci/Silah/blob/main/docs/EVALUATION.md"><b>Evaluation: methods and results</b><small>GitHub</small></a>
     <a href="https://github.com/Marc-Dvci/Silah/blob/main/docs/READABILITY.md"><b>Readability in Arabic and English</b><small>GitHub</small></a>
     <a href="https://github.com/Marc-Dvci/Silah/blob/main/docs/ASSUMPTIONS_AND_LIMITATIONS.md"><b>Assumptions, dependencies and limitations</b><small>GitHub</small></a>
@@ -347,11 +355,13 @@
       <p class="eyebrow">Built with</p>
       <ul class="built">
         <li><b>Phone app</b>Preact (a lightweight React) and Vite. It installs from the browser and works offline.</li>
-        <li><b>Language model</b>Gemma 4, on the phone through Transformers.js or on the counsellor’s computer through llama.cpp.</li>
+        <li><b>Language model</b>Gemma 4, on the phone through Transformers.js, on the counsellor’s computer through llama.cpp, or, if the person chooses, on Workers AI with no names sent.</li>
+        <li><b>Reports</b>pdf.js reads a PDF report on the phone. HL7 FHIR R4 for genomics files and the physician summary.</li>
+        <li><b>Linked phones</b>A small Cloudflare Worker relays end-to-end encrypted messages and holds ciphertext only.</li>
         <li><b>Signatures</b>Ed25519 on results and receipts; RSA blind signatures so relatives can be invited without revealing who sent the invitation.</li>
         <li><b>Clinical sources</b>The DoH Premarital Screening Standard V3 and published Emirati carrier frequencies.</li>
       </ul>
-      <p class="small muted" style="margin-top:14px">Every component is open-licensed. No personal data.</p>
+      <p class="small muted" style="margin-top:14px">The code and the models are open-licensed; the narration voices are used under prototype terms. No personal data.</p>
     </div>
   </div>
 </section>

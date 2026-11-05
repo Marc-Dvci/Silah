@@ -2,17 +2,17 @@
 question through the verifier. Uses a persistent profile so the model is cached after the first run, and the full Chromium build
 (channel 'chromium'): the headless shell lacks dxil.dll, so Dawn cannot create a shader-f16 device.
 Prints progress as it goes. Usage: python tests/e2e/webgpu.py [base]"""
-import re, sys, time
+import os, re, sys, tempfile, time
 sys.stdout.reconfigure(encoding="utf-8")
 from playwright.sync_api import sync_playwright
 BASE = sys.argv[1] if len(sys.argv) > 1 else 'http://127.0.0.1:5173/'
-SHOT = 'D:/tmp/silah_shots/15_webgpu_answer.png'
+SHOT = os.path.join(tempfile.gettempdir(), 'silah_webgpu_answer.png')
 
 def say(*a):
     print(*a, flush=True)
 
 with sync_playwright() as p:
-    ctx = p.chromium.launch_persistent_context('D:/tmp/pw_webgpu', channel='chromium', headless=True, args=['--enable-unsafe-webgpu', '--use-angle=d3d11'],
+    ctx = p.chromium.launch_persistent_context(os.path.join(tempfile.gettempdir(), 'silah_pw_webgpu'), channel='chromium', headless=True, args=['--enable-unsafe-webgpu', '--use-angle=d3d11'],
                                                viewport={'width': 412, 'height': 900})
     pg = ctx.new_page()
     logs = []; pg.on('console', lambda m: logs.append(f'{m.type}: {m.text}'))

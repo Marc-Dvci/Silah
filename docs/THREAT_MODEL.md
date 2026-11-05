@@ -37,5 +37,5 @@
 ## Data rules
 
 - No genetic data is used to choose who is invited to a couple check. Ranking uses declared relationship, a known affected relative and pregnancy plans only.
-- Health data stays in the UAE: on the person's phone, or with UAE-hosted health services (Federal Law No. 2 of 2019, Article 13, as summarised by Latham & Watkins; the official text was not reachable for this project).
+- Health data stays in the UAE: on the person's phone, or with UAE-hosted health services (Federal Law No. 2 of 2019, Article 13, as summarised by Latham & Watkins).
 - Aggregates reported to DoH suppress counts under 5.

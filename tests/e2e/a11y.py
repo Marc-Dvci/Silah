@@ -7,6 +7,7 @@ AXE = open('node_modules/axe-core/axe.min.js', encoding='utf-8').read()
 pages = [('noura', p) for p in ['', 'result', 'check', 'options', 'birth', 'family', 'counsellor', 'privacy', 'ask']] + \
         [('fatima', p) for p in ['', 'result', 'privacy']] + [('mariam', '')]
 total = {}
+screens = [0]
 JS = r"""async () => { const r = await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa'] } }); return r.violations.map(v => ({ id: v.id, impact: v.impact, n: v.nodes.length, help: v.help, sample: v.nodes.slice(0, 2).map(n => n.target.join(' ') + ' :: ' + (n.failureSummary || '').slice(0, 160)) })); }"""
 with sync_playwright() as pw:
     b = pw.chromium.launch()
@@ -14,6 +15,7 @@ with sync_playwright() as pw:
     pg = b.new_context(viewport={'width': 412, 'height': 900}, bypass_csp=True).new_page()
     def scan(url, label):
         pg.goto(BASE + url); pg.wait_for_timeout(1800)
+        screens[0] += 1
         pg.add_script_tag(content=AXE)
         res = pg.evaluate(JS)
         for v in res:
@@ -25,6 +27,7 @@ with sync_playwright() as pw:
         scan(f'#/p/noura/{page}', f'noura/{page}')
     # Your own result: landing, the upload screen, the confirm screen, and every screen after it, in both languages.
     def scan_here(label):
+        screens[0] += 1
         pg.add_script_tag(content=AXE)
         for v in pg.evaluate(JS):
             key = v['id']; total.setdefault(key, {'impact': v['impact'], 'help': v['help'], 'where': []})
@@ -50,4 +53,6 @@ with sync_playwright() as pw:
         scan(f'#/c/{c}', f'clinic/{c}')
     b.close()
 print(json.dumps(total, indent=1, ensure_ascii=False))
+print('screens:', screens[0])
 print('violations:', len(total))
+sys.exit(1 if total else 0)
