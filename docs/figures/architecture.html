@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Silah architecture</title>
+<style>
+@font-face { font-family: Plex; src: url('../../site/assets/fonts/ibm-plex-sans-latin-400-normal.woff2'); font-weight: 400; }
+@font-face { font-family: Plex; src: url('../../site/assets/fonts/ibm-plex-sans-latin-500-normal.woff2'); font-weight: 500; }
+@font-face { font-family: Plex; src: url('../../site/assets/fonts/ibm-plex-sans-latin-600-normal.woff2'); font-weight: 600; }
+:root { --ink:#1B1F33; --ink2:#545A70; --indigo:#2B3A67; --tint:#ECEEF5; --soft:#F4F5F8; --saffron:#FBF1DD; --saffron-ink:#8A5F12; --palm:#E4F0EB; --palm-ink:#2F6B57; --line:#AEB5C9; }
+* { box-sizing: border-box; margin: 0; }
+body { background: #fff; font-family: Plex, sans-serif; color: var(--ink); }
+#fig { width: 860px; padding: 14px 10px; background: #fff; }
+.eyebrow { font-weight: 600; font-size: 14px; letter-spacing: .07em; text-transform: uppercase; color: var(--indigo); }
+.chain { display: grid; grid-template-columns: 1fr 18px 1fr 18px 1fr 18px 1fr 18px 1fr; align-items: stretch; margin-top: 10px; }
+.chain .to { display: flex; align-items: center; justify-content: center; color: var(--line); font-size: 16px; }
+.step { border-radius: 14px; padding: 10px 11px; background: var(--tint); }
+.step h3 { font-size: 15px; font-weight: 600; line-height: 1.2; }
+.step p { font-size: 14px; line-height: 1.28; color: var(--ink2); margin-top: 4px; }
+.step.model { background: var(--saffron); }
+.step.model h3 { color: var(--saffron-ink); }
+.legend { display: flex; gap: 18px; margin-top: 10px; font-size: 14px; color: var(--ink2); align-items: center; flex-wrap: wrap; }
+.swatch { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-right: 6px; vertical-align: -1px; }
+.routes { margin-top: 10px; font-size: 14px; line-height: 1.3; color: var(--ink); }
+.routes b { font-weight: 600; }
+.split { margin-top: 20px; display: grid; grid-template-columns: 236px 1fr 262px; row-gap: 8px; }
+.split .head { padding-bottom: 2px; }
+.node { background: var(--tint); border-radius: 14px; padding: 9px 12px; display: flex; flex-direction: column; justify-content: center; min-height: 56px; }
+.node h3 { font-size: 15px; font-weight: 600; line-height: 1.2; }
+.node p { font-size: 14px; color: var(--ink2); line-height: 1.25; margin-top: 2px; }
+.node.sim { background: var(--soft); }
+.node.live { background: var(--palm); }
+.node.live h3 { color: var(--palm-ink); }
+.wire { display: flex; flex-direction: column; justify-content: center; gap: 3px; padding: 0 12px; }
+.lab { font-size: 14px; color: var(--ink2); text-align: center; line-height: 1.15; }
+.arrow { position: relative; height: 2px; background: var(--line); }
+.arrow.r::after, .arrow.l::after { content: ''; position: absolute; top: -5px; border: 6px solid transparent; }
+.arrow.r::after { right: -2px; border-left: 9px solid var(--line); border-right: 0; }
+.arrow.l::after { left: -2px; border-right: 9px solid var(--line); border-left: 0; }
+.gap { grid-column: 1 / -1; font-weight: 600; font-size: 14px; letter-spacing: .07em; text-transform: uppercase; color: var(--palm-ink); text-align: right; padding-top: 8px; }
+</style></head><body>
+<div id="fig">
+  <p class="eyebrow">On the person’s phone · offline, Arabic and English</p>
+  <div class="chain">
+    <div class="step"><h3>The result</h3><p>Lab-signed, or the person’s own report, confirmed line by line</p></div>
+    <div class="to">→</div>
+    <div class="step"><h3>Risk kernel</h3><p>Exact fractions, each with its arithmetic and sources</p></div>
+    <div class="to">→</div>
+    <div class="step model"><h3>Gemma 4</h3><p>Writes plain words from the fact cards</p></div>
+    <div class="to">→</div>
+    <div class="step"><h3>Verifier</h3><p>Each sentence: its card, its numbers, no steering, no certainty</p></div>
+    <div class="to">→</div>
+    <div class="step"><h3>The screen</h3><p>Passed sentences, with the fixed text one tap away</p></div>
+  </div>
+  <div class="legend"><span><i class="swatch" style="background:var(--tint)"></i>Plain code decides</span><span><i class="swatch" style="background:var(--saffron)"></i>The model only phrases</span></div>
+  <p class="routes"><b>Hard routes, before any model:</b> distress, termination, religious rulings, blame and other people’s results go to a person.</p>
+
+  <div class="split">
+    <p class="eyebrow head">The phone</p><div></div><p class="eyebrow head">Simulated in the demo</p>
+
+    <div class="node"><h3>Invitation and consent</h3><p>Both partners agree first</p></div>
+    <div class="wire"><p class="lab">invitation, declared signals only</p><div class="arrow l"></div><div class="arrow r"></div><p class="lab">signed consent</p></div>
+    <div class="node sim"><h3>Outreach (DoH)</h3><p>Never ranked on genetics</p></div>
+
+    <div class="node"><h3>Couple result</h3><p>Each partner’s own, plus shared genes</p></div>
+    <div class="wire"><p class="lab">signed result</p><div class="arrow l"></div></div>
+    <div class="node sim"><h3>Genomics lab (EGP)</h3><p>Couple check, Ed25519 signature</p></div>
+
+    <div class="node"><h3>Booking and summary</h3><p>A4 or HL7 FHIR, sent by choice</p></div>
+    <div class="wire"><p class="lab">booking, summary, revocable receipt</p><div class="arrow r"></div></div>
+    <div class="node sim"><h3>Counselling clinic</h3><p>Appendix 13 sites, urgency queue</p></div>
+
+    <div class="node"><h3>Birth plan</h3><p>This pregnancy, shared genes only</p></div>
+    <div class="wire"><p class="lab">plan</p><div class="arrow r"></div><div class="arrow l"></div><p class="lab">newborn result</p></div>
+    <div class="node sim"><h3>Delivery hospital</h3><p>Targeted test in the first days</p></div>
+
+    <div class="node"><h3>Family invitations</h3><p>They name no sender</p></div>
+    <div class="wire"><p class="lab">blinded token</p><div class="arrow r"></div><div class="arrow l"></div><p class="lab">blind signature (RFC 9474)</p></div>
+    <div class="node sim"><h3>Invitation service</h3><p>Cannot link an invitation to its sender</p></div>
+
+    <p class="gap">Live on Cloudflare, both optional</p>
+
+    <div class="node"><h3>Linked phones</h3><p>Chosen findings, stop at any time</p></div>
+    <div class="wire"><p class="lab">end-to-end encrypted</p><div class="arrow r"></div><div class="arrow l"></div><p class="lab">ciphertext only</p></div>
+    <div class="node live"><h3>Relay</h3><p>Worker and Durable Object</p></div>
+
+    <div class="node"><h3>Explanation service</h3><p>If the person chooses it</p></div>
+    <div class="wire"><p class="lab">fact cards, names removed</p><div class="arrow r"></div><div class="arrow l"></div><p class="lab">text, checked by the phone’s verifier</p></div>
+    <div class="node live"><h3>Gemma 4 on Workers AI</h3><p>Nothing stored</p></div>
+  </div>
+</div>
+</body></html>

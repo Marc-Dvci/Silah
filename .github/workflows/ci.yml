@@ -1,0 +1,49 @@
+# Types, unit tests in random order with coverage of the decision core, the build, the product page in a real browser,
+# spelling and local links, on every push to main. It reads the repository and writes nothing to it.
+name: ci
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Types
+        run: npm run typecheck
+      - name: Unit tests, random order, coverage floor on the core
+        run: npm run coverage
+      - name: Summary on the run page
+        if: always()
+        run: node scripts/ci-summary.mjs >> "$GITHUB_STEP_SUMMARY"
+      - name: Build
+        run: npm run build
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-dev.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Product page in both languages, with axe-core
+        run: python tests/e2e/site.py
+  docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install codespell==2.4.1
+      - name: Spelling
+        run: codespell README.md SECURITY.md docs/*.md eval/*.md relay/README.md
+      - name: Local links and anchors
+        run: python scripts/check_links.py

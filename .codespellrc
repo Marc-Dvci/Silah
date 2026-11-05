@@ -1,0 +1,3 @@
+[codespell]
+# "Commun Med" is a journal name; "Abou" is part of a surname.
+ignore-words-list = commun,abou

@@ -1,0 +1,38 @@
+# Plays the whole demo story on the live site and asks the relay whether it is up, every six hours during assessment.
+# It reads the live site and writes nothing to the repository. After GITEX it ends at once, so the badge stays true.
+name: live
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  LIVE_URL: https://marc-dvci.github.io/Silah/demo/
+  RELAY_URL: https://silah-relay.pages.dev
+  LAST_DAY: '2026-12-11'
+jobs:
+  date:
+    runs-on: ubuntu-latest
+    outputs:
+      over: ${{ steps.check.outputs.over }}
+    steps:
+      - id: check
+        run: |
+          if [ "$(date -u +%F)" \> "$LAST_DAY" ]; then echo "over=true" >> "$GITHUB_OUTPUT"; else echo "over=false" >> "$GITHUB_OUTPUT"; fi
+  smoke:
+    needs: date
+    if: needs.date.outputs.over != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: The relay answers
+        run: curl -fsS -A silah-smoke --retry 3 --retry-delay 20 --max-time 60 "$RELAY_URL/v1/health" | grep -q '"ok":true'
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-dev.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: The whole demo story, on the live site
+        run: python tests/e2e/flow.py "$LIVE_URL"

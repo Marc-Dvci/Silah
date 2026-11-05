@@ -123,7 +123,8 @@ with sync_playwright() as p:
     if relay_up():
         pg.set_viewport_size({'width': 412, 'height': 900})
         pg.goto(BASE + '#/p/me/partner'); pg.wait_for_timeout(1000)
-        pg.get_by_role('button', name='Make a link for my partner').click(); pg.wait_for_timeout(1500)
+        pg.get_by_role('button', name='Make a link for my partner').click()
+        pg.locator('img[alt="QR code with the pairing link"]').wait_for(timeout=20000)
         check(pg.locator('img[alt="QR code with the pairing link"]').count() == 1, 'pairing QR code shown')
         # The link is what the share button sends; without a share sheet it is copied to the clipboard.
         pg.evaluate("() => { Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }); }")

@@ -66,5 +66,15 @@ export default defineConfig({
       },
     }),
   ],
-  test: { include: ['tests/**/*.test.ts'], environment: 'node' },
+  test: {
+    include: ['tests/**/*.test.ts'],
+    environment: 'node',
+    testTimeout: 60000,
+    coverage: {
+      provider: 'v8',
+      include: ['src/core/**'],
+      reporter: ['text', 'json-summary'],
+      thresholds: { lines: 90, branches: 80, functions: 90 },
+    },
+  },
 } as any);
