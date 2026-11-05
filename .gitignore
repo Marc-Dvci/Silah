@@ -7,3 +7,4 @@ site/build/shots_ar/
 site/build/qr-site.png
 _site/
 coverage/
+.venv/
