@@ -141,7 +141,7 @@ export function Import({ s, act, base }: { s: PersonState; act: Act; base: strin
 
         <div class="pool soft stack" style={{ '--gap': '8px' } as any}>
           <p class="small"><b>{t({ en: 'No report to hand? Try a sample', ar: 'لا يتوفر تقرير؟ جرّبي نموذجاً', arM: 'لا يتوفر تقرير؟ جرّب نموذجاً' })}</b></p>
-          <p class="tiny muted">{t({ en: 'Fictional people, a fictional laboratory. Each opens exactly as a PDF you upload would.', ar: 'أشخاص ومختبر من نسج الخيال، ويُفتح كل نموذج تماماً كما يُفتح أي ملف PDF.' })}</p>
+          <p class="tiny muted">{t({ en: 'Each opens exactly as a PDF you upload would.', ar: 'يُفتح كل نموذج تماماً كما يُفتح أي ملف PDF.' })}</p>
           {SAMPLES.map(x => (
             <div key={x.id} class="row">
               <button class="link grow" style={{ textAlign: 'start' }} onClick={() => sample(x.file)}>{t(x.label)}</button>

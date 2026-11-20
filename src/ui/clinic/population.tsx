@@ -2,7 +2,7 @@ import { useState } from 'preact/hooks';
 import { simulate, outreach, foundPer100, summary, type SimConfig, type Strategy, type YieldPoint } from '../../core/population';
 import { CARRIER_FREQS } from '../../core/frequencies';
 
-// Outreach strategies compared on a synthetic consanguineous population. Seven genes use published
+// Outreach strategies compared on a simulated consanguineous population. Seven genes use published
 // Emirati carrier frequencies; forty more use the stated 1-in-200 assumption.
 
 function config(seed: number): SimConfig {

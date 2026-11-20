@@ -74,7 +74,7 @@ const newborn = async () => {
   })();
 };
 
-// The person who brings their own report (a fictional sample PDF in the story).
+// The person who brings their own report (a sample PDF in the story).
 const ownImport = withPerson(OWN_ID, async st => {
   if (/aisha/i.test(st.profile?.name ?? '') && currentView(st)) return;
   await importSamplePdf(st, 'samples/aisha-khalfan-sample.pdf');
@@ -122,10 +122,10 @@ const STORY: StoryStep[] = [
     text: 'The demo moves to the due date. Maternity tests the baby on day 2, confirms SMA and refers that week, before any signs; Noura sees it on her phone.',
     action: newborn,
   },
-  { who: 'fatima', page: 'result', clinic: 'pathway', title: '“Compatible” is not zero', text: 'Fatima’s certificate says compatible. Her fiancé is her cousin, so Silah shows 1 in 260 for her gene and 1 in 160 for the whole panel, from the detection the simulated lab states. Fictional couple.' },
+  { who: 'fatima', page: 'result', clinic: 'pathway', title: '“Compatible” is not zero', text: 'Fatima’s certificate says compatible. Her fiancé is her cousin, so Silah shows 1 in 260 for her gene and 1 in 160 for the whole panel, from the detection the simulated lab states.' },
   {
     who: OWN_ID, page: 'result', clinic: 'queue', title: 'A couple brings their own report',
-    text: 'Aisha opens her PDF report (a fictional sample). Silah reads it on the phone, she confirms each line, and the same kernel works out her chances. The screen says the result was entered by her, not signed by a lab.',
+    text: 'Aisha opens her sample PDF report. Silah reads it on the phone, she confirms each line, and the same kernel works out her chances. The screen says the result was entered by her, not signed by a lab.',
     action: ownImport,
   },
   {
@@ -189,7 +189,7 @@ export function Stage() {
       <div dir="ltr">
         <header class="row stage-head" style={{ padding: '16px 28px 0', gap: '14px' }}>
           <Mark size={32} /><span class="wordmark">صلة</span><b style={{ fontSize: '20px' }}>Silah</b>
-          <span class="muted small tagline">Inherited-risk pathway · prototype with a fictional family</span>
+          <span class="muted small tagline">Inherited-risk pathway · working prototype</span>
           <span class="grow" />
           <span class="tiny muted" style={{ whiteSpace: 'nowrap' }}>Phone:</span>
           {PERSONAS.map(p => <button key={p.id} class={`chip ${p.id === who ? 'indigo' : ''}`} onClick={() => pick(p.id)}>{p.name.en}</button>)}
@@ -202,7 +202,7 @@ export function Stage() {
         <div class="stage">
           <div class="stack" style={{ '--gap': '10px' } as any}>
             <div class="device">{ready && <iframe ref={phone} key={`phone-${nonce}`} src={firstSrc.current} title="Person's phone" />}</div>
-            <p class="small muted" style={{ maxWidth: '410px' }}>{who === OWN_ID ? 'Bring your own premarital genetic report (PDF, FHIR or typed), or use a fictional sample. It is read and kept in this browser only.' : PERSONAS.find(p => p.id === who)?.blurb.en}</p>
+            <p class="small muted" style={{ maxWidth: '410px' }}>{who === OWN_ID ? 'Bring your own premarital genetic report (PDF, FHIR or typed), or use a sample report. It is read and kept in this browser only.' : PERSONAS.find(p => p.id === who)?.blurb.en}</p>
           </div>
           <div class="stack" style={{ '--gap': '14px' } as any}>
             <Story step={step} play={play} />
@@ -246,12 +246,12 @@ function Chooser({ reset }: { reset: () => void }) {
       <main class="page stack" style={{ '--gap': '18px', paddingTop: '28px' } as any}>
         <div class="row"><Mark size={40} /><span class="wordmark" style={{ fontSize: '34px' }}>صلة</span></div>
         <h1>Silah</h1>
-        <p class="muted">A private companion for inherited disease risk in Abu Dhabi: from the couple check to counselling, birth and family. This prototype runs entirely in your browser with a fictional family.</p>
+        <p class="muted">A private companion for inherited disease risk in Abu Dhabi: from the couple check to counselling, birth and family. This prototype runs entirely in your browser.</p>
         <p class="small">Start with Mariam: the Department of Health’s invitation is waiting on her phone. Each phone has an <span lang="ar">ع</span> / EN switch at the top.</p>
         <p class="eyebrow">Open a phone</p>
         <button class="choice" onClick={() => go(`p/${OWN_ID}`)}>
           <b>Use your own result</b>
-          <div class="small muted">Bring a PDF report or a result file, or try a fictional sample. Explained in plain words, booked, summarised for your clinician.</div>
+          <div class="small muted">Bring a PDF report or a result file, or try a sample report. Explained in plain words, booked, summarised for your clinician.</div>
         </button>
         {PERSONAS.map(p => (
           <button key={p.id} class="choice" onClick={async () => { if (p.id === 'mariam' || p.id === 'saeed') await invite(); go(`p/${p.id}`); }}>

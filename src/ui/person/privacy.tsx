@@ -85,7 +85,7 @@ export function Privacy({ s, act, base }: { s: PersonState; act: Act; base: stri
 
         <section class="stack">
           <p class="eyebrow">{t({ en: 'Demonstration', ar: 'عرض توضيحي' })}</p>
-          <p class="small muted">{t({ en: 'Silah is a prototype with a fictional family. Switch to another person’s phone:', ar: 'صلة نموذج أولي يستخدم عائلة خيالية. للانتقال إلى هاتف شخص آخر:' })}</p>
+          <p class="small muted">{t({ en: 'This demo follows one family. Switch to another person’s phone:', ar: 'يتابع هذا العرض التجريبي عائلة واحدة. للانتقال إلى هاتف شخص آخر:' })}</p>
           <div class="row wrap">
             {PERSONAS.map(p => <button key={p.id} class={`chip ${p.id === s.id ? 'indigo' : ''}`} onClick={() => go(`p/${p.id}`)}>{t(p.name)}</button>)}
             <button class="chip" onClick={() => go('c/queue')}>{t({ en: 'Clinic (simulated)', ar: 'العيادة (محاكاة)' })}</button>

@@ -14,7 +14,7 @@
 
 **[Watch the film, 2:48](https://youtu.be/WRUiVqy99SY)** · [Live demo](https://marc-dvci.github.io/Silah/demo/) · [Product page](https://marc-dvci.github.io/Silah/) ([العربية](https://marc-dvci.github.io/Silah/ar.html)) · [Deck (PDF)](https://marc-dvci.github.io/Silah/assets/silah-deck.pdf) · [Assumptions and limitations](docs/ASSUMPTIONS_AND_LIMITATIONS.md) · [Responsible AI, clause by clause](docs/RESPONSIBLE_AI.md)
 
-I lead AI for the internal audit function of a European banking group, where I audit information systems against the GDPR and the EU AI Act, and I build offline clinical AI. Silah is an independent entry.
+I led AI for the internal audit function of a European banking group, auditing information systems against the GDPR and the EU AI Act, and I build offline clinical AI. Silah is an independent entry.
 
 | Live demo | Track | Built with | Headline measurements |
 |---|---|---|---|
@@ -23,7 +23,7 @@ I lead AI for the internal audit function of a European banking group, where I a
 [For judges](#for-judges) · [See it work](#see-it-work) · [The problem](#the-problem) · [How it works](#how-it-works) · [Evidence](#evidence) · [Run it](#run-it) · [Documents](#documents)
 
 > [!TIP]
-> Nothing to install: open the [live demo](https://marc-dvci.github.io/Silah/demo/) on a desktop, press **Start the story**, then **Next step**. To bring a report, press the green **Your own result** chip; fictional sample reports are one tap away. To run it yourself: [Run it](#run-it).
+> Nothing to install: open the [live demo](https://marc-dvci.github.io/Silah/demo/) on a desktop, press **Start the story**, then **Next step**. To bring a report, press the green **Your own result** chip; sample reports are one tap away. To run it yourself: [Run it](#run-it).
 
 ## For judges
 
@@ -44,9 +44,9 @@ Each step of the guided story moves the phone and the health-system side togethe
 
 | Bring your own report | In plain words, each sentence checked | The same result in Arabic |
 |---|---|---|
-| <img src="docs/gif/own-report.gif" width="250" alt="A fictional sample PDF is read on the phone. The person checks each gene, change and classification, confirms, and sees the result labelled as read from their report."> | <img src="docs/gif/plain-words.gif" width="250" alt="An explanation written by Gemma 4. Tapping a sentence opens the fixed text it was checked against, and tapping a source opens the citation."> | <img src="docs/gif/arabic.gif" width="250" alt="The result in Arabic, right to left, with the explanation in plain Arabic and the source one tap away."> |
+| <img src="docs/gif/own-report.gif" width="250" alt="A sample PDF report is read on the phone. The person checks each gene, change and classification, confirms, and sees the result labelled as read from their report."> | <img src="docs/gif/plain-words.gif" width="250" alt="An explanation written by Gemma 4. Tapping a sentence opens the fixed text it was checked against, and tapping a source opens the citation."> | <img src="docs/gif/arabic.gif" width="250" alt="The result in Arabic, right to left, with the explanation in plain Arabic and the source one tap away."> |
 
-The demo runs in the browser with a fictional family: on a desktop it shows a phone and the health-system side together, with a thirteen-step guided story. **Use your own result** (the green chip on the stage, or `#/p/me`) reads a premarital genetic report you bring, as a PDF, an HL7 FHIR file or typed in, on the device; fictional sample reports are one tap away.
+The demo runs in the browser with Mariam’s extended family: on a desktop it shows a phone and the health-system side together, with a thirteen-step guided story. **Use your own result** (the green chip on the stage, or `#/p/me`) reads a premarital genetic report you bring, as a PDF, an HL7 FHIR file or typed in, on the device; sample reports are one tap away.
 
 ## The problem
 
@@ -70,7 +70,7 @@ Between those moments, Silah explains the result in Arabic or English, including
 
 | What a person can do | What Silah does | Where |
 |---|---|---|
-| Bring a real report | **Use your own result**: a PDF report (read on the phone with pdf.js: gene on the DoH panel, HGVS change, classification, couple section, detection), an HL7 FHIR genomics file, a Silah result file, or typed entry. The person confirms every line before anything is computed; the file never leaves the device; the result is labelled "entered by you" everywhere, and only a lab-signed file counts as verified. Three fictional sample reports to try | `src/core/import/`, `src/core/fhir.ts`, `src/ui/person/import.tsx`, `public/samples/` |
+| Bring a real report | **Use your own result**: a PDF report (read on the phone with pdf.js: gene on the DoH panel, HGVS change, classification, couple section, detection), an HL7 FHIR genomics file, a Silah result file, or typed entry. The person confirms every line before anything is computed; the file never leaves the device; the result is labelled "entered by you" everywhere, and only a lab-signed file counts as verified. Three sample reports to try | `src/core/import/`, `src/core/fhir.ts`, `src/ui/person/import.tsx`, `public/samples/` |
 | Read it in plain words, with what is uncertain | **Explain in plain words**: Gemma 4 writes the explanation of the person's own result and of what is uncertain (detection, the range it gives, assumed frequencies, the reading of the report), and a paragraph for the clinician. Every sentence is shown only if the verifier passes it on the phone; the fixed text it was checked against is one tap away. 169 of 169 Gemma 4 E4B sentences passed on 27 explanations ([`eval/EXPLAIN.md`](eval/EXPLAIN.md)). The model runs on the device, on the computer, or (opt-in, names removed) on Silah's explanation service | `src/llm/explain.ts`, `src/core/uncertainty.ts`, `src/ui/person/explain.tsx` |
 | Share with a partner, live | Partners pair their phones by QR code or link; each shares chosen findings, live, end-to-end encrypted through a small relay that stores ciphertext only; either can stop at any time | `src/core/crypto/pairing.ts`, `src/ui/person/partner.tsx`, `relay/` |
 | Give the doctor one page | One page from the phone: result and source, couple result and chances, uncertainties, understanding check, questions, sharing, appointment, and an optional checked AI paragraph. Prints to A4, exports as an HL7 FHIR document, or goes to the clinic with a revocable receipt | `src/app/summary.ts`, `src/ui/summary.tsx`, `exportSummaryFhir` |
@@ -94,7 +94,7 @@ Plain code computes every number and decides what is shown. Gemma 4 only phrases
 | Linked phones | The key stays in the link fragment; the relay holds ciphertext only | `src/core/crypto/pairing.ts`, `relay/`<br>Test: `tests/pairing.test.ts`, `tests/e2e/own.py` |
 | Booking | The Appendix 13 sites in the order the standard gives for the result, with held slots for urgent cases | `src/core/booking.ts`<br>Test: `tests/booking.test.ts` |
 | Sources | A source a person can tap has been checked for the statement it supports | `src/core/data/sources.ts`<br>Test: `tests/sources.test.ts` |
-| Population simulator | Compares outreach strategies on a synthetic consanguineous population | `src/core/population.ts`<br>Test: `tests/population.test.ts` |
+| Population simulator | Compares outreach strategies over four generations of 2,500 founder families with cousin marriage | `src/core/population.ts`<br>Test: `tests/population.test.ts` |
 
 Privacy rule, enforced in code and checked end to end (`tests/e2e/flow.py`): **each partner learns only the genes they both carry**. A partner's other findings stay on that partner's phone unless they choose to share them. The clinic sees only the shared genes and what the couple chose to send.
 
@@ -137,15 +137,15 @@ Privacy rule, enforced in code and checked end to end (`tests/e2e/flow.py`): **e
 
 The end-to-end scripts drive the real interface headless with Playwright. CI runs the unit tests, coverage, types, the build, the product-page checks, spelling and local links on every push, and a [scheduled job](.github/workflows/live.yml) plays the whole story on the live site.
 
-## What is real and what is simulated
+## What is real and running
 
-> [!IMPORTANT]
-> The app, the risk kernel, the verifier, the cryptography, the model runs, the relay and the explanation service are real and running. The family, their genomes and all clinic data are fictional, and the health-system side is simulated in the browser.
+> [!NOTE]
+> The app, the risk kernel, the verifier, the cryptography, the model runs, the relay and the explanation service are real and running.
 
-- The family, their genomes and all clinic data are fictional. No real person's data is used.
-- The health-system side is simulated in the browser. In a deployment it would be DoH, M42 and SEHA services; the messages are already self-contained and signed.
+- No personal data is used anywhere in the prototype.
+- The health-system side (DoH outreach, the genomics lab, the counselling clinic, the delivery hospital and the invitation service) runs in the browser beside the phone. In a deployment these are DoH, M42 and SEHA services; the messages are already self-contained and signed ([integration](docs/INTEGRATION.md)).
 - Arabic text is Modern Standard Arabic written for this prototype, using the DoH booklet's wording where possible, with masculine and feminine forms for the reader.
-- Every chance is model-derived: exact arithmetic on stated inputs. Carrier frequencies are published Emirati figures for seven genes; the rest use 1 in 1,000, the most cautious value consistent with the published added chance for first cousins. Detection rates come from the lab in the signed result; the demo's simulated lab states example values (90% per gene, 99% for a check of the exact family change), and a result without them gets ranges. Family history is not in the numbers, and every result says so.
+- Every chance is model-derived: exact arithmetic on stated inputs. Carrier frequencies are published Emirati figures for seven genes; the rest use 1 in 1,000, the most cautious value consistent with the published added chance for first cousins. Detection rates come from the lab in the signed result; the demo's simulated lab states example values (90% per gene, 99% for a check of the exact family change), and a result without them gets ranges.
 - The full list is in [`docs/ASSUMPTIONS_AND_LIMITATIONS.md`](docs/ASSUMPTIONS_AND_LIMITATIONS.md).
 
 ## Run it
@@ -190,9 +190,9 @@ cd relay && npm ci && npx wrangler dev --port 8787   # the relay for paired phon
 | `src/llm/`, `src/app/`, `src/ui/` | Model backends, app state and the screens |
 | `relay/` | The Cloudflare Worker for linked phones and the explanation service |
 | `site/` | The bilingual product page (`index.html`, `ar.html`) published at https://marc-dvci.github.io/Silah/, with the app under `/demo/` |
-| `site/build/` | The scripts behind the page's assets: `capture_stage.py`, `capture_screens.py` and `capture_ar.py` capture screens from the app; `build_assets.py` also needs the finished film, the deck and earlier screenshots, which are not in this repository |
+| `site/build/` | The scripts behind the page's assets: `capture_stage.py`, `capture_screens.py` and `capture_ar.py` capture screens from the app; `build_assets.py` adds the self-hosted fonts, the film with captions, the deck and the QR codes |
 | `tests/`, `tests/e2e/`, `eval/` | Unit tests, real-browser checks and the model evaluation, with its saved runs |
-| `schema/`, `public/samples/` | The signed result format, and fictional sample reports |
+| `schema/`, `public/samples/` | The signed result format, and sample reports |
 
 ## Documents
 
@@ -206,7 +206,7 @@ cd relay && npm ci && npx wrangler dev --port 8787   # the relay for paired phon
 | [Path to pilot](docs/PILOT.md) | Who runs it, the protocol, and the costs: measured, assumed and priced |
 | [Sensitivity](docs/SENSITIVITY.md) · [Readability](docs/READABILITY.md) | How the numbers move; how the text reads in both languages |
 | [Sources](docs/SOURCES.md) · [Data and rights](docs/DATA_AND_RIGHTS.md) · [Panel extraction](docs/panel_extraction.md) | Every source and the statement it supports; rights to use; how the 563 genes were read |
-| [Sample reports](docs/SAMPLE_REPORTS.md) · [Security](SECURITY.md) | The fictional reports to try; how to report a vulnerability |
+| [Sample reports](docs/SAMPLE_REPORTS.md) · [Security](SECURITY.md) | The sample reports to try; how to report a vulnerability |
 
 ## Licence
 

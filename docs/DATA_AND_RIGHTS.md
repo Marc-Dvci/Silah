@@ -1,6 +1,6 @@
 # Data sources and the right to use them
 
-No personal data is used anywhere in the prototype. Every person, genome and clinic record is fictional.
+No personal data is used anywhere in the prototype.
 
 | Source | Owner | Type | Used for | Licence or permission | Personal data |
 |---|---|---|---|---|---|
@@ -15,7 +15,7 @@ No personal data is used anywhere in the prototype. Every person, genome and cli
 | Gulf News, Aletihad, Gulf Today reports | Publishers | News | Programme figures (565 of 11,748; 900,000 genomes; 15,628 births) | Facts cited | No |
 | Gemma 4 E2B / E4B | Google | Model weights | Optional answers to free questions | Apache-2.0 | No |
 | Qwen3.5-4B | Alibaba Qwen | Model weights | Evaluation only | Apache-2.0 | No |
-| Microsoft neural voices (ar-AE, en-GB) | Microsoft | Synthetic speech | Pre-rendered narration | Prototype use; production would license Azure AI Speech | No |
+| Microsoft neural voices (ar-AE, en-GB) | Microsoft | Text-to-speech | Pre-rendered narration | Prototype use; production would license Azure AI Speech | No |
 | IBM Plex Sans, Plex Sans Arabic, Plex Mono; Reem Kufi | IBM; Khaled Hosny and contributors | Fonts | Interface | SIL Open Font License | No |
 
 Open-source code used: Preact (MIT), Vite (MIT), @noble/curves and @noble/hashes (MIT), @cloudflare/blindrsa-ts (Apache-2.0), Transformers.js (Apache-2.0), qrcode (MIT), Workbox via vite-plugin-pwa (MIT), llama.cpp (MIT).

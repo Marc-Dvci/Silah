@@ -126,7 +126,7 @@ function OwnLanding({ s }: { s: PersonState }) {
         <p class="muted">{t({ en: 'Bring the PDF report, a result file, or type it in. It is read on this phone and kept here, encrypted. Then Silah explains it, checks understanding, books counselling and prepares a summary for your clinician.', ar: 'أحضِري تقرير PDF أو ملف النتيجة، أو أدخليها يدوياً. تُقرأ على هذا الهاتف وتُحفظ فيه مشفّرة. ثم يشرحها تطبيق صلة، ويتحقق من الفهم، ويحجز موعد الاستشارة، ويُعدّ ملخصاً لطبيبكِ.', arM: 'أحضِر تقرير PDF أو ملف النتيجة، أو أدخلها يدوياً. تُقرأ على هذا الهاتف وتُحفظ فيه مشفّرة. ثم يشرحها تطبيق صلة، ويتحقق من الفهم، ويحجز موعد الاستشارة، ويُعدّ ملخصاً لطبيبك.' })}</p>
         {paired && <p class="chip palm">{t({ en: 'Your phone is linked with your partner’s.', ar: 'هاتفك مرتبط بهاتف الطرف الآخر.' })}</p>}
         <button class="btn primary full" onClick={() => go(`p/${s.id}/import`)}>{t({ en: 'Add my result', ar: 'إضافة نتيجتي' })}</button>
-        <p class="tiny muted">{t({ en: 'No report to hand? The next screen has fictional samples.', ar: 'لا يتوفر تقرير؟ تجد نماذج افتراضية في الشاشة التالية.' })}</p>
+        <p class="tiny muted">{t({ en: 'No report to hand? The next screen has sample reports.', ar: 'لا يتوفر تقرير؟ تجد نماذج تقارير في الشاشة التالية.' })}</p>
         <div style={{ opacity: .3, display: 'flex', justifyContent: 'center', paddingTop: '24px' }}><Mark size={110} /></div>
       </Enter>
     </main>

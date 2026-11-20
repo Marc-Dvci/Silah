@@ -57,7 +57,7 @@ function Body({ token, gene }: { token: string; gene: string | null }) {
         )}
         {state === 'spent' && <p class="chip saffron">{t({ en: 'This invitation has already been used.', ar: 'استُخدمت هذه الدعوة من قبل.' })}</p>}
         {state === 'invalid' && <p class="chip madder">{t({ en: 'This invitation could not be verified.', ar: 'تعذّر التحقق من هذه الدعوة.' })}</p>}
-        <p class="tiny muted">{t({ en: 'Silah prototype. Fictional demonstration.', ar: 'نموذج أولي لتطبيق صلة، وعرض ببيانات خيالية.' })}</p>
+        <p class="tiny muted">{t({ en: 'Silah prototype.', ar: 'نموذج أولي لتطبيق صلة.' })}</p>
       </Enter>
     </main>
   );

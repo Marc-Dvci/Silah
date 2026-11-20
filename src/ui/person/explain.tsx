@@ -10,7 +10,7 @@ import { SourceChips } from './sources';
 
 type Act = (f: (st: PersonState) => Promise<void>) => Promise<void>;
 
-/** The stored explanation for this result and language, or the one written for a fictional person, re-checked now. */
+/** The stored explanation for this result and language, or the one written for a demo person, re-checked now. */
 export function currentExplanation(s: PersonState, cards: FactCard[], audience: Audience = 'person'): Explanation | undefined {
   return storedExplanation({ id: s.id, lang: s.lang, own: isOwn(s.id), sampleName: s.profile?.name, explanations: s.explanations }, cards, audience);
 }
@@ -94,7 +94,7 @@ export function ExplainPanel({ s, act, audience = 'person' }: { s: PersonState; 
           </div>
           <p class="tiny muted">
             {e!.precomputed
-              ? t({ en: `Written by ${e!.model} when this demo was built, for this fictional person. Checked again on this phone just now: ${ok.length} sentences passed`, ar: `كتبه ${e!.model} عند إعداد هذا العرض لهذا الشخص الافتراضي، وتم التحقق منه مجدداً على هذا الهاتف الآن. عدد الجمل التي اجتازت الفحص: ${ok.length}` })
+              ? t({ en: `Written by ${e!.model} when this demo was built, for this person. Checked again on this phone just now: ${ok.length} sentences passed`, ar: `كتبه ${e!.model} عند إعداد هذا العرض لهذا الشخص، وتم التحقق منه مجدداً على هذا الهاتف الآن. عدد الجمل التي اجتازت الفحص: ${ok.length}` })
               : t({ en: `Written by ${e!.model}. Each sentence was checked on this phone against your numbers before it was shown: ${ok.length} passed`, ar: `كتبه ${e!.model}، وقبل عرض كل جملة تم التحقق منها على هذا الهاتف مقابل أرقامك. عدد الجمل التي اجتازت الفحص: ${ok.length}` })}
             {held > 0 ? t({ en: `, ${held} held back.`, ar: `، وعدد المحجوبة: ${held}.` }) : '.'}
             {' '}{t({ en: 'It is not medical advice; the fixed text on this page is the reference.', ar: 'وليس هذا نصيحة طبية، والنص الثابت في هذه الصفحة هو المرجع.' })}

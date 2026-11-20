@@ -1,6 +1,6 @@
 # Sample reports
 
-Three fictional premarital genetic reports ship with the demo, so anyone can try **Use my own result** without a real result. They are in `public/samples/` and the app links to them. Every person, the laboratory and the signature are invented. Each page is marked "SAMPLE: fictional person, not a real result".
+Three sample premarital genetic reports ship with the demo, so anyone can try **Use my own result** straight away. They are in `public/samples/` and the app links to them. Each page is marked as a sample.
 
 The layout is generic: a header, a patient block, a table of reported variants, a couple analysis and a methods section. Silah does not depend on this layout. It looks for panel gene symbols, HGVS changes and classification words on each line, then asks the person to confirm what it found.
 

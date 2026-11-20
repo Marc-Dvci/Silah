@@ -14,4 +14,4 @@ The reports that matter most are anything that:
 - makes a phone accept a forged signed result, or show an entered result as lab-signed;
 - sends a name, or anything beyond the de-identified cards, to the explanation service.
 
-The demo uses fictional people and fictional results. Please leave real genetic results out of any report.
+The demo family and the sample reports are enough to show any issue, so a report never needs a real genetic result.

@@ -119,7 +119,12 @@ export function localServer(base = 'http://127.0.0.1:8080', model = 'local'): Ba
   };
 }
 
+/** A model server on this computer serves the app when the app itself is opened from this computer. */
+const servedLocally = () =>
+  typeof location !== 'undefined' && ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+
 export async function detectLocalServer(base = 'http://127.0.0.1:8080'): Promise<boolean> {
+  if (!servedLocally()) return false;
   try {
     const r = await fetch(`${base}/health`, { signal: AbortSignal.timeout(1200) });
     return r.ok;

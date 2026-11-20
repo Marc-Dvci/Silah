@@ -36,7 +36,7 @@ For a result the person brought (no lab case exists), each of these messages als
 
 The phone reads, on the device and without uploading the file:
 
-- **PDF reports** with selectable text (pdf.js): a line counts as a finding when it has a gene symbol on the DoH panel, an HGVS c. change and a classification word, in English or Arabic. The couple section, the relationship and the detection rates are read from their own lines. `src/core/import/extract.ts`, tested on the fictional samples in `public/samples/` ([`SAMPLE_REPORTS.md`](SAMPLE_REPORTS.md)).
+- **PDF reports** with selectable text (pdf.js): a line counts as a finding when it has a gene symbol on the DoH panel, an HGVS c. change and a classification word, in English or Arabic. The couple section, the relationship and the detection rates are read from their own lines. `src/core/import/extract.ts`, tested on the samples in `public/samples/` ([`SAMPLE_REPORTS.md`](SAMPLE_REPORTS.md)).
 - **HL7 FHIR R4 genomics files**: variant Observations (LOINC 69548-6) with gene studied (48018-6), DNA change (48004-6), amino-acid change (48005-3), allelic state (53034-5) and clinical significance (53037-8). FHIR has no standard couple-carrier resource, so the couple section is a Silah-coded Observation (`couple-analysis`, system `https://marc-dvci.github.io/Silah/fhir/CodeSystem/silah`). `src/core/fhir.ts`.
 - **Silah result files**, signed or not. A signed one is verified against the lab keys the phone trusts.
 

@@ -2,7 +2,7 @@
   "name": "silah",
   "license": "Apache-2.0",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A private companion for inherited disease risk in Abu Dhabi, from the couple check to counselling, birth and family.",
   "type": "module",
   "engines": {
